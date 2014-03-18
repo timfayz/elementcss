@@ -28,35 +28,45 @@ compiles to
 }
 ```
 
-
 **What do I need to know before using?**
 
 Please, before using or reading the source code you need to learn some basics of SASS(SCSS) and know CSS3 basics (@media, @font-face rules, etc). 
 Otherwise you will experience difficulties in understanding principles of work and efficiency.
 
 **[Download](https://github.com/kalopsia/element/archive/master.zip)**
+
+##Principles/Features of the ELEMENT:
+1. Modular
+2. Flexibility & Deep customization
+3. Best practices
+4. Logical naming
+
 ##Get started
 **ELEMENT helps Web developers create complex and thoughtful GUI for the contemporary web applications.**
+
+###Installation
+1. [Install Ruby]()
+*(Don't hesitate about unawareness of ruby/ruby on rails, it is not necessary for successfully using SASS and ELEMENT too. FYI, I doesn't know it too :).)*
+2. [Install Gruntjs]()
+3. [Install Autoprefixer]()
+
+For successfully using ELEMENT I recommend you to use tools as follows: [Gruntjs](gruntjs.com), [Vagrant](vagrantup.com).
 
 ELEMENT means ...
 
 The reason to create this project is make something more modular, abstract, flexible, logical, tighten? with community and unique that will differentiate it from other frameworks are existing. Something that without predefined forms, buttons, block-quotes, lists etc.
 
-Why SASS and not LESS? Originally I was creating element in LESS, but sometime later I realised that LESS doesn't have enough features to release necessary and pursued ideas.
+**Why SASS and not LESS?**
 
-Goals of this framework:
+Originally I was creating ELEMENT in LESS, but sometime later I realized that LESS doesn't have enough features to release necessary and pursued ideas. After the release of version 3.3 - SASS become the most advanced preprocessor! 
+
+**Goals of this framework**
 - modular
-- modulness (SMACSS?)
 - abstract (OOCSS)
 - simple
 - strict structure
 - good maintenance
 
-###Principles/Features of the ELEMENT:
-1. Modulness
-2. Flexibility & Deep customization
-3. Best practices
-4. Logical naming
 
 ## File structure
 .md extension means markdown syntax to style text on the web.
