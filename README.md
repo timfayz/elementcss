@@ -1,9 +1,9 @@
 **Please, do not read the text below. Readme under heavy development.**
+<sub>I'm sorry for the language mistakes I've made - I'm from Russia.</sub>
 
-# ELEMENT - CSS/GUI framework
+#ELEMENT - CSS/GUI framework
 ELEMENT is free and open-source CSS framework written in SASS that promotes clean, object-oriented design and encourages rapid prototyping. It helps you to create new project as well as integrate to existing project. ELEMENT is not just framework, but tool and suit of best practices and the most advanced methods to make web more robust and easy. It contains the experience of thousand professionals.
 
-<sub>I'm sorry for the language mistakes I've made - I'm from Russia.</sub>
 
 ##Preface
 ELEMENT is based on [SCSS](sass-lang.com) preprocessor. If you use plain CSS to make your styles, you will love preprocessors, particularly SCSS.
@@ -35,14 +35,17 @@ Otherwise you will experience difficulties in understanding principles of work a
 
 **[Download](https://github.com/kalopsia/element/archive/master.zip)**
 
-##Principles/Features of the ELEMENT:
+
+##ELEMENT features
 1. Modular
 2. Flexibility & Deep customization
 3. Best practices
 4. Logical naming
 
+
 ##Get started
 **ELEMENT helps Web developers create complex and thoughtful GUI for the contemporary web applications.**
+
 
 ###Installation
 1. [Install Ruby]()
@@ -52,6 +55,8 @@ Otherwise you will experience difficulties in understanding principles of work a
 
 For successfully using ELEMENT I recommend you to use tools as follows: [Gruntjs](gruntjs.com), [Vagrant](vagrantup.com).
 
+
+###About
 ELEMENT means ...
 
 The reason to create this project is make something more modular, abstract, flexible, logical, tighten? with community and unique that will differentiate it from other frameworks are existing. Something that without predefined forms, buttons, block-quotes, lists etc.
@@ -68,6 +73,6 @@ Originally I was creating ELEMENT in LESS, but sometime later I realized that LE
 - good maintenance
 
 
-## File structure
+###File structure
 .md extension means markdown syntax to style text on the web.
 
