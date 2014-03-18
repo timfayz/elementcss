@@ -1,0 +1,10 @@
+.idea/
+.sass-cache/
+project/
+framework/
+
+NOTES.md
+THANKS.md
+
+*.css
+*~
