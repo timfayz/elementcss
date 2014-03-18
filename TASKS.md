@@ -1,5 +1,5 @@
 ##Tasks
 
-- [ ] Documentation
-- [ ] 
-- [ ] JS syntax highligher
+- Documentation
+- JS plugins
+- JS syntax highligher
