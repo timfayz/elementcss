@@ -1,7 +1,7 @@
 **Please, do not read the text below. Readme under heavy development.**
 
 # Element - CSS/GUI framework
-<sub>First of all, I'm sorry for the language mistakes I've made - I'm from Russia.</sub>
+<sub>I'm sorry for the language mistakes I've made - I'm from Russia.</sub>
 
 ##Preface
 Element is based on [SCSS](sass-lang.com) preprocessor. If you use plain CSS to make your styles, you will love preprocessors, particularly SCSS.
@@ -26,10 +26,13 @@ compiles to
 }
 ```
 
+
 **What do I need to know before using?**
+
 Please, before using or reading the source code you need to learn some basics of SASS(SCSS) and know CSS3 basics (@media, @font-face rules, etc). 
 Otherwise you will experience difficulties in understanding principles of work and efficiency.
 
+**[Download](https://github.com/kalopsia/element/archive/master.zip)**
 ##Get started
 
 
