@@ -26,7 +26,7 @@ Otherwise you will experience difficulties in understanding principles of work a
 
 **SASS** is CSS preprocessor that make it possible to inject into CSS some "*programming*" features/techniques like  **variables, functions, if/else statements** and so on. Preprocessor is program that simple convert files with the extension .scss into .css. For example: 
 ```SCSS
-#styles.scss
+/* styles.scss */
 $black: #000;
 $black-postfix: black;
 
@@ -36,7 +36,7 @@ $black-postfix: black;
 ``` 
 compiles to
 ```CSS
-#styles.css
+/* styles.css */
 .text-black {
   color: #000;
 }
