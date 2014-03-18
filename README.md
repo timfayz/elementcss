@@ -1,10 +1,12 @@
 **Please, do not read the text below. Readme under heavy development.**
 
-# Element - CSS/GUI framework
+# ELEMENT - CSS/GUI framework
+ELEMENT is free and open-source CSS framework written in SASS that promotes clean, object-oriented design and encourages rapid prototyping. It helps you to create new project as well as integrate to existing project. ELEMENT is not just framework, but tool and suit of best practices and the most advanced methods to make web more robust and easy. It contains the experience of thousand professionals.
+
 <sub>I'm sorry for the language mistakes I've made - I'm from Russia.</sub>
 
 ##Preface
-Element is based on [SCSS](sass-lang.com) preprocessor. If you use plain CSS to make your styles, you will love preprocessors, particularly SCSS.
+ELEMENT is based on [SCSS](sass-lang.com) preprocessor. If you use plain CSS to make your styles, you will love preprocessors, particularly SCSS.
 
 **What is SCSS?**
 
@@ -34,7 +36,21 @@ Otherwise you will experience difficulties in understanding principles of work a
 
 **[Download](https://github.com/kalopsia/element/archive/master.zip)**
 ##Get started
+**ELEMENT helps Web developers create complex and thoughtful GUI for the contemporary web applications.**
 
+ELEMENT means ...
+
+The reason to create this project is make something more modular, abstract, flexible, logical, tighten? with community and unique that will differentiate it from other frameworks are existing. Something that without predefined forms, buttons, block-quotes, lists etc.
+
+Why SASS and not LESS? Originally I was creating element in LESS, but sometime later I realised that LESS doesn't have enough features to release necessary and pursued ideas.
+
+Goals of this framework:
+- modular
+- modulness (SMACSS?)
+- abstract (OOCSS)
+- simple
+- strict structure
+- good maintenance
 
 ###Principles/Features of the ELEMENT:
 1. Modulness
