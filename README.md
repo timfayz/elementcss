@@ -8,18 +8,20 @@ Element is based on [SCSS](sass-lang.com) preprocessor. If you use plain CSS to 
 
 **What is SCSS?**
 
-**SCSS** is CSS preprocessor that make it possible to inject into CSS some "*programming*" features/techniques like  **variables, functions, if/else statements** and so on. Preprocessor is program that simple convert something like this:
+**SCSS** is CSS preprocessor that make it possible to inject into CSS some "*programming*" features/techniques like  **variables, functions, if/else statements** and so on. Preprocessor is program that simple convert files with the extension .scss into .css. For example: 
 ```
 #styles.scss
 $black: #000;
-.class {
+$black-postfix: black;
+
+.text-#{$black-postfix} {
   color: $black;
-}  
+}
 ``` 
-into
+compiles to
 ```
 #styles.css
-.class {
+.text-black {
   color: #000;
 }
 ```
