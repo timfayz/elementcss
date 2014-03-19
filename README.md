@@ -68,11 +68,15 @@ For successfully using ELEMENT I recommend you to use tools as follows: [Gruntjs
 
 
 ###File structure
-``_naming.scss`` - contains
-``_globals.scss`` - contains
+``_naming.scss`` - contains all class prefixes which are used among all files<br/>
+``_globals.scss`` - contains global variables which are used among all files
+
 ``_mixins.scss`` - contains
+
 ``_functions.scss`` - contains
-``_vr.scss``
+
+``_vr.scss`` - contains
+
 ``classes/``
 
 ``.md`` extension means that file uses markdown syntax which is used for styling text (like wiki markup).
