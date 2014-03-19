@@ -15,7 +15,7 @@ ELEMENT is free and open-source CSS framework written in SASS that promotes clea
 
 
 ##Preface
-ELEMENT is based on [SCSS](sass-lang.com) preprocessor. If you use plain CSS to make your styles, you will love preprocessors, particularly SCSS.
+ELEMENT is based on [SCSS](sass-lang.com) preprocessor. If you use plain CSS to make your styles, you will love preprocessors, particularly SASS.
 
 **What do I need to know before using?**
 
@@ -68,7 +68,15 @@ For successfully using ELEMENT I recommend you to use tools as follows: [Gruntjs
 
 
 ###File structure
-.md extension means markdown syntax to style text on the web.
+``_naming.scss`` - contains
+``_globals.scss`` - contains
+``_mixins.scss`` - contains
+``_functions.scss`` - contains
+``_vr.scss``
+``classes/``
+
+``.md`` extension means that file uses markdown syntax which is used for styling text (like wiki markup).
+``.scss`` extension means that file uses SCSS syntax of SASS preprocessor which father will be compiled into CSS. 
 
 
 ###Ideology
