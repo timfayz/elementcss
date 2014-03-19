@@ -100,15 +100,19 @@ List of sources thanks to which this framework is raised.
 ###Online resources
 - [w3schools.com](http://w3schools.com/)
 - [Mozilla Developer Network](https://developer.mozilla.org/en-US/docs/Web)
+- [Paulirish.com](http://paulirish.com/) by Paul Irish
 - [CSS-Tricks.com](css-tricks.com) by Chris Coyier
-- [Caniuse.com](caniuse.com)
+- [Caniuse.com](caniuse.com) by Tim Brown
+- [Meyerweb.com](http://meyerweb.com/) by Eric A. and Kathryn S. Meyer
+- [nicolasgallagher.com](http://nicolasgallagher.com/) by Nicolas Gallagher
+- [Nicewebtype.com](http://nicewebtype.com/) by Tim Brown
 
 ###Tools
 - [SASS](http://sass-lang.com/) by Hampton Catlin, Nathan Weizenbaum, Chris Eppstein
 - [LESS](http://lesscss.org/) by Alexis Sellier
 - [HTML5 Boilerplate](http://html5boilerplate.com/) by Nicolas Gallagher, Paul Irish, Mathias Bynens, Divya Manian, and Hans Christian Reinl
 - [Normalize.css](http://necolas.github.io/normalize.css/) by Nicolas Gallagher 
-- Just numerous contributors that help to evolve their favorite projects.
+- Just numerous contributors that help to evolve their favorite projects
 
 ###Frameworks
 - Bootstrap
