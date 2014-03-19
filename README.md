@@ -64,7 +64,7 @@ Do not hesitate, some of them will be useful in future<br/>
 Please, googling if you experience difficulties in installation.
  
 1. [Install Ruby](https://www.ruby-lang.org/en/installation/) (required for SASS language)<br/>
-*Please, do not hesitate about unawareness of ruby/ruby on rails, it is not necessary for successfully*<br/> *using SASS and ELEMENT. FYI, I doesn't know it too.*
+*Please, do not hesitate about unawareness of ruby/ruby on rails, it is not necessary*<br/> *for successfully using SASS and ELEMENT.*
 2. [Install SASS](http://sass-lang.com/install)
 3. [Install Nodejs](http://nodejs.org/download/)
 2. [Install Gruntjs](http://gruntjs.com/getting-started)
