@@ -43,12 +43,20 @@ compiles to
 ```
 **Why SASS and not LESS?**
 
-Originally I was creating ELEMENT in LESS, but sometime later I realized that LESS doesn't have enough features to release necessary and pursued ideas. After the release of version 3.3 - SASS become the most advanced preprocessor! 
+Originally I was creating ELEMENT in LESS, but sometime later I realized that LESS doesn't have enough features to release necessary and pursued ideas. (?) After the release of version 3.3 - SASS become the most advanced preprocessor! 
 
 
 ##Get started
 **ELEMENT helps Web developers create complex and thoughtful GUI for the contemporary web applications.**
 
+###Why is need for?
+ELEMENT has different structure, abstraction and thus different features
+
+* Full control. Element generates nothing by default, you decide what the module you want to include and what each module includes and excludes inside.
+* Normalize & Tags initiating.
+* Vertical Rhythm. Vertical line-height synchronization.
+* Powerful grid system. But still features (hence code)  can be easily reduced.
+* Mobile First. But still responsive features can be easily disabled.
 
 ###Installation
 1. [Install Ruby]()
@@ -63,7 +71,7 @@ For successfully using ELEMENT I recommend you to use tools as follows: [Gruntjs
 .md extension means markdown syntax to style text on the web.
 
 
-###About ELEMENT
+###Ideology
 The reason to create this project is make something more modular, abstract, flexible, logical, tighten? with community and unique that will differentiate it from other frameworks are existing. Something that without predefined forms, buttons, block-quotes, lists etc.
 
 
@@ -74,5 +82,15 @@ The reason to create this project is make something more modular, abstract, flex
 - strict structure
 - good maintenance
 
+###Inspired by
+- Bootstrap
+- Foundation
+- FlatUI
+- Gridlover
+- Golden Grid System
+- KNACSS
+- Susy
+- GoodUI
+- etc
 
 
