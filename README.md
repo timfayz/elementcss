@@ -115,5 +115,3 @@ List of sources thanks to which this framework is raised.
 - Susy
 - GoodUI
 - etc
-
-модульность
