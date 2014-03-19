@@ -38,7 +38,7 @@ compiles to
 
 **Why SASS and not LESS?**
 
-Originally I was creating ELEMENT in LESS, but sometime later I realized that LESS doesn't have enough features to release necessary and pursued ideas. (?) After the release of version 3.3 - SASS become the most advanced preprocessor! 
+Originally I was creating ELEMENT in LESS, but sometime later I realized that LESS doesn't have enough features to release necessary and pursued ideas. So I switched to SASS. Now there is no doubt after the release of version 3.3 - SASS become the most advanced preprocessor! 
 
 
 ##Get started
@@ -59,7 +59,8 @@ ELEMENT has different structure, abstraction and thus different features
 * **Mobile First**. Many modules have responsive additions, however they can be easily disabled.
 
 ###Installation
-If you've never used the tools below, don't confuse about a huge amount of necessary software. Do not hesitate, some of them will be useful in future :)<br/>
+If you've never used the tools below, don't confuse about a huge amount of necessary software.<br/>
+Do not hesitate, some of them will be useful in future<br/>
 Please, googling if you experience difficulties in installation.
  
 1. [Install Ruby](https://www.ruby-lang.org/en/installation/)(required for SASS language)<br/>
@@ -118,4 +119,3 @@ List of sources thanks to which this framework is raised.
 - KNACSS
 - Susy
 - GoodUI
-- etc
