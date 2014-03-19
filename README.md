@@ -47,16 +47,16 @@ Originally I was creating ELEMENT in LESS, but sometime later I realized that LE
 ###Why is need for?
 ELEMENT has different structure, abstraction and thus different features
 
-* Fast Prototyping.
-* Logical class names. Every class names enforce to rules..
-* Flexibility & Deep customization.
-* Best practices.
-* Modularity.
-* Full control. Element generates nothing by default, you decide what the module you want to include and what each module includes and excludes inside.
-* Normalize & Tags initiating. By default most of all tags have similar appearance. 
-* Vertical Rhythm. Vertical line-height synchronization.
-* Powerful grid system. Fully customized grid system which has some "defacto" standards like column offset, pushing, pulling, centering etc. However features (hence code amount) can be easily reduced by excluding unnecessary classes. 
-* Mobile First. Many modules have responsive additions, however they can be easily disabled.
+* **Fast Prototyping**.
+* **Logical class names**. Every class names enforce to rules..
+* **Flexibility & Deep customization**.
+* **Best practices**.
+* **Modularity**.
+* **Full control**. Element generates nothing by default, you decide what the module you want to include and what each module includes and excludes inside.
+* **Normalize & Tags initiating**. By default most of all tags have similar appearance. 
+* **Vertical Rhythm**. Vertical line-height synchronization.
+* **Powerful Grid System**. Fully customized grid system which has some "defacto" standards like column offset, pushing, pulling, centering etc. However features (hence code amount) can be easily reduced by excluding unnecessary classes. 
+* **Mobile First**. Many modules have responsive additions, however they can be easily disabled.
 
 ###Installation
 If you've never used the tools below, don't confuse about a huge amount of necessary software. Do not hesitate, some of them will be useful in future :)<br/>
@@ -80,7 +80,7 @@ For successfully using ELEMENT I recommend you to use tools as follows: [Gruntjs
 ``_vr.scss`` - contains vertical rhythm mixins and functions that provide vertical synchronization<br/>
 ``classes/`` - contains all files that generates appropriate classes<br/>
 ``classes/_all.scss`` - combine all files in the folder. Just shortcut for including all files easily.<br/>
-``classes/_*.scss``- contains appropriate classes<br/>
+``classes/_*.scss`` - contains appropriate classes<br/>
 ``tags/`` - contains all files that initiate appropriate tags<br/>
 ``tags/_all.scss`` - combine all files in the folder. Just shortcut for including all files easily.<br/>
 ``tags/_*.scss`` - contains appropriate tags<br/>
@@ -93,16 +93,20 @@ For successfully using ELEMENT I recommend you to use tools as follows: [Gruntjs
 The reason to create this project is make something more modular, abstract, flexible, logical, tighten? with community and unique that will differentiate it from other frameworks are existing. Something that without predefined forms, buttons, block-quotes, lists etc.
 
 
-##words of gratitude
+##Acknowledgements
 List of sources thanks to which this framework is raised.
 
 ###Online resources
-- [HTML5 Boilerplate](http://html5boilerplate.com/)  by Nicolas Gallagher, Paul Irish, Mathias Bynens, Divya Manian, and Hans Christian Reinl
-- [Normalize.css](http://necolas.github.io/normalize.css/) by Nicolas Gallagher 
-- [LESS](http://lesscss.org/) by Alexis Sellier 
-- [SASS](http://sass-lang.com/) by Hampton Catlin, Nathan Weizenbaum, Chris Eppstein
+- [w3schools.com](http://w3schools.com/)
+- [Mozilla Developer Network](https://developer.mozilla.org/en-US/docs/Web)
 - [CSS-Tricks.com](css-tricks.com) by Chris Coyier
 - [Caniuse.com](caniuse.com)
+
+###Tools
+- [SASS](http://sass-lang.com/) by Hampton Catlin, Nathan Weizenbaum, Chris Eppstein
+- [LESS](http://lesscss.org/) by Alexis Sellier
+- [HTML5 Boilerplate](http://html5boilerplate.com/) by Nicolas Gallagher, Paul Irish, Mathias Bynens, Divya Manian, and Hans Christian Reinl
+- [Normalize.css](http://necolas.github.io/normalize.css/) by Nicolas Gallagher 
 - Just numerous contributors that help to evolve their favorite projects.
 
 ###Frameworks
