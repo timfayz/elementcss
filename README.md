@@ -63,12 +63,12 @@ If you've never used the tools below, don't confuse about a huge amount of neces
 Do not hesitate, some of them will be useful in future<br/>
 Please, googling if you experience difficulties in installation.
  
-1. [Install Ruby](https://www.ruby-lang.org/en/installation/)(required for SASS language)<br/>
-*(Don't hesitate about unawareness of ruby/ruby on rails, it is not necessary for successfully using SASS and ELEMENT. FYI, I doesn't know it too.)*
+1. [Install Ruby](https://www.ruby-lang.org/en/installation/) (required for SASS language)<br/>
+*Please, do not hesitate about unawareness of ruby/ruby on rails, it is not necessary for successfully*<br/> *using SASS and ELEMENT. FYI, I doesn't know it too.*
 2. [Install SASS](http://sass-lang.com/install)
 3. [Install Nodejs](http://nodejs.org/download/)
 2. [Install Gruntjs](http://gruntjs.com/getting-started)
-3. [Install Autoprefixer](https://github.com/nDmitry/grunt-autoprefixer)(Gruntjs module)
+3. [Install Autoprefixer](https://github.com/nDmitry/grunt-autoprefixer) (Gruntjs' module)
 
 For successfully using ELEMENT I recommend you to use tools as follows: [Gruntjs](gruntjs.com), [Vagrant](vagrantup.com).
 
