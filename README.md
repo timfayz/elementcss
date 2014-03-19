@@ -78,12 +78,12 @@ For successfully using ELEMENT I recommend you to use tools as follows: [Gruntjs
 ``_mixins.scss`` - contains all general mixins<br/>
 ``_functions.scss`` - contains all general functions<br/>
 ``_vr.scss`` - contains vertical rhythm mixins and functions that provide vertical synchronization<br/>
-``classes/``- contains all files that generates appropriate classes<br/>
+``classes/`` - contains all files that generates appropriate classes<br/>
 ``classes/_all.scss`` - combine all files in the folder. Just shortcut for including all files easily.<br/>
 ``classes/_*.scss``- contains appropriate classes<br/>
-``tags/``- contains all files that initiate appropriate tags<br/>
+``tags/`` - contains all files that initiate appropriate tags<br/>
 ``tags/_all.scss`` - combine all files in the folder. Just shortcut for including all files easily.<br/>
-``tags/_*.scss``- contains appropriate tags<br/>
+``tags/_*.scss`` - contains appropriate tags<br/>
 
 ``.md`` extension means that file uses markdown syntax which is used for styling text (like wiki markup).
 ``.scss`` extension means that file uses SCSS syntax of SASS preprocessor which father will be compiled into CSS. 
@@ -92,11 +92,20 @@ For successfully using ELEMENT I recommend you to use tools as follows: [Gruntjs
 ###Ideology
 The reason to create this project is make something more modular, abstract, flexible, logical, tighten? with community and unique that will differentiate it from other frameworks are existing. Something that without predefined forms, buttons, block-quotes, lists etc.
 
-###Why is need for?
 
+##words of gratitude
+List of sources thanks to which this framework is raised.
 
+###Online resources
+- [HTML5 Boilerplate](http://html5boilerplate.com/)  by Nicolas Gallagher, Paul Irish, Mathias Bynens, Divya Manian, and Hans Christian Reinl
+- [Normalize.css](http://necolas.github.io/normalize.css/) by Nicolas Gallagher 
+- [LESS](http://lesscss.org/) by Alexis Sellier 
+- [SASS](http://sass-lang.com/) by Hampton Catlin, Nathan Weizenbaum, Chris Eppstein
+- [CSS-Tricks.com](css-tricks.com) by Chris Coyier
+- [Caniuse.com](caniuse.com)
+- Just numerous contributors that help to evolve their favorite projects.
 
-###Inspired by
+###Frameworks
 - Bootstrap
 - Foundation
 - FlatUI
@@ -107,4 +116,4 @@ The reason to create this project is make something more modular, abstract, flex
 - GoodUI
 - etc
 
-
+модульность
