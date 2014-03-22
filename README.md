@@ -13,12 +13,12 @@ ELEMENT is based on [SASS](http://sass-lang.com/guide) preprocessor. If you use 
 
 **What do I need to know before using?**
 
-Please, before using or reading the source code you need to learn HTML/HTML5, CSS/CSS3 and basics of SASS(SCSS syntax).
+Please, before using or reading the source code you need to learn HTML/HTML5, CSS/CSS3 and basics of SASS.
 Otherwise you will experience difficulties in understanding principles of work and efficiency. If you know nothing about previously mentioned technologies go to [w3schools.com](http://w3schools.com) to gain some basic knowledge.
 
 **What is SASS?**
 
-**SASS** is CSS preprocessor that make it possible to inject into CSS some "*programming*" features/techniques like  **variables, functions, mixins, if/else statements** and so on. Preprocessor is program that simply compile selected files with the extension .scss or .sass into .css. **SASS** has two variants of syntax: SCSS(CSS-like syntax, files ending with .scss) and SASS(syntactic sugar, files ending with .sass). We use SCSS, because its syntax is the same as CSS. For example:
+**SASS** is CSS preprocessor that make it possible to inject into CSS some "*programming*" features/techniques like  **variables, functions, if/else statements** and so on. Preprocessor is program that simply compiles selected files with the extension ``.scss`` or ``.sass`` into ``.css``. **SASS** has two variants of syntax: SCSS(CSS-like syntax, files ending with .scss) and SASS(syntactic sugar, files ending with .sass). We use SCSS, because its syntax is the same as CSS. For example:
 ```SCSS
 /* styles.scss */
 $black: #000;
@@ -35,8 +35,7 @@ $black-postfix: black
 
 .text-#{$black-postfix}
   color: $black
-
-``` 
+```
 both will be compiled into
 ```CSS
 /* styles.css */
@@ -72,16 +71,31 @@ ELEMENT has different structure, abstraction and thus different features
 If you've never used the tools below, don't confuse about a huge amount of necessary software.<br/>
 Do not hesitate, some of them will be useful in future<br/>
 Please, googling if you experience difficulties in installation.
- 
-1. [Install Ruby](https://www.ruby-lang.org/en/installation/) (required for SASS language)<br/>
+
+1. [Download ELEMENT](https://github.com/kalopsia/element/archive/master.zip)
+2. Extract the directory where you store your own styles
+3. Include CSS file into project
+```HTML
+<head>
+	...
+	<link rel="stylesheet" type="text/css" href="path/to/styles.css">
+	...
+</head>
+```
+4. [Install Ruby](https://www.ruby-lang.org/en/installation/) (required for SASS language)<br/>
 *Please, do not hesitate about unawareness of ruby/ruby on rails, it is not necessary*<br/> *for successfully using SASS and ELEMENT.*
-2. [Install SASS](http://sass-lang.com/install)
-3. [Install Nodejs](http://nodejs.org/download/)
-2. [Install Gruntjs](http://gruntjs.com/getting-started)
-3. [Install Autoprefixer](https://github.com/nDmitry/grunt-autoprefixer) (Gruntjs' module)
+5. [Install SASS](http://sass-lang.com/install)
+6. Go to directory where ``styles.scss`` is placed<br/>
+	Windows: ``Shift`` + ``Right Click`` in the directory -> "Open command line"<br/>
+	Unix: ``cd path/to/directory``
 
-For successfully using ELEMENT I recommend you to use tools as follows: [Gruntjs](gruntjs.com), [Vagrant](vagrantup.com).
+	And run the following: ``sass styles.scss styles.css``
 
+
+For successfully using ELEMENT I recommend you to make additional steps:
+* [Install Nodejs](http://nodejs.org/download/) (required for Gruntjs)
+* [Install Gruntjs](http://gruntjs.com/getting-started)
+* [Install Autoprefixer](https://github.com/nDmitry/grunt-autoprefixer) (Gruntjs' module)
 
 ###File structure
 ``styles.css`` - the destination CSS file that will contain generated SASS code from *styles.scss*
@@ -98,8 +112,8 @@ For successfully using ELEMENT I recommend you to use tools as follows: [Gruntjs
 ``framework/tags/_all.scss`` - combine all files in the folder. Just shortcut for including all files easily<br/>
 ``framework/tags/_*.scss`` - contains appropriate tags<br/>
 
-``.md`` extension means that file uses markdown syntax which is used for styling text (like wiki markup)
-``.scss`` extension means that file uses SCSS syntax of SASS preprocessor which father will be compiled into CSS
+``.md`` extension means that file uses markdown syntax (like wiki markup)
+``.scss`` extension means that file uses SCSS syntax of SASS preprocessor
 
 
 ###Ideology
