@@ -157,7 +157,7 @@ List of sources thanks to which this framework is raised.
 - GoodUI
 
 ##Tasks
-
+If you want to help and contribute our common goals..
 - Documentation
 - JS plugins
 - JS syntax highligher
