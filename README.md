@@ -67,6 +67,9 @@ ELEMENT has different structure, abstraction and thus different features
 * **Powerful Grid System**. Fully customized grid system which has some "defacto" standards like column offset, pushing, pulling, centering etc. However features (hence code amount) can be easily reduced by excluding unnecessary classes. 
 * **Mobile First**. Many modules have responsive additions, however they can be easily disabled.
 
+###How it works?
+
+
 ###Installation
 If you've never used the tools below, don't confuse about a huge amount of necessary software.<br/>
 Do not hesitate, some of them will be useful in future<br/>
@@ -75,13 +78,12 @@ Please, googling if you experience difficulties in installation.
 1. [Download ELEMENT](https://github.com/kalopsia/element/archive/master.zip)
 2. Extract the directory where you store your own styles
 3. Include CSS file into project:
-```HTML
+	``HTML
 	<head>
 		...
 		<link rel="stylesheet" type="text/css" href="path/to/styles.css">
 		...
-	</head>
-```
+	</head>``
 4. [Install Ruby](https://www.ruby-lang.org/en/installation/) (required for SASS language)<br/>
 *Please, do not hesitate about unawareness of ruby/ruby on rails, it is not necessary*<br/> *for successfully using SASS and ELEMENT.*
 5. [Install SASS](http://sass-lang.com/install)
@@ -91,8 +93,10 @@ Please, googling if you experience difficulties in installation.
 7. Run the following:<br/>
 	``sass styles.scss styles.css``
 
+Using command line and ``sass`` command quite enough, but for successfully using ELEMENT I recommend you to use [Gruntjs](http://gruntjs.com/getting-started). Gruntjs allows performing repetitive tasks like watching, compilation, minification and etc. For example, let's imagine that we have styles.scss file we need the behavior:
+* check if any changes
 
-For successfully using ELEMENT I recommend you to make additional steps:
+to make additional steps:
 * [Install Nodejs](http://nodejs.org/download/) (required for Gruntjs)
 * [Install Gruntjs](http://gruntjs.com/getting-started)
 * [Install Autoprefixer](https://github.com/nDmitry/grunt-autoprefixer) (Gruntjs' module)
@@ -117,7 +121,9 @@ For successfully using ELEMENT I recommend you to make additional steps:
 
 
 ###Ideology
-The reason to create this project is make something more modular, abstract, flexible, logical, tighten? with community and unique that will differentiate it from other frameworks are existing. Something that without predefined forms, buttons, block-quotes, lists etc.
+The reason to create this project is make something more modular, abstract, flexible, logical, tighten? with community and unique that will differentiate it from other frameworks are existing. Something that doesn't have predefined forms, buttons, block-quotes, lists etc.
+
+All modules(logically separated files) have unified structure and generating techniques. For more information see documentation folder.
 
 
 ##Acknowledgements
@@ -132,13 +138,13 @@ List of sources thanks to which this framework is raised.
 - [Meyerweb.com](http://meyerweb.com/) by Eric A. and Kathryn S. Meyer
 - [nicolasgallagher.com](http://nicolasgallagher.com/) by Nicolas Gallagher
 - [Nicewebtype.com](http://nicewebtype.com/) by Tim Brown
+- Just numerous contributors that help to evolve their favorite projects :)
 
 ###Tools
 - [SASS](http://sass-lang.com/) by Hampton Catlin, Nathan Weizenbaum, Chris Eppstein
 - [LESS](http://lesscss.org/) by Alexis Sellier
 - [HTML5 Boilerplate](http://html5boilerplate.com/) by Nicolas Gallagher, Paul Irish, Mathias Bynens, Divya Manian, and Hans Christian Reinl
 - [Normalize.css](http://necolas.github.io/normalize.css/) by Nicolas Gallagher 
-- Just numerous contributors that help to evolve their favorite projects
 
 ###Frameworks
 - Bootstrap
@@ -149,3 +155,10 @@ List of sources thanks to which this framework is raised.
 - KNACSS
 - Susy
 - GoodUI
+
+##Tasks
+
+- Documentation
+- JS plugins
+- JS syntax highligher
+
