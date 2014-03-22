@@ -1,0 +1,102 @@
+@import '../_globals.scss';
+@import '../_naming.scss';
+@import '../_functions.scss';
+@import '../_mixins.scss';
+
+//@todo
+
+// Default Variables
+// --------------------------------------------------
+  $background: false !default;
+
+  $background-exclude: background-tablet !default;
+  $background-include: diff-list((
+        background, background-tablet, background-mobile
+        ), $background-exclude) !default;
+
+  $background-set: () !default;
+  $background-set-tablet: () !default;
+  $background-set-mobile: () !default;
+
+
+// Mixins & Functions
+// --------------------------------------------------
+
+  @mixin background($set) {
+    $i: 1;
+    @while $i <= length($set) {
+      $name: nth($set, 1);
+      $value: nth($set, 2);
+
+      .background-#{$name} {
+        background: $value;
+      }
+
+      $i: $i + 1;
+    }
+  }
+
+
+// Output Styles
+// --------------------------------------------------
+@if $background or $background==static {
+
+  // Backgrounds
+  // ------------
+  @if in-list(background, $background-include) {
+    //custom set
+    @include background($background-set);
+  }
+
+}
+
+@if $background or $background==responsive {
+
+  // Tablet Backgrounds
+  // ------------------
+  @if in-list(background-tablet, $background-include) {
+
+    @media (max-width: 720px) {
+      //trigger
+      .tablet-background-none {
+        background: none;
+      }
+
+      //custom set
+      @include background($background-set-tablet);
+    }
+
+  }
+
+  // Mobile Backgrounds
+  // ------------------
+  @if in-list(background-mobile, $background-include) {
+
+    @media (max-width: 480px) {
+      //trigger
+      .mobile-background-none {
+        background: none;
+      }
+
+      //custom set
+      @include background($background-set-mobile);
+    }
+
+  }
+
+}
+
+$background: false;
+
+// --------------------------------------------------------------------------
+
+// Now, when module is formed we can use it as follows:
+//
+// $background: true; <- activate module
+// $background-exclude: background-tablet, background-mobile; <- exclude unnecessary components
+// $background-set: <- define what we want
+//   blue, #111,
+//   green, #222,
+//   yellow, #333;
+//
+// @import 'path/to/_background.scss'; <- generate
