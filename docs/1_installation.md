@@ -5,14 +5,7 @@ Do not hesitate, some of them will be useful in future<br/>
 
 1. [Download ELEMENT](https://github.com/kalopsia/element/archive/master.zip)
 2. Extract the directory where you store your own styles
-3. Include CSS file into project:
-
-    <head>
-        ...
-        <link rel="stylesheet" type="text/css" href="path/to/styles.css">
-        ...
-    </head>
-
+3. Include CSS file into project: ``<link rel="stylesheet" type="text/css" href="path/to/styles.css">``
 4. [Install Ruby](https://www.ruby-lang.org/en/installation/) (required for SASS language)<br/>
 	Please, don't confuse about unawareness of ruby/ruby on rails, it is not necessary*<br/> *for successfully using SASS and ELEMENT.*
 5. [Install SASS](http://sass-lang.com/install)
