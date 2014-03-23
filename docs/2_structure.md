@@ -1,8 +1,9 @@
-##Structure
+##Structure `[`[back](https://github.com/kalopsia/element/blob/master/docs/0_preface.md)`]`
 
 ###File structure
 ```
 |-- docs
+|
 |-- framework
 |   |-- classes
 |       |-- _all.scss
@@ -15,9 +16,10 @@
 |   |-- _functions.scss
 |   |-- _mixins.scss
 |   |-- _vr.scss
+|
 |-- templates
 |   |-- _module.scss
-
+|
 ```
 
 ``styles.css`` - the destination CSS file that will contain generated SASS code from *styles.scss*
