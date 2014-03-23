@@ -1,9 +1,10 @@
 #Documentation
 **Table of Content:**
-0. [Preface](https://github.com/kalopsia/element/blob/master/docs/0_preface.md)
-1. [Installation](https://github.com/kalopsia/element/blob/master/docs/1_installation.md)
-2. [Structure](https://github.com/kalopsia/element/blob/master/docs/2_structure.md)
-3. [Usage](https://github.com/kalopsia/element/blob/master/docs/3_structure.md)
+
+0. [Preface](https://github.com/kalopsia/element/blob/master/docs/0_preface.md)<br/>
+1. [Installation](https://github.com/kalopsia/element/blob/master/docs/1_installation.md)<br/>
+2. [Structure](https://github.com/kalopsia/element/blob/master/docs/2_structure.md)<br/>
+3. [Usage](https://github.com/kalopsia/element/blob/master/docs/3_structure.md)<br/>
 
 ##Preface
 ELEMENT is free and open-source CSS framework written in SASS that promotes clean, object-oriented design and encourages rapid prototyping. It helps you to create new project as well as integrate to existing project. ELEMENT is not just framework, but tool and suit of best practices and the most advanced methods to make web more robust and easy. It contains the experience of thousand professionals.
