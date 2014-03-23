@@ -11,11 +11,11 @@ ELEMENT is free and open-source CSS framework written in SASS that promotes clea
 
 ELEMENT is based on [SASS](http://sass-lang.com/guide) preprocessor. If you use plain CSS to make your styles, you will love preprocessors, particularly SASS.
 
-**What is CSS framework?**
+###What is CSS framework?
 
 `[edit]` CSS frameworks are pre-prepared libraries that are meant to allow for easier, more standards-compliant styling of web pages using the Cascading Style Sheets language. ([wiki](http://en.wikipedia.org/wiki/CSS_frameworks))
 
-**What is SASS?**
+###What is SASS?
 
 **SASS** is CSS preprocessor that make it possible to inject into CSS some "*programming*" features/techniques like  **variables, functions, if/else statements** and so on. Preprocessor is program that simply compiles selected files with the extension ``.scss`` or ``.sass`` into ``.css``. **SASS** has two variants of syntax: SCSS(CSS-like syntax, files ending with .scss) and SASS(syntactic sugar, files ending with .sass). We use SCSS, because its syntax is the same as CSS. For example:
 ```SCSS
@@ -44,11 +44,11 @@ both will be compiled into
 ```
 [More examples](http://sass-lang.com/guide).
 
-**Why SASS and not LESS?**
+###Why SASS and not LESS?
 
 Originally I was creating ELEMENT in LESS, but sometime later I realized that LESS doesn't have enough features to release necessary and pursued ideas. So I switched to SASS. Now there is no doubt after the release of version 3.3 - SASS become the most advanced preprocessor!
 
-**What the features has ELEMENT?**
+###What the features has ELEMENT?
 
 ELEMENT has different structure, abstraction and thus different features
 * **Fast Prototyping**.
