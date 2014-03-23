@@ -83,7 +83,8 @@ Please, googling if you experience difficulties in installation.
 		...
 		<link rel="stylesheet" type="text/css" href="path/to/styles.css">
 		...
-</head>```
+</head>
+```
 4. [Install Ruby](https://www.ruby-lang.org/en/installation/) (required for SASS language)<br/>
 *Please, do not hesitate about unawareness of ruby/ruby on rails, it is not necessary*<br/> *for successfully using SASS and ELEMENT.*
 5. [Install SASS](http://sass-lang.com/install)
