@@ -1,5 +1,4 @@
 #Documentation
-**Table of Content:**
 
 0. [Preface](https://github.com/kalopsia/element/blob/master/docs/0_preface.md)<br/>
 1. [Installation](https://github.com/kalopsia/element/blob/master/docs/1_installation.md)<br/>
@@ -46,6 +45,7 @@ both will be compiled into
 
 ###Why SASS and not LESS?
 
+*Skip if you know nothing about LESS.*<br/>
 Originally I was creating ELEMENT in LESS, but sometime later I realized that LESS doesn't have enough features to release necessary and pursued ideas. So I switched to SASS. Now there is no doubt after the release of version 3.3 - SASS become the most advanced preprocessor!
 
 ###What the features has ELEMENT?
