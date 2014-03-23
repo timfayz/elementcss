@@ -1,4 +1,4 @@
-##Structure &laquo;[back](https://github.com/kalopsia/element/blob/master/docs/0_preface.md)
+##Structure [&laquo;back](https://github.com/kalopsia/element/blob/master/docs/0_preface.md)
 
 ###File structure
 ```

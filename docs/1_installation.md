@@ -1,4 +1,5 @@
-##Installation
+##Installation [&laquo;back](https://github.com/kalopsia/element/blob/master/docs/0_preface.md)
+
 If you've never used the tools below, don't confuse about a huge amount of necessary software.<br/>
 Do not hesitate, some of them will be useful in future<br/>
 *Please, googling if you experience difficulties in installation.*
