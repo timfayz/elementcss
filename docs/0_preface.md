@@ -16,7 +16,10 @@ ELEMENT is based on [SASS](http://sass-lang.com/guide) preprocessor. If you use 
 
 ###What is SASS?
 
-**SASS** is CSS preprocessor that make it possible to inject into CSS some "*programming*" features/techniques like  **variables, functions, if/else statements** and so on. Preprocessor is program that simply compiles selected files with the extension ``.scss`` or ``.sass`` into ``.css``. **SASS** has two variants of syntax: SCSS(CSS-like syntax, files ending with .scss) and SASS(syntactic sugar, files ending with .sass). We use SCSS, because its syntax is the same as CSS. For example:
+**SASS** is CSS preprocessor that make it possible to inject into CSS some "*programming*" features/techniques like  **variables, functions, if/else statements** and so on. Preprocessor is program that simply compiles selected files with the extension ``.scss`` or ``.sass`` into ``.css``.
+
+**SASS** has two variants of syntax: SCSS (CSS-like syntax, files ending with .scss) and Sass (syntactic sugar, files ending with .sass). We use SCSS, because its syntax is the same as CSS. For example:
+
 ```SCSS
 /* styles.scss */
 $black: #000;
@@ -41,7 +44,7 @@ both will be compiled into
   color: #000;
 }
 ```
-[More examples](http://sass-lang.com/guide).
+[More examples](http://sass-lang.com/guide)
 
 ###Why SASS and not LESS?
 
