@@ -1,4 +1,4 @@
-##Structure `[`[back](https://github.com/kalopsia/element/blob/master/docs/0_preface.md)`]`
+##Structure [[back](https://github.com/kalopsia/element/blob/master/docs/0_preface.md)]
 
 ###File structure
 ```
@@ -40,4 +40,4 @@
 ``.scss`` extension means that file uses SCSS syntax of SASS preprocessor
 
 ###Module structure
-All modules have unified structure. It makes easier to read excisting and create
+All modules have unified structure. It makes easier to read existing and create
