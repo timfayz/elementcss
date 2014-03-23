@@ -3,9 +3,9 @@ If you've never used the tools below, don't confuse about a huge amount of neces
 Do not hesitate, some of them will be useful in future<br/>
 *Please, googling if you experience difficulties in installation.*
 
-* [Download ELEMENT](https://github.com/kalopsia/element/archive/master.zip)
-* Extract the directory where you store your own styles
-* Include CSS file into project:
+1. [Download ELEMENT](https://github.com/kalopsia/element/archive/master.zip)
+2. Extract the directory where you store your own styles
+3. Include CSS file into project:
 ```HTML
 	<head>
 		...
@@ -13,10 +13,10 @@ Do not hesitate, some of them will be useful in future<br/>
 		...
 </head>
 ```
-* [Install Ruby](https://www.ruby-lang.org/en/installation/) (required for SASS language)<br/>
+4. [Install Ruby](https://www.ruby-lang.org/en/installation/) (required for SASS language)<br/>
 	Please, don't confuse about unawareness of ruby/ruby on rails, it is not necessary*<br/> *for successfully using SASS and ELEMENT.*
-* [Install SASS](http://sass-lang.com/install)
-* From now on you can use GUI application or command line to make compilation
+5. [Install SASS](http://sass-lang.com/install)
+6. From now on you can use GUI **application** or **command line** to make compilations
 
 If you choose command line, the steps below for you:
 
