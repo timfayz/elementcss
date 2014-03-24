@@ -9,6 +9,8 @@ ELEMENT is free and open-source CSS framework written in SASS that promotes clea
 
 
 ##Preface
+*This article is shortened version of [documentation](https://github.com/kalopsia/element/blob/master/docs/0_preface.md). If you have any difficulties in understanding ELEMENT's usage, you should read documentation first.*
+
 ELEMENT is based on [SASS](http://sass-lang.com/guide) preprocessor. If you use plain CSS to make your styles, you will love preprocessors, particularly SASS.
 
 **What do I need to know before using?**
