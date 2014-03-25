@@ -1,15 +1,15 @@
 **Please, do not read the text below. Readme under heavy development.**
 
 #ELEMENT - CSS/GUI framework
-<sub>I'm sorry for the language mistakes I've made - I'm from Russia.</sub>
+<sub>I'm sorry for the language mistakes I've made - my English is intermediate.</sub>
 
-ELEMENT is free and open-source CSS framework written in SASS that promotes clean, object-oriented design and encourages rapid prototyping. It helps you to create new project as well as integrate to existing project. ELEMENT is not just framework, but tool and suit of best practices and the most advanced methods to make web more robust and easy. It contains the experience of thousand professionals.
+ELEMENT is free and open-source CSS framework written in SASS that promotes clean, object-oriented design and encourages rapid prototyping. It helps you to create new project as well as integrate to existing project. ELEMENT is not just framework, but tool and suit of best practices and the most advanced methods to make web more robust and easy. It contains experience of many professionals.
 
 **[Download](https://github.com/kalopsia/element/archive/master.zip)**
 
 
 ##Preface
-*This article is shortened version of [documentation](https://github.com/kalopsia/element/blob/master/docs/0_preface.md). If you have any difficulties in understanding ELEMENT's usage, you should read documentation first.*
+> *This article is shortened version of [documentation](https://github.com/kalopsia/element/blob/master/docs/0_preface.md). If you have any difficulties in understanding usage, you should read documentation first.*
 
 ELEMENT is based on [SASS](http://sass-lang.com/guide) preprocessor. If you use plain CSS to make your styles, you will love preprocessors, particularly SASS.
 
@@ -20,7 +20,7 @@ Otherwise you will experience difficulties in understanding principles of work a
 
 **What is SASS?**
 
-**SASS** is CSS preprocessor that make it possible to inject into CSS some "*programming*" features/techniques like  **variables, functions, if/else statements** and so on. Preprocessor is program that simply compiles selected files with the extension ``.scss`` or ``.sass`` into ``.css``. **SASS** has two variants of syntax: SCSS(CSS-like syntax, files ending with .scss) and SASS(syntactic sugar, files ending with .sass). We use SCSS, because its syntax is the same as CSS. For example:
+**SASS** is CSS preprocessor that make it possible to inject into CSS some "*programming*" features/techniques like  **variables, functions, if/else statements** and so on. Preprocessor is program that simply compiles selected files with the extension ``.scss`` or ``.sass`` into ``.css``. **SASS** has two variants of syntax: SCSS (CSS-like syntax, files ending with ``.scss``) and SASS (syntactic sugar, files ending with ``.sass``). We use SCSS, because its syntax is the same as CSS. For example:
 ```SCSS
 /* styles.scss */
 $black: #000;
@@ -45,7 +45,7 @@ both will be compiled into
   color: #000;
 }
 ```
-[More examples](http://sass-lang.com/guide).
+[More examples](http://sass-lang.com/guide)
 
 **Why SASS and not LESS?**
 
