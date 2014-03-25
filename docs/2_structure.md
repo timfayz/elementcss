@@ -22,6 +22,7 @@
 |
 ```
 
+``.gitignore`` - file using by [git](http://git-scm.com/) to exclude unnecessary files
 ``styles.css`` - the destination CSS file that will contain generated SASS code from *styles.scss*
 ``styles.scss`` - main SCSS file that imports necessary files from *framework* folder
 ``framework/_naming.scss`` - contains all class prefixes which are used among all files<br/>

@@ -65,3 +65,9 @@ ELEMENT has different structure, abstraction and thus different features
 * **Powerful Grid System**. Fully customized grid system which has some "defacto" standards like column offset, pushing, pulling, centering etc. However features (hence code amount) can be easily reduced by excluding unnecessary classes.
 * **Mobile First**. Many modules have responsive additions, however they can be easily disabled.
 
+###Ideology
+The reason to create this project is make something more modular, abstract, flexible, logical, tighten? with community and unique that will differentiate it from other frameworks are existing. Something that doesn't have predefined forms, buttons, block-quotes, lists etc.
+
+All modules(logically separated files) have unified structure and generating techniques. For more information see documentation folder.
+
+

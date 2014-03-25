@@ -38,7 +38,7 @@ $black-postfix: black
 .text-#{$black-postfix}
   color: $black
 ```
-both will be compiled into
+Both will be compiled into:
 ```CSS
 /* styles.css */
 .text-black {
@@ -49,14 +49,21 @@ both will be compiled into
 
 **Why SASS and not LESS?**
 
-Originally I was creating ELEMENT in LESS, but sometime later I realized that LESS doesn't have enough features to release necessary and pursued ideas. So I switched to SASS. Now there is no doubt after the release of version 3.3 - SASS become the most advanced preprocessor! 
+Originally I was creating ELEMENT in LESS, but sometime later I realized that LESS doesn't have enough features to release necessary and pursued ideas. So I switched to SASS. Now there is no doubt after the release of version 3.3 - SASS become the most advanced preprocessor!
 
 
 ##Get started
-**ELEMENT helps Web developers create complex and thoughtful GUI for the contemporary web applications.**
+ELEMENT helps web-developers to create complex and elaborate GUI for the contemporary web applications.
+It provides fast prototyping, thought-out project structure and many other features, like theming.
 
 ###Why is need for?
-ELEMENT has different structure, abstraction and thus different features
+The main reasons to use ELEMENT are:
+* asd
+* asd
+* asd
+
+###What does it do?
+ELEMENT has different structure, abstraction and thus different features:
 
 * **Fast Prototyping**.
 * **Logical class names**. Every class names enforce to rules..
@@ -121,12 +128,6 @@ to make additional steps:
 
 ``.md`` extension means that file uses markdown syntax (like wiki markup)<br/>
 ``.scss`` extension means that file uses SCSS syntax of SASS preprocessor
-
-
-###Ideology
-The reason to create this project is make something more modular, abstract, flexible, logical, tighten? with community and unique that will differentiate it from other frameworks are existing. Something that doesn't have predefined forms, buttons, block-quotes, lists etc.
-
-All modules(logically separated files) have unified structure and generating techniques. For more information see documentation folder.
 
 
 ##Acknowledgements
