@@ -1,13 +1,14 @@
 // Import general files in such sequence
-// File _globals imports all necessary variables that will be used not only
-// in the _module itself, but in _functions and _mixins files
+// _globals file provides all necessary variables that will be used not only in the
+// _module itself, but in _functions and _mixins files
 @import '../_globals.scss';
-// Import _naming file which is may be not necessarily used if you doesn't
-// want to use standardized prefixes and names
+// _naming file provides standardized prefixes and names which are may be not necessarily
+// used if you don't want to use them
 @import '../_naming.scss';
-// First we import functions that will be used in _mixins and _module itself
+// _functions file provides general functions which can be used in the _module itself
 @import '../_functions.scss';
-// Next, we import mixins
+// _mixins file provides general mixins and one of the most important mixin like property()
+// which can be used in the _module itself
 @import '../_mixins.scss';
 
 // Write what you want to do here
