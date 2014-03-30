@@ -39,5 +39,10 @@
 ``.md`` extension means that file uses markdown syntax (like wiki markup)<br/>
 ``.scss`` extension means that file uses SCSS syntax of SASS preprocessor
 
+###Logic
+
+
 ###Module structure
-All modules have unified structure. It makes easier to read existing and create
+Each module within framework folder has unified structure. It makes easier to read existing modules and create new one.
+
+You can get prepared module template in the [templates](https://github.com/kalopsia/element/tree/master/templates) folder. Line by line explanation and its brief using example you can find in the [docs/code_review]() directory.
