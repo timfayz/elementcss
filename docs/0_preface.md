@@ -10,9 +10,14 @@ ELEMENT is free and open-source CSS framework written in SASS that promotes clea
 
 ELEMENT is based on [SASS](http://sass-lang.com/guide) preprocessor. If you use plain CSS to make your styles, you will love preprocessors, particularly SASS.
 
+###What do I need to know before using?
+
+Please, before using or reading the source code you need to learn HTML/HTML5, CSS/CSS3 and basics of SASS.
+Otherwise you will experience difficulties in understanding principles of work and efficiency. If you know nothing about previously mentioned technologies go to [w3schools.com](http://w3schools.com) to gain some basic knowledge.
+
 ###What is CSS framework?
 
-`[edit]` CSS frameworks are pre-prepared libraries that are meant to allow for easier, more standards-compliant styling of web pages using the Cascading Style Sheets language. ([wiki](http://en.wikipedia.org/wiki/CSS_frameworks))
+`[edit]` CSS frameworks are pre-prepared libraries that allow you make easier, more standards-compliant styling of web pages using the Cascading Style Sheets language. ([wiki](http://en.wikipedia.org/wiki/CSS_frameworks))
 
 ###What is SASS?
 
@@ -54,12 +59,11 @@ Originally I was creating ELEMENT in LESS, but sometime later I realized that LE
 ###What the features has ELEMENT?
 
 ELEMENT has different structure, abstraction and thus different features
-* **Fast Prototyping**.
-* **Logical class names**. Every class names enforce to rules..
-* **Flexibility & Deep customization**.
+* **Fast Prototyping**. You
+* **Logical class names**. Every class names enforce to general rules. It provides intuitive and easy remembering.
+* **Flexibility & Deep customization**. ELEMENT generates nothing by default, you decide what the module you want to include and what each module includes and excludes inside.
 * **Best practices**.
 * **Modularity**.
-* **Full control**. Element generates nothing by default, you decide what the module you want to include and what each module includes and excludes inside.
 * **Normalize & Tags initiating**. By default most of all tags have similar appearance.
 * **Vertical Rhythm**. Vertical line-height synchronization.
 * **Powerful Grid System**. Fully customized grid system which has some "defacto" standards like column offset, pushing, pulling, centering etc. However features (hence code amount) can be easily reduced by excluding unnecessary classes.

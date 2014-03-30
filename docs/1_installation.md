@@ -23,7 +23,7 @@ If you choose command line, the steps below for you:
 	``sass --watch styles.scss:styles.css --style compressed`` - compilation and minification on change<br/>
 
 	If you are faced faced with ``LoadError: cannot load such file -- rb-inotify``<br/>
-	Please run: ``sudo gem install rb-inotify``
+	Please run: ``gem install rb-inotify``
 
 Using command line and ``sass`` command quite enough, but for successfully using ELEMENT I recommend you to use [Gruntjs](http://gruntjs.com/getting-started). Gruntjs allows performing repetitive tasks like watching, compilation, minification and etc. For example, let's imagine that we have styles.scss file..
 
