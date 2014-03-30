@@ -40,9 +40,9 @@
 ``.scss`` extension means that file uses SCSS syntax of SASS preprocessor
 
 ###Logic
-
+ELEMENT has two steps:
+1. Initiate tags. Appropriate module responsible for particular category of tags. For example ``tags/_basic.scss`` module covers html, body and * (all elements). Initiating means tag normalizing and resetting into unified view.
+2. Class generating.
 
 ###Module structure
-Each module within framework folder has unified structure. It makes easier to read existing modules and create new one.
-
-You can get prepared module template in the [templates](https://github.com/kalopsia/element/tree/master/templates) folder. Line by line explanation and its brief using example you can find in the [docs/code_review]() directory.
+Each module within framework folder has unified structure. It makes easier to read existing modules and create new one. You can get initial module template in the [templates](https://github.com/kalopsia/element/tree/master/templates) folder. Line by line explanation and its brief using example you can find under [docs/code_review]() directory.
