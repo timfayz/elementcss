@@ -45,12 +45,13 @@ Lets explore line by line a very basic usage which is the basis of ``app-minimal
 //$font-size:           100%;
 
 
-// 3. Initiate and normalize all tags. Modules and HTML tags within are grouped by function presented
-// in w3schools.com/tags/ref_byfunc.asp page.
+// 3. Initiate and normalize all tags. HTML tags within modules are grouped by function as presented
+// at w3schools.com/tags/ref_byfunc.asp page.
 
 // Initiating Tags
 // ---------------
-// You can delete the commented variables, because the variables below are set to true by default.
+// You can delete commented variables below, because they are set to true by default. They are presented
+// only in case you need to exclude appropriate range of tags.
 //$basic: true;
 //$forms: true;
 //$lists: true;
@@ -65,7 +66,7 @@ Lets explore line by line a very basic usage which is the basis of ``app-minimal
 // Import the whole bunch of tag modules via file below which is simple shortcut importing all
 // files within 'framework/tags' folder:
 @import 'element/framework/tags/_all.scss';
-// Hence, instead of the line above you can write something like this:
+// Hence, instead of the line above you can import modules separately:
 // @import 'element/framework/tags/_basic.scss';
 // @import 'element/framework/tags/_forms.scss';
 // @import 'element/framework/tags/_lists.scss';
@@ -104,6 +105,9 @@ $grid-calc-value:     1%;
 // Import the whole bunch of classes. The same principle as mentioned previously.
 @import 'element/framework/classes/_all.scss';
 
+// Styles
+// -------
+// your own styles
 
 ```
 
