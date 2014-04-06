@@ -1,0 +1,280 @@
+@import '../_globals.scss';
+@import '../_naming.scss';
+@import '../_functions.scss';
+@import '../_mixins.scss';
+
+// Default Variables
+// --------------------------------------------------
+  $grid: false !default;
+
+  $grid-exclude: false !default;
+  $grid-contain: diff-list((
+    //pseudo
+    container, row, column, column-center, column-push, column-pull, column-offset, column-stretch
+    ), $grid-exclude) !default;
+
+  // Grid Parameters
+  // ---------------------
+  $grid-columns-number: 12 !default;
+  $grid-calc-method:    column-gap !default;
+  $grid-calc-value:     (60px, 20px) !default;
+
+  // Wrapped Row
+  // ---------------------
+  $grid-container-default: 940px !default;
+  $grid-container-xsm: 100% !default;
+  $grid-container-sm: 100% !default;
+  $grid-container-md: 700px !default;
+  $grid-container-lg: 940px !default;
+  $grid-container-xlg: 1000px !default;
+  $grid-container-list:
+    $grid-container-xsm, $grid-container-sm, $grid-container-md, $grid-container-lg, $grid-container-xlg !default;
+
+
+// Mixins
+// --------------------------------------------------
+
+  // Grid Elements
+  // ---------------------------
+  // $parameters list contains all useful grid parameters
+  $grid-parameters: calc-grid($grid-columns-number, $grid-calc-method, $grid-calc-value) !default;
+
+  @mixin grid($type, $parameters: $grid-parameters, $i: 1) {
+    $column-width: null;
+    $gap-width: null;
+    $columns: null;
+
+    @if length($parameters) > 1 {
+      $column-width: nth($parameters, 1);
+      $gap-width: nth($parameters, 2);
+      $columns: nth($parameters, 3);
+    }
+
+
+    // Container
+    // --------------------
+    @if $type==container {
+      width: $parameters;
+      margin-#{$left}: auto;
+      margin-#{$right}: auto;
+    }
+
+    // Row Types
+    // --------------------
+    //columned row
+    @if $type==row {
+      //width: auto;
+      //margin-#{$right}: -$gap-width;
+      position: relative;
+      width: 100% + ($gap-width * 2.04);
+      margin-#{$left}: -$gap-width + (-$gap-width * 0.0);
+      @include clearfix();
+    }
+
+
+    @if $type==row-gapless {
+      width: 100%;
+      margin-#{$left}: 0;
+      //margin-#{$right}: 0;
+    }
+
+    //columned list row
+    @if $type==row-columned {
+      & > * {
+        float:left;
+        display:block;
+        list-style:none;
+        min-height:1px;
+        padding-#{$left}: $gap-width;
+        padding-#{$right}: $gap-width;
+        position:relative;
+      }
+    }
+
+    @if $type==row-columned-gapless {
+      & > * {
+        padding-#{$left}: 0;
+        padding-#{$right}: 0;
+      }
+    }
+
+
+    // Column Types
+    // --------------------
+    @if $type==column-width {
+      width: if($i==0, auto, $column-width * $i);
+    }
+    @if $type==column-base {
+      min-height:1px;
+      float: if($left==left, left, right);
+      position: relative;
+      display: block;
+    }
+    @if $type==column-indents {
+      padding-#{$left}: $gap-width;
+      padding-#{$right}: $gap-width;
+    }
+    @if $type==column-indents-gapless {
+      padding-#{$left}: 0;
+      padding-#{$right}: 0;
+    }
+
+
+    // Column manipulations
+    // ---------------------
+    @if $type==column-offset {
+      margin-#{$left}: $column-width * $i;
+    }
+    @if $type==column-unoffset {
+      margin-#{$left}: 0;
+      margin-#{$right}: 0;
+    }
+
+    @if $type==column-push {
+      #{$left}: $column-width * $i;
+      #{$right}: auto;
+    }
+    @if $type==column-pull {
+      #{$right}: $column-width * $i;
+      #{$left}: auto;
+    }
+    @if $type==column-unpush or $type==column-unpull{
+      left:auto;
+      right:auto;
+    }
+
+    @if $type==column-center {
+      margin-#{$left}: auto;
+      margin-#{$right}: auto;
+      float:none;
+    }
+    @if $type==column-uncentred {
+      margin-#{$left}: 0; //or nothing
+      margin-#{$right}: 0;
+      float:left;
+    }
+
+    @if $type==column-stretch {
+      width: $column-width * $columns !important;
+      //float: none !important; @think
+      right: auto;
+      left: auto;
+      margin-left: 0;
+      margin-right: 0;
+    }
+
+  }
+
+  // Reusable Pattern of Column's Set
+  // -------------------------------------------------
+  @mixin column-elements($prefix: null, $parameters: $grid-parameters) {
+    $prefix: append-dash($prefix);
+    $columns-number: nth($parameters, 3);
+    $i: 1 !global;
+
+    @if in-list(column, $grid-contain) {
+      [class*="#{$prefix}column-"] {@include grid(column-indents, $parameters, $i);}
+      @for $i from 0 through $columns-number {
+        .#{$prefix}by-#{$i} > * {@include grid(column-width, $parameters, $i);}
+      }
+      @for $i from 0 through $columns-number {
+        .#{$prefix}column-#{$i} {@include grid(column-width, $parameters, $i);}
+      }
+    }
+
+    @if in-list(column-offset, $grid-contain) {
+      @for $i from 1 through $columns-number {
+        .#{$prefix}offset-#{$i} {
+          @include grid(column-offset, $parameters, $i);
+        }
+      }
+      .#{$prefix}unoffset {@include grid(column-unoffset, $parameters, $i);}
+    }
+
+    @if in-list(column-pull, $grid-contain) {
+      @for $i from 1 through $columns-number {
+        .#{$prefix}pull-#{$i} {@include grid(column-pull, $parameters, $i);}
+      }
+      .#{$prefix}unpull {@include grid(column-unpull, $parameters, $i);}
+    }
+
+    @if in-list(column-push, $grid-contain) {
+      @for $i from 1 through $columns-number {
+        .#{$prefix}push-#{$i} {@include grid(column-push, $parameters, $i);}
+      }
+      .#{$prefix}unpush {@include grid(column-unpush, $parameters, $i);}
+    }
+
+    @if in-list(column-center, $grid-contain) {
+      .#{$prefix}center {@include grid(column-center, $parameters, $i);}
+      .#{$prefix}uncenter {@include grid(column-uncentred, $parameters, $i);}
+    }
+
+    @if in-list(column-stretch, $grid-contain) {
+      .#{$prefix}stretch {@include grid(column-stretch, $parameters, $i);}
+    }
+
+  }
+
+// Output Styles
+// --------------------------------------------------
+@if $grid or $grid == static {
+
+  // Initiate container
+  @if in-list(container, $grid-contain) {
+    .container              {@include grid(container, $grid-container-default);}
+  }
+
+  // Initiate row and row types
+  @if in-list(row, $grid-contain) {
+    .row                    {@include grid(row);}
+    .row.-gapless           {@include grid(row-gapless);}
+    .row.-columned          {@include grid(row-columned);}
+    .row.-columned.-gapless {@include grid(row-columned-gapless);}
+  }
+
+  // Initiate columns and its nested behavior
+  @if in-list(column, $grid-contain) {
+    [class*="column-"] {@include grid(column-base);}
+
+    //.row.-floatless > [class*="column-"] {float:none;}
+    //nested behavior
+    .row.-gapless {
+      [class*="column-"]
+        {@include grid(column-indents-gapless);}
+      .row [class*="column-"]
+        {@include grid(column-indents);}
+      .row.-gapless [class*="column-"]
+        {@include grid(column-indents-gapless);}
+    }
+  }
+
+  //media independent column's set
+  @include column-elements();
+}
+
+@if $grid or $grid == responsive {
+
+  $grid-screens:    break-list(united, $screen-list, $screen-breakpoint) !default;
+  $grid-prefixes:   break-list(united, $screen-list, $screen-breakpoint, $screen-name-list) !default;
+  $grid-containers: break-list(united, $screen-list, $screen-breakpoint, $grid-container-list) !default;
+  $f: 1;
+  @while $f <= length($grid-screens) {
+    $screen:          nth($grid-screens, $f);
+    $screen-name:     nth($grid-prefixes, $f);
+    $container-width: nth($grid-containers, $f);
+
+    @media #{get-media(opened, $screen, $screen-list, $screen-breakpoint)} {
+      //media dependent column's set
+      @include column-elements($screen-name);
+
+      //media dependent containers
+      .container {
+        @include grid(container, $container-width);
+      }
+    }
+
+    $f: $f + 1;
+  }
+
+}
