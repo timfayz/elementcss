@@ -8,7 +8,7 @@ Do not hesitate, some of them will be useful in future<br/>
 2. Extract the directory where you store your own styles
 3. Include CSS file into project: ``<link rel="stylesheet" type="text/css" href="path/to/styles.css">``
 4. [Install Ruby](https://www.ruby-lang.org/en/installation/) (required for SASS language)<br/>
-	Please, don't confuse about unawareness of ruby/ruby on rails, it is not necessary*<br/> *for successfully using SASS and ELEMENT.*
+	*Please, don't confuse about unawareness of ruby/ruby on rails, it is not necessary*<br/> *for successfully using SASS and ELEMENT.*
 5. [Install SASS](http://sass-lang.com/install)
 6. From now on you can use GUI **application** or **command line** to make compilations
 
@@ -22,7 +22,7 @@ If you choose command line, the steps below for you:
 	``sass --watch styles.scss:styles.css`` - compilation on change (recommended)<br/>
 	``sass --watch styles.scss:styles.css --style compressed`` - compilation and minification on change<br/>
 
-	If you are faced faced with ``LoadError: cannot load such file -- rb-inotify``<br/>
+	If you are faced with ``LoadError: cannot load such file -- rb-inotify``<br/>
 	Please run: ``gem install rb-inotify``
 
 Using command line and ``sass`` command quite enough, but for successfully using ELEMENT I recommend you to use [Gruntjs](http://gruntjs.com/getting-started). Gruntjs allows performing repetitive tasks like watching, compilation, minification and etc. For example, let's imagine that we have styles.scss file..

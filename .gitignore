@@ -1,9 +1,7 @@
 .idea/
 .sass-cache/
-.emil/
 
 project/
-framework/
 
 NOTES.md
 *.css
