@@ -43,14 +43,14 @@
 ``styles.css`` - the destination CSS file that will contain generated SASS code from *styles.scss*<br/>
 ``styles.scss`` - main SCSS file that imports necessary files from *framework* folder
 
-``*`` symbol means any file or any name of files<br/>
-``.md`` extension means that file uses markdown syntax (like wiki markup)<br/>
-``.scss`` extension means that file uses SCSS syntax of SASS preprocessor
+``*`` - symbol means any file or any name of files<br/>
+``.md`` - extension means that file uses markdown syntax (like wiki markup)<br/>
+``.scss`` - extension means that file uses SCSS syntax of SASS preprocessor
 
-###Logic
-ELEMENT has two steps:
-1. Initiate tags. Appropriate module responsible for particular category of tags. For example ``tags/_basic.scss`` module covers html, body and * (all elements). Initiating means tag normalizing and resetting into unified view.
-2. Class generating.
+###Logic structure
+ELEMENT has two step to make your app unique:
+1. Tags initiating. Appropriate module responsible for particular [category of tags](http://www.w3schools.com/tags/ref_byfunc.asp). For example ``tags/_basic.scss`` module covers html, body, * (all elements), etc. Initiating means tag normalizing and resetting into unified view.
+2. Class generating. After tags are initialized we can generate appropriate classes to make our styling.
 
 ###Module structure
 Each module within framework folder has unified structure. It makes easier to read existing modules and create new one. You can get initial module template in the [templates](https://github.com/kalopsia/element/tree/master/templates) folder. Line by line explanation and its brief using example you can find under [docs/code_review]() directory.

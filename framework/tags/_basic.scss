@@ -20,11 +20,13 @@
       -webkit-box-sizing: border-box;
       box-sizing: border-box;
     }
+
     #{$html} {
       font-family: $font-family-main;
       font-size: $font-size;
       text-size-adjust: 100%;
     }
+
     #{$body} {
       margin:0;
       cursor: $cursor-default;
@@ -36,6 +38,32 @@
       text-rendering: optimizelegibility;
       &::selection {
         background-color: fade-out($selection-color, $selection-opacity);
+      }
+
+      #{$_headings} {
+        margin:0;
+        font-weight: inherit;
+        font-size: inherit;
+        color: inherit;
+        text-rendering: optimizelegibility;
+      }
+
+      #{$h1} {}
+      #{$h2} {}
+      #{$h3} {}
+      #{$h4} {}
+      #{$h5} {}
+      #{$h6} {}
+
+      #{$p} {
+        margin: 0;
+      }
+
+      #{$hr} {
+        box-sizing: content-box;
+        height: 0;
+        border: none;
+        margin: 0;
       }
     }
 

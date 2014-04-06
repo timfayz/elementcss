@@ -70,8 +70,4 @@ ELEMENT has different structure, abstraction and thus different features
 * **Mobile First**. Many modules have responsive additions, however they can be easily disabled.
 
 ###Ideology
-The reason to create this project is make something more modular, abstract, flexible, logical, tighten? with community and unique that will differentiate it from other frameworks are existing. Something that doesn't have predefined forms, buttons, block-quotes, lists etc.
-
-All modules(logically separated files) have unified structure and generating techniques. For more information see documentation folder.
-
-
+The reason to create this project is make something more modular, abstract, flexible, logical, community aimed and unique that will differentiate it from other frameworks are existing. Something that doesn't have predefined forms, buttons, block-quotes, lists etc.
