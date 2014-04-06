@@ -1,0 +1,68 @@
+// _module.scss template provides uniform way in creating logical and convenient module structure
+
+// 1. Import general files
+// _globals file provides all necessary variables that will be used not only in the
+// _module itself, but in _functions and _mixins files
+@import '../_globals.scss';
+
+// _naming file provides standardized prefixes and names which are may be not necessarily
+// used if you don't want to use them
+@import '../_naming.scss';
+
+// _functions file provides general functions which can be used in the _module itself
+@import '../_functions.scss';
+
+// _mixins file provides general mixins and one of the most important mixin like property()
+// which can be used in the _module itself
+@import '../_mixins.scss';
+
+// vr_ file provides functions and mixins for vertical synchronization like line-height()
+// uncomment only if you need appropriate functionality
+//@import '../_vr.scss';
+
+// 2. Write what you want to do here
+//@todo
+
+// Default Variables
+// --------------------------------------------------
+  // 3. Set module including to false by default. The name must be as short as possible,
+  // because every new variable below should be prepended by this name (namespace prefix).
+  $module: false !default;
+
+  // 4. Now every new variable must be prefixed by $module-*
+  // For example: $module-foo, $module-bar and so on
+  //code
+
+
+// Mixins & Functions
+// --------------------------------------------------
+
+  // 5. Write you mixins and functions here
+  // Mixins' names should be prepended by name of module. For example: module-foo(), module-bar()
+  // Functions' names can be anything
+  // Auxiliary functions should be prepended by _. For example: _my-foo(), _my-bar()
+  // Auxiliary - means that function will be used only withing module and nowhere else
+  //code
+
+
+// Output Styles
+// --------------------------------------------------
+@if $module or $module==static {
+
+  // 6. Place here anything that generates styles or styles itself
+  // There is only one restriction - do not place @media rule here
+  // and any other styles that responsible for responsive design
+  //code
+
+}
+
+@if $module or $module==responsive {
+
+  // 7. There should be styles and styles under @media rule that
+  // responsible for responsive design
+  //code
+
+}
+
+// 8. Exclude module to avoid further including elsewhere
+$module: false;
