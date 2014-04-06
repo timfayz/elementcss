@@ -1,0 +1,48 @@
+@import '../_globals.scss';
+@import '../_naming.scss';
+@import '../_functions.scss';
+@import '../_mixins.scss';
+
+//@todo
+
+// Default Variables
+// --------------------------------------------------
+  $list: false !default;
+
+  $list-exclude: false !default;
+  $list-include: diff-list((
+    list-style, list-style-type
+    ), $list-exclude) !default;
+
+  $list-style-set-default:
+    none, none,
+    circle, circle,
+    square, square
+    !default;
+  $list-style-set: () !default;
+
+
+// Mixins & Functions
+// --------------------------------------------------
+
+//codee
+
+
+// Output Styles
+// --------------------------------------------------
+@if $list or $list==static {
+
+  //code
+
+}
+
+@if $list or $list==responsive {
+
+  @if in-list(list-style, $list-include) {
+    @include property(list-style, $List-style, $list-style-set-default);
+    @include property(list-style, $List-style, $list-style-set);
+  }
+
+}
+
+$module: false;
