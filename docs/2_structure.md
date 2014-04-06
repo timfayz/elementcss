@@ -3,6 +3,8 @@
 ###File structure
 ```
 |-- docs
+|   |-- module_review
+|   |-- *.md
 |-- framework
 |   |-- classes
 |       |-- _all.scss
@@ -25,6 +27,7 @@
 ```
 
 ``docs/`` - contains ELEMENT's documentation<br/>
+``docs/module_review`` - contains module's line by line explanation and usage<br/>
 ``framework/`` - core files of framework<br/>
 ``framework/_naming.scss`` - contains all class prefixes which are used among all files<br/>
 ``framework/_globals.scss`` - contains global variables which are used among all files<br/>
@@ -53,7 +56,8 @@ ELEMENT has two step to make your app unique:
 2. Class generating. After tags are initialized we can generate appropriate classes to make our styling.
 
 ###Module structure
-Each module within framework folder has unified structure. It makes easier to read existing modules and create new one. You can get initial module template in the [templates](https://github.com/kalopsia/element/tree/master/templates) folder. Line by line explanation and its brief using example you can find under [docs/code_review]() directory.
+Module is the most important component of the framework.
+Each module within framework folder has unified structure. It makes easier to read existing modules and create new one. You can get initial module template under [templates/module](https://github.com/kalopsia/element/tree/master/templates/module) folder. Line by line explanation and its brief using example you can find under [docs/module](https://github.com/kalopsia/element/tree/master/docs/module) directory.
 
 <hr>
 
