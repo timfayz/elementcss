@@ -1,0 +1,111 @@
+@import '../_globals.scss';
+@import '../_naming.scss';
+@import '../_functions.scss';
+@import '../_mixins.scss';
+
+// Default Variables
+// --------------------------------------------------
+  $displaying: false !default;
+
+  $displaying-exclude: display-table !default;
+  $displaying-include: diff-list((
+    display,
+    //pseudo
+    display-table
+    ), $displaying-exclude) !default;
+
+  $displaying-set-default:
+    none, none,
+    block, block,
+    inline, inline,
+    inline-block, inline-block
+    !default;
+  $displaying-set: () !default;
+
+
+  // Media Visibilities
+  // -------------------------------
+  $displaying-screens:  break-list(united, $screen-list, $screen-breakpoint) !default;
+  $displaying-screen-names: break-list(united, $screen-list, $screen-breakpoint, $screen-name-list) !default;
+
+  $displaying-print:      false !default;
+  $displaying-touch:      true !default;
+  $displaying-portrait:   false !default;
+  $displaying-landscape:  false !default;
+
+
+// Mixins & Functions
+// --------------------------------------------------
+
+  @mixin media-displaying($prefix:null) {
+    $prefix: append-dash($prefix);
+
+    @if in-list(display, $displaying-include) {
+      @include property(display, #{$prefix}#{$Display}, $displaying-set-default);
+    }
+    @if in-list(display-table, $displaying-include) {
+      .#{$prefix}#{$Display}table           {display:table;}
+      .#{$prefix}#{$Display}table-row       {display:table-row;}
+      .#{$prefix}#{$Display}table-cell      {display:table-cell;}
+      .#{$prefix}#{$Display}table-caption   {display:table-caption;}
+      .#{$prefix}#{$Display}table-header    {display:table-header-group;}
+      .#{$prefix}#{$Display}table-body      {display:table-row-group;}
+      .#{$prefix}#{$Display}table-footer    {display:table-footer-group;}
+      //.#{$prefix}#{$Display}table-column    {display:table-column;}
+      //.#{$prefix}#{$Display}table-columns   {display:table-column-group;}
+    }
+  }
+
+
+// Output Styles
+// --------------------------------------------------
+@if $displaying or $displaying == static {
+
+  //media independent displaying
+  @if in-list(display, $displaying-include) {
+    @include property(display, $Display, $displaying-set-default);
+    @include property(display, $Display, $displaying-set);
+  }
+  @if in-list(display-table, $displaying-include) {
+    .#{$Display}table           {display:table;}
+    .#{$Display}table-row       {display:table-row;}
+    .#{$Display}table-cell      {display:table-cell;}
+    .#{$Display}table-caption   {display:table-caption;}
+    .#{$Display}table-header    {display:table-header-group;}
+    .#{$Display}table-body      {display:table-row-group;}
+    .#{$Display}table-footer    {display:table-footer-group;}
+  }
+
+}
+
+@if $displaying or $displaying == responsive {
+
+  $f: 1;
+  @while $f <= length($displaying-screens) {
+    $screen: nth($displaying-screens, $f);
+    $screen-name: nth($displaying-screen-names, $f);
+
+    //media dependent displaying
+    @media #{get-media(opened, $screen, $screen-list, $screen-breakpoint)} {
+
+      @include media-displaying($screen-name);
+
+    }
+
+    $f: $f + 1;
+  }
+
+  @if $displaying-print {
+    @media print {@include media-displaying(print);}
+  }
+  @if $displaying-touch {
+    .touch {@include media-displaying(touch);}
+  }
+  @if $displaying-landscape {
+    @media (orientation: landscape) {@include media-displaying(landscape);}
+  }
+  @if $displaying-portrait {
+    @media (orientation: portrait)  {@include media-displaying(portrait);}
+  }
+
+}
