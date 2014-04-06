@@ -1,0 +1,35 @@
+@import '../_globals.scss';
+@import '../_naming.scss';
+@import '../_functions.scss';
+@import '../_mixins.scss';
+//@import '../_vr.scss';
+
+
+// Default Variables
+// --------------------------------------------------
+  $module: false !default;
+
+  //code
+
+
+// Mixins & Functions
+// --------------------------------------------------
+
+  //code
+
+
+// Output Styles
+// --------------------------------------------------
+@if $module or $module==static {
+
+  //code
+
+}
+
+@if $module or $module==responsive {
+
+  //code
+
+}
+
+$module: false;
