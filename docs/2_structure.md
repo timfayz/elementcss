@@ -65,5 +65,3 @@ Each module within framework folder has unified structure. It makes easier to re
 <hr>
 
 To understand what is module and how to start using framework, please go to the next chapter.
-
-##[next&raquo;]
