@@ -1,0 +1,119 @@
+@import '../_globals.scss';
+@import '../_naming.scss';
+@import '../_functions.scss';
+@import '../_mixins.scss';
+
+// Default Variables
+// --------------------------------------------------
+$formatting: true !default;
+$formatting-initiating: true !default;
+
+
+// Output Styles
+// --------------------------------------------------
+@if $formatting or $formatting==static {
+
+  @if $formatting-initiating {
+
+    #{$abbr} {
+      &[title] {
+        border: none;
+      }
+    }
+    #{$address} {
+      font-style: inherit;
+    }
+    #{$b} {
+      font-weight: bold;
+    }
+    #{$blockquote} {
+      margin:0;
+    }
+    #{$cite} {
+      font-style: italic;
+    }
+    #{$code} {
+      font-family: $font-family-mono;
+      font-size: inherit;
+    }
+    #{$del} {
+      text-decoration: line-through;
+    }
+    #{$dfn} {
+      font-style: italic;
+    }
+    #{$em} {
+      font-style: italic;
+    }
+    #{$i} {
+      font-style: italic;
+    }
+    #{$ins} {}
+    #{$kbd} {
+      font-size: inherit;
+      font-family: $font-family-mono;
+    }
+    #{$mark} {
+      background: transparent;
+      color: inherit;
+    }
+    #{$meter} {
+      display: block;
+      @include height(1);
+      width: 100%;
+    }
+    #{$pre} {
+      font-family: $font-family-mono;
+      font-size: inherit;
+      white-space: pre-wrap;
+      margin: 0;
+      overflow: auto;
+    }
+    #{$progress} {
+      width: 100%;
+      display: block;
+      vertical-align: baseline;
+      @include height(1);
+    }
+    #{$q} {
+      quotes: "\201C" "\201D" "\2018" "\2019";
+    }
+    #{$s} {
+      text-decoration: line-through;
+    }
+    #{$samp} {
+      font-family: $font-family-mono;
+      font-size: inherit;
+    }
+    #{$small} {
+      font-size: 80%;
+    }
+    #{$strong} {
+      font-weight: bold;
+    }
+    #{$sub} {
+      font-size: 75%;
+      line-height: 0;
+      position: relative;
+      vertical-align: baseline;
+      top: -0.5em;
+    }
+    #{$sup} {
+      font-size: 75%;
+      line-height: 0;
+      position: relative;
+      vertical-align: baseline;
+      bottom: -0.25em;
+    }
+    #{$time} {}
+    #{$u} {}
+    #{$var} {
+      font-family: $font-family-mono;
+    }
+
+  }
+
+}
+
+$formatting: false;
+

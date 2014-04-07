@@ -6,10 +6,10 @@
 |   |-- module
 |   |-- *.md
 |-- framework
-|   |-- classes
+|   |-- generate
 |       |-- _all.scss
 |       |-- _*.scss
-|   |-- tags
+|   |-- initialize
 |       |-- _all.scss
 |       |-- _*.scss
 |   |-- _globals.scss
@@ -34,12 +34,12 @@
 ``framework/_mixins.scss`` - contains all general mixins<br/>
 ``framework/_functions.scss`` - contains all general functions<br/>
 ``framework/_vr.scss`` - contains vertical rhythm mixins and functions that provide vertical synchronization<br/>
-``framework/classes/`` - contains files that generates appropriate classes<br/>
-``framework/classes/_all.scss`` - combine all files in the folder. Just shortcut for including all files easily<br/>
-``framework/classes/_*.scss`` - contain appropriate classes<br/>
-``framework/tags/`` - contains all files that initiate appropriate tags<br/>
-``framework/tags/_all.scss`` - combine all files in the folder. Just shortcut for including all files easily<br/>
-``framework/tags/_*.scss`` - appropriate category of tags<br/>
+``framework/generate/`` - contains files that generates appropriate classes<br/>
+``framework/generate/_all.scss`` - combine all files in the folder. Just shortcut for including all files easily<br/>
+``framework/generate/_*.scss`` - contains appropriate classes<br/>
+``framework/initialize/`` - contains all files that initiate appropriate tags<br/>
+``framework/initialize/_all.scss`` - combine all files in the folder. Just shortcut for including all files easily<br/>
+``framework/initialize/_*.scss`` - initializes appropriate category of tags<br/>
 ``templates/`` - contains variety of useful templates<br/>
 ``templates/app-minimal/`` - minimal app template<br/>
 ``templates/app-basic/`` - basic app template<br/>
@@ -47,7 +47,6 @@
 ``.gitignore`` - file using by [git](http://en.wikipedia.org/wiki/Git_(software)) to exclude tracking unnecessary files<br/>
 ``LICENSE`` - licence terms and conditions<br/>
 ``README.md`` - brief documentation (pieces of text from main documentation)<br/>
-``styles.scss`` - main SCSS file that imports necessary files from *framework* folder
 
 ``*`` - symbol means any file or any name of files<br/>
 ``.md`` - extension means that file uses markdown syntax (like wiki markup)<br/>
@@ -55,12 +54,12 @@
 
 ###Logic structure
 ELEMENT has two step to make your app unique:
-1. Tags initiating. Appropriate module responsible for particular [category of tags](http://www.w3schools.com/tags/ref_byfunc.asp). For example ``tags/_basic.scss`` module covers html, body, * (all elements), etc. Initiating means tag normalizing and resetting into unified view.
+1. Tags initiating. Appropriate module responsible for particular [category of tags](http://www.w3schools.com/tags/ref_byfunc.asp). For example ``initialize/_basic.scss`` module covers html, body, * (all elements), etc. Initiating means tag normalizing and resetting into unified view.
 2. Class generating. After tags are initialized we can generate appropriate classes to make our styling. For example [?]
 
 ###Module structure
 Module is the most important component of the framework.
-Each module within framework folder has unified structure. It makes easier to read existing modules and create new one. You can get initial module template under [templates/module](https://github.com/kalopsia/element/tree/master/templates/module) folder. Line by line explanation and its brief using example you can find under [docs/module](https://github.com/kalopsia/element/tree/master/docs/module) directory.
+Each file within the framework folder has unified structure. It makes easier to read existing files (modules) and create new one. You can get initial module template under [templates/module](https://github.com/kalopsia/element/tree/master/templates/module) folder. Line by line explanation and its brief using example you can find under [docs/module](https://github.com/kalopsia/element/tree/master/docs/module) directory.
 
 <hr>
 

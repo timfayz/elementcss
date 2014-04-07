@@ -24,7 +24,7 @@
 //$images: true;
 //$polyfills: true;
 //$tables: true;
-@import 'element/framework/tags/_all.scss';
+@import 'element/framework/initialize/_all.scss';
 
 
 // Generating Classes
@@ -45,7 +45,7 @@
 //$utilities: true;
 //$indention: true;
 //$background: true;
-@import 'element/framework/classes/_all.scss';
+@import 'element/framework/generate/_all.scss';
 
 // Styles
 // -------

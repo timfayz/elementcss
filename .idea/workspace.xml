@@ -1,0 +1,1000 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="27485b4f-3299-46fd-93e3-9fe9f0e07e66" name="Default" comment="">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/framework/classes/_all.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/framework/classes/_background.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/framework/classes/_border.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/framework/classes/_content.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/framework/classes/_dimension.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/framework/classes/_displaying.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/framework/classes/_grid.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/framework/classes/_icons.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/framework/classes/_indention.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/framework/classes/_lists.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/framework/classes/_opacity.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/framework/classes/_positioning.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/framework/classes/_shadow.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/framework/classes/_text.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/framework/classes/_transition.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/framework/classes/_utilities.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/framework/classes/_visibility.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/framework/tags/_all.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/framework/tags/_basic.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/framework/tags/_formatting.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/framework/tags/_forms.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/framework/tags/_images.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/framework/tags/_links.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/framework/tags/_lists.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/framework/tags/_media.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/framework/tags/_polyfills.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/framework/tags/_sections.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/framework/tags/_tables.scss" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/2_structure.md" afterPath="$PROJECT_DIR$/docs/2_structure.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/3_usage.md" afterPath="$PROJECT_DIR$/docs/3_usage.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/app-minimal/styles.scss" afterPath="$PROJECT_DIR$/templates/app-minimal/styles.scss" />
+    </list>
+    <ignored path="element.iws" />
+    <ignored path=".idea/workspace.xml" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
+  <component name="CreatePatchCommitExecutor">
+    <option name="PATCH_PATH" value="" />
+  </component>
+  <component name="DaemonCodeAnalyzer">
+    <disable_hints />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
+  <component name="FavoritesManager">
+    <favorites_list name="element" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf>
+      <file leaf-file-name="0_preface.md" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/docs/0_preface.md">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="277" max-vertical-offset="1476">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="1_installation.md" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/docs/1_installation.md">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="702">
+              <folding />
+            </state>
+          </provider>
+          <provider editor-type-id="MarkdownPreviewEditor">
+            <state />
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="2_structure.md" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/docs/2_structure.md">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="61" column="56" selection-start="2965" selection-end="2965" vertical-scroll-proportion="-35.214287" vertical-offset="112" max-vertical-offset="1350">
+              <folding />
+            </state>
+          </provider>
+          <provider editor-type-id="MarkdownPreviewEditor">
+            <state />
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="3_usage.md" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/docs/3_usage.md">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="10" column="12" selection-start="894" selection-end="894" vertical-scroll-proportion="0.2435724" vertical-offset="54" max-vertical-offset="2448">
+              <folding />
+            </state>
+          </provider>
+          <provider editor-type-id="MarkdownPreviewEditor">
+            <state />
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="_forms.scss" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/framework/initialize/_forms.scss">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="2358">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="_grid.scss" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/framework/generate/_grid.scss">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="12" column="43" selection-start="332" selection-end="357" vertical-scroll-proportion="-6.0" vertical-offset="54" max-vertical-offset="5130">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="_lists.scss" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/framework/generate/_lists.scss">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="7.4444447" vertical-offset="201" max-vertical-offset="954">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="_globals.scss" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/framework/_globals.scss">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2898">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="styles.scss" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/app-minimal/styles.scss">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="47" column="27" selection-start="856" selection-end="864" vertical-scroll-proportion="-29.222221" vertical-offset="57" max-vertical-offset="1026">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="_basic.scss" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/framework/initialize/_basic.scss">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="1746">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FindManager">
+    <FindUsagesManager>
+      <setting name="OPEN_NEW_TAB" value="false" />
+    </FindUsagesManager>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="changedFiles">
+      <list>
+        <option value="$PROJECT_DIR$/styles.scss" />
+        <option value="$PROJECT_DIR$/framework/classes/_text.scss" />
+        <option value="$PROJECT_DIR$/framework/_naming.scss" />
+        <option value="$PROJECT_DIR$/README.md" />
+        <option value="$PROJECT_DIR$/framework/_mixins.scss" />
+        <option value="$PROJECT_DIR$/docs/code_review/_module(basic).scss" />
+        <option value="$PROJECT_DIR$/docs/code_review/_module(advanced).scss" />
+        <option value="$PROJECT_DIR$/framework/classes/_content.scss" />
+        <option value="$PROJECT_DIR$/docs/code_review/_module(2_real-example).scss" />
+        <option value="$PROJECT_DIR$/docs/code_review/_module(2_example).scss" />
+        <option value="$PROJECT_DIR$/docs/1_installation.md" />
+        <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/templates/_module.scss" />
+        <option value="$PROJECT_DIR$/docs/code_review/_module(0_basic-usage).scss" />
+        <option value="$PROJECT_DIR$/framework/tags/_type.scss" />
+        <option value="$PROJECT_DIR$/framework/tags/_basic.scss" />
+        <option value="$PROJECT_DIR$/docs/0_preface.md" />
+        <option value="$PROJECT_DIR$/templates/app-minimal/styles.scss" />
+        <option value="$PROJECT_DIR$/docs/2_structure.md" />
+        <option value="$PROJECT_DIR$/docs/3_usage.md" />
+      </list>
+    </option>
+  </component>
+  <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" interpreter_name="php5">
+    <include_path>
+      <path value="$PROJECT_DIR$/../../../packages/yii/framework" />
+    </include_path>
+  </component>
+  <component name="ProjectFrameBounds">
+    <option name="x" value="48" />
+    <option name="y" value="-4" />
+    <option name="width" value="1553" />
+    <option name="height" value="905" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="false">
+    <OptionsSetting value="true" id="Add" />
+    <OptionsSetting value="true" id="Remove" />
+    <OptionsSetting value="true" id="Checkout" />
+    <OptionsSetting value="true" id="Update" />
+    <OptionsSetting value="true" id="Status" />
+    <OptionsSetting value="true" id="Edit" />
+    <ConfirmationsSetting value="0" id="Add" />
+    <ConfirmationsSetting value="0" id="Remove" />
+  </component>
+  <component name="ProjectReloadState">
+    <option name="STATE" value="0" />
+  </component>
+  <component name="ProjectView">
+    <navigator currentView="Scope" currentSubView="Project Files" proportions="" version="1" splitterProportion="0.5">
+      <flattenPackages />
+      <showMembers />
+      <showModules />
+      <showLibraryContents />
+      <hideEmptyPackages />
+      <abbreviatePackageNames />
+      <autoscrollToSource Scope="true" />
+      <autoscrollFromSource Scope="true" />
+      <sortByType />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="element" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+      <pane id="Scope">
+        <subPane subId="Project Files">
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="element">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="element">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="templates">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="element">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="templates">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="app-minimal">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="element">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="framework">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="element">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="docs">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="options.lastSelected" value="Errors" />
+    <property name="options.splitter.main.proportions" value="0.3" />
+    <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="options.searchVisible" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="WebServerToolWindowFactoryState" value="true" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth0" value="125" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder0" value="0" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth1" value="141" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder1" value="1" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth2" value="149" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder2" value="2" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth3" value="1049" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder3" value="3" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth0" value="125" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder0" value="0" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth1" value="141" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder1" value="1" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth2" value="149" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder2" value="2" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth3" value="1049" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder3" value="3" />
+    <property name="FullScreen" value="false" />
+    <property name="SearchEverywhereHistory" value="" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/templates/module" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
+      <TestRunner />
+      <method />
+    </configuration>
+    <configuration default="true" type="PhpLocalRunConfigurationType" factoryName="PHP Console">
+      <method />
+    </configuration>
+    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug" singleton="true">
+      <method />
+    </configuration>
+    <configuration default="true" type="PhpUnitRemoteRunConfigurationType" factoryName="PHPUnit on Server" server_id="275f9686-84ea-4b3e-934b-3902ec1e2c6d" server_name="element">
+      <method />
+    </configuration>
+    <list size="0" />
+  </component>
+  <component name="ShelveChangesManager" show_recycled="false" />
+  <component name="SvnConfiguration" maxAnnotateRevisions="500" myUseAcceleration="nothing" myAutoUpdateAfterCommit="false" cleanupOnStartRun="false" SSL_PROTOCOLS="all">
+    <option name="USER" value="" />
+    <option name="PASSWORD" value="" />
+    <option name="mySSHConnectionTimeout" value="30000" />
+    <option name="mySSHReadTimeout" value="30000" />
+    <option name="LAST_MERGED_REVISION" />
+    <option name="MERGE_DRY_RUN" value="false" />
+    <option name="MERGE_DIFF_USE_ANCESTRY" value="true" />
+    <option name="UPDATE_LOCK_ON_DEMAND" value="false" />
+    <option name="IGNORE_SPACES_IN_MERGE" value="false" />
+    <option name="CHECK_NESTED_FOR_QUICK_MERGE" value="false" />
+    <option name="IGNORE_SPACES_IN_ANNOTATE" value="true" />
+    <option name="SHOW_MERGE_SOURCES_IN_ANNOTATE" value="true" />
+    <option name="FORCE_UPDATE" value="false" />
+    <option name="IGNORE_EXTERNALS" value="false" />
+    <myIsUseDefaultProxy>false</myIsUseDefaultProxy>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="27485b4f-3299-46fd-93e3-9fe9f0e07e66" name="Default" comment="" />
+      <created>1395521652816</created>
+      <updated>1395521652816</updated>
+    </task>
+    <task id="LOCAL-00001" summary="editing&#10;">
+      <created>1395556878313</created>
+      <updated>1395556878313</updated>
+    </task>
+    <task id="LOCAL-00002" summary="editing&#10;">
+      <created>1395561820405</created>
+      <updated>1395561820405</updated>
+    </task>
+    <task id="LOCAL-00003" summary="editing&#10;">
+      <created>1395569825398</created>
+      <updated>1395569825398</updated>
+    </task>
+    <task id="LOCAL-00004" summary="editing&#10;">
+      <created>1395569867320</created>
+      <updated>1395569867320</updated>
+    </task>
+    <task id="LOCAL-00005" summary="editing&#10;">
+      <created>1395574247909</created>
+      <updated>1395574247909</updated>
+    </task>
+    <task id="LOCAL-00006" summary="editing&#10;">
+      <created>1395574367247</created>
+      <updated>1395574367247</updated>
+    </task>
+    <task id="LOCAL-00007" summary="editing&#10;">
+      <created>1395574490930</created>
+      <updated>1395574490930</updated>
+    </task>
+    <task id="LOCAL-00008" summary="editing&#10;">
+      <created>1395574664865</created>
+      <updated>1395574664865</updated>
+    </task>
+    <task id="LOCAL-00009" summary="editing&#10;">
+      <created>1395574782823</created>
+      <updated>1395574782823</updated>
+    </task>
+    <task id="LOCAL-00010" summary="editing&#10;">
+      <created>1395575538107</created>
+      <updated>1395575538107</updated>
+    </task>
+    <task id="LOCAL-00011" summary="editing&#10;">
+      <created>1395575789591</created>
+      <updated>1395575789591</updated>
+    </task>
+    <task id="LOCAL-00012" summary="editing&#10;">
+      <created>1395576022878</created>
+      <updated>1395576022878</updated>
+    </task>
+    <task id="LOCAL-00013" summary="editing&#10;">
+      <created>1395576171736</created>
+      <updated>1395576171736</updated>
+    </task>
+    <task id="LOCAL-00014" summary="editing&#10;">
+      <created>1395576235572</created>
+      <updated>1395576235572</updated>
+    </task>
+    <task id="LOCAL-00015" summary="editing&#10;">
+      <created>1395687884959</created>
+      <updated>1395687884959</updated>
+    </task>
+    <task id="LOCAL-00016" summary="editing&#10;">
+      <created>1395728605029</created>
+      <updated>1395728605029</updated>
+    </task>
+    <task id="LOCAL-00017" summary="editing&#10;">
+      <created>1395729633375</created>
+      <updated>1395729633375</updated>
+    </task>
+    <task id="LOCAL-00018" summary="editing&#10;">
+      <created>1396015141209</created>
+      <updated>1396015141209</updated>
+    </task>
+    <task id="LOCAL-00019" summary="editing&#10;">
+      <created>1396019441906</created>
+      <updated>1396019441906</updated>
+    </task>
+    <task id="LOCAL-00020" summary="editing&#10;">
+      <created>1396118281128</created>
+      <updated>1396118281128</updated>
+    </task>
+    <task id="LOCAL-00021" summary="editing&#10;">
+      <created>1396177275215</created>
+      <updated>1396177275215</updated>
+    </task>
+    <task id="LOCAL-00022" summary="editing&#10;">
+      <created>1396177930840</created>
+      <updated>1396177930840</updated>
+    </task>
+    <task id="LOCAL-00023" summary="editing&#10;">
+      <created>1396179822276</created>
+      <updated>1396179822276</updated>
+    </task>
+    <task id="LOCAL-00024" summary="editing&#10;">
+      <created>1396187622250</created>
+      <updated>1396187622250</updated>
+    </task>
+    <task id="LOCAL-00025" summary="upload framework files">
+      <created>1396771398954</created>
+      <updated>1396771398954</updated>
+    </task>
+    <task id="LOCAL-00026" summary="make small changes&#10;">
+      <created>1396771668495</created>
+      <updated>1396771668495</updated>
+    </task>
+    <task id="LOCAL-00027" summary="make small changes&#10;">
+      <created>1396772464448</created>
+      <updated>1396772464448</updated>
+    </task>
+    <task id="LOCAL-00028" summary="rename files under code_review">
+      <created>1396773637252</created>
+      <updated>1396773637252</updated>
+    </task>
+    <task id="LOCAL-00029" summary="move module template&#10;">
+      <created>1396774924037</created>
+      <updated>1396774924037</updated>
+    </task>
+    <task id="LOCAL-00030" summary="make changes">
+      <created>1396774993684</created>
+      <updated>1396774993684</updated>
+    </task>
+    <task id="LOCAL-00031" summary="make additions&#10;">
+      <created>1396791287762</created>
+      <updated>1396791287762</updated>
+    </task>
+    <task id="LOCAL-00032" summary="make changes&#10;">
+      <created>1396791314314</created>
+      <updated>1396791314314</updated>
+    </task>
+    <task id="LOCAL-00033" summary="make changes&#10;">
+      <created>1396820343958</created>
+      <updated>1396820343958</updated>
+    </task>
+    <task id="LOCAL-00034" summary="make changes&#10;">
+      <created>1396820875627</created>
+      <updated>1396820875627</updated>
+    </task>
+    <task id="LOCAL-00035" summary="make changes&#10;">
+      <created>1396820894976</created>
+      <updated>1396820894976</updated>
+    </task>
+    <task id="LOCAL-00036" summary="make changes&#10;">
+      <created>1396858076449</created>
+      <updated>1396858076449</updated>
+    </task>
+    <option name="localTasksCounter" value="37" />
+    <servers />
+  </component>
+  <component name="TodoView" selected-index="0">
+    <todo-panel id="selected-file">
+      <are-packages-shown value="false" />
+      <are-modules-shown value="false" />
+      <flatten-packages value="false" />
+      <is-autoscroll-to-source value="false" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="false" />
+      <are-modules-shown value="false" />
+      <flatten-packages value="false" />
+      <is-autoscroll-to-source value="false" />
+    </todo-panel>
+    <todo-panel id="default-changelist">
+      <are-packages-shown value="false" />
+      <are-modules-shown value="false" />
+      <flatten-packages value="false" />
+      <is-autoscroll-to-source value="false" />
+    </todo-panel>
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="48" y="-4" width="1553" height="905" extended-state="6" />
+    <editor active="false" />
+    <layout>
+      <window_info id="File Transfer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32880098" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2645241" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32880098" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.16655608" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.17319177" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32880098" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24845488" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.14532183" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.16456535" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+    </layout>
+  </component>
+  <component name="Vcs.Log.UiProperties">
+    <option name="RECENTLY_FILTERED_USER_GROUPS">
+      <collection />
+    </option>
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
+    <option name="CHECK_NEW_TODO" value="false" />
+    <option name="myTodoPanelSettings">
+      <TodoPanelSettings />
+    </option>
+    <MESSAGE value="editing&#10;" />
+    <MESSAGE value="upload framework files" />
+    <MESSAGE value="make small changes&#10;" />
+    <MESSAGE value="rename files under code_review" />
+    <MESSAGE value="move module template&#10;" />
+    <MESSAGE value="make changes" />
+    <MESSAGE value="make additions&#10;" />
+    <MESSAGE value="make changes&#10;" />
+    <option name="LAST_COMMIT_MESSAGE" value="make changes&#10;" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/templates/module/_module.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="0" selection-start="138" selection-end="138" vertical-scroll-proportion="0.0" vertical-offset="108" max-vertical-offset="738">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/2_structure.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1332">
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="MarkdownPreviewEditor">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/3_usage.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="42" column="0" selection-start="2011" selection-end="2011" vertical-scroll-proportion="0.0" vertical-offset="756" max-vertical-offset="900">
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="MarkdownPreviewEditor">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/framework/_globals.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2898">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/app-minimal/styles.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="14" column="0" selection-start="228" selection-end="479" vertical-scroll-proportion="0.0" vertical-offset="252" max-vertical-offset="1080">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/framework/initialize/_basic.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1746">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/0_preface.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="756" max-vertical-offset="1404">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="14" column="0" selection-start="1043" selection-end="1422" vertical-scroll-proportion="0.0" vertical-offset="252" max-vertical-offset="3114">
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="MarkdownPreviewEditor">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/1_installation.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="702">
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="MarkdownPreviewEditor">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1" column="12" selection-start="19" selection-end="19" vertical-scroll-proportion="0.0" vertical-offset="18" max-vertical-offset="270">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/module/_module.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="0" selection-start="138" selection-end="138" vertical-scroll-proportion="0.0" vertical-offset="108" max-vertical-offset="738">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/2_structure.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1332">
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="MarkdownPreviewEditor">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/3_usage.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="30" column="4" selection-start="1489" selection-end="1489" vertical-scroll-proportion="0.0" vertical-offset="540" max-vertical-offset="684">
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="MarkdownPreviewEditor">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/app-minimal/styles.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="9" column="0" selection-start="128" selection-end="242" vertical-scroll-proportion="0.0" vertical-offset="162" max-vertical-offset="1116">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/framework/initialize/_basic.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="993" max-vertical-offset="1746">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/0_preface.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1422">
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="MarkdownPreviewEditor">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/2_structure.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="25" column="27" selection-start="703" selection-end="703" vertical-scroll-proportion="0.0" vertical-offset="450" max-vertical-offset="864">
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="MarkdownPreviewEditor">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/1_installation.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="702">
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="MarkdownPreviewEditor">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/framework/generate/_content.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="43" column="8" selection-start="817" selection-end="817" vertical-scroll-proportion="0.0" vertical-offset="129" max-vertical-offset="882" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/framework/generate/_text.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="8" column="18" selection-start="229" selection-end="229" vertical-scroll-proportion="0.0" vertical-offset="144" max-vertical-offset="3762" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/framework/_naming.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="348" column="30" selection-start="8438" selection-end="8438" vertical-scroll-proportion="0.0" vertical-offset="5925" max-vertical-offset="6786" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/framework/_mixins.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="132" column="14" selection-start="3325" selection-end="3325" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2646" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/module/_module.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="534" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="756">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/0_preface.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="64" column="183" selection-start="3177" selection-end="3177" vertical-scroll-proportion="0.0" vertical-offset="1152" max-vertical-offset="1422">
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="MarkdownPreviewEditor">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/framework/generate/_content.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="43" column="8" selection-start="817" selection-end="817" vertical-scroll-proportion="0.0" vertical-offset="129" max-vertical-offset="882" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/framework/generate/_text.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="8" column="18" selection-start="229" selection-end="229" vertical-scroll-proportion="0.0" vertical-offset="144" max-vertical-offset="3762" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/framework/_naming.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="348" column="30" selection-start="8438" selection-end="8438" vertical-scroll-proportion="0.0" vertical-offset="5925" max-vertical-offset="6786" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="55" column="0" selection-start="2493" selection-end="3396" vertical-scroll-proportion="0.0" vertical-offset="990" max-vertical-offset="3060" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/1_installation.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1" column="0" selection-start="96" selection-end="96" vertical-scroll-proportion="0.0" vertical-offset="18" max-vertical-offset="702">
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="MarkdownPreviewEditor">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/module/_module.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="509" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="738">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/0_preface.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1314">
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="MarkdownPreviewEditor">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/2_structure.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="24" column="86" selection-start="489" selection-end="489" vertical-scroll-proportion="0.0" vertical-offset="112" max-vertical-offset="882">
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="MarkdownPreviewEditor">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/3_usage.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="88" selection-start="88" selection-end="88" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="108" />
+      </provider>
+      <provider editor-type-id="MarkdownPreviewEditor">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/LICENSE">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="752" />
+      </provider>
+      <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/framework/generate/_text.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="8" column="18" selection-start="229" selection-end="229" vertical-scroll-proportion="0.0" vertical-offset="144" max-vertical-offset="3762" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/framework/_naming.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="348" column="30" selection-start="8438" selection-end="8438" vertical-scroll-proportion="0.0" vertical-offset="5925" max-vertical-offset="6786" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/framework/_mixins.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="132" column="14" selection-start="3325" selection-end="3325" vertical-scroll-proportion="0.0" vertical-offset="1785" max-vertical-offset="2646" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/framework/generate/_content.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="43" column="8" selection-start="817" selection-end="817" vertical-scroll-proportion="0.0" vertical-offset="129" max-vertical-offset="882" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="14" column="0" selection-start="1043" selection-end="1422" vertical-scroll-proportion="0.0" vertical-offset="252" max-vertical-offset="3114">
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="MarkdownPreviewEditor">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1" column="12" selection-start="19" selection-end="19" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="270">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/module/_module.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="0" selection-start="138" selection-end="138" vertical-scroll-proportion="0.0" vertical-offset="108" max-vertical-offset="738">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/framework/_globals.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="2898">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/framework/initialize/_basic.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="993" max-vertical-offset="1746">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/framework/generate/_lists.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="7.4444447" vertical-offset="201" max-vertical-offset="954">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/framework/generate/_grid.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="12" column="43" selection-start="332" selection-end="357" vertical-scroll-proportion="-6.0" vertical-offset="54" max-vertical-offset="5130">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/framework/initialize/_forms.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2358">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/app-minimal/styles.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="47" column="27" selection-start="856" selection-end="864" vertical-scroll-proportion="-29.222221" vertical-offset="57" max-vertical-offset="1026">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/0_preface.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="277" max-vertical-offset="1476">
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="MarkdownPreviewEditor">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/1_installation.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="738">
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="MarkdownPreviewEditor">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/2_structure.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="61" column="56" selection-start="2965" selection-end="2965" vertical-scroll-proportion="-35.214287" vertical-offset="112" max-vertical-offset="1350">
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="MarkdownPreviewEditor">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/3_usage.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="10" column="12" selection-start="894" selection-end="894" vertical-scroll-proportion="0.2435724" vertical-offset="54" max-vertical-offset="2448">
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="MarkdownPreviewEditor">
+        <state />
+      </provider>
+    </entry>
+  </component>
+</project>
+

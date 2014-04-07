@@ -5,7 +5,17 @@ SASS unlike CSS allows us to make separate files and combine them into something
 
 ###Module explanation
 
-**Module** is a little piece of code that generates logically related classes, @media rules, tag styles etc. For example: module ``classes/_grid.scss`` generates in accordance with your settings something like this: ``.container``, ``.row``, ``.column-1``, ``.column-2`` and so on.
+**Module** is a little piece of code that generates logically related classes, @media rules, tag styles etc. For example, ``generate/_grid.scss`` module generates in accordance with your settings something like this: ``.container``, ``.row``, ``.column-1``, ``.column-2`` and so on. Thus you can define necessary variables to the desired module and then include them separately:
+```SCSS
+// activate module
+$grid: true;
+// exclude unnecessary components of grid system
+$grid-excludes: column-offset, column-push, column-pull;
+// set 12 column grid
+$grid-columns-number: 12;
+// import and generate
+@import 'path/to/framework/generate/_grid.scss';
+```
 
 ###Create basic app
 Lets imagine we need to create a simple web app that must be responsible, vertical synchronized and ...
@@ -64,12 +74,12 @@ Lets explore line by line a very basic usage which is the basis of ``app-minimal
 //$tables: true;
 
 // Import the whole bunch of tag modules via file below which is simple shortcut importing all
-// files within 'framework/tags' folder:
-@import 'element/framework/tags/_all.scss';
+// files within 'framework/initialize' folder:
+@import 'element/framework/initialize/_all.scss';
 // Hence, instead of the line above you can import modules separately:
-// @import 'element/framework/tags/_basic.scss';
-// @import 'element/framework/tags/_forms.scss';
-// @import 'element/framework/tags/_lists.scss';
+// @import 'element/framework/initialize/_basic.scss';
+// @import 'element/framework/initialize/_forms.scss';
+// @import 'element/framework/initialize/_lists.scss';
 
 
 // 4. Generate necessary classes.
@@ -103,11 +113,11 @@ $grid-calc-value:     1%;
 //$background: true;
 
 // Import the whole bunch of classes. The same principle as mentioned previously.
-@import 'element/framework/classes/_all.scss';
+@import 'element/framework/generate/_all.scss';
 
 // Styles
 // -------
-// your own styles
+// There is your own styles
 
 ```
 

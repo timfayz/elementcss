@@ -1,0 +1,38 @@
+@import '../_globals.scss';
+@import '../_naming.scss';
+@import '../_functions.scss';
+@import '../_mixins.scss';
+
+// Default Variables
+// --------------------------------------------------
+  $links: false !default;
+  $links-initiating: true !default;
+
+
+// Output Styles
+// --------------------------------------------------
+@if $links or $links==static {
+
+  @if $links-initiating {
+    #{$a} {
+      background: transparent;
+      color: inherit;
+      text-decoration:none;
+      &:focus {
+        outline: none;
+      }
+      &:hover {
+        outline: none;
+        color: inherit;
+        cursor: $cursor-pointer;
+      }
+      &:active {
+        outline: none;
+      }
+    }
+    #{$nav} {
+      display: block;
+    }
+  }
+
+} $links: false;
