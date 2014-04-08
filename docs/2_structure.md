@@ -52,15 +52,14 @@
 ``.md`` - extension means that file uses markdown syntax (like wiki markup)<br/>
 ``.scss`` - extension means that file uses SCSS syntax of SASS preprocessor
 
-###Logic structure
+###Logic
 ELEMENT has two step to make your app unique:
+
 1. Tags initiating. Appropriate module responsible for particular [category of tags](http://www.w3schools.com/tags/ref_byfunc.asp). For example ``initialize/_basic.scss`` module covers html, body, * (all elements), etc. Initiating means tag normalizing and resetting into unified view.
 2. Class generating. After tags are initialized we can generate appropriate classes to make our styling. For example [?]
 
-###Module structure
+###Module
 Module is the most important component of the framework.
 Each file within the framework folder has unified structure. It makes easier to read existing files (modules) and create new one. You can get initial module template under [templates/module](https://github.com/kalopsia/element/tree/master/templates/module) folder. Line by line explanation and its brief using example you can find under [docs/module](https://github.com/kalopsia/element/tree/master/docs/module) directory.
-
-<hr>
 
 To understand what is module and how to start using framework, please go to the next chapter.

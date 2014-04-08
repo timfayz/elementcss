@@ -6,7 +6,7 @@
 
 SASS unlike CSS allows us to make separate files and combine them into something single. One of the ideas of ELEMENT is to include and generate exactly what you need and what you want. That is why we have a big amount of logically separated modules.
 
-**Module** is a little piece of code that generates logically related classes, @media rules, tag styles etc. For example, ``generate/_grid.scss`` module generates in accordance with your settings something like this: ``.container``, ``.row``, ``.column-1``, ``.column-2`` and so on. Thus you can define necessary variables to the desired module and then include them separately:
+**Module** is a little piece of code that generates logically related classes, @media rules, tag styles etc. For example, ``generate/_grid.scss`` generates in accordance with your settings something like this: ``.container``, ``.row``, ``.column-1``, ``.column-2`` and so on. Thus you need to define necessary variables before importing the desired module(s) to overwrite default settings. For example:
 ```SCSS
 // activate module
 $grid: true;
