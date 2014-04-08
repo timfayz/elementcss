@@ -1,9 +1,10 @@
 ##Usage [&laquo;back](https://github.com/kalopsia/element/blob/master/docs/0_preface.md)
 
-**Please, before using or reading the source code you need to learn HTML/HTML5, CSS/CSS3 and basics of SASS.**<br/>
-SASS unlike CSS allows us to make separate files and combine them into something single. The idea of this framework is include and generate exactly what you need and what you want. That is why we have a big amount of logically separated modules.
+*First of all it is important to learn the basics of HTML/HTML5, CSS/CSS3 and SASS. At the beginning you may find the framework difficult - different logic, many variables, many files, unknown functions, mixins, methods in creating styles etc. However sometime later when you become better acquainted with SASS and ELEMENT you realize that the mentioned difficulties are quite simple and logically required to achieve previously mentioned features.*
 
-###Module explanation
+###Module usage
+
+SASS unlike CSS allows us to make separate files and combine them into something single. One of the ideas of ELEMENT is to include and generate exactly what you need and what you want. That is why we have a big amount of logically separated modules.
 
 **Module** is a little piece of code that generates logically related classes, @media rules, tag styles etc. For example, ``generate/_grid.scss`` module generates in accordance with your settings something like this: ``.container``, ``.row``, ``.column-1``, ``.column-2`` and so on. Thus you can define necessary variables to the desired module and then include them separately:
 ```SCSS
@@ -16,8 +17,15 @@ $grid-columns-number: 12;
 // import and generate
 @import 'path/to/framework/generate/_grid.scss';
 ```
+All available options you can find in the module itself (*Default Variables* section).
 
-###Create basic app
+If you want to understand what is in the module itself and what exactly means the *unified structure* go to the following pages in this sequence:
+- [basic usage](https://github.com/kalopsia/element/blob/master/docs/module/0_module-basic-usage.scss)
+- [advanced usage](https://github.com/kalopsia/element/blob/master/docs/module/1_module-advanced-usage.scss)
+- [small example](https://github.com/kalopsia/element/blob/master/docs/module/2_module-example.scss)
+
+###Creating app
+
 Lets imagine we need to create a simple web app that must be responsible, vertical synchronized and ...
 
 First of all we need to choose template under ``templates/app-*`` folder where do we start. As you are newbie we choose ``app-minimal`` template. Copy and paste contents of the ``templates/app-minimal`` near to the whole *element* folder. From now on we have a structure as follows:
