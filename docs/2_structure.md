@@ -1,29 +1,27 @@
-##Structure [&laquo;back](https://github.com/kalopsia/element/blob/master/docs/0_preface.md)
+#ELEMENT STRUCTURE [&laquo;back](https://github.com/kalopsia/element/blob/master/docs/0_preface.md)
 
-###File structure
+##File Structure
 ```
-|-- docs
-|   |-- module
-|   |-- *.md
-|-- framework
-|   |-- generate
-|       |-- _all.scss
-|       |-- _*.scss
-|   |-- initialize
-|       |-- _all.scss
-|       |-- _*.scss
-|   |-- _globals.scss
-|   |-- _naming.scss
-|   |-- _functions.scss
-|   |-- _mixins.scss
-|   |-- _vr.scss
-|-- templates
-|   |-- _module.scss
-|-- .gitignore
-|-- LICENSE
-|-- README.md
-|-- styles.css
-|-- styles.scss
+docs/
+    module/
+    *.md
+framework/
+    generate/
+        _all.scss
+        _*.scss
+    initialize/
+        _all.scss
+        _*.scss
+    _globals.scss
+    _naming.scss
+    _functions.scss
+    _mixins.scss
+    _vr.scss
+templates/
+    _module.scss
+.gitignore
+LICENSE
+README.md
 ```
 
 ``docs/`` - contains ELEMENT's step by step documentation<br/>
@@ -52,13 +50,13 @@
 ``.md`` - extension means that file uses markdown syntax (like wiki markup)<br/>
 ``.scss`` - extension means that file uses SCSS syntax of SASS preprocessor
 
-###Logic
+##Logic
 ELEMENT has two step to make your app unique:
 
 1. Tags initiating. Appropriate module responsible for particular [category of tags](http://www.w3schools.com/tags/ref_byfunc.asp). For example ``initialize/_basic.scss`` module covers html, body, * (all elements), etc. Initiating means tag normalizing and resetting into unified view.
 2. Class generating. After tags are initialized we can generate appropriate classes to make our styling. For example [?]
 
-###Module
+##Module
 Module is the most important component of the framework.
 Each file within the framework folder has unified structure. It makes easier to read existing files (modules) and create new one. You can get initial module template under [templates/module](https://github.com/kalopsia/element/tree/master/templates/module) folder. Line by line explanation and its brief using example you can find under [docs/module](https://github.com/kalopsia/element/tree/master/docs/module) directory.
 
