@@ -31,8 +31,8 @@ Lets imagine we need to create a simple web app that must be responsible, vertic
 First of all we need to choose template under ``templates/app-*`` folder where do we start. As you are newbie we choose ``app-minimal`` template. Copy and paste contents of the ``templates/app-minimal`` near to the whole *element* folder. From now on we have a structure as follows:
 
 ```
-|-- styles.scss
-|-- element
+styles.scss
+element
 ```
 
 Lets explore line by line a very basic usage which is the basis of ``app-minimal/styles.scss``:
@@ -40,7 +40,7 @@ Lets explore line by line a very basic usage which is the basis of ``app-minimal
 ```SCSS
 // 1. Make short description of your project. This is special comment block that gives strangers
 // useful information about the project. Exclamation mark at the beginning indicates that the
-// comment must not be excluded when we compress out styles via SASS itself or third-party tools
+// comment must not be removed when we compress our styles via SASS itself or third-party tools
 
 /*!
  * Name: Your Name
@@ -81,7 +81,7 @@ $images: true;
 $polyfills: true;
 $tables: true;
 
-// Import the whole bunch of tag modules via file below which is simple shortcut importing all files
+// Import the whole bunch of tag modules via "_all.scss" file which is simple shortcut importing all files
 // within 'framework/initialize' folder:
 @import 'element/framework/initialize/_all.scss';
 // Hence, instead of the line above you can import modules separately:
