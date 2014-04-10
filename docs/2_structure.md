@@ -18,7 +18,8 @@ framework/
     _mixins.scss
     _vr.scss
 templates/
-    _module.scss
+    app-minimal/
+    module/
 .gitignore
 LICENSE
 README.md
@@ -51,9 +52,9 @@ README.md
 ``.scss`` - extension means that file uses SCSS syntax of SASS preprocessor
 
 ##Logic
-ELEMENT has two step to make your app unique:
+ELEMENT has two step to make your app GUI unique:
 
-1. Tags initiating. Appropriate module responsible for particular [category of tags](http://www.w3schools.com/tags/ref_byfunc.asp). For example ``initialize/_basic.scss`` module covers html, body, * (all elements), etc. Initiating means tag normalizing and resetting into unified view.
+1. Tags initiating. Appropriate module responsible for particular [category of tags](http://www.w3schools.com/tags/ref_byfunc.asp). For example ``initialize/_forms.scss`` module covers form, legend, input, button, etc. Initiating means tag normalizing and resetting into unified view.
 2. Class generating. After tags are initialized we can generate appropriate classes to make our styling. For example [?]
 
 ##Module

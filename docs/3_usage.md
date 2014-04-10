@@ -2,7 +2,7 @@
 
 *First of all it is important to learn the basics of HTML/HTML5, CSS/CSS3 and SASS. At the beginning you may find the framework difficult - different logic, many variables, many files, unknown functions, mixins, methods in creating styles etc. However sometime later when you become better acquainted with SASS and ELEMENT you realize that the mentioned difficulties are quite simple and logically required to achieve previously mentioned features.*
 
-##Module usage
+##Module Usage
 
 SASS unlike CSS allows us to make separate files and combine them into something single. One of the ideas of ELEMENT is to include and generate exactly what you need and what you want. That is why we have a big amount of logically separated modules.
 
@@ -24,7 +24,7 @@ If you want to understand what is in the module itself and what exactly means th
 - [advanced usage](https://github.com/kalopsia/element/blob/master/docs/module/1_module-advanced-usage.scss)
 - [small example](https://github.com/kalopsia/element/blob/master/docs/module/2_module-example.scss)
 
-##Creating app
+##Creating Project Styles
 
 Lets imagine we need to create a simple web app that must be responsible, vertical synchronized and ...
 
@@ -43,12 +43,13 @@ Lets explore line by line a very basic usage which is the basis of ``app-minimal
 // comment must not be removed when we compress our styles via SASS itself or third-party tools
 
 /*!
- * Name: Your Name
- * Version:
- * Author:
- * Author URL:
+ * Name: Project name
+ * Version: 0.9
+ * Author: Your Name
+ * Author URL: yourpage.com
  * Powered by:
  * ELEMENT | MIT License | github.com/kalopsia/element
+ * Another Tool | License | project URL
  */
 
 // 2. Define/redefine global variables. Here we can dramatically change the base ELEMENT's behavior.
@@ -113,7 +114,7 @@ $grid: true;
 $grid-columns-number: 10;
 $grid-calc-method:    gap;
 $grid-calc-value:     1%;
-// Now we have 10 column grid system and 1% gap between columns. Other available options you can find
+// We set 10 column grid system and 1% gap between columns. Other available options you can find
 // within appropriate module.
 
 // Inactive modules
@@ -139,6 +140,6 @@ $grid-calc-value:     1%;
 
 ```
 
-##Create module
+##Creating Module
 
 If you want to create your own module, go to ``templates/module`` folder. It is the basic
