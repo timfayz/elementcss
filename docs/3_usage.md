@@ -1,4 +1,5 @@
-#ELEMENT USAGE [&laquo;back](https://github.com/kalopsia/element/blob/master/docs/0_preface.md)
+#ELEMENT USAGE
+**[Return to the beginning](https://github.com/kalopsia/element/blob/master/docs/0_preface.md)**<br/>
 
 *First of all it is important to learn the basics of HTML/HTML5, CSS/CSS3 and SASS. At the beginning you may find the framework difficult - different logic, many variables, many files, unknown functions, mixins, methods in creating styles etc. However sometime later when you become better acquainted with SASS and ELEMENT you realize that the mentioned difficulties are quite simple and logically required to achieve previously mentioned features.*
 
@@ -126,13 +127,8 @@ $grid-calc-value:     1%;
 // Now we need to import modules that we have activate. Instead of including modules separately we
 // import the whole bunch. It is the same principle as mentioned previously.
 @import 'element/framework/generate/_all.scss';
-// Or:
-// @import 'element/framework/generate/_positioning.scss';
-// @import 'element/framework/generate/_displaying.scss';
-// @import 'element/framework/generate/_grid.scss';
-// etc
 
-//[Different order, different files]
+//[Different order, different files] The reason to import modules separately is changing order of styles.
 
 // Styles
 // -------

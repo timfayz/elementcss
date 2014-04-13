@@ -1,4 +1,5 @@
-#ELEMENT INSTALLATION [&laquo;back](https://github.com/kalopsia/element/blob/master/docs/0_preface.md)
+#ELEMENT INSTALLATION
+**[Return to the beginning](https://github.com/kalopsia/element/blob/master/docs/0_preface.md)**<br/>
 
 To use ELEMENT efficiently and successfully we need to install some additional popular tools. Do not confuse about a huge amount of necessary software - don't hesitate, they certainly will be useful in future.<br/>
 *Please, googling if you experience difficulties in installation.*
@@ -10,8 +11,7 @@ SASS is written in Ruby, so we need to install Ruby first. Please, don't confuse
 3. From now on you can use GUI **application** or **command line** to make compilations
 
 ##SASS Usage
-First of all, create empty ``styles.scss`` file at the same place as if you create normal CSS file and write some SASS code into the file.<br/>
-Next we need to make our first compilation from SASS to plain CSS. If you choose command line, the steps below is for you:
+Let's take a closer look at SASS. First of all, create empty ``styles.scss`` file at the same place as if you create normal CSS file, then write a some SASS code into the file. Next we need to make our first compilation from SASS to plain CSS. If you choose command line, the steps below is for you:
 
 * Go to directory where ``styles.scss`` is placed:<br/>
 	Windows: open the directory by file explorer, run ``Shift`` + ``Right Click`` at a pane and choose ``Open command line`` in the context menu<br/>
@@ -25,6 +25,93 @@ Next we need to make our first compilation from SASS to plain CSS. If you choose
 	Please, run ``gem install rb-inotify``
 
 ##Autoprefixer
+ELEMENT is designed for use with [Autoprefixer](https://github.com/ai/autoprefixer). Autoprefixer is tool that help us to parse CSS and add [vendor prefixes](http://webdesign.about.com/od/css/a/css-vendor-prefixes.htm) to CSS rules automatically using the latest data from [Can I Use](http://caniuse.com/) capability tables.
+
+Let's take example:
+```CSS
+html {
+  box-sizing: border-box;
+}
+```
+The code above will be compiled into:
+```CSS
+html {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+```
+
+
+###Why Autoprefixer and not Compass?
+Let's take a little example of what libraries and frameworks like Compass are:
+
+```SCSS
+// 1. Define mixins with the same names as in CSS3 under separate file
+// -------------------------------------------------
+// _css3-library.scss
+@mixin box-shadow($value) {
+  -webkit-box-shadow: $value;
+  -moz-box-shadow: $value;
+  box-shadow: $value;
+}
+@mixin text-shadow($value) {...}
+@mixin box-sizing($value) {...}
+// etc
+
+// 2. Import mixins and use it where necessary
+// -------------------------------------------------
+// styles.scss
+@import "_css3-library.scss";
+
+.shadow {
+  @include box-shadow(rgba(0, 0, 0, 0.5) 0 2px 5px);
+}
+
+// 3. Make compilation
+// -------------------------------------------------
+// styles.css
+.shadow {
+  -webkit-box-shadow: rgba(0, 0, 0, 0.5) 0 2px 10px inset;
+  -moz-box-shadow: rgba(0, 0, 0, 0.5) 0 2px 10px inset;
+  box-shadow: rgba(0, 0, 0, 0.5) 0 2px 10px inset;
+}
+```
+
+Compass is written in SASS which means that you have to use the SASS preprocessor. Compass provide cross-browser mixins for CSS properties introduced in CSS3. For example:
+
+```SCSS
+// Import compass CSS3 mixins
+@import "compass/css3";
+
+// Use compass' box-shadow mixin
+.shadow {
+  @include box-shadow(rgba(0, 0, 0, 0.5) 0 2px 10px inset);
+}
+
+// After compilation we will get the following:
+.shadow {
+  -webkit-box-shadow: rgba(0, 0, 0, 0.5) 0 2px 10px inset;
+  -moz-box-shadow: rgba(0, 0, 0, 0.5) 0 2px 10px inset;
+  box-shadow: rgba(0, 0, 0, 0.5) 0 2px 10px inset;
+}
+```
+
+Autoprefixer allows us to write *mixins free* CSS (or include less additional mixins when we use SASS) without thinking what the mixins is available under selected library and how to use it correctly. Autoprefixer just analyse your CSS and then add vendor prefixes accordingly to latest browser support data from [Can I Use](http://caniuse.com/). Autoprefixer is independent of the any preprocessors (eg: SASS, LESS and Stylus). So we can even write plain CSS and parse it when we need to add cross-browser support (for example at the production stage). When we use SASS we do not need to write any additional mixins and thus increase compilation time. We can parse compiled CSS to add vendor prefixes only when we need it.
+
+```SCSS
+.shadow {
+  box-shadow: rgba(0, 0, 0, 0.5) 0 2px 10px inset;
+}
+
+// After compilation (if we use SASS) and parsing we will get the following:
+.shadow {
+  -webkit-box-shadow: rgba(0, 0, 0, 0.5) 0 2px 10px inset;
+  -moz-box-shadow: rgba(0, 0, 0, 0.5) 0 2px 10px inset;
+  box-shadow: rgba(0, 0, 0, 0.5) 0 2px 10px inset;
+}
+```
+
 
 ##Gruntjs
 Using command line and ``sass`` command quite enough, but for successfully using ELEMENT I recommend you to use [Gruntjs](http://gruntjs.com/getting-started) or GUI application like .... Gruntjs allows performing repetitive tasks like watching, compilation, minification and etc. Let's imagine we have styles.scss which need to be compiled after changes was made, then add [vendor prefixes](http://webdesign.about.com/od/css/a/css-vendor-prefixes.htm) and make compress (remove all indents, spaces and new line breaks). To do so we

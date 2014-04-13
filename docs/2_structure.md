@@ -1,4 +1,5 @@
-#ELEMENT STRUCTURE [&laquo;back](https://github.com/kalopsia/element/blob/master/docs/0_preface.md)
+#ELEMENT STRUCTURE
+**[Return to the beginning](https://github.com/kalopsia/element/blob/master/docs/0_preface.md)**<br/>
 
 ##File Structure
 ```
