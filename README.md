@@ -1,7 +1,7 @@
 **Please, do not read the text below. Readme under heavy development.**
 
 #ELEMENT - CSS/GUI framework
-<sub>I'm sorry for the language mistakes I've made - my English is intermediate.</sub>
+<sub>I'm sorry for the language mistakes I've made - I'm from Russia.</sub>
 
 ELEMENT is free and open-source CSS framework written in SASS that promotes clean, object-oriented design and encourages rapid prototyping. It helps you to create complex and elaborate GUI for the contemporary web applications as well as integrate to existing project. It provides thought-out structure and many other features, like theming. ELEMENT is not just framework, but tool and suit of best practices and the most advanced methods from many professionals to make web more robust and easy.
 
@@ -17,7 +17,6 @@ templates/    useful templates
 LICENSE       license information
 README.md     this is what you are currently reading
 ```
-
 
 ##REQUIREMENTS
 Please, before using or reading the source code you need to learn HTML/HTML5, CSS/CSS3 and basics of SASS.

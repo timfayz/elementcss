@@ -14,15 +14,14 @@ SASS is written in Ruby, so we need to install Ruby first. Please, don't confuse
 Let's take a closer look at SASS. First of all, create empty ``styles.scss`` file at the same place as if you create normal CSS file, then write a some SASS code into the file. Next we need to make our first compilation from SASS to plain CSS. If you choose command line, the steps below is for you:
 
 * Go to directory where ``styles.scss`` is placed:<br/>
-	Windows: open the directory by file explorer, run ``Shift`` + ``Right Click`` at a pane and choose ``Open command line`` in the context menu<br/>
-	Unix: open terminal, run ``cd path/to/directory``
+  Windows: open the directory by file explorer, run ``Shift`` + ``Right Click`` at a pane and choose ``Open command line`` in the context menu<br/>
+  Unix: open terminal, run ``cd path/to/directory``
 * Run one of the following commands:<br/>
-	``sass styles.scss styles.css`` - single compilation<br/>
-	``sass styles.scss styles.css --style compressed`` - single compilation and minification<br/>
-	``sass --watch styles.scss:styles.css`` - compilation on change without minification (recommended)<br/>
-
-	If you are faced with ``LoadError: cannot load such file -- rb-inotify``<br/>
-	Please, run ``gem install rb-inotify``
+  ``sass styles.scss styles.css`` - single compilation<br/>
+  ``sass styles.scss styles.css --style compressed`` - single compilation and minification<br/>
+  ``sass --watch styles.scss:styles.css`` - compilation on change without minification (recommended)<br/>
+  If you are faced with ``LoadError: cannot load such file -- rb-inotify``<br/>
+  Please, run ``gem install rb-inotify``
 
 ##Autoprefixer
 ELEMENT is designed for using with [Autoprefixer](https://github.com/ai/autoprefixer). Autoprefixer is a tool that help us to parse CSS and add [vendor prefixes](http://webdesign.about.com/od/css/a/css-vendor-prefixes.htm) to CSS rules automatically using the latest data from [Can I Use](http://caniuse.com/) capability tables. Take a look at a little usage example:
@@ -30,10 +29,10 @@ ELEMENT is designed for using with [Autoprefixer](https://github.com/ai/autopref
 ```CSS
 /* Write any CSS property without vendor prefixes */
 .shadow {
-  @include box-shadow(rgba(0, 0, 0, 0.5) 0 2px 10px inset);
+  box-shadow: rgba(0, 0, 0, 0.5) 0 2px 10px inset;
 }
 
-/* After Autoprefixer parsing we will get the following: */
+/* After parsing we will get the following: */
 .shadow {
   -webkit-box-shadow: rgba(0, 0, 0, 0.5) 0 2px 10px inset;
   -moz-box-shadow: rgba(0, 0, 0, 0.5) 0 2px 10px inset;
@@ -42,7 +41,7 @@ ELEMENT is designed for using with [Autoprefixer](https://github.com/ai/autopref
 ```
 
 ###Compass
-Compass as well as Autoprefixer is intended to give us cross-browser support. Compass is a library/framework that provides cross-browser mixins for CSS properties introduced in CSS3 and some additional features. Compass is written in SASS which means that you have to use the SASS preprocessor. Let's take a little usage example:
+Compass as well as Autoprefixer is intended to give us cross-browser support. Compass is a library/framework that provides mixins for CSS properties introduced in CSS3 and some additional features. Compass is based on SASS which means that you have to use the SASS preprocessor. Let's take a little example:
 
 ```SCSS
 // 1. Import compass CSS3 mixins
@@ -60,7 +59,7 @@ Compass as well as Autoprefixer is intended to give us cross-browser support. Co
   box-shadow: rgba(0, 0, 0, 0.5) 0 2px 10px inset;
 }
 ```
-As you can see the result is the same as if we use Autoprefixer. To understand how it works let's take a example of what libraries and frameworks like Compass are:
+As you can see the result is the same as if we use Autoprefixer. To understand how it works let's take example of what libraries and frameworks like Compass are:
 
 ```SCSS
 /* _css3-library.scss */
@@ -83,7 +82,7 @@ As you can see the result is the same as if we use Autoprefixer. To understand h
 ```SCSS
 /* styles.scss */
 
-// 2. Import mixins, use it where necessary and make compilation
+// 2. Import mixins, use it where necessary and then make compilation
 @import "_css3-library.scss";
 .shadow {
   @include box-shadow(rgba(0, 0, 0, 0.5) 0 2px 5px);
@@ -102,7 +101,7 @@ As you can see the result is the same as if we use Autoprefixer. To understand h
 ```
 
 ###Why Autoprefixer and not Compass?
-Autoprefixer allows us to write *mixins free* CSS (or include less additional mixins when we use SASS) without thinking of what the mixins is available under selected library and how to use it correctly. Autoprefixer just analyse your CSS and then add vendor prefixes accordingly to latest browser support data from [Can I Use](http://caniuse.com/). Autoprefixer is independent of the any preprocessors (eg: SASS, LESS and Stylus). So we can even write plain CSS and parse it when we need to add cross-browser support (for example at the production stage). When we use SASS we do not need to write any additional third-party mixins or write your own ones and thus increase compilation time when we use it. We can just parse compiled CSS to add vendor prefixes only when we need it.
+Autoprefixer allows us to write *mixins free* CSS (or include less additional mixins when we use SASS) without thinking of what the mixins are available under selected third-party library and how to use it correctly. At first, if we use SASS we compile our styles from SCSS to CSS and then (when we need it) make additional parsing to add cross-browser support. Autoprefixer just analyse your CSS and then add vendor prefixes accordingly to the latest browser support data from [Can I Use](http://caniuse.com/). Autoprefixer is independent of the any preprocessors (eg: SASS, LESS and Stylus). So we can even write plain CSS and parse it when we need to add cross-browser support (for example at the production stage). One of the main advantage of Autoprefixer is when we use SASS we do not need to import any additional third-party mixins or write your own ones, which increase amount of code and compilation time.
 
 
 ##Gruntjs
