@@ -25,7 +25,7 @@ Let's take a closer look at SASS. First of all, create empty ``styles.scss`` fil
 	Please, run ``gem install rb-inotify``
 
 ##Autoprefixer
-ELEMENT is designed for use with [Autoprefixer](https://github.com/ai/autoprefixer). Autoprefixer is tool that help us to parse CSS and add [vendor prefixes](http://webdesign.about.com/od/css/a/css-vendor-prefixes.htm) to CSS rules automatically using the latest data from [Can I Use](http://caniuse.com/) capability tables.
+ELEMENT is designed for using with [Autoprefixer](https://github.com/ai/autoprefixer). Autoprefixer is tool that help us to parse CSS and add [vendor prefixes](http://webdesign.about.com/od/css/a/css-vendor-prefixes.htm) to CSS rules automatically using the latest data from [Can I Use](http://caniuse.com/) capability tables.
 
 Let's take example:
 ```CSS
@@ -33,7 +33,7 @@ html {
   box-sizing: border-box;
 }
 ```
-The code above will be compiled into:
+The code above will be converted into:
 ```CSS
 html {
   -moz-box-sizing: border-box;
@@ -46,10 +46,10 @@ html {
 ###Why Autoprefixer and not Compass?
 Let's take a little example of what libraries and frameworks like Compass are:
 
+_css3-library.scss:
 ```SCSS
 // 1. Define mixins with the same names as in CSS3 under separate file
 // -------------------------------------------------
-// _css3-library.scss
 @mixin box-shadow($value) {
   -webkit-box-shadow: $value;
   -moz-box-shadow: $value;
@@ -58,19 +58,23 @@ Let's take a little example of what libraries and frameworks like Compass are:
 @mixin text-shadow($value) {...}
 @mixin box-sizing($value) {...}
 // etc
+```
 
-// 2. Import mixins and use it where necessary
+styles.scss:
+```SCSS
+// 2. Import mixins, use it where necessary and make compilation
 // -------------------------------------------------
-// styles.scss
 @import "_css3-library.scss";
 
 .shadow {
   @include box-shadow(rgba(0, 0, 0, 0.5) 0 2px 5px);
 }
+```
 
-// 3. Make compilation
+styles.css:
+```CSS
+// 3. After compilation
 // -------------------------------------------------
-// styles.css
 .shadow {
   -webkit-box-shadow: rgba(0, 0, 0, 0.5) 0 2px 10px inset;
   -moz-box-shadow: rgba(0, 0, 0, 0.5) 0 2px 10px inset;
