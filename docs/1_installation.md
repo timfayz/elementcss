@@ -25,16 +25,15 @@ Let's take a closer look at SASS. First of all, create empty ``styles.scss`` fil
 	Please, run ``gem install rb-inotify``
 
 ##Autoprefixer
-ELEMENT is designed for using with [Autoprefixer](https://github.com/ai/autoprefixer). Autoprefixer is a tool that help us to parse CSS and add [vendor prefixes](http://webdesign.about.com/od/css/a/css-vendor-prefixes.htm) to CSS rules automatically using the latest data from [Can I Use](http://caniuse.com/) capability tables.
+ELEMENT is designed for using with [Autoprefixer](https://github.com/ai/autoprefixer). Autoprefixer is a tool that help us to parse CSS and add [vendor prefixes](http://webdesign.about.com/od/css/a/css-vendor-prefixes.htm) to CSS rules automatically using the latest data from [Can I Use](http://caniuse.com/) capability tables. Take a look at a little usage example:
 
-Let's take example:
 ```CSS
+/* Write any CSS property without vendor prefixes */
 html {
   box-sizing: border-box;
 }
-```
-The code above will be converted into:
-```CSS
+
+/* The result after Autoprefixer parsing: */
 html {
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
@@ -43,18 +42,18 @@ html {
 ```
 
 ###Compass
-Compass is a library/framework that provides cross-browser mixins for CSS properties introduced in CSS3 and some additional features. Compass is written in SASS which means that you have to use the SASS preprocessor. Usage example:
+Compass as well as Autoprefixer intended to give us cross-browser support. Compass is a library/framework that provides cross-browser mixins for CSS properties introduced in CSS3 and some additional features. Compass is written in SASS which means that you have to use the SASS preprocessor. Let's take a little usage example:
 
 ```SCSS
-// Import compass CSS3 mixins
+// 1. Import compass CSS3 mixins
 @import "compass/css3";
 
-// Use compass' box-shadow mixin
+// 2. Include Compass' mixins where necessary
 .shadow {
   @include box-shadow(rgba(0, 0, 0, 0.5) 0 2px 10px inset);
 }
 
-// After compilation we will get the following:
+// 3. After compilation we will get the following:
 .shadow {
   -webkit-box-shadow: rgba(0, 0, 0, 0.5) 0 2px 10px inset;
   -moz-box-shadow: rgba(0, 0, 0, 0.5) 0 2px 10px inset;
@@ -68,7 +67,6 @@ To understand how it works let's take a little example of what libraries and fra
 /* _css3-library.scss: */
 
 // 1. Define mixins with the same names as in CSS3 under separate file
-// -------------------------------------------------
 @mixin box-shadow($value) {
   -webkit-box-shadow: $value;
   -moz-box-shadow: $value;
@@ -83,7 +81,6 @@ To understand how it works let's take a little example of what libraries and fra
 /* styles.scss: */
 
 // 2. Import mixins, use it where necessary and make compilation
-// -------------------------------------------------
 @import "_css3-library.scss";
 
 .shadow {
@@ -94,8 +91,7 @@ To understand how it works let's take a little example of what libraries and fra
 ```CSS
 /* styles.css: */
 
-/* 3. After compilation
-   ------------------------------------------------- */
+/* 3. After compilation */
 .shadow {
   -webkit-box-shadow: rgba(0, 0, 0, 0.5) 0 2px 10px inset;
   -moz-box-shadow: rgba(0, 0, 0, 0.5) 0 2px 10px inset;
