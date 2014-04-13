@@ -29,20 +29,20 @@ ELEMENT is designed for using with [Autoprefixer](https://github.com/ai/autopref
 
 ```CSS
 /* Write any CSS property without vendor prefixes */
-html {
-  box-sizing: border-box;
+.shadow {
+  @include box-shadow(rgba(0, 0, 0, 0.5) 0 2px 10px inset);
 }
 
-/* The result after Autoprefixer parsing: */
-html {
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
+/* After Autoprefixer parsing we will get the following: */
+.shadow {
+  -webkit-box-shadow: rgba(0, 0, 0, 0.5) 0 2px 10px inset;
+  -moz-box-shadow: rgba(0, 0, 0, 0.5) 0 2px 10px inset;
+  box-shadow: rgba(0, 0, 0, 0.5) 0 2px 10px inset;
 }
 ```
 
 ###Compass
-Compass as well as Autoprefixer intended to give us cross-browser support. Compass is a library/framework that provides cross-browser mixins for CSS properties introduced in CSS3 and some additional features. Compass is written in SASS which means that you have to use the SASS preprocessor. Let's take a little usage example:
+Compass as well as Autoprefixer is intended to give us cross-browser support. Compass is a library/framework that provides cross-browser mixins for CSS properties introduced in CSS3 and some additional features. Compass is written in SASS which means that you have to use the SASS preprocessor. Let's take a little usage example:
 
 ```SCSS
 // 1. Import compass CSS3 mixins
@@ -60,11 +60,10 @@ Compass as well as Autoprefixer intended to give us cross-browser support. Compa
   box-shadow: rgba(0, 0, 0, 0.5) 0 2px 10px inset;
 }
 ```
-
-To understand how it works let's take a little example of what libraries and frameworks like Compass are:
+As you can see the result is the same as if we use Autoprefixer. To understand how it works let's take a example of what libraries and frameworks like Compass are:
 
 ```SCSS
-/* _css3-library.scss: */
+/* _css3-library.scss */
 
 // 1. Define mixins with the same names as in CSS3 under separate file
 @mixin box-shadow($value) {
@@ -72,26 +71,29 @@ To understand how it works let's take a little example of what libraries and fra
   -moz-box-shadow: $value;
   box-shadow: $value;
 }
-@mixin text-shadow($value) {...}
-@mixin box-sizing($value) {...}
+@mixin text-shadow($value) {
+  ...
+}
+@mixin box-sizing($value) {
+  ...
+}
 // etc
 ```
 
 ```SCSS
-/* styles.scss: */
+/* styles.scss */
 
 // 2. Import mixins, use it where necessary and make compilation
 @import "_css3-library.scss";
-
 .shadow {
   @include box-shadow(rgba(0, 0, 0, 0.5) 0 2px 5px);
 }
 ```
 
 ```CSS
-/* styles.css: */
+/* styles.css */
 
-/* 3. After compilation */
+/* 3. After compilation. */
 .shadow {
   -webkit-box-shadow: rgba(0, 0, 0, 0.5) 0 2px 10px inset;
   -moz-box-shadow: rgba(0, 0, 0, 0.5) 0 2px 10px inset;
