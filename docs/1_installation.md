@@ -46,8 +46,9 @@ html {
 ###Why Autoprefixer and not Compass?
 Let's take a little example of what libraries and frameworks like Compass are:
 
-_css3-library.scss:
 ```SCSS
+/* _css3-library.scss: */
+
 // 1. Define mixins with the same names as in CSS3 under separate file
 // -------------------------------------------------
 @mixin box-shadow($value) {
@@ -60,8 +61,9 @@ _css3-library.scss:
 // etc
 ```
 
-styles.scss:
 ```SCSS
+/* styles.scss: */
+
 // 2. Import mixins, use it where necessary and make compilation
 // -------------------------------------------------
 @import "_css3-library.scss";
@@ -71,10 +73,12 @@ styles.scss:
 }
 ```
 
-styles.css:
 ```CSS
-// 3. After compilation
-// -------------------------------------------------
+/* styles.css: */
+
+/* 3. After compilation
+ * -------------------------------------------------
+ */
 .shadow {
   -webkit-box-shadow: rgba(0, 0, 0, 0.5) 0 2px 10px inset;
   -moz-box-shadow: rgba(0, 0, 0, 0.5) 0 2px 10px inset;

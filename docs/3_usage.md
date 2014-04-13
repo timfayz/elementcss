@@ -21,9 +21,9 @@ $grid-columns-number: 12;
 All available options you can find in the module itself (*Default Variables* section).
 
 If you want to understand what is in the module itself and what exactly means the *unified structure* go to the following pages in this sequence:
-- [basic usage](https://github.com/kalopsia/element/blob/master/docs/module/0_module-basic-usage.scss)
-- [advanced usage](https://github.com/kalopsia/element/blob/master/docs/module/1_module-advanced-usage.scss)
-- [small example](https://github.com/kalopsia/element/blob/master/docs/module/2_module-example.scss)
+- [basic module usage](https://github.com/kalopsia/element/blob/master/docs/module/0_module-basic-usage.scss)
+- [advanced module usage](https://github.com/kalopsia/element/blob/master/docs/module/1_module-advanced-usage.scss)
+- [small module example](https://github.com/kalopsia/element/blob/master/docs/module/2_module-example.scss)
 
 ##Creating Project Styles
 
@@ -128,7 +128,9 @@ $grid-calc-value:     1%;
 // import the whole bunch. It is the same principle as mentioned previously.
 @import 'element/framework/generate/_all.scss';
 
-//[Different order, different files] The reason to import modules separately is changing order of styles.
+// The reasons to import modules separately are:
+// - changing the order of generated styles in the flow
+// - generate the same module, but differently tuned
 
 // Styles
 // -------
