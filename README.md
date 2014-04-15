@@ -1,5 +1,3 @@
-**Please, do not read the text below. Readme under heavy development.**
-
 #ELEMENT - CSS/GUI framework
 <sub>I'm sorry for the language mistakes I've made - I'm from Russia.</sub>
 
@@ -31,7 +29,8 @@ Otherwise you will experience difficulties in understanding principles of work a
 
 
 ##HOW TO PARTICIPATE
-If you want to help and contribute our common goals please make your own pull request or [report issues](https://github.com/kalopsia/element/issues). We are welcome any kind of ideas and support. The following tasks are actual at the moment:
+**Your participation to ELEMENT development is very welcome!**
+If you want to help and contribute this project please make your own pull request or [report issues](https://github.com/kalopsia/element/issues). We are welcome any kind of ideas and support. The following tasks are actual at the moment:
 - Documentation
 - JS plugins
 
