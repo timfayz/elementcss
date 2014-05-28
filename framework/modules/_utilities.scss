@@ -19,11 +19,19 @@
 
   .clearfix {@include clearfix();}
 
+  .text-hidden {
+    font: 0/0 a;
+    color: transparent;
+    text-shadow: none;
+    background-color: transparent;
+    border: 0;
+  }
+
   // Floats
   @if in-list(floats, $utilities-include) {
     .#{$Float}right  {float:right;}
     .#{$Float}left   {float:left;}
-    .#{$Float}none   {float:none !important;}
+    .#{$Float}none   {float:none;}
   }
 
   // Overflow

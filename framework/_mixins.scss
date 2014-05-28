@@ -65,11 +65,11 @@
 // @param string $property any CSS property
 // @param string $property-prefix CSS class prefix
 // @return
-@mixin property($property, $class-property-prefix, $list, $vr:false)
+@mixin property($property, $class-property-name, $list, $vr:false)
 {
   $i: 1 !global;
-  $class-before: null;
-  $class-after: null;
+  $class-prefix: null;
+  $class-postfix: null;
   $selector-before: (null);
   $selector-after: (null);
 
@@ -103,12 +103,12 @@
 
     //if pre/postfix class names are presented
     @if length($next-value) == 2 {
-      $class-before: #{nth($next-value, 1)}_;
-      $class-after: nth($next-value, 2);
+      $class-prefix: #{nth($next-value, 1)}_;
+      $class-postfix: nth($next-value, 2);
     }
     //if there is only class postfix
     @else {
-      $class-after: $next-value;
+      $class-postfix: $next-value;
     }
 
 
@@ -118,7 +118,7 @@
     $next-value: nth($list, $i);
     $i: $i + 1 !global;
 
-//    $property-value: $next-value;
+    // append null for correct handling values within the loop
     $property-value: $next-value, null;
 
     // step 4
@@ -127,7 +127,7 @@
     $v: 1;
     @while $v <= length($selector-before) {
       $selector:
-        #{nth($selector-before, $v)}#{'.'}#{$class-before}#{$class-property-prefix}#{$class-after}#{nth($selector-after, $v)};
+        #{nth($selector-before, $v)}#{'.'}#{$class-prefix}#{$class-property-name}#{$class-postfix}#{nth($selector-after, $v)};
 
       #{$selector} {
         $pass: nth($property-value, $v);

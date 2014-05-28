@@ -13,15 +13,13 @@
 
   // Z-index Levels
   // -------------------------
-  $z-index-default:  5 !default;
 
-  $z-index-xxlg:     50 !default;
+  $z-index-default:  5 !default;
   $z-index-xlg:      40 !default;
   $z-index-lg:       30 !default;
   $z-index-md:       20 !default;
   $z-index-sm:       10 !default;
   $z-index-xsm:      -5 !default;
-  $z-index-xxsm:     -10 !default;
 
   // Typography, Vertical Rhythm
   // -------------------------
@@ -49,44 +47,51 @@
   // Responsive Partitioning
   // -------------------------
   $screen-breakpoint: 1366px !default;
-  
+
+  $container-default: 940px !default;
+  $container-xlg: 1000px !default;
+  $container-lg: 940px !default;
+  $container-md: 700px !default;
+  $container-sm: 100% !default;
+  $container-xsm: 100% !default;
+
   //null to exclude
-  $screen-xsm:  480px !default;
-  $screen-sm:   740px !default;
-  $screen-md:   1024px !default;
-  $screen-lg:   1366px !default;
   $screen-xlg:  1600px !default;
+  $screen-lg:   1366px !default;
+  $screen-md:   1024px !default;
+  $screen-sm:   740px !default;
+  $screen-xsm:  480px !default;
   $screen-list:
     $screen-xsm, $screen-sm, $screen-md, $screen-lg, $screen-xlg !default;
 
   //prefixes
-  $screen-name-xsm:   mobile !default;
-  $screen-name-sm:    tablet !default;
-  $screen-name-md:    laptop !default;
-  $screen-name-lg:    desktop !default;
   $screen-name-xlg:   tv !default;
+  $screen-name-lg:    desktop !default;
+  $screen-name-md:    laptop !default;
+  $screen-name-sm:    tablet !default;
+  $screen-name-xsm:   mobile !default;
   $screen-name-list:
     $screen-name-xsm, $screen-name-sm, $screen-name-md, $screen-name-lg, $screen-name-xlg !default;
 
   // Sizing
   // -------------------------
   $size-default:  1 !default;
-  $size-xxsm:     0.25 !default;
-  $size-xsm:      0.5 !default;
-  $size-sm:       2 !default;
-  $size-md:       3 !default;
-  $size-lg:       4 !default;
-  $size-xlg:      5 !default;
   $size-xxlg:     7 !default;
+  $size-xlg:      5 !default;
+  $size-lg:       4 !default;
+  $size-md:       3 !default;
+  $size-sm:       2 !default;
+  $size-xsm:      0.5 !default;
+  $size-xxsm:     0.25 !default;
 
   $name-default: def !default;
-  $name-xxsm:    xxsm !default;
-  $name-xsm:     xsm !default;
-  $name-sm:      sm !default;
-  $name-md:      md !default;
-  $name-lg:      lg !default;
-  $name-xlg:     xlg !default;
   $name-xxlg:    xxlg !default;
+  $name-xlg:     xlg !default;
+  $name-lg:      lg !default;
+  $name-md:      md !default;
+  $name-sm:      sm !default;
+  $name-xsm:     xsm !default;
+  $name-xxsm:    xxsm !default;
 
   // Color Scheme
   // -------------------------
@@ -109,8 +114,7 @@
 
   // Cursor Selection
   // -------------------------
-  $selection-color:     $color-light;
-  $selection-opacity:   0.7;
+  $selection-color:     null;
 
   // Cursors (?)
   // -------------------------

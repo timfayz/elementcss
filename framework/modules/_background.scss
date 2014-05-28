@@ -9,15 +9,12 @@
 
   $background-exclude: false !default;
   $background-include: diff-list((
-    background-color, background
+    background-color, background-size, background
     ), $background-exclude) !default;
 
   $background-set:        () !default;
-  $background-transition: null !default;
-
-  $background-color-set:        () !default;
-  $background-color-transition: null !default;
-
+  $background-color-set:  () !default;
+  $background-size-set:   () !default;
 
 // Mixins
 // --------------------------------------------------
@@ -29,16 +26,14 @@
 
   @if in-list(background, $background-include) {
     @include property(background, $Background, $background-set);
-
-    [class*="#{$Background}"] {transitions: $background-transition;}
   }
-
 
   @if in-list(background-color, $background-include) {
     @include property(background-color, $Background-color, $background-color-set);
-
-    [class*="#{$Background-color}"] {transitions: $background-color-transition;}
   }
 
+  @if in-list(background-size, $background-include) {
+    @include property(background-size, $Background-size, $background-size-set);
+  }
 
 } $background: false;

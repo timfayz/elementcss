@@ -41,6 +41,12 @@
 
 @if $dimension or $dimension == static {
 
+  //@todo place
+  .fill {
+    width: 100%;
+    height: 100%;
+  }
+
   @if in-list(height, $dimension-include) {
     .#{$Height}0     {height:0;}
     .#{$Height}100   {height:100%;}

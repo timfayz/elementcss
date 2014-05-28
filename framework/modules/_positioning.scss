@@ -12,20 +12,16 @@
   $positioning-include: diff-list((
     vertical-align,
     z-index, position,
-    top, right, bottom, left
+    top, right, bottom, left, corners
     ), $positioning-exclude) !default;
 
   $positioning-set: () !default;
   $positioning-set-default:
-    def_, -$size-default/2,
     def, $size-default,
     xxsm, $size-xxsm,
     xsm, $size-xsm,
-    xsm_, -$size-xsm/2,
     sm, $size-sm,
-    sm_, -$size-sm/2,
     md, $size-md,
-    md_, -$size-md/2,
     lg, $size-lg,
     xlg, $size-xlg,
     xxlg, $size-xxlg !default;
@@ -35,14 +31,13 @@
   $positioning-left-set: $positioning-set-default !default;
 
   $positioning-z-index-set:
+    0, 0,
     def, $z-index-default,
-    xxsm, $z-index-xxsm,
     xsm, $z-index-xsm,
     sm, $z-index-sm,
     md, $z-index-md,
     lg, $z-index-lg,
     xlg, $z-index-xlg,
-    xxlg, $z-index-xxlg
     !default;
 
 // Mixins & Functions
@@ -88,6 +83,24 @@
     .#{$Left}0       {left:0;}
     .#{$Left}auto    {left:auto;}
     @include property(left, $Left, $positioning-left-set, $vr);
+  }
+  @if in-list(corners, $positioning-include) {
+    .top-left {
+      top: 0;
+      left: 0;
+    }
+    .top-right {
+      top: 0;
+      right: 0;
+    }
+    .bottom-right {
+      bottom: 0;
+      right: 0;
+    }
+    .bottom-left {
+      bottom: 0;
+      left: 0;
+    }
   }
 
   // Z-index
