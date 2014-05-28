@@ -92,14 +92,6 @@
 // --------------------------------------------------
 @if $text or $text == static {
 
-  .text-hidden {
-    font: 0/0 a;
-    color: transparent;
-    text-shadow: none;
-    background-color: transparent;
-    border: 0;
-  }
-
   // Font-Family
   @if in-list(font-family, $text-include) {
     @include property(font-family, $Font-family, $text-font-family-set-default);
@@ -153,7 +145,7 @@
     @include property(color, $Color, $text-color-set-default);
     @include property(color, $Color, $text-color-set);
 
-    [class*="#{$Color}"] {transitions: $text-color-transition;}
+    [class*="#{$Color}"] {transition: $text-color-transition;}
   }
 
   // Text-Align
@@ -189,7 +181,7 @@
     @include property(word-spacing, $Word-spacing, $text-word-spacing-set-default);
     @include property(word-spacing, $Word-spacing, $text-word-spacing-set);
 
-    //[class*="#{$Word-spacing}"] {transitions: $text-word-spacing-transition;}
+    //[class*="#{$Word-spacing}"] {transition: $text-word-spacing-transition;}
   }
 
   // Text-Rendering

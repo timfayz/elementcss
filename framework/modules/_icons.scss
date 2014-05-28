@@ -27,12 +27,10 @@
     .postfix-#{$icons-prefix} {
       font-family: $icons-font-name;
       speak: none;
-      font-style: normal;
-      font-weight: normal;
-      font-variant: normal;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
       text-transform: none;
+      vertical-align: middle;
     }
     .prefix-#{$icons-prefix}:before {
       content:attr(title);

@@ -1,0 +1,559 @@
+@import '../_globals.scss';
+@import '../_functions.scss';
+@import '../_naming.scss';
+@import '../_mixins.scss';
+@import '../_vr.scss';
+
+// Default Variables
+// --------------------------------------------------
+  $normalize: true !default;
+
+
+// Output Styles
+// --------------------------------------------------
+@if $normalize or $normalize==static {
+
+  // Basic
+  // --------------------------------
+  *, *:before, *:after {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+  }
+
+  ::selection {
+    background-color: $selection-color;
+  }
+  ::-moz-selection {
+    background-color: $selection-color;
+  }
+
+  html {
+    font-family: $font-family-main;
+    font-size: $font-size;
+    text-size-adjust: 100%;
+  }
+
+  body {
+    margin:0;
+    cursor: $cursor-default;
+    direction: if($left==left, ltr, rtl);
+    font-size: inherit;
+    font-weight: normal;
+    font-style: normal;
+    line-height: tounit(round(tounit($line-height, px)), rem);
+    text-rendering: optimizelegibility;
+
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    margin:0;
+    font-weight: inherit;
+    font-size: inherit;
+    color: inherit;
+    text-rendering: optimizelegibility;
+  }
+
+  h1 {@include font-size ($font-size-xlg);}
+  h2 {@include font-size ($font-size-lg);}
+  h3 {@include font-size ($font-size-md);}
+  h4 {@include font-size ($font-size-sm);}
+  h5 {@include font-size ($font-size-xsm);}
+  h6 {@include font-size ($font-size-xxsm);}
+
+  p {
+    margin: 0;
+  }
+
+  hr {
+    box-sizing: content-box;
+    height: 0;
+    border: none;
+    margin: 0;
+  }
+
+  // Formatting
+  // --------------------------------
+  abbr {
+    &[title] {
+      border: none;
+    }
+  }
+  address {
+    font-style: inherit;
+  }
+  b {
+    font-weight: bold;
+  }
+  blockquote {
+    margin:0;
+  }
+  cite {
+    font-style: italic;
+  }
+  code {
+    font-family: $font-family-mono;
+    font-size: inherit;
+  }
+  del {
+    text-decoration: line-through;
+  }
+  dfn {
+    font-style: italic;
+  }
+  em {
+    font-style: italic;
+  }
+  i {
+    font-style: italic;
+  }
+  ins {}
+  kbd {
+    font-size: inherit;
+    font-family: $font-family-mono;
+  }
+  mark {
+    background: transparent;
+    color: inherit;
+  }
+  meter {
+    display: block;
+    @include height(1);
+    width: 100%;
+  }
+  pre {
+    font-family: $font-family-mono;
+    font-size: inherit;
+    white-space: pre-wrap;
+    margin: 0;
+    overflow: auto;
+  }
+  progress {
+    width: 100%;
+    display: block;
+    vertical-align: baseline;
+    @include height(1);
+  }
+  q {
+    quotes: "\201C" "\201D" "\2018" "\2019";
+  }
+  s {
+    text-decoration: line-through;
+  }
+  samp {
+    font-family: $font-family-mono;
+    font-size: inherit;
+  }
+  small {
+    font-size: 80%;
+  }
+  strong {
+    font-weight: bold;
+  }
+  sub {
+    font-size: 75%;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline;
+    top: -0.5em;
+  }
+  sup {
+    font-size: 75%;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline;
+    bottom: -0.25em;
+  }
+  time {}
+  u {}
+  var {
+    font-family: $font-family-mono;
+  }
+
+
+  // Forms
+  // --------------------------------
+  form {
+    margin:0;
+  }
+  fieldset {
+    padding: 0;
+    margin: 0;
+    border: 0;
+  }
+  legend {
+    display: block;
+    width: 100%;
+    padding: 0;
+    border: 0;
+  }
+  label {
+    display: block;
+    width: 100%;
+    border: 0;
+    padding: 0;
+    vertical-align: middle;
+  }
+  textarea {
+    overflow: auto;
+    resize: vertical;
+  }
+  optgroup {
+    color: inherit;
+    font-weight: bold;
+    font: inherit;
+    margin: 0;
+  }
+  option {}
+  datalist {}
+  keygen {
+    margin: 0;
+    @include min-height(1);
+    font-family: inherit;
+  }
+  output {
+    text-decoration: underline;
+  }
+  select {
+    text-transform: none;
+    background: none;
+    @include min-height(1);
+  }
+
+  // Inputs
+  // all types except:
+  // radio, checkbox, range?, button, reset, submit, hidden, image?
+  select,
+  textarea,
+  input:not([type]),
+  input[type="date"],
+  input[type="datetime"],
+  input[type="datetime-local"],
+  input[type="email"],
+  input[type="file"],
+  input[type="month"],
+  input[type="number"],
+  input[type="password"],
+  input[type="search"],
+  input[type="tel"],
+  input[type="text"],
+  input[type="time"],
+  input[type="url"],
+  input[type="week"],
+  .#{$input} {
+    box-sizing: border-box;
+    display: block;
+    margin: 0;
+    padding: 0;
+    height: auto;
+    width: 100%;
+    color: inherit;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    vertical-align: middle;
+    border:1px solid black;
+    outline: 0;
+  }
+
+  select[readonly],
+  textarea[readonly],
+  input:not([type])[readonly],
+  input[type="date"][readonly],
+  input[type="datetime"][readonly],
+  input[type="datetime-local"][readonly],
+  input[type="email"][readonly],
+  input[type="file"][readonly],
+  input[type="month"][readonly],
+  input[type="number"][readonly],
+  input[type="password"][readonly],
+  input[type="search"][readonly],
+  input[type="tel"][readonly],
+  input[type="text"][readonly],
+  input[type="time"][readonly],
+  input[type="url"][readonly],
+  input[type="week"][readonly],
+  .#{$input-readonly} {
+    cursor: $cursor-default;
+  }
+
+  select[disabled],
+  textarea[disabled],
+  input:not([type])[disabled],
+  input[type="date"][disabled],
+  input[type="datetime"][disabled],
+  input[type="datetime-local"][disabled],
+  input[type="email"][disabled],
+  input[type="file"][disabled],
+  input[type="month"][disabled],
+  input[type="number"][disabled],
+  input[type="password"][disabled],
+  input[type="search"][disabled],
+  input[type="tel"][disabled],
+  input[type="text"][disabled],
+  input[type="time"][disabled],
+  input[type="url"][disabled],
+  input[type="week"][disabled],
+  .#{$input-disabled} {
+    cursor: $cursor-default;
+  }
+
+  // Buttons
+  //@todo range width 100%?
+  input[type="checkbox"],
+  input[type="radio"],
+  input[type="color"],
+  input[type="range"],
+  input[type="image"],
+  .#{$radio},
+  .#{$checkbox} {
+    border: 0;
+    outline: 0;
+    margin: 0;
+    vertical-align: inherit;
+    line-height: inherit;
+  }
+  input[type="checkbox"][disabled],
+  input[type="radio"][disabled],
+  .#{$radio-disabled},
+  .#{$checkbox-disabled} {
+    cursor: $cursor-default;
+  }
+
+  button {
+    color: inherit;
+    overflow: visible;
+    text-transform: none;
+  }
+
+  button,
+  input[type="button"],
+  input[type="reset"],
+  input[type="submit"],
+  .#{$button} {
+    cursor: $cursor-pointer;
+    display: block;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    text-align: center;
+    vertical-align: middle;
+    background: none;
+    border:1px solid black;
+    outline: none;
+  }
+
+  button[disabled],
+  input[type="button"][disabled],
+  input[type="reset"][disabled],
+  input[type="submit"][disabled],
+  .#{$button-disabled} {
+    cursor: $cursor-default;
+  }
+
+
+  // Images
+  // --------------------------------
+  img {
+    border: 0;
+    max-width: 100%;
+    height: auto;
+    vertical-align: middle;
+    -ms-interpolation-mode: bicubic;
+  }
+  map {}
+  area {}
+  canvas {
+    display: block;
+    vertical-align: baseline;
+  }
+  figcaption {
+    display: block;
+  }
+  figure {
+    margin: 0;
+    display: block;
+  }
+
+  // Links
+  // --------------------------------
+  a {
+    background: transparent;
+    color: inherit;
+    text-decoration:none;
+    &:focus {
+      outline: none;
+    }
+    &:hover {
+      outline: none;
+      color: inherit;
+      cursor: $cursor-pointer;
+    }
+    &:active {
+      outline: none;
+    }
+  }
+  nav {
+    display: block;
+  }
+
+  // Lists
+  // --------------------------------
+  ul, li {
+    list-style: none;
+    position:relative;
+    padding: 0;
+    margin: 0;
+  }
+
+  ul {}
+  ol {}
+  li {
+    list-style: none;
+  }
+
+  dl {
+    margin:0;
+  }
+  dt {}
+  dd {
+    margin:0;
+  }
+
+  // Media
+  // --------------------------------
+  audio {
+    //      width: 100%;
+    display: block;
+    @include height(1);
+
+    &:not([controls]) {
+      display: none;
+      height: 0;
+    }
+  }
+  track {}
+  video {
+    display: block;
+    vertical-align: baseline;
+  }
+
+
+  // Sections
+  // --------------------------------
+  main,
+  header,
+  footer,
+  section,
+  article,
+  aside,
+  details,
+  dialog,
+  summary {
+    display: block;
+  }
+
+  // Tables
+  // --------------------------------
+  table {
+    line-height: inherit;
+    font-size: inherit;
+    font-variant: normal;
+    font-style: normal;
+    color: inherit;
+    text-align: inherit;
+    border-collapse: collapse;
+    border-spacing: 0;
+  }
+  td {
+    padding: 0;
+  }
+  th {
+    padding: 0;
+  }
+
+  // Polyfills
+  // --------------------------------
+  //Required for Windows 8 Metro split-screen snapping with IE10
+  @-ms-viewport{
+    width: device-width;
+  }
+
+  audio:not([controls]) {
+    display: none;
+    height: 0;
+  }
+
+  [hidden],
+  template {
+    display: none;
+  }
+
+  svg:not(:root) {
+    overflow: hidden;
+  }
+
+  button,
+  html input[type="button"],
+  input[type="reset"],
+  input[type="submit"] {
+    -webkit-appearance: button;
+    cursor: pointer;
+  }
+
+  button::-moz-focus-inner,
+  input::-moz-focus-inner {
+    border: 0;
+    padding: 0;
+  }
+
+  input[type="checkbox"],
+  input[type="radio"] {
+    box-sizing: border-box;
+    padding: 0;
+  }
+
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
+    height: auto;
+  }
+
+  input[type="search"] {
+    -webkit-appearance: textfield;
+    -moz-box-sizing: content-box;
+    -webkit-box-sizing: content-box;
+    box-sizing: content-box;
+  }
+
+  input[type="search"]::-webkit-search-cancel-button,
+  input[type="search"]::-webkit-search-decoration {
+    -webkit-appearance: none;
+  }
+
+}
+
+@if $normalize or $normalize == responsive {
+
+//    $basic-screens:  break-list(united, $screen-width-list, $screen-breakpoint);
+//    $basic-font-size: 80%, 85%, 90%, 93%, 95%, 95%;
+//    $basic-font-size: break-list(united, $screen-width-list, $screen-breakpoint, $basic-font-size);
+//    $f: 1;
+//    @while $f <= length($basic-screens) {
+//      $screen: nth($basic-screens, $f);
+//      $font-size: nth($basic-font-size, $f);
+//
+//      @media #{get-media(opened, $screen, $screen-width-list, $screen-breakpoint) {
+//
+//        html {
+//          font-size: $font-size;
+//        }
+//
+//      }
+//
+//      $f: $f + 1;
+//    }
+
+} $normalize: false;

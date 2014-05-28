@@ -6,8 +6,8 @@
 
 // KEYWORDS
 // -------------------------------------
-$disabled:    '-disabled';
-$readonly:    '-readonly';
+$disabled:    'disabled';
+$readonly:    'readonly';
 
 
 
@@ -16,14 +16,11 @@ $readonly:    '-readonly';
 
 // Basic
 // -------------------
-$_all:        '*, *:before, *:after';
 $html:        'html';
 $body:        'body';
 
-
 // Type
 // -------------------
-$_headings:   'h1, h2, h3, h4, h5, h6';
 $h1:          'h1';
 $h2:          'h2';
 $h3:          'h3';
@@ -38,7 +35,6 @@ $hr:          'hr';
 $a:           'a';
 $nav:         'nav';
 
-
 // Images
 // -------------------
 $img:         'img';
@@ -47,7 +43,6 @@ $area:        'area';
 $canvas:      'canvas';
 $figcaption:  'figcaption';
 $figure:      'figure';
-
 
 // Media
 // -------------------
@@ -66,7 +61,6 @@ $dt:          'dt';
 $dd:          'dd';
 $menu:        'menu';
 
-
 // Tables
 // -------------------
 $table:       'table';
@@ -79,7 +73,6 @@ $tbody:       'tbody';
 $tfoot:       'tfoot';
 $col:         'col';
 $colgroup:    'colgroup';
-
 
 // Sections
 // -------------------
@@ -94,7 +87,6 @@ $aside:       'aside';
 $details:     'details';
 $dialog:      'dialog';
 $summary:     'summary';
-
 
 // Formatting
 // -------------------
@@ -141,7 +133,6 @@ $small:       'small';
 // important text
 $strong:      'strong';
 // superscript and subscript text
-$_indexes:    'sub, sup';
 $sub:         'sub';
 $sup:         'sup';
 // date/time
@@ -156,118 +147,32 @@ $var:         'var';
 
 // Forms
 // -------------------
-$form:            'form';
-$fieldset:        'fieldset';
-$legend:          'legend';
-$label:           'label';
-$textarea:        'textarea';
-$select:          'select';
-$optgroup:        'optgroup';
-$option:          'option';
-$datalist:        'datalist';
-$keygen:          'keygen';
-$output:          'output';
-$select:          'select';
-$textarea:        'textarea';
+$form:              'form';
+$fieldset:          'fieldset';
+$legend:            'legend';
+$label:             'label';
+$textarea:          'textarea';
+$select:            'select';
+$optgroup:          'optgroup';
+$option:            'option';
+$datalist:          'datalist';
+$keygen:            'keygen';
+$output:            'output';
+$select:            'select';
+$textarea:          'textarea';
 
-$radio:           'radio';
-$checkbox:        'checkbox';
+$input:             'input';
+$input-readonly:    '#{$input}.-#{$readonly}';
+$input-disabled:    '#{$input}.-#{$disabled}';
 
-$clicker:         'clicker';
-//radio & checkbox = clicker
-$_clicker:
-  'input[type="checkbox"],
-    input[type="radio"],
-    input[type="color"],
-    input[type="range"],
-    input[type="image"],
-    .#{$clicker},
-    .#{$radio},
-    .#{$checkbox}';
-$_clicker-disabled:
-  'input[type="checkbox"][disabled],
-    input[type="radio"][disabled],
-    .#{$clicker}.#{$disabled},
-    .#{$radio}.#{$disabled},
-    .#{$checkbox}.#{$disabled}';
+$radio:             'radio';
+$radio-disabled:    '#{$radio}.-#{$disabled}';
 
-$input:           'input';
-//all types except:
-//radio, checkbox, range?, button, reset, submit, hidden, image?
-$_input:
-  'select,
-    textarea,
-    input:not([type]),
-    input[type="date"],
-    input[type="datetime"],
-    input[type="datetime-local"],
-    input[type="email"],
-    input[type="file"],
-    input[type="month"],
-    input[type="number"],
-    input[type="password"],
-    input[type="search"],
-    input[type="tel"],
-    input[type="text"],
-    input[type="time"],
-    input[type="url"],
-    input[type="week"],
-    .#{$input}';
-$_input-disabled:
-  'select[disabled],
-    textarea[disabled],
-    input:not([type])[disabled],
-    input[type="date"][disabled],
-    input[type="datetime"][disabled],
-    input[type="datetime-local"][disabled],
-    input[type="email"][disabled],
-    input[type="file"][disabled],
-    input[type="month"][disabled],
-    input[type="number"][disabled],
-    input[type="password"][disabled],
-    input[type="search"][disabled],
-    input[type="tel"][disabled],
-    input[type="text"][disabled],
-    input[type="time"][disabled],
-    input[type="url"][disabled],
-    input[type="week"][disabled],
-    .#{$input}.#{$disabled}';
-$_input-readonly:
-  'select[readonly],
-    textarea[readonly],
-    input:not([type])[readonly],
-    input[type="date"][readonly],
-    input[type="datetime"][readonly],
-    input[type="datetime-local"][readonly],
-    input[type="email"][readonly],
-    input[type="file"][readonly],
-    input[type="month"][readonly],
-    input[type="number"][readonly],
-    input[type="password"][readonly],
-    input[type="search"][readonly],
-    input[type="tel"][readonly],
-    input[type="text"][readonly],
-    input[type="time"][readonly],
-    input[type="url"][readonly],
-    input[type="week"][readonly],
-    .#{$input}.#{$readonly}';
+$checkbox:          'checkbox';
+$checkbox-disabled: '#{$checkbox}.-#{$disabled}';
 
-$button:          'button';
-$button-disabled: 'button.-disabled';
-$_button:
-  'button,
-    input[type="button"],
-    input[type="reset"],
-    input[type="submit"],
-    .#{$button}';
-
-$_button-disabled:
-  'button[disabled],
-    input[type="button"][disabled],
-    input[type="reset"][disabled],
-    input[type="submit"][disabled],
-    .#{$button}.#{$disabled}';
-
+$button:            'button';
+$button-disabled:   '#{$button}.-#{$disabled}';
 
 // Programming
 // -------------------
@@ -278,7 +183,6 @@ $object:      'object';
 
 // CLASS NAMING
 // ---------------------------------------
-
 
 // Property's Directions
 // -------------------
@@ -312,8 +216,8 @@ $List-style:          'list-' !default;
 $List-style-type:     'list-' !default;
 
 // Indention
-$Margin:              'margin-' !default;
-$Padding:             'padding-' !default;
+$Margin:              'marg-' !default;
+$Padding:             'padd-' !default;
 
 // Dimension
 $Width:               'width-' !default;
@@ -326,6 +230,7 @@ $Min-height:          'min-height-' !default;
 // Background
 $Background:          'grad-' !default;
 $Background-color:    'back-' !default;
+$Background-size:     '' !default;
 
 // Border
 $Border-radius:       'radius-' !default;
@@ -350,6 +255,9 @@ $Text-shadow:         'text-sh-' !default;
 
 // Transition
 $Transition:          'trans-' !default;
+
+// Filter
+$Filter:              'filter-' !default;
 
 // Shadow
 $Box-shadow:          'shadow-' !default;
