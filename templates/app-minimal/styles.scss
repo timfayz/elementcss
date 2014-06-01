@@ -12,23 +12,9 @@
 //$line-height:         1.7;
 //$font-size:           100%;
 
-// Initiating Tags
-// ---------------
-//$basic: true;
-//$forms: true;
-//$lists: true;
-//$type: true;
-//$links: true;
-//$formatting: true;
-//$media: true;
-//$images: true;
-//$polyfills: true;
-//$tables: true;
-@import 'element/framework/initialize/_all.scss';
-
-
 // Generating Classes
 // ------------------
+//$normalize: true;
 //$content: true;
 //$list: true;
 //$shadow: true;
