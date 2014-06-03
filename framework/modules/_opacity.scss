@@ -16,7 +16,6 @@
     xlg, 0.7,
     xxlg, 0.9 !default;
   $opacity-set:   () !default;
-  $opacity-transition:  null !default;
 
 
 // Mixins & Functions
@@ -30,8 +29,6 @@
 
   @include property(opacity, $Opacity, $opacity-set-default);
   @include property(opacity, $Opacity, $opacity-set);
-
-  [class*="#{$Opacity}"] {transition: $opacity-transition;}
 
 } $opacity: false;
 

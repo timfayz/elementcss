@@ -10,7 +10,6 @@ $disabled:    'disabled';
 $readonly:    'readonly';
 
 
-
 // TAG NAMING
 // -------------------------------------
 
@@ -186,14 +185,14 @@ $object:      'object';
 
 // Property's Directions
 // -------------------
-$T:                   't-' !default;
-$R:                   'r-' !default;
-$B:                   'b-' !default;
-$L:                   'l-' !default;
-$TL:                  'tl-' !default;
-$TR:                  'tr-' !default;
-$BR:                  'br-' !default;
-$BL:                  'bl-' !default;
+$T:                   't-' !default; //top
+$R:                   'r-' !default; //right
+$B:                   'b-' !default; //bottom
+$L:                   'l-' !default; //left
+$TL:                  'tl-' !default; //top-left
+$TR:                  'tr-' !default; //top-right
+$BR:                  'br-' !default; //bottom-right
+$BL:                  'bl-' !default; //bottom-left
 
 
 // Properties shortcuts
@@ -205,7 +204,7 @@ $Right:               'right-' !default;
 $Bottom:              'bottom-' !default;
 $Left:                'left-' !default;
 $Position:            null !default;
-$Z-index:             'z-index-' !default;
+$Z-index:             'z-' !default;
 $Vertical-align:      'align-' !default;
 
 // Content
@@ -230,7 +229,7 @@ $Min-height:          'min-height-' !default;
 // Background
 $Background:          'grad-' !default;
 $Background-color:    'back-' !default;
-$Background-size:     '' !default;
+$Background-size:     null !default;
 
 // Border
 $Border-radius:       'radius-' !default;

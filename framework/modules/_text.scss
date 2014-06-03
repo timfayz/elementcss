@@ -23,7 +23,6 @@
   // Color
   $text-color-set:        () !default;
   $text-color-set-default: () !default;
-  $text-color-transition: null !default;
 
   // Text-Transform
   $text-transform-set: () !default;
@@ -144,8 +143,6 @@
   @if in-list(color, $text-include) {
     @include property(color, $Color, $text-color-set-default);
     @include property(color, $Color, $text-color-set);
-
-    [class*="#{$Color}"] {transition: $text-color-transition;}
   }
 
   // Text-Align
@@ -180,8 +177,6 @@
   @if in-list(word-spacing, $text-include) {
     @include property(word-spacing, $Word-spacing, $text-word-spacing-set-default);
     @include property(word-spacing, $Word-spacing, $text-word-spacing-set);
-
-    //[class*="#{$Word-spacing}"] {transition: $text-word-spacing-transition;}
   }
 
   // Text-Rendering
