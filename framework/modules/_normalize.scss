@@ -1,7 +1,7 @@
-@import '../_globals.scss';
-@import '../_functions.scss';
-@import '../_naming.scss';
-@import '../_mixins.scss';
+@import '../globals.scss';
+@import '../functions.scss';
+@import '../naming.scss';
+@import '../mixins.scss';
 @import '../_vr.scss';
 
 // Default Variables
@@ -15,35 +15,38 @@
 
   // Basic
   // --------------------------------
-  *, *:before, *:after {
+  * {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+  }
+  *:before, *:after {
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
   }
 
   ::selection {
-    background-color: $selection-color;
+    background-color: $_selection-color;
   }
   ::-moz-selection {
-    background-color: $selection-color;
+    background-color: $_selection-color;
   }
 
   html {
-    font-family: $font-family-main;
-    font-size: $font-size;
+    -ms-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
     text-size-adjust: 100%;
   }
 
   body {
     margin:0;
-    cursor: $cursor-default;
-    direction: if($left==left, ltr, rtl);
+    cursor: $_cursor-default;
+    direction: if($_left==left, ltr, rtl);
     font-size: inherit;
     font-weight: normal;
     font-style: normal;
-    line-height: tounit(round(tounit($line-height, px)), rem);
     text-rendering: optimizelegibility;
-
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -53,13 +56,6 @@
     color: inherit;
     text-rendering: optimizelegibility;
   }
-
-  h1 {@include font-size ($font-size-xlg);}
-  h2 {@include font-size ($font-size-lg);}
-  h3 {@include font-size ($font-size-md);}
-  h4 {@include font-size ($font-size-sm);}
-  h5 {@include font-size ($font-size-xsm);}
-  h6 {@include font-size ($font-size-xxsm);}
 
   p {
     margin: 0;
@@ -92,7 +88,7 @@
     font-style: italic;
   }
   code {
-    font-family: $font-family-mono;
+    font-family: monospace;
     font-size: inherit;
   }
   del {
@@ -110,7 +106,7 @@
   ins {}
   kbd {
     font-size: inherit;
-    font-family: $font-family-mono;
+    font-family: monospace;
   }
   mark {
     background: transparent;
@@ -118,11 +114,11 @@
   }
   meter {
     display: block;
-    @include height(1);
+    //@include height(1);
     width: 100%;
   }
   pre {
-    font-family: $font-family-mono;
+    font-family: monospace;
     font-size: inherit;
     white-space: pre-wrap;
     margin: 0;
@@ -132,7 +128,7 @@
     width: 100%;
     display: block;
     vertical-align: baseline;
-    @include height(1);
+    //@include height(1);
   }
   q {
     quotes: "\201C" "\201D" "\2018" "\2019";
@@ -141,7 +137,7 @@
     text-decoration: line-through;
   }
   samp {
-    font-family: $font-family-mono;
+    font-family: monospace;
     font-size: inherit;
   }
   small {
@@ -167,7 +163,7 @@
   time {}
   u {}
   var {
-    font-family: $font-family-mono;
+    font-family: monospace;
   }
 
 
@@ -208,7 +204,7 @@
   datalist {}
   keygen {
     margin: 0;
-    @include min-height(1);
+    //@include min-height(1);
     font-family: inherit;
   }
   output {
@@ -217,7 +213,7 @@
   select {
     text-transform: none;
     background: none;
-    @include min-height(1);
+    //@include min-height(1);
   }
 
   // Inputs
@@ -274,7 +270,7 @@
   input[type="url"][readonly],
   input[type="week"][readonly],
   .#{$input-readonly} {
-    cursor: $cursor-default;
+    cursor: $_cursor-default;
   }
 
   select[disabled],
@@ -295,7 +291,7 @@
   input[type="url"][disabled],
   input[type="week"][disabled],
   .#{$input-disabled} {
-    cursor: $cursor-default;
+    cursor: $_cursor-default;
   }
 
   // Buttons
@@ -317,7 +313,7 @@
   input[type="radio"][disabled],
   .#{$radio-disabled},
   .#{$checkbox-disabled} {
-    cursor: $cursor-default;
+    cursor: $_cursor-default;
   }
 
   button {
@@ -331,7 +327,7 @@
   input[type="reset"],
   input[type="submit"],
   .#{$button} {
-    cursor: $cursor-pointer;
+    cursor: $_cursor-pointer;
     display: block;
     margin: 0;
     padding: 0;
@@ -351,7 +347,7 @@
   input[type="reset"][disabled],
   input[type="submit"][disabled],
   .#{$button-disabled} {
-    cursor: $cursor-default;
+    cursor: $_cursor-default;
   }
 
 
@@ -390,7 +386,7 @@
     &:hover {
       outline: none;
       color: inherit;
-      cursor: $cursor-pointer;
+      cursor: $_cursor-pointer;
     }
     &:active {
       outline: none;
@@ -426,9 +422,9 @@
   // Media
   // --------------------------------
   audio {
-    //      width: 100%;
+    //width: 100%;
     display: block;
-    @include height(1);
+    //@include height(1);
 
     &:not([controls]) {
       display: none;
@@ -533,27 +529,7 @@
     -webkit-appearance: none;
   }
 
+
 }
 
-@if $normalize or $normalize == responsive {
-
-//    $basic-screens:  break-list(united, $screen-width-list, $screen-breakpoint);
-//    $basic-font-size: 80%, 85%, 90%, 93%, 95%, 95%;
-//    $basic-font-size: break-list(united, $screen-width-list, $screen-breakpoint, $basic-font-size);
-//    $f: 1;
-//    @while $f <= length($basic-screens) {
-//      $screen: nth($basic-screens, $f);
-//      $font-size: nth($basic-font-size, $f);
-//
-//      @media #{get-media(opened, $screen, $screen-width-list, $screen-breakpoint) {
-//
-//        html {
-//          font-size: $font-size;
-//        }
-//
-//      }
-//
-//      $f: $f + 1;
-//    }
-
-} $normalize: false;
+$normalize: false;
