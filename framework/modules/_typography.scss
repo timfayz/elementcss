@@ -1,0 +1,47 @@
+@import '../globals.scss';
+@import '../naming.scss';
+@import '../functions.scss';
+@import '../mixins.scss';
+
+// Default Variables
+// --------------------------------------------------
+  $type: false !default;
+
+  $type-font-family-headings: $_font-family-sans !default;
+  $type-font-size-headings: (
+    h1: $_font-size-xlg,
+    h2: $_font-size-lg,
+    h3: $_font-size-md,
+    h4: $_font-size-sm,
+    h5: $_font-size-xsm,
+    h6: $_font-size-xxsm,
+  ) !default;
+
+
+// Output Styles
+// --------------------------------------------------
+
+@if $type {
+
+  html {
+    font-family: $_font-family;
+    font-size: tounit($_font-size, unit($_font-size));
+  }
+  body {
+    line-height: tounit($_line-height, rem);
+  }
+
+  @each $header, $font-size in $type-font-size-headings {
+    #{$header}, .#{$header} {
+      font-size: vr($font-size, $font:true);
+      line-height: vr(auto, $font:$font-size);
+    }
+  }
+
+  code,
+  kbd,
+  pre,
+  samp {
+    font-family: $_font-family-mono;
+  }
+}
