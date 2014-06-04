@@ -1,9 +1,8 @@
 .idea/
 .sass-cache/
+deprecated/
 
-project/
-
-NOTES.md
+*.html
 *.css
 *.scss
 *~

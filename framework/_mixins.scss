@@ -31,7 +31,7 @@
       url('#{$font-path}.svg#{$query}##{$svg-font-name}') format('svg');
     }
   }
-  @else {
+  @else { //@todo kill off
     @font-face {
       font-family: $font-family;
       src: url('#{$font-path}.eot#{$query}');
@@ -42,60 +42,91 @@
   }
 }
 
-// Property multiplier
-// -------------------
-@mixin _get-property($properties, $value, $vr)
-{
-  @each $property in $properties {
-    @if $vr != true {
-      #{$property}: $value;
+// Media Builder
+// -------------
+@mixin media($media-map, $media-name:null, $unit:$_media-unit, $no-query:null) {
+  $string: ();
+  $query: null;
+  $query-type: null;
+
+  //if query map is presented
+  @if $media-name {
+    $query: map-get($media-map, $media-name);
+  }
+  //if only media query is presented
+  @else {
+    $query: $media-map;
+  }
+
+  @if $query {
+    @for $i from 1 through length($query) {
+      $value: nth($query, $i);
+
+      @if $i == 1 {
+        $query-type: if($value==media, media, string);
+      }
+      $value: if(type-of($value)==number, tounit($value, $unit), unquote($value));
+      $string: append($string, if($value!=media, $value, null));
+    }
+
+    @if $query-type==media {
+      @media #{$string} {
+        @content;
+      }
     }
     @else {
-      @if $property == font-size {
-        $value: $value / $vr-line-height;
+      #{$string} {
+        @content;
       }
-      @include vr-property($property, $value);
     }
   }
-}
+  @else {
+    @content;
+  }
 
+}
 
 // Property generator
 // -------------------------------------
-// @param string $property any CSS property
-// @param string $property-prefix CSS class prefix
+// $properties - any CSS property(es)
+// $class-property-shortcut - CSS class prefix
 // @return
-@mixin property($property, $class-property-name, $list, $vr:false)
+@mixin property($property, $property-shortcut, $list, $device:null)
 {
-  $i: 1 !global;
+  $device-prefix: null;
   $class-prefix: null;
   $class-postfix: null;
   $selector-before: (null);
   $selector-after: (null);
 
+  $i: 1 !global;
   @while $i <= length($list) {
 
-    // step 1
-    // ------
-    // get selectors
-    $first-value: nth($list, $i);
-
-    @if length($first-value) >= 2 {
-      $selector-before: ();
-      $selector-after: ();
-
-      $b: 1 !global;
-      @while $b <= length($first-value) {
-        $selector-before: append($selector-before, nth($first-value, $b));
-        $selector-after: append($selector-after, nth($first-value, $b + 1));
-
-        $b: $b + 2 !global;
-      }
-
+    $initial-value: nth($list, $i);
+    // Autoprefixing
+    // --------
+    @if $initial-value == prefix {
+      $device-prefix:_($device);
+      $i: $i + 1 !global;
+    }
+    @else if $initial-value == unprefix {
+      $device-prefix:null;
       $i: $i + 1 !global;
     }
 
-    // step 2
+    // step 0
+    // ------
+    // get selectors if presented
+    $first-value: nth($list, $i);
+    @if length($first-value) == 3 {
+      $selector-before: nth($first-value, 1);
+      $selector-after: nth($first-value, 3);
+      @debug $selector-before;
+      $i: $i + 1 !global;
+    }
+
+
+    // step 1
     // ------
     // get class name and/or additional selector
     $next-value: nth($list, $i);
@@ -108,11 +139,11 @@
     }
     //if there is only class postfix
     @else {
+      $class-prefix: null; //reset prefix
       $class-postfix: $next-value;
     }
 
-
-    // step 3
+    // step 2
     // ------
     // get property value
     $next-value: nth($list, $i);
@@ -121,21 +152,42 @@
     // append null for correct handling values within the loop
     $property-value: $next-value, null;
 
-    // step 4
+    // step 3
     // ------
     // construct class
-    $v: 1;
-    @while $v <= length($selector-before) {
-      $selector:
-        #{nth($selector-before, $v)}#{'.'}#{$class-prefix}#{$class-property-name}#{$class-postfix}#{nth($selector-after, $v)};
+    $selector:
+      #{$selector-before}#{'.'}#{$device-prefix}#{$class-prefix}#{$property-shortcut}#{$class-postfix}#{$selector-after};
 
-      #{$selector} {
-        $pass: nth($property-value, $v);
-        @include _get-property($property, $pass, $vr);
+    #{$selector} {
+      $value: $property-value;
+      @each $property-name in $property {
+        #{$property-name}: $value;
       }
-
-      $v: $v + 1;
     }
 
+  }
+}
+
+// Property Set generator
+// -------------------------------------
+// $media -
+// $class-property-shortcut - CSS class prefix
+// @return
+@mixin property-media($media, $property, $property-shortcut, $list) {
+  //@each $list in $args {
+  @if length($list) > 0 {
+    $media-devices: map-keys($media) !global;
+    $devices: nths($media-devices, indexes($media-devices, map-keys($list)));
+
+    @if length($devices) > 0 {
+      @for $i from 1 through length($devices) {
+        $device: nth($devices, $i);
+        $property-list: map-get($list, $device);
+
+        @include media($media, $device) {
+          @include property($property, $property-shortcut, $property-list, $device:$device);
+        }
+      }
+    }
   }
 }

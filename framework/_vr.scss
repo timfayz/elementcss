@@ -1,146 +1,123 @@
 // MAKE EASY THINGS DIFFICULT.
 // PLEASE DO NOT READ THIS IF YOU HAVE POOR SASS KNOWLEADGE
-// AND HAVEN'T RED DOCUMENTATION!
+// AND HAVEN'T READ ANY DOCUMENTATION!
 // You may never use this file if it confuse you.
 
 // Default Variables
 // --------------------------------------------------
 
-  $vr-font-size:      $font-size !default;
+  $vr-font-size: $_font-size !default;
+  //new line jumping threshold
+  $vr-font-threshold: 84% !default; //%
 
   //values for calculatings
-  $vr-line-height:    ununit(tounit($line-height, rem)) !default;
-//  $vr-line-height:  ununit(round(tounit($line-height, px))/16) !default;
-
-  //newline threshold
-  $vr-line-threshold: $line-threshold !default; //%
-
-  //unit fallback
-  $vr-unit-fallback:  false !default;
+  $vr-line-height: ununit(tounit($_line-height, rem)) !default;
+  //$vr-line-height:    ununit(round(tounit($line-height, px))/16) !default;
+  $vr-line-pitch: 0.5 !default;
 
   //output unit rendering
-  //rem, px, pt
-  $vr-font-unit:      rem !default;
-  $vr-line-unit:      rem !default;
+  $vr-unit: rem !default; //rem, px, pt
+
+  //unit fallback
+  $vr-unit-fallback: false !default;
 
 
 // Mixins & Functions
 // --------------------------------------------------
 
-
-  // New Line Calculator
+  // Line Magnet (explain)
   // -----------------------------
-  @function vr-number-of-lines($font-size, $threshold: $vr-line-threshold, $line-height: $vr-line-height) {
-    $threshold: ununit($threshold);
-    $font-size: ununit($font-size);
-    $multiplier: ceil( $font-size / ($line-height * ($threshold/100)) );
+  // $line-height must be prepared in advance
+  @function vr-line-sticker($value, $line-height: $vr-line-height, $pitch:$vr-line-pitch, $font:false)
+  {
+    $value: ununit(tounit($value, rem));
+    //-------------
+    $ratio: ceil($value / $line-height);
+    $calc: $line-height * ($ratio - 1) + ($line-height * $pitch);
+    $return: if($calc <= $value, $ratio, $ratio - $pitch);
 
-    @return $multiplier;
+    //-------------
+    @return $return;
   }
 
-  // Each Vr Value Handler
+  // New Line Calculator (explain)
   // -----------------------------
-  @function vr-value-handler($value, $unit: $vr-line-unit) {
-    @if $value == important {
+  @function vr-lines-by-font($font-size, $line-height: $vr-line-height, $threshold: $vr-font-threshold)
+  {
+    $font-size: ununit(tounit($font-size, rem));
+    $threshold: ununit($threshold);
+
+    @return ceil( $font-size / ($line-height * ($threshold/100)) );
+  }
+
+  // VR Value Handler
+  // -----------------------------
+  // handle each value and synchronize to vertical rhythm
+  @function vr-value-handler($value, $unit, $font, $vr)
+  {
+    //calculate number of lines
+    @if type-of($value) == number and $value!=0 {
+      @if unitless($value) {
+        $value: if($font, $value, $value * $vr-line-height);
+        @return tounit($value, $unit);
+      }
+      @else {
+        @if $vr {
+          $value: if($font, $value, vr-line-sticker($value) * $vr-line-height);
+          @return tounit($value, $unit);
+        }
+        @else {
+          @debug $value;
+          @return $value; //pass
+        }
+      }
+    }
+    //calculate number of lines by font size
+    @else if $value==auto and type-of($font)==number {
+      @if $vr {
+        $lines-number: vr-lines-by-font($font);
+        @return tounit($lines-number * $vr-line-height, $unit);
+      }
+      @else {
+        @return null; //pass
+      }
+    }
+    //!important
+    @else if $value == important {
       @return unquote('!'+$value);
     }
-    @else if type-of($value) == string {
-      @return $value;
-    }
-    @else if type-of($value) == number {
-      @return tounit(tounit($value, rem) * $vr-line-height, $unit);
-    }
-    @else {
-      @return null;
-    }
+    @return $value;
+
   }
 
-  // Value List Handler
+  // Return VR Value
   // -----------------------------
-  @function vr-list-handler($args, $unit: $vr-line-unit) {
+  // only expose list values and pass through vr handler function
+  @function vr($list, $unit: $vr-unit, $font:false, $vr:$_vr)
+  {
     $values: ();
 
-    @each $arg in $args {
-      @if type-of($arg)!=string or $arg==auto or $arg==inherit or $arg==important {
-        $values: append( $values, vr-value-handler($arg, $unit) );
-      }
+    @each $value in $list {
+      $value: vr-value-handler($value, $unit, $font, $vr);
+      $values: append($values, $value);
     }
 
     @return $values;
   }
 
 
-  // A Single Value Properties
+  // VR Property
   // -----------------------------
-  @mixin vr-property ($property, $mixed, $unit: $vr-line-unit, $fallback: $vr-unit-fallback) {
-    $value: nth($mixed, 1);
-    $important: null;
-
-    @if length($mixed) > 1 {
-      $important: if(nth($mixed, 2) == important, important, null);
+  @mixin vr-property($property, $list, $unit: $vr-unit, $font:false, $vr:$_vr, $fallback: $vr-unit-fallback) {
+    @if $property==font-size {
+      $font: true;
     }
 
-    @if $fallback and type-of($value)==number and $unit!=px {
-      #{$property}: vr-list-handler(join($value, $important), px);
+    @if $fallback and $unit!=px {
+      #{$property}: vr($list, px, $font);
     }
 
     //#{$property}: if($offset == null, calc(#{$value} + #{$offset}), $value);
-    $value: vr-list-handler(join($value, $important), $unit);
+    $value: vr($list, $unit, $font, $vr);
     #{$property}: $value;
   }
-
-
-  // A Multiple Value Properties
-  // ---------------------------
-  @function indent-direction($mixed) {
-    $direction: nth($mixed, 1);
-    @return if( $direction==left or $direction==top or $direction==right or $direction==bottom, '-'+$direction, null );
-  }
-
-  @mixin vr-property-multi($property, $mixed, $unit: $vr-line-unit, $fallback: $vr-unit-fallback) {
-    $direction: indent-direction($mixed);
-    @if $fallback and $unit != px {
-      #{$property}#{$direction}: vr-list-handler($mixed, px);
-    }
-    #{$property}#{$direction}: vr-list-handler($mixed, $unit);
-  }
-
-
-  // VR Properties Aliases
-  // --------------------------
-  @mixin font-size($value, $mixed...) {
-    //Font size
-    $value: tounit($value, rem);
-
-    //Render Font-size
-    @include vr-property (font-size, join($value / $vr-line-height, $mixed));
-
-    //if line-height specified
-    @if $mixed {
-      $lines: if(type-of($mixed)==number, $mixed, vr-number-of-lines($value));
-      @include vr-property (line-height, $lines);
-    }
-  }
-  @mixin line-height($value, $mixed...) {@include vr-property(line-height, join($value, $mixed));}
-  @mixin height($value, $mixed...)      {@include vr-property(height, join($value, $mixed));}
-  @mixin max-height($value, $mixed...)  {@include vr-property(max-height, join($value, $mixed));}
-  @mixin min-height($value, $mixed...)  {@include vr-property(min-height, join($value, $mixed));}
-  @mixin width($value, $mixed...)       {@include vr-property(width, join($value, $mixed));}
-  @mixin max-width($value, $mixed...)   {@include vr-property(max-width, join($value, $mixed));}
-  @mixin min-width($value, $mixed...)   {@include vr-property(min-width, join($value, $mixed));}
-  @mixin top($value, $mixed...)         {@include vr-property(top, join($value, $mixed));}
-  @mixin right($value, $mixed...)       {@include vr-property(right, join($value, $mixed));}
-  @mixin bottom($value, $mixed...)      {@include vr-property(bottom, join($value, $mixed));}
-  @mixin left($value, $mixed...)        {@include vr-property(left, join($value, $mixed));}
-  @mixin margin($value, $mixed...)      {@include vr-property-multi(margin, join($value, $mixed));}
-  @mixin padding($value, $mixed...)     {@include vr-property-multi(padding, join($value, $mixed));}
-
-// temporary
-%vr-grid {
-  background-image: linear-gradient(rgba(0,0,0,0.1) 0px, transparent 1px);
-  background-size: 100% #{$vr-line-height}rem;
-  background-repeat: repeat;
-  background-position: top left;
-  //@include clearfix();
-  //background-position: 0 1.3rem; //only for leveling
-}

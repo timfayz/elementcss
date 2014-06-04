@@ -1,7 +1,36 @@
+// Index getter
+// ------------------------------
+// Returns the positions of a values within a list-1
+@function indexes($list-1, $list-2) {
+  $output: () !global;
+
+  @each $value-of-2 in $list-2 {
+    $output: append($output, index($list-1, $value-of-2)) !global;
+  }
+
+  @return $output;
+}
+
+// Nth getter
+// ------------------------------
+// Returns a specific items in a list-1 by list of indexes
+@function nths($list, $indexes) {
+  $output: () !global;
+
+  @each $index in $indexes {
+    @if $index {
+      $output: append($output, nth($list, $index)) !global;
+    }
+  }
+
+  @return $output;
+}
+
 // List Filter
 // ------------------------------
-// filter list 1 or filter list 2 by list 1
-@function list-filter($list-1, $list-2:null)
+// excludes null values from list 1 or from both list 1 and 2
+// (second list's values excludes according to list 1)
+@function filter-list($list-1, $list-2:null)
 {
   $i: 1 !global;
   $output: () !global;
@@ -21,9 +50,41 @@
   @return $output;
 }
 
+// Map Filter
+// ------------------------------
+// excludes null values from map 1 or from both list 1 and 2
+// (second map's values excludes according to map 1)
+@function filter-map($map-1, $map-2:null)
+{
+  $i: 1 !global;
+  $output: () !global;
+  @while $i <= length($map-1) {
+    $array: nth($map-1, $i);
+    $key: nth($array, 1);
+    $value: nth($array, 2);
+
+    @if $key!=null and $value!=null {
+      @if $map-2 {
+        $array: nth($map-2, $i);
+        $key: nth($array, 1);
+        $value: nth($array, 2);
+
+        $output: map-merge($output, ($key: $value)) !global;
+      }
+      @else {
+        $output: map-merge($output, ($key: $value)) !global;
+      }
+    }
+
+    $i: $i + 1 !global;
+  }
+
+  @return $output;
+}
+
 // Exclude one value from list
 // ------------------------------
-@function exclude-from($list, $value:null)
+@function exclude-value($list, $value:null)
 {
   $output: () !global;
   @if $value {
@@ -42,14 +103,14 @@
 
 // Computes the difference of lists
 // ------------------------------
-// subtract list 2 from list 1
+// subtract list-2 from list-1
 @function diff-list($list-1, $list-2:null)
 {
   @if $list-2 {
     @each $val-of-first in $list-1 {
       @each $val-of-second in $list-2 {
         @if $val-of-first == $val-of-second {
-          $list-1: exclude-from($list-1, $val-of-first);
+          $list-1: exclude-value($list-1, $val-of-first);
         }
       }
     }
@@ -61,37 +122,9 @@
   }
 }
 
-// Search Value in list
-// ------------------------------
-// check if value exists in list
-@function in-list($value, $list)
-{
-  @if $list and length($list) > 0 {
-    $z: 1 !global;
-    @while $z <= length($list) {
-      $array_value: nth($list, $z);
-      $check: false !default;
-
-      @if $array_value == $value or $array_value == all {
-        $check: true;
-      }
-
-      //on the last cycle
-      @if $check or $z == length($list) {
-        @return $check;
-      }
-
-      $z: $z + 1 !global;
-    }
-  }
-  @else {
-    @return false;
-  }
-}
-
 // List Reordering
 // ------------------------------
-// reverse list oreder
+// reverse list order
 @function reverse-list($list)
 {
   $reverse-list: () !global;
@@ -107,198 +140,68 @@
 // Dash Appender
 // ------------------------------
 // just append dash to value
-@function append-dash($value)
+@function append-dash($value:null)
 {
-  $value: if($value, unquote("#{$value}-"), null);
-  @return $value;
+  @return if($value, unquote('#{$value}-'), null);
+}
+// Dash Appender (with validation)
+// Appends dash if value not equal to $exception
+@function _($device:null, $exception:default) {
+  @return if($device==$exception, null, append-dash($device));
 }
 
 // Dash Prepender
 // ------------------------------
 // just prepend dash to value
-@function prepend-dash($value)
+@function prepend-dash($value:null)
 {
-  $value: if($value, unquote("-#{$value}"), null);
-  @return $value;
+  @return if($value, unquote("-#{$value}"), null);
 }
-
+// Dash Prepender (with validation)
+// Prepends dash if value not equal to $exception
+@function __($device:null, $exception:default) {
+  @return if($device==$exception, null, prepend-dash($device));
+}
 
 // Grid Settings Calculator
 // ------------------------------
-// @param
-// @param
-// @return
-@function calc-grid ($columns, $method, $mixed, $type: padding-based)
+// $columns - number of grid columns
+// $calc-method - method based on what will be made calculation
+// $calc-data - input data for calculation according to selected method
+// @return list of 1:columns number, 2:column width, 3:gap width
+@function grid-params($columns, $calc-method, $calc-data)
 {
   $column: null;
   $gap: null;
 
   // Gaps By Padding
-  @if $type==padding-based and $method==gap {
-    $gap: $mixed;
-
-    $column: 100% / $columns;
-    $gap: $gap/2;
-  }
-  @else if $type==padding-based and $method==column {
-    $ratio: $mixed;
-
-    $column: 100% / $columns;
-    $gap: (100% - ($ratio * $columns)) / $columns;
-  }
-  @else if $type==padding-based and $method==column-gap {
-    $px-column: nth($mixed,1);
-    $px-gap: nth($mixed,2);
+  @if $calc-method==column-gap {
+    $px-column: nth($calc-data,1);
+    $px-gap: nth($calc-data,2);
     $px-row: ($columns * $px-column) + ($px-gap * ($columns - 1));
     $percent-gap: percentage($px-gap/$px-row);
 
     $column: 100% / $columns;
     $gap: $percent-gap/2;
   }
+  @else if $calc-method==gap {
+    $gap: $calc-data;
 
-  // Gaps by Margin
-  // (deprecated)
+    $column: 100% / $columns;
+    $gap: $gap/2;
+  }
+  @else if $calc-method==column {
+    $ratio: $calc-data;
 
-  // Gapless calculation
-  // (deprecated)
-
-
-  @return ($column, $gap, $columns); //+$type
-}
-
-
-// Screen List Divider
-// ------------------------------
-$break-polarity: right !default;
-@function break-list($return, $screen-list, $breakpoint, $additional-list:null)
-{
-  //redefine and exclude null values
-  $screen-list: list-filter($screen-list);
-  $additional-list: list-filter($screen-list, $additional-list);
-
-  //define source to work with
-  $values-list: if($additional-list, $additional-list, $screen-list);
-
-  $breakpoint: if($break-polarity==right, $breakpoint - 1px, $breakpoint + 1px);
-
-
-  //divide input value list into two list according to breakpoint
-  $i: 1 !global;
-  $values-before: ();
-  $values-after: ();
-  @while $i <= length($screen-list) {
-    @if nth($screen-list, $i) < $breakpoint {
-      $values-before: append($values-before, nth($values-list, $i));
-    }
-    @if nth($screen-list, $i) > $breakpoint {
-      $values-after: append($values-after, nth($values-list, $i));
-    }
-
-    $i: $i + 1 !global;
+    $column: 100% / $columns;
+    $gap: (100% - ($ratio * $columns)) / $columns;
   }
 
-  //reverse sequence for using in styles
-  $values-before: reverse-list($values-before);
+  // Gaps by Margin (deprecated)
 
-  @if $return == before {@return $values-before}
-  @if $return == after {@return $values-after}
-  @if $return == after-before {@return ($values-after, $values-before)}
-  @if $return == united {@return join($values-after, $values-before)}
-}
+  // Gapless (deprecated)
 
-// Media Query Range Generator
-// ------------------------------
-// opened - bounded range
-// closed - unbounded range
-// @return media query according to input screen
-@function get-media($type, $screen-width, $screen-list, $breakpoint)
-{
-  //get two lists of arranged screens in accordance with breakpoint
-  $screen-list: break-list(after-before, $screen-list, $breakpoint);
-  $screens-after-break: nth($screen-list, 1);
-  $screens-before-break: nth($screen-list, 2);
-
-  //redefine breakpoint according to break polarity
-  $breakpoint: if($break-polarity == right, $breakpoint - 1px, $breakpoint + 1px);
-
-  //define polarity according to polarity
-  $polarity:           if($screen-width > $breakpoint, min, max);
-  $polarity-opposite:  if($screen-width > $breakpoint, max, min);
-
-  //add or subtract 1px at the junction of screens
-  $px: if($screen-width > $breakpoint, -1, 1);
-
-  //define final screen list where placed input screen
-  $screens: if($screen-width > $breakpoint, $screens-after-break, $screens-before-break);
-
-  $i: 1 !global;
-  @while $i <= length($screens) {
-    $current-screen: nth($screens, $i);
-    $biggest-screen: nth($screens, length($screens));
-    $smallest-screen: nth($screens, 1);
-
-    //within the limits of screen list
-    @if $screen-width == $current-screen {
-
-      @if $type == closed {
-        @if $i < length($screens) or $i > 1 and $i!=length($screens) and length($screens) > 1 {
-          $next-screen: nth($screens, $i + 1);
-          @return '(#{$polarity}-width: #{$current-screen}) and (#{$polarity-opposite}-width: #{$next-screen + $px})';
-        }
-        @else {
-          @return '(#{$polarity}-width: #{$current-screen})';
-        }
-      }
-
-      @else if $type == opened {
-        @return '(#{$polarity}-width: #{$current-screen})';
-      }
-
-      @else if $type==united {
-        @if length($screens-before-break) >= 1 and length($screens-after-break) >= 1  {
-          $last-screen-before: nth($screens-before-break, 1);
-          $first-screen-after: nth($screens-after-break, 1);
-
-          @if $break-polarity == left {
-            $polarity:           if($screen-width > $breakpoint, max, min);
-            $polarity-opposite:  if($screen-width > $breakpoint, min, max);
-            $px: if($screen-width > $breakpoint, 1, -1);
-          }
-
-          @return
-            '(#{$polarity-opposite}-width: #{$first-screen-after + $px}) and (#{$polarity}-width: #{$last-screen-before - $px})';
-        }
-        @if length($screens-before-break) == 0  {
-          $needed-screen: nth($screens-after-break, 1);
-          @return '(#{$polarity-opposite}-width: #{$needed-screen + $px})';
-        }
-        @if length($screens-after-break) == 0 {
-          $needed-screen: nth($screens-before-break, 1);
-          @return '(#{$polarity-opposite}-width: #{$needed-screen + $px})';
-        }
-
-      }
-    }
-
-    //within the limits of screen list
-    //      @else {
-    //        @if $type == closed {
-    //          @if $i < length($screens) or $i > 1 and $i!=length($screens) and length($screens) > 1 and $current-screen <= $smallest-screen  {
-    //            $next-screen: nth($screens, $i + 1);
-    //            @return '(#{$polarity}-width: #{$screen-width}) and (#{$polarity-opposite}-width: #{$next-screen + $px})';
-    //          }
-    //          @else {
-    //            @return '(#{$polarity}-width: #{$screen-width})';
-    //          }
-    //        }
-    //        @else if $type == opened {
-    //          @return '(#{$polarity}-width: #{$screen-width})';
-    //        }
-    //      }
-
-    $i: $i + 1 !global;
-  }
-
+  @return ($columns, $column, $gap);
 }
 
 // Remove Value's Unit
@@ -325,34 +228,32 @@ $break-polarity: right !default;
 
 // Unit Converter
 // --------------
-@function _tounit($value, $unit: none, $pixel-size: 16px, $ppi-ratio: 72/96) {
-  $pixel-size: ununit($pixel-size);
+@function _tounit($value, $unit: null, $pixel-size: 16, $ppi-ratio: 72/96) {
 
-  @if $unit != none {
-    //PERCENT TO UNIT
-    @if unit($value) == '%' {
-      $value: round($value * $pixel-size/100) / ($pixel-size/100);
-      @if $unit == '%'              { @return $value; }
-      @if $unit == 'px'             { @return setunit($value * $pixel-size/100, px); }
-      @else if $unit == 'pt'        { @return setunit($value * $pixel-size/100 * $ppi-ratio, pt); }
-      @else if $unit == 'em'        { @return setunit($value / 100, em); }
-      @else if $unit == 'rem'       { @return setunit($value / 100, rem); }
-      @else if $unit == 'unitless'  { @return setunit($value / 100); }
-    }
+  @if $unit {
       //PX TO UNIT
-    @else if unit($value) == 'px' {
-      //$value: round($value); //?
+    @if unit($value) == 'px' {
       @if $unit == '%'              { @return setunit($value * 100 / $pixel-size, '%'); }
-      @if $unit == 'px'             { @return $value; }
+      @else if $unit == 'px'        { @return $value; }
       @else if $unit == 'pt'        { @return setunit($value * $ppi-ratio, pt); }
       @else if $unit == 'em'        { @return setunit($value / $pixel-size, em); }
       @else if $unit == 'rem'       { @return setunit($value / $pixel-size, rem); }
       @else if $unit == 'unitless'  { @return setunit($value / $pixel-size); }
     }
+    //PERCENT TO UNIT
+    @else if unit($value) == '%' {
+      $value: round($value * $pixel-size/100) / ($pixel-size/100);
+      @if $unit == '%'              { @return $value; }
+      @else if $unit == 'px'        { @return setunit($value * $pixel-size/100, px); }
+      @else if $unit == 'pt'        { @return setunit($value * $pixel-size/100 * $ppi-ratio, pt); }
+      @else if $unit == 'em'        { @return setunit($value / 100, em); }
+      @else if $unit == 'rem'       { @return setunit($value / 100, rem); }
+      @else if $unit == 'unitless'  { @return setunit($value / 100); }
+    }
       //EM, REM, UNITLESS TO UNIT
     @else if unit($value) == 'em' or unit($value) == 'rem' or unitless($value) {
       @if $unit == '%'              { @return setunit(ununit($value) * 100, '%'); }
-      @if $unit == 'px'             { @return setunit($value * $pixel-size, px); } //round?
+      @else if $unit == 'px'        { @return setunit($value * $pixel-size, px); } //round?
       @else if $unit == 'pt'        { @return setunit(ununit($value) * $pixel-size * $ppi-ratio, pt); }
       @else if $unit == 'em'        { @return setunit($value, em); }
       @else if $unit == 'rem'       { @return setunit($value, rem); }
@@ -361,20 +262,26 @@ $break-polarity: right !default;
       //PT TO UNIT
     @else if unit($value) == 'pt' {
       @if $unit == '%'              { @return setunit(ununit($value) / $ppi-ratio * 100/ununit($pixel-size), '%'); }
-      @if $unit == 'px'             { @return setunit(round($value / $ppi-ratio), px); }
+      @else if $unit == 'px'        { @return setunit(round($value / $ppi-ratio), px); }
       @else if $unit == 'pt'        { @return $value; }
       @else if $unit == 'em'        { @return setunit(ununit($value) / $ppi-ratio / $pixel-size, em); }
       @else if $unit == 'rem'       { @return setunit(ununit($value) / $ppi-ratio / $pixel-size, rem); }
       @else if $unit == 'unitless'  { @return setunit(ununit($value) / $ppi-ratio / $pixel-size); }
     }
+    @else {
+      @return $value;
+    }
   }
-  @else if $unit == none {
-    @return ununit($value);
+  @else {
+    @return $value;
+    //@return ununit($value);
   }
 }
 
 //trick to get always integer pixel value at the end of browser rendering
-@function tounit($value, $unit: none) {
-  @return _tounit(round(_tounit($value, px)), $unit)
-  //  @return _tounit($value, $unit);
+//@todo add $round option to get this trick
+//@todo exclude pt?
+@function tounit($value, $unit: null) {
+  @return _tounit(round(_tounit($value, px)), $unit); //on (slow)
+//  @return _tounit($value, $unit); //off (speedup)
 }
