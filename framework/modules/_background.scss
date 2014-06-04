@@ -1,0 +1,39 @@
+@import '../_globals.scss';
+@import '../_naming.scss';
+@import '../_functions.scss';
+@import '../_mixins.scss';
+
+// Default Variables
+// --------------------------------------------------
+  $background: false !default;
+
+  $background-exclude: false !default;
+  $background-include: diff-list((
+    background-color, background-size, background
+    ), $background-exclude) !default;
+
+  $background-set:        () !default;
+  $background-color-set:  () !default;
+  $background-size-set:   () !default;
+
+// Mixins
+// --------------------------------------------------
+
+
+// Output Styles
+// --------------------------------------------------
+@if $background or $background==static {
+
+  @if in-list(background, $background-include) {
+    @include property(background, $Background, $background-set);
+  }
+
+  @if in-list(background-color, $background-include) {
+    @include property(background-color, $Background-color, $background-color-set);
+  }
+
+  @if in-list(background-size, $background-include) {
+    @include property(background-size, $Background-size, $background-size-set);
+  }
+
+} $background: false;

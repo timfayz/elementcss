@@ -1,0 +1,190 @@
+@import '../_globals.scss';
+@import '../_naming.scss';
+@import '../_functions.scss';
+@import '../_mixins.scss';
+@import '../_vr.scss';
+
+// Default Variables
+// --------------------------------------------------
+  $text: false !default;
+
+  $text-exclude: false !default;
+  $text-include: diff-list((
+    line-height,
+    color, word-spacing, word-breaking, white-space,
+    text-align, text-transform, text-decoration, text-rendering, text-shadow,
+    font-family, font-size, font-style, font-weight
+    ), $text-exclude) !default;
+
+  // Word Spacing
+  $text-word-spacing-set: () !default;
+  $text-word-spacing-set-default: () !default;
+
+  // Color
+  $text-color-set:        () !default;
+  $text-color-set-default: () !default;
+
+  // Text-Transform
+  $text-transform-set: () !default;
+  $text-transform-set-default:
+    upper, uppercase,
+    lower, lowercase,
+    capital, capitalize
+    !default;
+
+  // Text-Decoration
+  $text-decoration-set: () !default;
+  $text-decoration-set-default:
+    underline, underline,
+    through, line-through
+    !default;
+
+  // Text-shadow
+  $text-shadow-set: () !default;
+  $text-shadow-set-default: () !default;
+
+  // Line-height
+  $text-line-height-set: () !default;
+  $text-line-height-set-default:
+    def, $size-default,
+    xxsm, $size-xxsm,
+    xsm, $size-xsm,
+    sm, $size-sm,
+    md, $size-md,
+    lg, $size-lg,
+    xlg, $size-xlg,
+    xxlg, $size-xxlg !default;
+
+  // Font-Size
+  $text-font-size-set:  () !default;
+  $text-font-size-set-default:
+    def, $font-size-default,
+    xxsm, $font-size-xxsm,
+    xsm, $font-size-xsm,
+    sm, $font-size-sm,
+    md, $font-size-md,
+    lg, $font-size-lg,
+    xlg, $font-size-xlg,
+    xxlg, $font-size-xxlg !default;
+
+  // Font-Family
+  $text-font-family-set: () !default;
+  $text-font-family-set-default: () !default;
+
+  // Font-Weight
+  $text-font-weight-set: () !default;
+  $text-font-weight-set-default:
+    normal, normal,
+    bold, bold
+    !default;
+
+  // Font-Style
+  $text-font-style-set: () !default;
+  $text-font-style-set-default:
+    italic, italic,
+    normal, normal
+    !default;
+
+
+
+// Output Styles
+// --------------------------------------------------
+@if $text or $text == static {
+
+  // Font-Family
+  @if in-list(font-family, $text-include) {
+    @include property(font-family, $Font-family, $text-font-family-set-default);
+    @include property(font-family, $Font-family, $text-font-family-set);
+  }
+
+  // Font-Size
+  @if in-list(font-size, $text-include) {
+    @include property(font-size, $Font-size, $text-font-size-set-default);
+    @include property(font-size, $Font-size, $text-font-size-set);
+  }
+
+  // Line-Height
+  @if in-list(line-height, $text-include) {
+    @include property(line-height, $Line-height, $text-line-height-set-default);
+    @include property(line-height, $Line-height, $text-line-height-set);
+  }
+
+  // Font-Weight
+  @if in-list(font-weight, $text-include) {
+    @include property(font-weight, $Font-weight, $text-font-weight-set-default);
+    @include property(font-weight, $Font-weight, $text-font-weight-set);
+  }
+
+  // Font-Weight
+  @if in-list(font-weight, $text-include) {
+    @include property(font-style, $Font-style, $text-font-style-set-default);
+    @include property(font-style, $Font-style, $text-font-style-set);
+  }
+
+  // Text-Decoration
+  @if in-list(text-decoration, $text-include) {
+    @include property(text-decoration, $Text-decoration, $text-decoration-set-default);
+    @include property(text-decoration, $Text-decoration, $text-decoration-set);
+  }
+
+  // Text-Transform
+  @if in-list(text-transform, $text-include) {
+    @include property(text-transform, $Text-transform, $text-transform-set-default);
+    @include property(text-transform, $Text-transform, $text-transform-set);
+  }
+
+  // Text-Shadow
+  @if in-list(text-shadow, $text-include) {
+    @include property(text-shadow, $Text-shadow, $text-shadow-set-default);
+    @include property(text-shadow, $Text-shadow, $text-shadow-set);
+  }
+
+  // Color
+  @if in-list(color, $text-include) {
+    @include property(color, $Color, $text-color-set-default);
+    @include property(color, $Color, $text-color-set);
+  }
+
+  // Text-Align
+  @if in-list(text-align, $text-include) {
+    .#{$Text-align}right   {text-align:right;}
+    .#{$Text-align}left    {text-align:left;}
+    .#{$Text-align}center  {text-align:center;}
+    .#{$Text-align}justify {text-align:justify;}
+  }
+
+
+  // White-Space
+  @if in-list(white-space, $text-include) {
+    .#{$White-space}pre       {white-space:pre;}
+    .#{$White-space}pre-wrap  {white-space:pre-wrap;}
+    .#{$White-space}pre-line  {white-space:pre-line;}
+    .#{$White-space}nowrap    {white-space:nowrap;}
+    .#{$White-space}clip      {white-space:nowrap;overflow:hidden;text-overflow:clip;}
+    .#{$White-space}ellipsis  {white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  }
+
+  // Word-Wrap and Word-Break
+  @if in-list(word-breaking, $text-include) {
+    .#{$Word-wrap}wrap       {word-wrap:break-word;}
+    .#{$Word-wrap}normal     {word-wrap:normal;}
+    .#{$Word-break}break     {word-break:break-all;}
+    .#{$Word-break}keep      {word-break:keep-all;}
+    //todo: .text-break, .text-nobreak etc
+  }
+
+  // Word-Spacing
+  @if in-list(word-spacing, $text-include) {
+    @include property(word-spacing, $Word-spacing, $text-word-spacing-set-default);
+    @include property(word-spacing, $Word-spacing, $text-word-spacing-set);
+  }
+
+  // Text-Rendering
+  @if in-list(text-rendering, $text-include) {
+    .#{$Text-rendering}smooth     {}
+    .#{$Text-rendering}legibility {text-rendering:optimizeLegibility; }
+    .#{$Text-rendering}speed      {text-rendering:optimizeSpeed; }
+  }
+
+
+} $text: false;
