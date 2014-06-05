@@ -39,7 +39,7 @@ $grid-calc-data: ( //grid parameters
     calc-method: gap,
     calc-data: 1.5%,
   ) !default;
-@import 'element/framework/modules/grid.scss';
+@import 'element/framework/modules/grid.scss'; // Надо не забыть /path/to/element. 
 
 
 // Utilities Module
