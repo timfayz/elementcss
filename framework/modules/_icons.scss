@@ -41,11 +41,11 @@
       margin-left:0.4em;
     }
 
-    @if $modernizr {
+    //@if $_modernizr {
       .no-fontface .prefix-#{$icons-prefix}:before,
       .no-fontface .postfix-#{$icons-prefix}:after
       {display:none;}
-    }
+    //}
   }
 
   $f: 1;
