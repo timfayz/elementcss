@@ -28,7 +28,7 @@ $_media:
 // Normalize Module
 // ------------------
 $normalize: true;
-@import 'element/framework/modules/normalize.scss';
+@import 'path/to/element/framework/modules/normalize.scss';
 
 
 // Grid Module
@@ -39,13 +39,13 @@ $grid-calc-data: ( //grid parameters
     calc-method: gap,
     calc-data: 1.5%,
   ) !default;
-@import 'element/framework/modules/grid.scss';
+@import 'path/to/element/framework/modules/grid.scss';
 
 
 // Utilities Module
 // ------------------
 $utilities: true;
-@import 'element/framework/modules/utilities.scss';
+@import 'path/to/element/framework/modules/utilities.scss';
 
 
 // Properties Module
@@ -95,7 +95,7 @@ $color: //name of variable must match to real css property
 
 //activate module and generate styles under $css-property-name
 $properties: true;
-@import 'element/framework/modules/properties.scss';
+@import 'path/to/element/framework/modules/properties.scss';
 
 // Styles
 // --------------------------------------------
