@@ -58,9 +58,9 @@ $color: //name of variable must match to real css property
 
       //postfix, value,
       black, #333,              //-> .color-black {color:#333;}
-      white, #fff,              //-> .color-black {color:#fff;}
+      white, #fff,              //-> .color-white {color:#fff;}
       //(prefix, postfix), value,
-      (no, black), #fff,        //-> .no_color-black {color:#fff;}
+      (no, black), #fff,        //-> .no_color-black {color:white;}
 
       //('selector before'_'selector after'),
       ('a '_':hover'),
@@ -80,15 +80,15 @@ $color: //name of variable must match to real css property
       //activate auto-prefixing
       prefix,
       black, #333,              //-> .mobile-color-black {color:#333;}
-      green, green,             //-> .mobile-color-black {color:green;}
+      green, green,             //-> .mobile-color-green {color:green;}
       //activate auto-postfixing
       postfix,
       black, #333,              //-> .color-black-mobile {color:#333;}
-      green, green,             //-> .color-black-mobile {color:green;}
+      green, green,             //-> .color-green-mobile {color:green;}
       //deactivate
       unfix,
       black, #333,              //-> .color-black {color:#333;}
-      white, #fff,              //-> .color-white {color:#fff;}
+      white, #fff,              //-> .color-white {color:white;}
     ),
     //}
   );
