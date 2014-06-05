@@ -1,0 +1,102 @@
+/*!
+ * Name:
+ * Version: 
+ * Author:
+ * Author URL: 
+ * Powered by:
+ * ELEMENT | MIT License | github.com/kalopsia/element
+ */
+
+// Global Variables
+// --------------------------------------------
+// define global variables prepended by _
+$_font-size:    16px;
+$_line-height:  1.7;
+$_media-unit: rem;
+$_media:
+  (
+    default:    null,
+    mobile:     (media 'screen and (max-width:' 740px ')'),
+    tablet:     (media 'screen and (max-width:' 1024px ')'),
+    laptop:     (media 'screen and (min-width:' 1366px ')'),
+    landscape:  (media '(orientation: landscape)'),
+    portrait:   (media '(orientation: portrait)'),
+    touch:      ('.touch'),
+  );
+
+
+// Normalize Module
+// ------------------
+$normalize: true;
+@import 'path/to/element/framework/modules/normalize.scss';
+
+
+// Grid Module
+// ------------------
+$grid: true;
+$grid-calc-data: ( //grid parameters
+    columns: 12,
+    calc-method: gap,
+    calc-data: 1.5%,
+  ) !default;
+@import 'path/to/element/framework/modules/grid.scss';
+
+
+// Utilities Module
+// ------------------
+$utilities: true;
+@import 'path/to/element/framework/modules/utilities.scss';
+
+
+// Properties Module
+// ------------------
+// let's take example and line by line explanation:
+$color: //name of variable must match to real css property
+  (
+    //classes without media
+    default: (
+
+      //postfix, value,
+      black, #333,              //-> .color-black {color:#333;}
+      white, #fff,              //-> .color-white {color:#fff;}
+      //(prefix, postfix), value,
+      (no, black), #fff,        //-> .no_color-black {color:white;}
+
+      //('selector before'_'selector after'),
+      ('a '_':hover'),
+      black, #333,              //-> a .color-black:hover {color:#333;}
+      green, green,             //-> a .color-green:hover {color:green;}
+      (a, green--hover), green, //-> a .a_color-green--hover:hover {color:green;}
+
+      //clear selectors
+      (''_''),
+      black, #333,              //-> .color-black {color:#333;}
+    ),
+
+    //classes under media query (see $_media var)
+    //@media screen and (max-width: ...rem) {
+    mobile: (
+      black, #333,              //-> .color-black {color:#333;}
+      //activate auto-prefixing
+      prefix,
+      black, #333,              //-> .mobile-color-black {color:#333;}
+      green, green,             //-> .mobile-color-green {color:green;}
+      //activate auto-postfixing
+      postfix,
+      black, #333,              //-> .color-black-mobile {color:#333;}
+      green, green,             //-> .color-green-mobile {color:green;}
+      //deactivate
+      unfix,
+      black, #333,              //-> .color-black {color:#333;}
+      white, #fff,              //-> .color-white {color:white;}
+    ),
+    //}
+  );
+
+//activate module and generate styles under $css-property-name
+$properties: true;
+@import 'path/to/element/framework/modules/properties.scss';
+
+// Styles
+// --------------------------------------------
+// your own styles

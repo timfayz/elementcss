@@ -9,8 +9,8 @@ $_right: right !default;
 
 // Typography, Vertical Rhythm
 // ---------------------------
+$_font-size:      1rem !default;
 $_line-height:    1.7 !default;
-$_font-size:      1.1rem !default; //
 
 $_font-size-default:   $_font-size !default;
 $_font-size-xxlg:      $_font-size * 6 !default;
@@ -21,7 +21,7 @@ $_font-size-sm:        $_font-size * 1.4 !default;
 $_font-size-xsm:       $_font-size * 0.8 !default;
 $_font-size-xxsm:      $_font-size * 0.6 !default;
 
-$_font-family-sans:    'Open Sans', Helvetica, Arial, sans-serif !default;
+$_font-family-sans:    Helvetica, Arial, sans-serif !default;
 $_font-family-serif:   Georgia, "Times New Roman", Times, serif !default;
 $_font-family-mono:    Monaco, Menlo, Consolas, "Courier New", monospace !default;
 //$_font-family-icons:  map !default; //@todo include several fonts
@@ -42,7 +42,7 @@ $_size-xxsm:     0.25 !default;
 // Responsive Partitioning
 // -------------------------
 $_media: (
-    default:          null,
+    default:    null,
     mobile:     (media 'screen and (max-width:' 740px ')'),
     tablet:     (media 'screen and (max-width:' 1024px ')'),
     laptop:     (media 'screen and (min-width:' 1366px ')'),
@@ -63,7 +63,7 @@ $_z-xsm:      -5 !default;
 
 // Cursor Selection
 // -------------------------
-$_selection-color:     null;
+$_selection-color: null;
 
 // Cursors (?)
 // -------------------------
@@ -71,17 +71,16 @@ $_selection-color:     null;
 $_cursor-default:       default !default;
 $_cursor-pointer:       pointer !default;
 $_cursor-not-allowed:   not-allowed !default;
-$cursor-crosshair:     crosshair !default;
-$cursor-help:          help !default;
-$cursor-move:          move !default;
-$cursor-progress:      progress !default;
-$cursor-text:          text !default;
-$cursor-wait:          wait !default;
-
+$_cursor-crosshair:     crosshair !default;
+$_cursor-help:          help !default;
+$_cursor-move:          move !default;
+$_cursor-progress:      progress !default;
+$_cursor-text:          text !default;
+$_cursor-wait:          wait !default;
 //news
-$cursor-n-resize:    n-resize !default;
-$cursor-s-resize:    s-resize !default;
-$cursor-e-resize:    e-resize !default;
-$cursor-w-resize:    w-resize !default;
-$cursor-sw-resize:   sw-resize !default;
-$cursor-se-resize:   se-resize !default;
+$_cursor-n-resize:    n-resize !default;
+$_cursor-s-resize:    s-resize !default;
+$_cursor-e-resize:    e-resize !default;
+$_cursor-w-resize:    w-resize !default;
+$_cursor-sw-resize:   sw-resize !default;
+$_cursor-se-resize:   se-resize !default;
