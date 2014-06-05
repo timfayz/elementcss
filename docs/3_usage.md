@@ -41,7 +41,7 @@ main.scss
 element
 ```
 
-Lets explore line by line a very basic usage which is the basis of ``app-minimal/main.scss``:
+Lets explore line by line a very basic usage which is the basis of ``app-minimal/main.scss``: **(remake!)**
 
 ```SCSS
 // 1. Make short description of your project. This is special comment block that gives strangers
@@ -81,9 +81,9 @@ $_font-size:           100%;
 $normalize: true;
 
 
-// 4. Generate necessary classes.
+// 4. Define necessary classes and parameters by variables.
 
-// Generating Classes
+// Define Classes
 // ------------------
 // Uncomment/comment necessary variables to make appropriate module work. This is necessary, because
 // they doesn't active by default.
@@ -102,7 +102,7 @@ $grid-calc-data: (
 //$utilities: true;
 //$icons: true;
 
-// Now we need to import modules that we have activated.
+// Now we need to import modules that we have activated and generate content.
 // You can import the whole bunch of modules via "_all.scss" file which is simple shortcut importing all files
 // within 'framework/modules' folder:
 @import 'element/framework/modules/_all.scss';
