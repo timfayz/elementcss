@@ -75,7 +75,7 @@
       }
     }
     @else {
-      #{$string} {
+      #{$string} & {
         @content;
       }
     }
@@ -94,6 +94,7 @@
 @mixin property($property, $property-shortcut, $list, $device:null)
 {
   $device-prefix: null;
+  $device-postfix: null;
   $class-prefix: null;
   $class-postfix: null;
   $selector-before: (null);
@@ -103,14 +104,22 @@
   @while $i <= length($list) {
 
     $initial-value: nth($list, $i);
-    // Autoprefixing
+    // step _
     // --------
+    // prepend/append/clean device name
     @if $initial-value == prefix {
       $device-prefix:_($device);
+      $device-postfix:null;
       $i: $i + 1 !global;
     }
-    @else if $initial-value == unprefix {
+    @if $initial-value == postfix {
       $device-prefix:null;
+      $device-postfix:__($device);
+      $i: $i + 1 !global;
+    }
+    @else if $initial-value == unfix {
+      $device-prefix:null;
+      $device-postfix:null;
       $i: $i + 1 !global;
     }
 
@@ -156,7 +165,7 @@
     // ------
     // construct class
     $selector:
-      #{$selector-before}#{'.'}#{$device-prefix}#{$class-prefix}#{$property-shortcut}#{$class-postfix}#{$selector-after};
+      #{$selector-before}#{'.'}#{$device-prefix}#{$class-prefix}#{$property-shortcut}#{$class-postfix}#{$device-postfix}#{$selector-after};
 
     #{$selector} {
       $value: $property-value;
