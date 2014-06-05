@@ -7,7 +7,7 @@
 
 SASS unlike CSS allows us to make separate files and combine them into something single. One of the ideas of ELEMENT is to include and generate exactly what you need and what you want. That is why we have a big amount of logically separated modules.
 
-**Module** is a little piece of code that generates logically related classes, @media rules, tag styles etc. For example, ``generate/_grid.scss`` generates in accordance with your settings something like this: ``.container``, ``.row``, ``.column-1``, ``.column-2`` and so on. Thus you need to define necessary variables before importing desired module(s) to overwrite default settings. For example:
+**Module** is a little piece of code that generates logically related classes, @media rules, tag styles etc. For example, ``modules/_grid.scss`` generates in accordance with your settings something like this: ``.container``, ``.row``, ``.column-1``, ``.column-2`` and so on. Thus you need to define necessary variables before importing desired module(s) to overwrite default settings. For example:
 ```SCSS
 // activate module
 $grid: true;
@@ -16,27 +16,32 @@ $grid-excludes: column-offset, column-push, column-pull;
 // set 12 column grid
 $grid-columns-number: 12;
 // import and generate
-@import 'path/to/framework/generate/_grid.scss';
+@import 'path/to/framework/modules/_grid.scss';
+//or
+//@import 'path/to/framework/modules/grid.scss'; //shorthand
+//or
+//@import 'path/to/framework/modules/grid'; //shorthand
 ```
+I remind you that
 All available options you can find in the module itself (*Default Variables* section).
 
 If you want to understand what is in the module itself and what exactly means the *unified structure* go to the following pages in this sequence:
 - [basic module usage](https://github.com/kalopsia/element/blob/master/docs/module/0_module-basic-usage.scss)
 - [advanced module usage](https://github.com/kalopsia/element/blob/master/docs/module/1_module-advanced-usage.scss)
-- [small module example](https://github.com/kalopsia/element/blob/master/docs/module/2_module-example.scss)
+- [simple module example](https://github.com/kalopsia/element/blob/master/docs/module/2_module-example.scss)
 
 ##Creating Project Styles
 
-Lets imagine we need to create a simple web app that must be responsible, vertical synchronized and ...
+Lets imagine we need to create a simple web app that must be responsible, has beautiful typography.
 
 First of all we need to choose template under ``templates/app-*`` folder where do we start. As you are newbie we choose ``app-minimal`` template. Copy and paste contents of the ``templates/app-minimal`` near to the whole *element* folder. From now on we have a structure as follows:
 
 ```
-styles.scss
+main.scss
 element
 ```
 
-Lets explore line by line a very basic usage which is the basis of ``app-minimal/styles.scss``:
+Lets explore line by line a very basic usage which is the basis of ``app-minimal/main.scss``:
 
 ```SCSS
 // 1. Make short description of your project. This is special comment block that gives strangers
@@ -45,13 +50,14 @@ Lets explore line by line a very basic usage which is the basis of ``app-minimal
 
 /*!
  * Name: Project name
- * Version: 0.9
+ * Version: 0.0
  * Author: Your Name
  * Author URL: yourpage.com
  * Powered by:
  * ELEMENT | MIT License | github.com/kalopsia/element
  * Another Tool | License | project URL
  */
+
 
 // 2. Define/redefine global variables. Here we can dramatically change the base ELEMENT's behavior.
 // We must define them before importing any modules in order to make custom variables work.
@@ -61,72 +67,50 @@ Lets explore line by line a very basic usage which is the basis of ``app-minimal
 
 // Global Variables
 // ----------------
-$line-height:         1.7;
-$font-size:           100%;
+$_line-height:         1.7;
+$_font-size:           100%;
 //etc
 
-// 3. Initiate and normalize all tags. HTML tags within modules are grouped by function as presented
-// at w3schools.com/tags/ref_byfunc.asp page.
 
-// Initiating Tags
+// 3. Initiate and normalize all tags. HTML tags within ``_normalize.scss`` are grouped by function
+// as presented at w3schools.com/tags/ref_byfunc.asp page.
+
+// Normalize
 // ---------------
-// You can delete the variables below, because they are set to true by default. They are presented
-// only in case you need to exclude appropriate range of tags.
-$basic: true;
-$forms: true;
-$lists: true;
-$type: true;
-$links: true;
-$formatting: true;
-$media: true;
-$images: true;
-$polyfills: true;
-$tables: true;
-
-// Import the whole bunch of tag modules via "_all.scss" file which is simple shortcut importing all files
-// within 'framework/initialize' folder:
-@import 'element/framework/initialize/_all.scss';
-// Hence, instead of the line above you can import modules separately:
-// @import 'element/framework/initialize/_basic.scss';
-// @import 'element/framework/initialize/_forms.scss';
-// @import 'element/framework/initialize/_lists.scss';
-// etc
+// just activate module
+$normalize: true;
 
 
 // 4. Generate necessary classes.
 
 // Generating Classes
 // ------------------
-// Uncomment/comment necessary variables to make appropriate module work. There we need explicitly
-// activate appropriate module, because modules under "generate" folder doesn't active by default.
-$positioning: true;
-$displaying: true;
-$opacity: true;
-$dimension: true;
-$indention: true;
-$visibility: true;
-$border: true;
-$text: true;
-$list: true;
-$background: true;
-$shadow: true;
+// Uncomment/comment necessary variables to make appropriate module work. This is necessary, because
+// they doesn't active by default.
+
 // For example, to activate grid system and change some settings we need to make the following:
 $grid: true;
-$grid-columns-number: 10;
-$grid-calc-method:    gap;
-$grid-calc-value:     1%;
+$grid-calc-data: (
+    columns: 12,
+    calc-method: column-gap,
+    calc-data: (60px, 20px),
+) !default;
 // We set 10 column grid system and 1% gap between columns. Other available options you can find
 // within appropriate module.
 
 // Inactive modules
-//$transition: true;
-//$icons: true;
 //$utilities: true;
-//$content: true;
+//$icons: true;
 
-// Now we need to import modules that we have activate. Instead of including modules separately we
-// import the whole bunch. It is the same principle as mentioned previously.
-@import 'element/framework/generate/_all.scss';
+// Now we need to import modules that we have activated.
+// You can import the whole bunch of modules via "_all.scss" file which is simple shortcut importing all files
+// within 'framework/modules' folder:
+@import 'element/framework/modules/_all.scss';
+
+// Hence, instead of the line above you can import modules separately:
+// @import 'element/framework/modules/_grid.scss';
+// @import 'element/framework/modules/_utilities.scss';
+// etc
 
 // The reasons to import modules separately are:
 // - changing the order of generated styles in the flow
@@ -140,4 +124,4 @@ $grid-calc-value:     1%;
 
 ##Creating Module
 
-If you want to create your own module, go to ``templates/module`` folder. It is the basic
+If you want to create your own module, go to ``templates/module`` folder.

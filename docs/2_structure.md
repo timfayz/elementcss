@@ -49,14 +49,16 @@ README.md
 ``README.md`` - brief documentation (pieces of text from main documentation)<br/>
 
 ``*`` - symbol means any file or any name of files<br/>
+``_file-name`` - the fist symbol means file should be compiled into css file and it is just auxiliary or child file (for example of you future project).<br/>
 ``.md`` - extension means that file uses markdown syntax (like wiki markup)<br/>
 ``.scss`` - extension means that file uses SCSS syntax of SASS preprocessor
 
 ##Logic
-ELEMENT has two step to make your app GUI unique:
+ELEMENT has three step to make your app GUI unique:
 
-1. Tags initiating. Appropriate module responsible for particular [category of tags](http://www.w3schools.com/tags/ref_byfunc.asp). For example ``initialize/_forms.scss`` module covers form, legend, input, button, etc. Initiating means tag normalizing and resetting into unified view.
-2. Class generating. After tags are initialized we can generate appropriate classes to make our styling. For example [?]
+1. **Tag initialization (normalize).** The module ``modules/_normalize.scss`` responsible for initiating particular [category of tags](http://www.w3schools.com/tags/ref_byfunc.asp). Hence it covers almost all HTML tags like html, body, form, legend, input, button, etc. Tag initiating or normalizing means resetting tags into unified view between different browsers.
+2. **Typography.** After tags are initiated we can configure typography. The module ``modules/_type.scss`` responsible for this job. What is typography (abbreviated as *type*)? To put it bluntly, we set font-size, font-family, line-height etc in the right place and in the right units.
+3. **Class generating.** The last one we need is generating classes to make our desirable styling.
 
 ##Module
 Module is the most important component of the framework.
