@@ -9,7 +9,6 @@
 
 // Global Variables
 // --------------------------------------------
-// define global variables prepended by _
 $_font-size:    16px;
 $_line-height:  1.7;
 $_media-unit: rem;
@@ -31,78 +30,32 @@ $normalize: true;
 @import 'path/to/element/framework/modules/normalize.scss';
 
 
-// Grid Module
+// Grid System Module
 // ------------------
 $grid: true;
-$grid-calc-data: ( //grid parameters
+$grid-calc-data: (
     columns: 12,
     calc-method: gap,
     calc-data: 1.5%,
-  ) !default;
+  );
 @import 'path/to/element/framework/modules/grid.scss';
 
 
-// Defaults
+// Defaults Module
 // ------------------
-// generate basic predefined styles
-$defaults: true; //you can deactivate generation if necessary
+$defaults: true;
 @import 'path/to/element/framework/modules/defaults.scss';
 
 
 // Classes
 // ------------------
-// one of the key idea in Element is create a big amount of classes where one class corresponds to one
-// CSS property. Let's take example (with line by line explanation) how we can create them easily:
-
-//name of variable should match to real CSS property name
-//it is necessary to improve readability in future
-$color: color //first value "color" defines CSS property on which classes will be based
-(
-  //classes without media query
+$color: color (
   default: (
-
-    //postfix, value,
-    black, #333,              //-> .color-black {color:#333;}
-    white, #fff,              //-> .color-white {color:#fff;}
-    //(prefix, postfix), value,
-    (no, black), #fff,        //-> .no_color-black {color:white;}
-
-    //('selector before'_'selector after'),
-    ('a '_':hover'),
-    black, #333,              //-> a .color-black:hover {color:#333;}
-    green, green,             //-> a .color-green:hover {color:green;}
-    (a, green--hover), green, //-> a .a_color-green--hover:hover {color:green;}
-
-    //clear selectors
-    (''_''),
-    black, #333,              //-> .color-black {color:#333;}
+    black, #000,
+    white, #fff,
   ),
-
-  //classes under media query (see $_media var)
-  //@media screen and (max-width: ...rem) {
-  mobile: (
-    black, #333,              //-> .color-black {color:#333;}
-    //activate auto-prefixing
-    prefix,
-    black, #333,              //-> .mobile-color-black {color:#333;}
-    green, green,             //-> .mobile-color-green {color:green;}
-    //activate auto-postfixing
-    postfix,
-    black, #333,              //-> .color-black-mobile {color:#333;}
-    green, green,             //-> .color-green-mobile {color:green;}
-    //deactivate
-    unfix,
-    black, #333,              //-> .color-black {color:#333;}
-    white, #fff,              //-> .color-white {color:white;}
-  ),
-  //}
 );
-
-//"classes" mixin generates classes in accordance to values and names inside $color variable
-//first argument sets prefix for CSS classes,
-//second argument is what we defined above,
-//third argument is media map which will be used to create CSS classes under media queries;
-@include classes(color-, $color, $_media);
+@include classes($Color, $color, $_media);
 
 // Styles
 // --------------------------------------------

@@ -34,12 +34,7 @@ README.md
 ``framework/_mixins.scss`` - contains all general mixins<br/>
 ``framework/_functions.scss`` - contains all general functions<br/>
 ``framework/_vr.scss`` - contains vertical rhythm mixins and functions that provide vertical synchronization<br/>
-``framework/generate/`` - contains files that generates appropriate classes<br/>
-``framework/generate/_all.scss`` - combine all files in the folder. Just shortcut for including all files easily<br/>
-``framework/generate/_*.scss`` - contains appropriate classes<br/>
-``framework/initialize/`` - contains all files that initiate appropriate tags<br/>
-``framework/initialize/_all.scss`` - combine all files in the folder. Just shortcut for including all files easily<br/>
-``framework/initialize/_*.scss`` - initializes appropriate category of tags<br/>
+``framework/modules/`` - contains logical separated modules<br/>
 ``templates/`` - contains variety of useful templates<br/>
 ``templates/app-minimal/`` - minimal app template<br/>
 ``templates/app-basic/`` - basic app template<br/>
@@ -60,7 +55,7 @@ ELEMENT has three step to make your app GUI unique:
 2. **Typography.** After tags are initiated we can configure typography. The module ``modules/_type.scss`` responsible for this job. What is typography (abbreviated as *type*)? Typography is a process of arranging type into a legible and aesthetic appearance with appropriate layout. To put it bluntly, we include our custom font, setting font-size, font-family, line-height etc in the right place and in the right units to make web type not only beautiful, but also responsible.
 3. **Class generating.** The last one we need is generating classes to bring our desirable styling into reality. At this point the ELEMENT is completely different from other frameworks. The idea is not create structure under your styles, like ``.header``, ``.header__nav``, ``.footer__nav--link`` etc but generate classes at the high level of Object Oriented ideology. To put it simply, create classes like ``.shadow-out``, ``.padding-sm``, ``.border-blue`` and then apply to necessary tags. Yea, it is force you create a huge amount of classes and use them, but at the same time it gives you maximum flexibility and create structure at the server side but not in a stylesheets.
 
-##Module
+##Modules
 Module is the most important component of the framework.
 Each file within the framework folder has unified structure. It makes easier to read existing files (modules) and create new one. You can get initial module template under [templates/module](https://github.com/kalopsia/element/tree/master/templates/module) folder. Line by line explanation and its brief using example you can find under [docs/module](https://github.com/kalopsia/element/tree/master/docs/module) directory.
 
