@@ -26,11 +26,11 @@
     .prefix-#{$icons-prefix},
     .postfix-#{$icons-prefix} {
       font-family: $icons-font-name;
-      speak: none;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
       text-transform: none;
       vertical-align: middle;
+      //speak: none;
     }
     .prefix-#{$icons-prefix}:before {
       content:attr(title);
@@ -41,11 +41,15 @@
       margin-left:0.4em;
     }
 
-    //@if $_modernizr {
-      .no-fontface .prefix-#{$icons-prefix}:before,
-      .no-fontface .postfix-#{$icons-prefix}:after
-      {display:none;}
-    //}
+    .no-fontface {
+      .prefix-#{$icons-prefix}:before,
+      .postfix-#{$icons-prefix}:after,
+      [class^="#{$icons-prefix}-"],
+      [class*=" #{$icons-prefix}-"]
+      {
+        display:none;
+      }
+    }
   }
 
   $f: 1;
