@@ -41,7 +41,7 @@ main.scss
 element
 ```
 
-Lets explore line by line a very basic usage which is the basis of ``app-minimal/main.scss``: **(remake!)**
+Lets explore line by line a very basic usage which is the basis of ``app-minimal/main.scss``:
 
 ```SCSS
 // 1. Make short description of your project. This is special comment block that gives strangers
@@ -67,7 +67,7 @@ Lets explore line by line a very basic usage which is the basis of ``app-minimal
 
 // Global Variables
 // --------------------------------------------
-// define global variables prepended by _
+// Define global variables prepended by _
 $_font-size:    16px;
 $_line-height:  1.7;
 $_media-unit: rem; //converts media values within $_media into the rem unit
@@ -92,16 +92,17 @@ $_media:
 
 // Normalize Module
 // -----------------
-// Normalize initiates and normalize all tags. HTML tags within ``_normalize.scss`` are grouped by function
-// as presented at w3schools.com/tags/ref_byfunc.asp page.
+// Normalize initiates and normalize all tags. HTML tags within ``_normalize.scss`` are grouped by
+// function as presented at w3schools.com/tags/ref_byfunc.asp page.
 $normalize: true; //this line isn't necessary, because all modules active by default
 @import 'path/to/element/framework/modules/normalize.scss'; //import module
 
 
 // Grid System Module
 // --------------------
-// Grid system creates layout of all HTML elements. If you need to change grid settings make the following:
+// Grid system creates layout of all HTML elements.
 $grid: true;
+// If you need to change grid settings make the following:
 $grid-calc-data: (
     columns: 12,
     calc-method: gap,
@@ -114,20 +115,21 @@ $grid-calc-data: (
 
 // Defaults Module
 // -----------------
-// generate the basic predefined styles. For more information see the source code
+// Generate the basic predefined styles. For more information see the source code
 $defaults: true;
 @import 'path/to/element/framework/modules/defaults.scss';
 
 
-// 4. Creating low level classes. Low level abstraction means that one class contains only one CSS property.
-// It sounds crazy but it works! This is one of the key ELEMENT's concepts. Due to
-// big amount of low level classes we get unprecedented flexibility and uniqueness in building design.
+// 4. Creating low level classes. Low level abstraction means one class contains only one CSS property.
+// It sounds crazy but it works! This is one of the key ELEMENT's concepts. Due to big amount of low
+// level classes we get unprecedented flexibility and uniqueness in building design.
 
 // Classes
 // ------------------
-// Let's take example with line by line explanation how we can create them easily:
+// Let's take example how we can create them easily with line by line explanation:
 
-//name of variable should match to real CSS property name it is necessary to improve readability in a future
+//name of variable should match to real CSS property name
+//it is necessary to improve readability in a future
 $color: color //first value "color" defines CSS property on which classes will be based
 (
   //classes without media query
