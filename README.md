@@ -26,6 +26,7 @@ Otherwise you will experience difficulties in understanding principles of work a
 1. [Installation](https://github.com/kalopsia/element/blob/master/docs/1_installation.md)<br/>
 2. [Structure](https://github.com/kalopsia/element/blob/master/docs/2_structure.md)<br/>
 3. [Usage](https://github.com/kalopsia/element/blob/master/docs/3_usage.md)<br/>
+4. [Conventions](https://github.com/kalopsia/element/blob/master/docs/4_conventions.md)<br/>
 
 
 ##HOW TO PARTICIPATE

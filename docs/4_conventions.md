@@ -73,8 +73,3 @@ Let's look at examples:
 ```
 
 For simplification and standardization many of predefined prefixes for properties are presented in `framework/_naming.scss` file. This file can be imported anywhere and used for creating standardized class names.
-
-
-________
-
-Low level abstracted framework. The first framework allowing to create your own themes.
