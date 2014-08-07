@@ -10,10 +10,10 @@ ELEMENT is free and open-source CSS framework written in SASS that promotes clea
 
 ELEMENT is based on [SASS](http://sass-lang.com/guide) preprocessor. If you use plain CSS to make your styles, you will love preprocessors, particularly SASS.
 
-##Ideology
-The reason to create this project is make something modular, abstract, flexible, logical, community aimed and unique that will differentiate it from other frameworks are existing. Something that doesn't have predefined forms, buttons, block-quotes, lists etc.
-
 ELEMENT allows people to choose what they want and generate what they want. Currently framework allow you to outline your desirable GUI and prototype them via classes. A little bit later we present the ways of doing that.
+
+##Ideology
+The reason to create this project is make something modular, abstract, flexible, logical, community aimed and unique that will differentiate it from other frameworks are existing. Something that doesn't have predefined forms, buttons, block-quotes, lists etc. As a result ELEMENT can be used to create your own themes and absolutely unique styles with a very flexible control mechanism.
 
 ##Features
 

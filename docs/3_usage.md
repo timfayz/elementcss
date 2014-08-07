@@ -173,8 +173,8 @@ $color: color //first value "color" defines CSS property on which classes will b
 );
 
 //"classes" mixin generates classes in accordance to values and names inside $color variable
-//- first argument sets prefix for CSS classes. All variables defining CSS prefixes begin with a capital.
-//  Full list of predefined prefixes you can find under naming.scss file
+//- first argument sets prefix for CSS classes. All variables defining CSS prefixes begin with a
+//  capital. Full list of predefined prefixes you can find under framework/_naming.scss file
 //- second argument is what we defined above.
 //- third argument is media map which will be used to create CSS classes under media queries;
 @include classes($Color, $color, $_media);
