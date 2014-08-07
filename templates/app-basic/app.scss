@@ -1,0 +1,36 @@
+/*!
+ * Name:
+ * Version: 
+ * Authors: Emil & Timur
+ * Author URL: 
+ * Powered by:
+ * ELEMENT | MIT License | github.com/kalopsia/element
+ */
+
+// HELPERS
+// ------------------------------------------------------------
+@import 'helpers/globals.scss';
+@import 'helpers/classes.scss';
+
+
+// BASE
+// ------------------------------------------------------------
+// base folder holds the most basic styles of your GUI
+@import 'base/normalize.scss';
+@import 'base/type.scss';
+@import 'base/grid.scss';
+
+
+// COMPONENTS
+// ------------------------------------------------------------
+// components folder holds logical separated components of your GUI
+//@import 'components/forms.scss';
+//@import 'components/images.scss';
+
+
+// VENDORS
+// ------------------------------------------------------------
+// vendors folder holds any third-party projects
+//@import 'vendors/font-awesome-4.1.0/css/font-awesome.min.css';
+
+
