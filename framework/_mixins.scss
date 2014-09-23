@@ -16,7 +16,7 @@
 
 // Font-Face
 // -------------
-@mixin font-face($font-path, $font-family, $font-weight: null, $font-style:null, $version:null, $svg-font-name:null)
+@mixin font-face($font-family, $font-path, $font-weight: null, $font-style:null, $version:null, $svg-font-name:null)
 {
   $query: if($version,'?v=#{$version}', null);
   @if $svg-font-name {

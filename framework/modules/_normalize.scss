@@ -248,7 +248,8 @@
     font-size: inherit;
     line-height: inherit;
     vertical-align: middle;
-    border:1px solid black;
+    //border:1px solid black;
+    border: 0;
     outline: 0;
   }
 
@@ -355,7 +356,8 @@
     text-align: center;
     vertical-align: middle;
     background: none;
-    border:1px solid black;
+    //border:1px solid black;
+    border: 0;
     outline: none;
   }
 
@@ -402,7 +404,7 @@
     }
     &:hover {
       outline: none;
-      color: inherit;
+      //color: inherit; ?
       cursor: $_cursor-pointer;
     }
     &:active {
