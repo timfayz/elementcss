@@ -29,8 +29,8 @@ README.md
 ``docs/`` - contains ELEMENT's step by step documentation<br/>
 ``docs/module`` - contains module's line by line explanations and usage example<br/>
 ``framework/`` - framework files<br/>
-``framework/_naming.scss`` - contains all class prefixes and names which are used among all files<br/>
-``framework/_globals.scss`` - contains global variables which are used among all files<br/>
+``framework/_naming.scss`` - contains all class prefixes and names which are used<br/>
+``framework/_globals.scss`` - contains global variables which are used<br/>
 ``framework/_mixins.scss`` - contains all general mixins<br/>
 ``framework/_functions.scss`` - contains all general functions<br/>
 ``framework/_vr.scss`` - contains vertical rhythm mixins and functions that provide vertical synchronization<br/>
