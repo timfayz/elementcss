@@ -1,17 +1,17 @@
 // KEYWORDS
 // -------------------------------------
 
-$Default:     def !default;
-$Xxlg:        xxlg !default;
-$Xlg:         xlg !default;
-$Lg:          lg !default;
-$Md:          md !default;
-$Sm:          sm !default;
-$Xsm:         xsm !default;
-$Xxsm:        xxsm !default;
+$Default:     'def' !default;
+$Xxlg:        'xxlg' !default;
+$Xlg:         'xlg' !default;
+$Lg:          'lg' !default;
+$Md:          'md' !default;
+$Sm:          'sm' !default;
+$Xsm:         'xsm' !default;
+$Xxsm:        'xxsm' !default;
 
-$disabled:    disabled !default;
-$readonly:    readonly !default;
+$disabled:    'disabled' !default;
+$readonly:    'readonly' !default;
 
 
 // PROPERTY NAMING
@@ -19,102 +19,108 @@ $readonly:    readonly !default;
 
 // Property's Directions
 // -------------------
-$T:                   't-' !default; //top
-$R:                   'r-' !default; //right
-$B:                   'b-' !default; //bottom
-$L:                   'l-' !default; //left
-$TL:                  'tl-' !default; //top-left
-$TR:                  'tr-' !default; //top-right
-$BR:                  'br-' !default; //bottom-right
-$BL:                  'bl-' !default; //bottom-left
+$T:                   't' !default; //top
+$R:                   'r' !default; //right
+$B:                   'b' !default; //bottom
+$L:                   'l' !default; //left
+$TL:                  'tl' !default; //top-left
+$TR:                  'tr' !default; //top-right
+$BR:                  'br' !default; //bottom-right
+$BL:                  'bl' !default; //bottom-left
 
 // Properties shortcuts
 // -------------------
 
 // Positioning
-$Top:                 'top-' !default;
-$Right:               'right-' !default;
-$Bottom:              'bottom-' !default;
-$Left:                'left-' !default;
+$Top:                 'top' !default;
+$Right:               'right' !default;
+$Bottom:              'bottom' !default;
+$Left:                'left' !default;
 $Position:            null !default;
-$Z-index:             'z-' !default;
-$Vertical-align:      'vertical-' !default;
+$Z-index:             'z' !default;
+$Vertical-align:      'align' !default;
 
 // Content
-$Content:             'content-' !default;
+$Content:             'content' !default;
 
 // Lists
-$List:                'list-' !default;
+$List:                'list' !default;
 $List-style:          $List !default;
 $List-style-type:     $List !default;
 
 // Indention
-$Margin:              'marg-' !default;
-$Margin-top:         #{$Margin}#{$T} !default;
-$Margin-right:       #{$Margin}#{$R} !default;
-$Margin-bottom:      #{$Margin}#{$B} !default;
-$Margin-left:        #{$Margin}#{$L} !default;
+$Margin:              'marg' !default;
+$Margin-top:          #{$Margin}-#{$T} !default;
+$Margin-right:        #{$Margin}-#{$R} !default;
+$Margin-bottom:       #{$Margin}-#{$B} !default;
+$Margin-left:         #{$Margin}-#{$L} !default;
 
-$Padding:             'padd-' !default;
-$Padding-top:         #{$Padding}#{$T} !default;
-$Padding-right:       #{$Padding}#{$R} !default;
-$Padding-bottom:      #{$Padding}#{$B} !default;
-$Padding-left:        #{$Padding}#{$L} !default;
+$Padding:             'padd' !default;
+$Padding-top:         #{$Padding}-#{$T} !default;
+$Padding-right:       #{$Padding}-#{$R} !default;
+$Padding-bottom:      #{$Padding}-#{$B} !default;
+$Padding-left:        #{$Padding}-#{$L} !default;
 
 // Dimension
-$Width:               'width-' !default;
+$Width:               'width' !default;
 $Max-width:           'max-#{$Width}' !default;
 $Min-width:           'min-#{$Width}' !default;
-$Height:              'height-' !default;
+$Height:              'height' !default;
 $Max-height:          'max-#{$Height}' !default;
 $Min-height:          'min-#{$Height}' !default;
 
 // Background
-$Background:          'grad-' !default;
-$Background-color:    'back-' !default;
-$Background-size:     'back-' !default;
+$Background:          'back' !default;
+$Background-color:    '#{$Background}-clr' !default;
+$Background-image:    '#{$Background}-img' !default;
+$Background-size:     #{$Background} !default;
+$Background-repeat:   #{$Background} !default;
 
 // Border
-$Border:              'border-' !default;
-$Border-top:          #{$Border}#{$T} !default;
-$Border-right:        #{$Border}#{$R} !default;
-$Border-bottom:       #{$Border}#{$B} !default;
-$Border-left:         #{$Border}#{$L} !default;
-$Border-radius:       'radius-' !default;
-$Border-top-left-radius:      'radius-#{$TL}' !default;
-$Border-top-right-radius:     'radius-#{$TR}' !default;
-$Border-bottom-right-radius:  'radius-#{$BR}' !default;
-$Border-bottom-left-radius:   'radius-#{$BL}' !default;
+$Border:                      'border' !default;
+$Border-top:                  '#{$Border}-#{$T}' !default;
+$Border-right:                '#{$Border}-#{$R}' !default;
+$Border-bottom:               '#{$Border}-#{$B}' !default;
+$Border-left:                 '#{$Border}-#{$L}' !default;
+$Border-radius:               'radius' !default;
+$Border-top-right-radius:     '#{$Border-radius}-#{$TR}' !default;
+$Border-top-left-radius:      '#{$Border-radius}-#{$TL}' !default;
+$Border-bottom-right-radius:  '#{$Border-radius}-#{$BR}' !default;
+$Border-bottom-left-radius:   '#{$Border-radius}-#{$BL}' !default;
+$Border-top-radius:           '#{$Border-radius}-#{$T}' !default;
+$Border-right-radius:         '#{$Border-radius}-#{$R}' !default;
+$Border-bottom-radius:        '#{$Border-radius}-#{$B}' !default;
+$Border-left-radius:          '#{$Border-radius}-#{$L}' !default;
 
 // Text
-$Line-height:         'line-' !default;
-$Color:               'color-' !default;
-$Font:                'font-' !default;
+$Line-height:         'line' !default;
+$Color:               'color' !default;
+$Font:                'font' !default;
 $Font-family:         $Font !default;
 $Font-size:           $Font !default;
 $Font-weight:         $Font !default;
 $Font-style:          $Font !default;
-$Word:                'word-' !default;
+$Word:                'word' !default;
 $Word-wrap:           $Word !default;
 $Word-break:          $Word !default;
 $Word-spacing:        $Word !default;
-$White-space:         'space-' !default;
-$Text:                'text-' !default;
+$White-space:         'space' !default;
+$Text:                'text' !default;
 $Text-align:          $Text !default;
 $Text-decoration:     $Text !default;
 $Text-transform:      $Text !default;
 $Text-rendering:      $Text !default;
-$Text-shadow:         '#{$Text}sh-' !default;
-$Text-indent:         'indent-' !default;
+$Text-shadow:         '#{$Text}-sh' !default;
+$Text-indent:         'indent' !default;
 
 // Transition
-$Transition:          'animate-' !default;
+$Transition:          'animate' !default;
 
 // Filter
-$Filter:              'filter-' !default;
+$Filter:              'filter' !default;
 
 // Shadow
-$Box-shadow:          'shadow-' !default;
+$Box-shadow:          'shadow' !default;
 
 // Displaying
 $Display:             null !default;
@@ -123,14 +129,14 @@ $Display:             null !default;
 $Visibility:          null !default;
 
 // Opacity
-$Opacity:             'opacity-' !default;
+$Opacity:             'opacity' !default;
 
 // Miliscenios
-$Overflow:            'over-' !default;
-$Overflow-x:          '#{$Overflow}x-' !default;
-$Overflow-y:          '#{$Overflow}y-' !default;
-$Float:               'float-' !default;
-$Cursor:              'cursor-' !default;
+$Overflow:            'over' !default;
+$Overflow-x:          '#{$Overflow}-x' !default;
+$Overflow-y:          '#{$Overflow}-y' !default;
+$Float:               'float' !default;
+$Cursor:              'cursor' !default;
 
 
 

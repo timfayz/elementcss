@@ -86,6 +86,9 @@
 
 }
 
+@function ad($value, $check) {
+  @return if($value, append-dash($value), null);
+}
 // Property generator
 // -------------------------------------
 // $properties - any CSS property(es)
@@ -167,8 +170,9 @@
     // step 3
     // ------
     // construct class
+    $class-shortcut: if($property-shortcut!=null and $class-postfix!=null, '#{$property-shortcut}-', $property-shortcut);
     $selector:
-      #{$selector-before}#{'.'}#{$device-prefix}#{$class-prefix}#{$property-shortcut}#{$class-postfix}#{$device-postfix}#{$selector-after};
+      #{$selector-before}#{'.'}#{$device-prefix}#{$class-prefix}#{$class-shortcut}#{$class-postfix}#{$device-postfix}#{$selector-after};
 
     #{$selector} {
       $value: $property-value;
