@@ -6,12 +6,12 @@
         module/
         *.md
     framework/
-        generate/
-            _all.scss
-            _*.scss
-        initialize/
-            _all.scss
-            _*.scss
+        modules/
+            _default.scss
+            _grid.scss
+            _icons.scss
+            _normalize.scss
+            _type.scss
         _globals.scss
         _naming.scss
         _functions.scss
@@ -32,7 +32,8 @@
 `framework/_mixins.scss` - contains all general mixins<br/>
 `framework/_functions.scss` - contains all general functions<br/>
 `framework/_vr.scss` - contains vertical rhythm mixins and functions that provide vertical synchronization feature<br/>
-`framework/modules/` - contains logical separated modules<br/>
+`framework/modules/` - contains logical separated modules<br/> 
+// наверное надо будет описать все что внутри папки /modules?
 `templates/` - contains variety of useful templates<br/>
 `templates/app-minimal/` - minimal app template<br/>
 `templates/app-basic/` - basic app template<br/>
