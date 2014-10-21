@@ -7,17 +7,16 @@
 3. [Conventions](https://github.com/kalopsia/element/blob/master/docs/4_conventions.md)<br/>
 
 ##Preface
-ELEMENT is free and open-source CSS framework written in SASS that promotes clean, object-oriented design and encourages rapid prototyping. It helps you to create complex and elaborate GUI for the contemporary web applications as well as integrate to existing project. It provides thought-out structure and many other features, like theming. ELEMENT is not just framework, but tool and suit of best practices and the most advanced methods from many professionals to make web more robust and easy.
+ELEMENT is free and open-source CSS framework written in SASS that promotes clean, object-oriented design and encourages rapid prototyping. It helps you to create complex, scalable and elaborate GUI for the contemporary web applications as well as integrate to existing project. It provides thought-out structure and many other features, like theming. ELEMENT is not just framework, but tool and suit of best practices and the most advanced methods from many professionals to make web more robust and easy.
 
 ELEMENT is based on [SASS](http://sass-lang.com/guide) preprocessor. If you use plain CSS to make your styles, you will love preprocessors, particularly SASS.
 
 ELEMENT allows people to choose what they want and generate what they want. Currently framework allow you to outline your desirable GUI and prototype them via classes. A little bit later we present the ways of doing that.
 
 ##Ideology
-The reason to create this project is make something modular, abstract, flexible, logical, community aimed and unique that will differentiate it from other frameworks are existing. Something that doesn't have predefined forms, buttons, block-quotes, lists etc. As a result ELEMENT can be used to create your own themes and absolutely unique styles with a very flexible control mechanism.
+The key reason of ELEMENT was to create framework and principe of writing styles that allows you don't think about "aging" and "clogging" styles. Something that allow you prototype GUI fast like "What You See Is What You Get" editor. It is means that "something" should be modular, abstract, flexible, logical, community aimed and unique that will differentiate it from other frameworks and methods (like OOCSS, ACSS, BEM, SMACSS) are existing. As a result ELEMENT now can be used to create your own themes using known methods (OOCSS, ACSS, BEM) and absolutely unique styles with a very flexible control mechanism. It is worth noting that ELEMENT is not easy to use at the first time, but the better you know ELEMENT, the better you understand the power of this instrument and method of work. It's like freedom in pure form.
 
 ##Features
-
 What the features has ELEMENT? ELEMENT has different structure, abstraction and thus different features:
 * **Fast Prototyping**. Do not think about how to change here and there to make you styles unique. Just generate what you want. Outline what you want to see and start to prototype your own GUI.
 * **Logical class names**. Every class names enforce to general rules. It provides intuitive and easy remembering.
@@ -75,4 +74,4 @@ both will be compiled into
 ##Why SASS and not LESS?
 
 *Skip if you know nothing about LESS.*<br/>
-Originally I was creating ELEMENT in LESS, but sometime later I realized that LESS doesn't have enough features to release necessary and pursued ideas. So I switched to SASS. Now there is no doubt after the release of version 3.3 - SASS become the most advanced preprocessor!
+Originally I was creating ELEMENT in LESS, but sometime later I realized that LESS doesn't have enough features to release necessary and pursued ideas. So I switched to SASS. Now there is no doubt after the release of version 3.3 - SASS become the most advanced CSS preprocessor!
