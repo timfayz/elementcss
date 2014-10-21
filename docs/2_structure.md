@@ -7,7 +7,7 @@
         *.md
     framework/
         modules/
-            _*.scss
+            *.scss
         _globals.scss
         _naming.scss
         _functions.scss
@@ -48,8 +48,10 @@ ELEMENT has three step to make your app GUI unique:
 
 1. **Tag initialization (normalize).** The module ``modules/_normalize.scss`` responsible for initiating particular [category of tags](http://www.w3schools.com/tags/ref_byfunc.asp). Hence it covers almost all HTML tags like html, body, form, legend, input, button, etc. What is normalizing? Tag initiating or normalizing means resetting tags into unified view between different browsers.
 2. **Typography.** After tags are initiated we can configure typography. The module ``modules/_type.scss`` responsible for this job. What is typography (abbreviated as *type*)? Typography is a process of arranging type into a legible and aesthetic appearance with appropriate layout. To put it bluntly, we include our custom font, setting font-size, font-family, line-height etc in the right place and in the right units to make web type not only beautiful, but also responsible.
-3. **Class generating.** The last one we need is generating classes to bring our desirable styling into reality. At this point the ELEMENT is completely different from other frameworks. The idea is not create structure under your styles, like ``.header``, ``.header__nav``, ``.footer__nav--link`` etc but generate classes at the high level of Object Oriented ideology. To put it simply, create classes like ``.shadow-out``, ``.padding-sm``, ``.border-blue`` and then apply to necessary tags. Yea, it is force you create a huge amount of classes and use them, but at the same time it gives you maximum flexibility.
+3. **Class generating.** The last one we need is generating classes to bring our desirable styling into reality. At this point the ELEMENT is completely different from other frameworks. The idea is not create structure under your styles, like ``.header``, ``.header__nav``, ``.footer__nav--link`` etc but generate classes at the high level of Object Oriented ideology. To put it simply, create classes like ``.shadow-out``, ``.padding-sm``, ``.border-blue`` and then apply to necessary tags. Yea, it is force you create a huge amount of classes and use them, but at the same time it gives you maximum flexibility and create structure at the server side but not in a stylesheets.
 
 ##Modules
 Module is the most important component of the framework.
 Each file within the framework folder has unified structure. It makes easier to read existing files (modules) and create new one. You can get initial module template under [templates/module](https://github.com/kalopsia/element/tree/master/templates/module) folder. Line by line explanation and its brief using example you can find under [docs/module](https://github.com/kalopsia/element/tree/master/docs/module) directory.
+
+To understand what is module and how to start using framework, please go to the next chapter.
