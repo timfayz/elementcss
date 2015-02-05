@@ -1,54 +1,45 @@
 /*!
- * Name:
- * Version: 
- * Author:
- * Author URL: 
+ * Name: App Name
+ * Version: 1.0
+ * Authors: Your Name
+ * Author URL: example.com
  * Powered by:
- * ELEMENT | MIT License | github.com/kalopsia/element
+ * Element | MIT License | github.com/kalopsia/element
+ * Project Name | License Type | url-to-project.com
  */
 
 // Global Variables
-// --------------------------------------------
+// -------------------------
 $_font-size:    16px;
 $_line-height:  1.7;
 $_media-unit: rem;
-$_media:
-  (
-    default:    null,
-    mobile:     (media 'screen and (max-width:' 740px ')'),
-    tablet:     (media 'screen and (max-width:' 1024px ')'),
-    laptop:     (media 'screen and (min-width:' 1366px ')'),
-    landscape:  (media '(orientation: landscape)'),
-    portrait:   (media '(orientation: portrait)'),
-    touch:      ('.touch'),
-  );
+$_media: (
+  default:    null,
+  mobile:     (media 'screen and (max-width:' 740px ')'),
+  tablet:     (media 'screen and (max-width:' 1024px ')'),
+  laptop:     (media 'screen and (min-width:' 1366px ')'),
+  touch:      ('.touch'),
+);
 
 
-// Normalize Module
-// ------------------
-$normalize: true;
+// Normalize
+// -------------------------
 @import 'path/to/element/framework/modules/normalize.scss';
 
 
-// Grid System Module
-// ------------------
-$grid: true;
-$grid-calc-data: (
-    columns: 12,
-    calc-method: gap,
-    calc-data: 1.5%,
-  );
+// Grid System
+// -------------------------
+$grid-params: calc-grid(12, gap, 2%);
 @import 'path/to/element/framework/modules/grid.scss';
 
 
-// Defaults Module
-// ------------------
-$defaults: true;
+// Defaults
+// -------------------------
 @import 'path/to/element/framework/modules/defaults.scss';
 
 
 // Classes
-// ------------------
+// -------------------------
 $color: color (
   default: (
     black, #000,
@@ -58,6 +49,6 @@ $color: color (
 @include set($Color, $color, $_media);
 
 // Styles
-// --------------------------------------------
+// -------------------------
 // create your own styles here
 
