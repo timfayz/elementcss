@@ -1,0 +1,48 @@
+@import '../globals.scss';
+@import '../naming.scss';
+@import '../functions.scss';
+@import '../mixins.scss';
+
+// Default Variables
+// --------------------------------------------------
+  $container: true !default;
+
+  $container-media-params: (
+    default: 940px,
+    laptop: 940px,
+    tablet: 700px,
+    mobile: 100%,
+  ) !default;
+
+// Output Styles
+// --------------------------------------------------
+@if $container {
+
+  $devices: nths(map-keys($_media), indexes(map-keys($_media), map-keys($container-media-params)));
+  $devices-params: nths(map-values($container-media-params), indexes(map-keys($container-media-params), $devices));
+
+  // base styles
+  .container {
+    position: relative;
+    margin-#{$_left}: auto;
+    margin-#{$_right}: auto;
+    @include clearfix();
+  }
+
+  // media styles
+  @for $f from 1 through length($devices) {
+    $name:    nth($devices, $f);
+    $prefix:  _($name);
+    $param:   nth($devices-params, $f);
+
+    @include media($_media, $name) {
+      .container { width: $param; }
+      @if $prefix {
+        .#{$prefix}container { width: $param; }
+      }
+    }
+  }
+
+}
+
+$container: false;
