@@ -1,6 +1,6 @@
 // Index getter
 // ------------------------------
-// Returns the positions of a values within a list-1
+// returns list - positions of a values in $list-1 that exists in $list-2
 @function indexes($list-1, $list-2) {
   $output: () !global;
 
@@ -11,9 +11,10 @@
   @return $output;
 }
 
+
 // Nth getter
 // ------------------------------
-// Returns a specific items in a list-1 by list of indexes
+// returns list - a specific items in a list-1 by list of indexes
 @function nths($list, $indexes) {
   $output: () !global;
 
@@ -190,7 +191,7 @@
 // $calc-method - method based on what will be made calculation
 // $calc-data - input data for calculation according to selected method
 // @return list of 1:columns number, 2:column width, 3:gap width
-@function grid-params($columns, $calc-method, $calc-data)
+@function calc-grid($columns, $calc-method, $calc-data)
 {
   $column: null;
   $gap: null;

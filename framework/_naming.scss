@@ -38,7 +38,7 @@ $Bottom:                'bottom' !default;
 $Left:                  'left' !default;
 $Position:              null !default;
 $Z-index:               'z' !default;
-$Vertical-align:        'align' !default;
+$Vertical-align:        'v-align' !default;
 
 // Content
 $Content:               'content' !default;
@@ -78,8 +78,11 @@ $Background-repeat:     #{$Background} !default;
 $Background-attachment: #{$Background} !default;
 
 
+// Outline
+$Outline:                     'outline' !default;
+$Outline-color:               '#{$Outline}-clr' !default;
+
 // Border
-$Outline:                      'outline' !default;
 $Border:                      'border' !default;
 $Border-top:                  '#{$Border}-#{$T}' !default;
 $Border-right:                '#{$Border}-#{$R}' !default;
@@ -135,7 +138,21 @@ $Visibility:          null !default;
 // Opacity
 $Opacity:             'opacity' !default;
 
-// Miliscenios
+// Flexbox
+$Flex:                'flex' !default;
+$Flex-basis:          'basis' !default;
+$Flex-direction:      'direction' !default;
+$Flex-flow:           'flow' !default;
+$Flex-grow:           'grow' !default;
+$Flex-shrink:         'shrink' !default;
+$Flex-wrap:           'wrap' !default;
+$Align-content:       'align-cont' !default;
+$Align-items:         'align-itms' !default;
+$Align-self:          'align-self' !default;
+$Order:               'order' !default;
+$Justify-content:     'justify' !default;
+
+// Miscellaneous
 $Overflow:            'over' !default;
 $Overflow-x:          '#{$Overflow}-x' !default;
 $Overflow-y:          '#{$Overflow}-y' !default;
