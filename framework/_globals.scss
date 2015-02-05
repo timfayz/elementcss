@@ -43,12 +43,12 @@ $_size-xxsm:     0.25 !default;
 // -------------------------
 $_media: (
     default:    null,
-    mobile:     (media 'screen and (max-width:' 740px ')'),
-    tablet:     (media 'screen and (max-width:' 1024px ')'),
-    laptop:     (media 'screen and (min-width:' 1366px ')'),
-    landscape:  (media '(orientation: landscape)'),
-    portrait:   (media '(orientation: portrait)'),
-    touch:      ('.touch'),
+    mobile:     media 'screen and (max-width:' 740px ')',
+    tablet:     media 'screen and (max-width:' 1024px ')',
+    laptop:     media 'screen and (min-width:' 1366px ')',
+    landscape:  media '(orientation: landscape)',
+    portrait:   media '(orientation: portrait)',
+    touch:      '.touch',
   ) !default;
 $_media-unit: rem;
 
