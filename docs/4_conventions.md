@@ -3,7 +3,7 @@
 
 To create really convenient and reusable styles we should follow some rules. Since the main idea of ELEMENT is using a big amount of classes we take care about class naming and make it logical, intuitive and "ease of remembering" as much as possible. Thus far all classes that you will generate should obey to some rules. Most of all conventions came from best practice in creating styles.
 
-For simplification and standardization purposes general conventions are already predefined in the ELEMENT itself. **Full list of available abbreviations** that is presented in examples below available under ``framework/_naming.scss`` file. This file can be imported anywhere and used for creating standardized class names.
+For simplification and standardization purposes general conventions are already defined in the ELEMENT itself. **Full list of available abbreviations** that is presented in examples below available under ``framework/_naming.scss`` file. This file can be imported anywhere and used for creating standardized class names.
 
 
 ##General Naming Conventions
@@ -29,7 +29,7 @@ Examples:
 
 **We should avoid using big amount of digits in class names and use deliberate set of names instead:**
 
-The most descriptive and convenient way to achieve it use the following set of names:
+The most descriptive and convenient set of names for this purposes is presented below:
   - `xxsm` = the smallest value
   - `xsm` = smaller value
   - `sm` = small value
@@ -38,17 +38,33 @@ The most descriptive and convenient way to achieve it use the following set of n
   - `xlg` = larger value
   - `xxlg` = the largest value
   
+If the above set is not enough we can use:
+  - `min` = smaller than `xxsm`
+  - `max` = larger than `xxlg`
+  
 Examples:
 ```
 | property-name:          | value;          | class name
+  width:                    0;                .width-0
   width:                    0.25rem;          .width-xxsm
   width:                    0.5rem;           .width-xsm
   width:                    1rem;             .width-sm
-  width:                    3rem;             .width-md
-  width:                    6rem;             .width-lg
+  margin:                   180px;            .marg-xlg
+  padding:                  180px;            .padd-xlg
 ```
 
-##Properties Naming Conventions
+This set of names can be used in many cases:
+  - top, right, bottom, left
+  - width, height
+  - z-index
+  - margin, padding
+  - font-size, line-height
+  - amount of opacity
+  - amount of alpha chanel in RGBA\HSLA colors <br>
+  etc
+  
+
+##CSS Properties Naming Conventions
 
 **Words indicating directions of properties abbreviate as first letter of direction and must be always presented in class name:**
 
@@ -98,7 +114,7 @@ Examples:
 ```
 
 Exception:
-  * For hypothetical cases where you may need to apply classes with the same values, eg `display: inherit;` and `position: inherit` on the same element. Just prefix four first letters of these properties like `.disp-inherit` and `posi-inherit`.
+  * For hypothetical cases where you may need to apply classes with the same values, eg `display: inherit;` and `position: inherit`. Just prefix four first letters of these properties like `.disp-inherit` and `posi-inherit`.
 
 
 ##CSS Measurement Values Naming Conventions
@@ -159,17 +175,17 @@ Examples:
   color:                    CadetBlue;        .color-kcadblu
 ```
 
-**Numerical color values abbreviated as one letter(type of color) + name of color's visual sense + alpha channel (if presented):**
+**Numerical color values abbreviated as one letter(type of color) + name of color's visual sense + name of alpha channel (if presented):**
 
-  - Hex color values have no prefix
-  - RGB and RGBA color values are prefixed by `r` letter
+  - Hex color values: **no prefix + name of visual sense** 
+  - RGB and RGBA color values: **`r` + name of visual sense + alpha channel**
   - HSL and HSLA color values are prefixed by `h` letter
   
 Examples:
 ```
 | property-name:          | value;          | class name
   background-color:         #222;             .back-clr-black
-  background-color:         ;       .color-ktrans
+  background-color:         rgba(0,0,0,0.3);  .back-clr-rblack_s
   background-color:         ;               .color-kred
   background-color:         ;         .color-kcadblu
 ```
@@ -191,3 +207,8 @@ Standardized names and rules are very important for the several reasons:
   2. We can share sets of classes to different people like snippets.
   3. It is increase readability of our code for ourselves and other people.
   4. Standardized names make it possible to create themes and share it.
+
+---
+
+####Please, help us improve these docs!
+Start new issue [here](https://github.com/kalopsia/element/issues/new) if you have found mistake or have any questions, suggestions and problems.

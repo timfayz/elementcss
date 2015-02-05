@@ -86,9 +86,6 @@
 
 }
 
-@function ad($value, $check) {
-  @return if($value, append-dash($value), null);
-}
 // Property generator
 // -------------------------------------
 // $properties - any CSS property(es)
@@ -184,11 +181,11 @@
   }
 }
 
-// Class - one property generator
+// Class setter
 // -------------------------------------
 //
 // @return
-@mixin classes($property-shortcut, $list, $media:null) {
+@mixin set($property-shortcut, $list, $media:null) {
   //@todo multi each $list in $args {}
   @if length($list) > 0 {
 
@@ -219,7 +216,7 @@
 
 // Class getter
 // -------------------------------------
-@function class-value($mixed-list, $class-name) {
+@function get($mixed-list, $class-name) {
 
   $property-list: nth($mixed-list, 1); //list with property name
   $property-list: nth($property-list, 2); //list without property name
@@ -291,7 +288,7 @@
     $class-name: nth($args, $c + 1);
 
     //output CSS property
-    #{$property-name}: class-value($mixed-list, $class-name);
+    #{$property-name}: get($mixed-list, $class-name);
 
     $c: $c + 2 !global;
   }

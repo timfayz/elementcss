@@ -19,64 +19,67 @@ $readonly:    'readonly' !default;
 
 // Property's Directions
 // -------------------
-$T:                   't' !default; //top
-$R:                   'r' !default; //right
-$B:                   'b' !default; //bottom
-$L:                   'l' !default; //left
-$TL:                  'tl' !default; //top-left
-$TR:                  'tr' !default; //top-right
-$BR:                  'br' !default; //bottom-right
-$BL:                  'bl' !default; //bottom-left
+$T:                     't' !default; //top
+$R:                     'r' !default; //right
+$B:                     'b' !default; //bottom
+$L:                     'l' !default; //left
+$TL:                    'tl' !default; //top-left
+$TR:                    'tr' !default; //top-right
+$BR:                    'br' !default; //bottom-right
+$BL:                    'bl' !default; //bottom-left
 
 // Properties shortcuts
 // -------------------
 
 // Positioning
-$Top:                 'top' !default;
-$Right:               'right' !default;
-$Bottom:              'bottom' !default;
-$Left:                'left' !default;
-$Position:            null !default;
-$Z-index:             'z' !default;
-$Vertical-align:      'align' !default;
+$Top:                   'top' !default;
+$Right:                 'right' !default;
+$Bottom:                'bottom' !default;
+$Left:                  'left' !default;
+$Position:              null !default;
+$Z-index:               'z' !default;
+$Vertical-align:        'align' !default;
 
 // Content
-$Content:             'content' !default;
+$Content:               'content' !default;
 
 // Lists
-$List:                'list' !default;
-$List-style:          $List !default;
-$List-style-type:     $List !default;
+$List:                  'list' !default;
+$List-style:            $List !default;
+$List-style-type:       $List !default;
 
 // Indention
-$Margin:              'marg' !default;
-$Margin-top:          #{$Margin}-#{$T} !default;
-$Margin-right:        #{$Margin}-#{$R} !default;
-$Margin-bottom:       #{$Margin}-#{$B} !default;
-$Margin-left:         #{$Margin}-#{$L} !default;
+$Margin:                'marg' !default;
+$Margin-top:            #{$Margin}-#{$T} !default;
+$Margin-right:          #{$Margin}-#{$R} !default;
+$Margin-bottom:         #{$Margin}-#{$B} !default;
+$Margin-left:           #{$Margin}-#{$L} !default;
 
-$Padding:             'padd' !default;
-$Padding-top:         #{$Padding}-#{$T} !default;
-$Padding-right:       #{$Padding}-#{$R} !default;
-$Padding-bottom:      #{$Padding}-#{$B} !default;
-$Padding-left:        #{$Padding}-#{$L} !default;
+$Padding:               'padd' !default;
+$Padding-top:           #{$Padding}-#{$T} !default;
+$Padding-right:         #{$Padding}-#{$R} !default;
+$Padding-bottom:        #{$Padding}-#{$B} !default;
+$Padding-left:          #{$Padding}-#{$L} !default;
 
 // Dimension
-$Width:               'width' !default;
-$Max-width:           'max-#{$Width}' !default;
-$Min-width:           'min-#{$Width}' !default;
-$Height:              'height' !default;
-$Max-height:          'max-#{$Height}' !default;
-$Min-height:          'min-#{$Height}' !default;
+$Width:                 'width' !default;
+$Max-width:             'max-#{$Width}' !default;
+$Min-width:             'min-#{$Width}' !default;
+$Height:                'height' !default;
+$Max-height:            'max-#{$Height}' !default;
+$Min-height:            'min-#{$Height}' !default;
 
 // Background
-$Background:          'back' !default;
-$Background-color:    '#{$Background}-clr' !default;
-$Background-image:    '#{$Background}-img' !default;
-$Background-size:     #{$Background} !default;
-$Background-repeat:   #{$Background} !default;
+$Background:            'back' !default;
+$Background-color:      '#{$Background}-clr' !default;
+$Background-image:      '#{$Background}-img' !default;
+$Background-size:       #{$Background} !default;
+$Background-repeat:     #{$Background} !default;
+$Background-attachment: #{$Background} !default;
+
 
 // Border
+$Outline:                      'outline' !default;
 $Border:                      'border' !default;
 $Border-top:                  '#{$Border}-#{$T}' !default;
 $Border-right:                '#{$Border}-#{$R}' !default;
@@ -100,6 +103,7 @@ $Font-family:         $Font !default;
 $Font-size:           $Font !default;
 $Font-weight:         $Font !default;
 $Font-style:          $Font !default;
+$Letter-spacing:      'letter' !default;
 $Word:                'word' !default;
 $Word-wrap:           $Word !default;
 $Word-break:          $Word !default;
@@ -169,15 +173,15 @@ $nav:         'nav' !default;
 $img:         'img' !default;
 $map:         'map' !default;
 $area:        'area' !default;
-$canvas:      'canvas' !default;
-$figcaption:  'figcaption' !default;
-$figure:      'figure' !default;
+$canvas:      'canv' !default;
+$figcaption:  'figc' !default;
+$figure:      'figu' !default;
 
 // Media
 // -------------------
-$audio:       'audio' !default;
-$track:       'track' !default;
-$video:       'video' !default;
+$audio:       'audi' !default;
+$track:       'trac' !default;
+$video:       'vide' !default;
 
 // Lists
 // -------------------
@@ -191,37 +195,37 @@ $menu:        'menu' !default;
 
 // Tables
 // -------------------
-$table:       'table' !default;
-$caption:     'caption' !default;
+$table:       'tabl' !default;
+$caption:     'capt' !default;
 $th:          'th' !default;
 $tr:          'tr' !default;
 $td:          'td' !default;
-$thead:       'thead' !default;
-$tbody:       'tbody' !default;
-$tfoot:       'tfoot' !default;
+$thead:       'thea' !default;
+$tbody:       'tbod' !default;
+$tfoot:       'tfoo' !default;
 $col:         'col' !default;
-$colgroup:    'colgroup' !default;
+$colgroup:    'colg' !default;
 
 // Sections
 // -------------------
 $main:        'main' !default;
 $div:         'div' !default;
 $span:        'span' !default;
-$header:      'header' !default;
-$footer:      'footer' !default;
-$section:     'section' !default;
-$article:     'article' !default;
-$aside:       'aside' !default;
-$details:     'details' !default;
-$dialog:      'dialog' !default;
-$summary:     'summary' !default;
+$header:      'head' !default;
+$footer:      'foot' !default;
+$section:     'sect' !default;
+$article:     'arti' !default;
+$aside:       'asid' !default;
+$details:     'deta' !default;
+$dialog:      'dial' !default;
+$summary:     'summ' !default;
 
 // Formatting
 // -------------------
 $abbr:        'abbr' !default;
-$address:     'address' !default;
+$address:     'addr' !default;
 $b:           'b' !default;
-$blockquote:  'blockquote' !default;
+$blockquote:  'bloc' !default;
 $cite:        'cite' !default;
 $code:        'code' !default;
 $del:         'del' !default;
@@ -231,14 +235,14 @@ $i:           'i' !default;
 $ins:         'ins' !default;
 $kbd:         'kbd' !default;
 $mark:        'mark' !default;
-$meter:       'meter' !default;
+$meter:       'mete' !default;
 $pre:         'pre' !default;
-$progress:    'progress' !default;
+$progress:    'prog' !default;
 $q:           'q' !default;
 $s:           's' !default;
 $samp:        'samp' !default;
-$small:       'small' !default;
-$strong:      'strong' !default;
+$small:       'smal' !default;
+$strong:      'stro' !default;
 $sub:         'sub' !default;
 $sup:         'sup' !default;
 $time:        'time' !default;
@@ -251,33 +255,31 @@ $var:         'var' !default;
 // Forms
 // -------------------
 $form:              'form' !default;
-$fieldset:          'fieldset' !default;
-$legend:            'legend' !default;
-$label:             'label' !default;
-$textarea:          'textarea' !default;
-$select:            'select' !default;
-$optgroup:          'optgroup' !default;
-$option:            'option' !default;
-$datalist:          'datalist' !default;
-$keygen:            'keygen' !default;
-$output:            'output' !default;
-$select:            'select' !default;
-$textarea:          'textarea' !default;
-$input:             'input' !default;
-$radio:             'radio' !default;
-$checkbox:          'checkbox' !default;
-$button:            'button' !default;
+$fieldset:          'fiel' !default;
+$legend:            'lege' !default;
+$label:             'labe' !default;
+$textarea:          'text' !default;
+$optgroup:          'optg' !default;
+$option:            'opti' !default;
+$datalist:          'data' !default;
+$keygen:            'keyg' !default;
+$output:            'outp' !default;
+$select:            'sele' !default;
+$input:             'inpu' !default;
+$radio:             'radi' !default;
+$checkbox:          'chec' !default;
+$button:            'butt' !default;
 
 // Programming
 // -------------------
-$embed:             'embed' !default;
-$object:            'object' !default;
+$embed:             'embe' !default;
+$object:            'obje' !default;
 
 
 // @todo CUSTOMS SELECTORS
 // ---------------------------------------
-$input-readonly:    '#{$input}.-#{$readonly}' !default;
-$input-disabled:    '#{$input}.-#{$disabled}' !default;
-$radio-disabled:    '#{$radio}.-#{$disabled}' !default;
-$checkbox-disabled: '#{$checkbox}.-#{$disabled}' !default;
-$button-disabled:   '#{$button}.-#{$disabled}' !default;
+$input-readonly:    '#{$input}-#{$readonly}' !default;
+$input-disabled:    '#{$input}-#{$disabled}' !default;
+$radio-disabled:    '#{$radio}-#{$disabled}' !default;
+$checkbox-disabled: '#{$checkbox}-#{$disabled}' !default;
+$button-disabled:   '#{$button}-#{$disabled}' !default;

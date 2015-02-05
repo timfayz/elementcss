@@ -273,8 +273,9 @@
         }
 
         @for $i from 0 through nth($params, 1) {
-          .#{$prefix}by-#{$i} > * {@include grid(column-width, $params, $i);}
-          .#{$prefix}col-#{$i} {@include grid(column-width, $params, $i);}
+          $index: if($i == 0, 'auto', $i);
+          .#{$prefix}by-#{$index} > * {@include grid(column-width, $params, $i);}
+          .#{$prefix}col-#{$index} {@include grid(column-width, $params, $i);}
         }
       }
     }

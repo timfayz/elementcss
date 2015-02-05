@@ -13,8 +13,11 @@ ELEMENT is based on [SASS](http://sass-lang.com/guide) preprocessor. If you use 
 
 ELEMENT allows people to choose what they want and generate what they want. Currently framework allow you to outline your desirable GUI and prototype them via classes. A little bit later we present the ways of doing that.
 
-##Ideology
+##The problem
 The key reason of ELEMENT was to create framework and principe of writing styles that allows you don't think about "aging" and "clogging" styles. Something that allow you prototype GUI fast like "What You See Is What You Get" editor. It is means that "something" should be modular, abstract, flexible, logical, community aimed and unique that will differentiate it from other frameworks and methods (like OOCSS, ACSS, BEM, SMACSS) are existing. As a result ELEMENT now can be used to create your own themes using known methods (OOCSS, ACSS, BEM) and absolutely unique styles with a very flexible control mechanism. It is worth noting that ELEMENT is not easy to use at the first time, but the better you know ELEMENT, the better you understand the power of this instrument and method of work. It's like freedom in pure form.
+
+##The solution
+To solve the problems described above we invent new method in creating styles: **one class** = **one CSS property**. At the firs time it sounds a little bit crazy, but time after time we tested it we realized that it works and it works really good! Thus far the rest of this documentation will explain how to use this method together with well-established practice like (grid system, typography, vertical rhythm and normalize).
 
 ##Features
 What the features has ELEMENT? ELEMENT has different structure, abstraction and thus different features:
@@ -75,3 +78,8 @@ both will be compiled into
 
 *Skip if you know nothing about LESS.*<br/>
 Originally I was creating ELEMENT in LESS, but sometime later I realized that LESS doesn't have enough features to release necessary and pursued ideas. So I switched to SASS. Now there is no doubt after the release of version 3.3 - SASS become the most advanced CSS preprocessor!
+
+---
+
+####Please, help us improve these docs!
+Start new issue [here](https://github.com/kalopsia/element/issues/new) if you have found mistake or have any questions, suggestions and problems.

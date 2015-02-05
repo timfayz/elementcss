@@ -177,7 +177,7 @@ $color: color //first value "color" defines CSS property on which classes will b
 //  capital. Full list of predefined prefixes you can find under framework/_naming.scss file
 //- second argument is what we defined above.
 //- third argument is media map which will be used to create CSS classes under media queries;
-@include classes($Color, $color, $_media);
+@include set($Color, $color, $_media);
 
 // Styles
 // --------------------------------------------
@@ -189,3 +189,8 @@ $color: color //first value "color" defines CSS property on which classes will b
 
 If you want to create your own module explore the source files and go to ``templates/module`` folder
 for more information.
+
+---
+
+####Please, help us improve these docs!
+Start new issue [here](https://github.com/kalopsia/element/issues/new) if you have found mistake or have any questions, suggestions and problems.
