@@ -17,7 +17,7 @@ $defaults: true !default;
   $default-border-set: (
     default: (
       0, 0
-    )
+    ),
   ) !default;
   @include set($Border, border $default-border-set, $_media);
   @include set($Border-top, border-top $default-border-set, $_media);
@@ -48,7 +48,7 @@ $defaults: true !default;
       relative, relative,
       absolute, absolute,
     ),
-  ) !global !default;
+  ) !default;
   @include set($Position, $default-position, $_media);
 
   // Vertical-Align
@@ -59,7 +59,7 @@ $defaults: true !default;
       middle, middle,
       bottom, bottom,
     ),
-  ) !global !default;
+  ) !default;
   @include set($Vertical-align, $default-vertical-align, $_media);
 
   // Top, Right, Bottom, Left
@@ -77,7 +77,7 @@ $defaults: true !default;
       $Xlg, vr($_size-xlg),
       $Xxlg, vr($_size-xxlg),
     ),
-  ) !global !default;
+  ) !default;
   @include set($Top, top $default-top-right-bottom-left-set, $_media);
   @include set($Right, right $default-top-right-bottom-left-set, $_media);
   @include set($Bottom, bottom $default-top-right-bottom-left-set, $_media);
@@ -95,7 +95,7 @@ $defaults: true !default;
       $Lg, $_z-lg,
       $Xlg, $_z-xlg,
     )
-  ) !global !default;
+  ) !default;
   @include set($Z-index, $default-z-index, $_media);
 
   // Margin
@@ -113,7 +113,7 @@ $defaults: true !default;
       $Xlg, vr($_size-xlg),
       $Xxlg, vr($_size-xxlg),
     )
-  ) !global !default;
+  ) !default;
   @include set($Margin, margin $default-margin-set, $_media);
   @include set($Margin-top, margin-top $default-margin-set, $_media);
   @include set($Margin-right, margin-right $default-margin-set, $_media);
@@ -134,7 +134,7 @@ $defaults: true !default;
       $Xlg, vr($_size-xlg),
       $Xxlg, vr($_size-xxlg),
     )
-  ) !global !default;
+  ) !default;
   @include set($Padding, padding $default-padding-set, $_media);
   @include set($Padding-top, padding-top $default-padding-set, $_media);
   @include set($Padding-right, padding-right $default-padding-set, $_media);
@@ -155,7 +155,7 @@ $defaults: true !default;
       $Xlg, 0.7,
       $Xxlg, 0.9
     )
-  ) !global !default;
+  ) !default;
   @include set($Opacity, $default-opacity, $_media);
 
   // Height, Width
@@ -186,9 +186,37 @@ $defaults: true !default;
       100, 100%,
       auto, auto,
     ),
-  ) !global !default;
+  ) !default;
   @include set($Height, height $default-width-height-set, $_media);
   @include set($Width, width $default-width-height-set, $_media);
+
+
+  // Flex
+  // ----------------------
+  $default-flex: flex (
+    default: (
+      1, 1,
+      2, 2,
+      3, 3,
+      4, 4,
+      5, 5,
+    )
+  ) !default;
+  @include set($Flex, $default-flex, $_media);
+
+  // Flex
+  // ----------------------
+  $default-flex: flex (
+    default: (
+      1, 1,
+      2, 2,
+      3, 3,
+      4, 4,
+      5, 5,
+    )
+  ) !default;
+  @include set($Flex, $default-flex, $_media);
+
 
   // Display
   // ----------------------
@@ -198,6 +226,7 @@ $defaults: true !default;
       block, block,
       inline, inline,
       inline-block, inline-block,
+      flex, flex,
       table, table,
       //table-row, table-row,
       //table-cell, table-cell,
@@ -211,21 +240,24 @@ $defaults: true !default;
       block, block,
       inline, inline,
       inline-block, inline-block,
+      flex, flex,
     ),
     tablet: (prefix,
       none, none,
       block, block,
       inline, inline,
       inline-block, inline-block,
+      flex, flex,
     ),
     mobile: (prefix,
       none, none,
       block, block,
       inline, inline,
       inline-block, inline-block,
+      flex, flex,
     ),
     //@todo add portrait, landscape etc
-  ) !global !default;
+  ) !default;
   @include set($Display, $default-display, $_media);
 
   // Visibility
@@ -248,7 +280,7 @@ $defaults: true !default;
       hidden, hidden,
     ),
     //@todo add portrait, landscape etc
-  ) !global !default;
+  ) !default;
   @include set($Visibility, $default-visibility, $_media);
 
   // List-style
@@ -259,7 +291,7 @@ $defaults: true !default;
       disc, disc,
       square, square
     )
-  ) !global !default;
+  ) !default;
   @include set($List-style, $default-list-style, $_media);
 
   // Line-Height
@@ -275,13 +307,13 @@ $defaults: true !default;
       $Xlg, vr($_size-xlg),
       $Xxlg, vr($_size-xxlg),
     ),
-  ) !global !default;
+  ) !default;
   @include set($Line-height, $default-line-height, $_media);
 
   // Font-Family
   // ---------------------
-  $font-family: font-family () !global !default;
-  @include set($Font-family, $font-family, $_media);
+//  $font-family: font-family () !default;
+//  @include set($Font-family, $font-family, $_media);
 
   // Font-Size
   // ---------------------
@@ -296,7 +328,7 @@ $defaults: true !default;
       $Xlg, $_font-size-xlg,
       $Xxlg, $_font-size-xxlg
     ),
-  ) !global !default;
+  ) !default;
   @include set($Font-size, $default-font-size, $_media);
 
   // Font-Weight
@@ -306,7 +338,7 @@ $defaults: true !default;
       normal, normal,
       bold, bold
     ),
-  ) !global !default;
+  ) !default;
   @include set($Font-weight, $default-font-weight, $_media);
 
   // Font-Style
@@ -316,7 +348,7 @@ $defaults: true !default;
       italic, italic,
       normal, normal
     ),
-  ) !global !default;
+  ) !default;
   @include set($Font-style, $default-font-style, $_media);
 
   // Text-Decoration
@@ -326,7 +358,7 @@ $defaults: true !default;
       underline, underline,
       through, line-through
     ),
-  ) !global !default;
+  ) !default;
   @include set($Text-decoration, $default-text-decoration, $_media);
 
   // Text-Transform
@@ -337,7 +369,7 @@ $defaults: true !default;
       lowercase, lowercase,
       capitalize, capitalize
     ),
-  ) !global !default;
+  ) !default;
   @include set($Text-transform, $default-text-transform, $_media);
 
   // Text-Align
@@ -349,7 +381,7 @@ $defaults: true !default;
       center, center,
       justify, justify,
     ),
-  ) !global !default;
+  ) !default;
   @include set($Text-align, $default-text-align, $_media);
 
   // White-space
@@ -361,9 +393,31 @@ $defaults: true !default;
       pre-line, pre-line,
       nowrap, nowrap,
     ),
-  ) !global !default;
+  ) !default;
   @include set($White-space, $default-white-space, $_media);
 
+  // Text utils
+  // ---------------------
+  $default-text-utils: true !default;
+  @if $default-text-utils {
+    .text-hidden {
+      font: 0/0 a;
+      color: transparent;
+      text-shadow: none;
+      background-color: transparent;
+      border: 0;
+    }
+    .text-clip {
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:clip;
+    }
+    .text-ellipsis {
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+  }
 
   // Floats
   // ---------------------
@@ -373,8 +427,15 @@ $defaults: true !default;
       right, right,
       none, none,
     ),
-  ) !global !default;
+  ) !default;
   @include set($Float, $default-float, $_media);
+
+  // Clearfix
+  // ---------------------
+  $default-clearfix: true !default;
+  @if $default-clearfix {
+    .clearfix { @include clearfix(); }
+  }
 
   // Overflow
   // ---------------------
@@ -383,11 +444,10 @@ $defaults: true !default;
       auto, auto,
       hidden, hidden,
     ),
-  ) !global !default;
+  ) !default;
   @include set($Overflow, overflow $default-overflow-set, $_media);
   @include set($Overflow-x, overflow-x $default-overflow-set, $_media);
   @include set($Overflow-y, overflow-y $default-overflow-set, $_media);
-
 
   // Cursor
   // ---------------------
@@ -411,36 +471,8 @@ $defaults: true !default;
       //nw-resize, $_cursor-se-resize,
       //se-resize, $_cursor-se-resize,
     ),
-  ) !global !default;
+  ) !default;
   @include set($Cursor, $default-cursor, $_media);
-
-  $default-utilities: true !global !default;
-
-  @if $default-utilities {
-    .clearfix {
-      @include clearfix();
-    }
-
-    .text-hidden {
-      font: 0/0 a;
-      color: transparent;
-      text-shadow: none;
-      background-color: transparent;
-      border: 0;
-    }
-
-    .text-clip {
-      white-space:nowrap;
-      overflow:hidden;
-      text-overflow:clip;
-    }
-
-    .text-ellipsis {
-      white-space:nowrap;
-      overflow:hidden;
-      text-overflow:ellipsis;
-    }
-  }
 
 }
 
