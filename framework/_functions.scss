@@ -27,162 +27,20 @@
   @return $output;
 }
 
-// List Filter
-// ------------------------------
-// excludes null values from list 1 or from both list 1 and 2
-// (second list's values excludes according to list 1)
-@function filter-list($list-1, $list-2:null)
-{
-  $i: 1 !global;
-  $output: () !global;
-  @while $i <= length($list-1) {
-    @if nth($list-1, $i) {
-      @if $list-2 {
-        $output: append($output, nth($list-2, $i)) !global;
-      }
-      @else       {
-        $output: append($output, nth($list-1, $i)) !global;
-      }
-    }
 
-    $i: $i + 1 !global;
-  }
-
-  @return $output;
-}
-
-// Map Filter
-// ------------------------------
-// excludes null values from map 1 or from both list 1 and 2
-// (second map's values excludes according to map 1)
-@function filter-map($map-1, $map-2:null)
-{
-  $i: 1 !global;
-  $output: () !global;
-  @while $i <= length($map-1) {
-    $array: nth($map-1, $i);
-    $key: nth($array, 1);
-    $value: nth($array, 2);
-
-    @if $key!=null and $value!=null {
-      @if $map-2 {
-        $array: nth($map-2, $i);
-        $key: nth($array, 1);
-        $value: nth($array, 2);
-
-        $output: map-merge($output, ($key: $value)) !global;
-      }
-      @else {
-        $output: map-merge($output, ($key: $value)) !global;
-      }
-    }
-
-    $i: $i + 1 !global;
-  }
-
-  @return $output;
-}
-
-// Exclude value by name from list
-// ------------------------------
-@function remove-value($list, $value:null, $separator:null)
-{
-  $output: () !global;
-//  @if $value {
-    @each $val-of-first in $list {
-      @if $val-of-first != $value {
-        $output: append($output, $val-of-first, $separator) !global;
-      }
-    }
-
-    @return $output;
-//  }
-//  @else {
-//    @return $list;
-//  }
-}
-
-// Remove value by index from list
-// ------------------------------
-@function remove($list, $index:null, $separator:null)
-{
-  $output: () !global;
-  @if $index {
-    @each $val-of-first in $list {
-      @if $val-of-first != $index {
-        $output: append($output, $val-of-first, $separator) !global;
-      }
-    }
-
-    @return $output;
-  }
-  @else {
-    @return $list;
-  }
-}
-
-// Computes the difference of lists
-// ------------------------------
-// subtract list-2 from list-1
-@function diff-list($list-1, $list-2:null)
-{
-  @if $list-2 {
-    @each $val-of-first in $list-1 {
-      @each $val-of-second in $list-2 {
-        @if $val-of-first == $val-of-second {
-          $list-1: remove-value($list-1, $val-of-first);
-        }
-      }
-    }
-
-    @return $list-1;
-  }
-  @else {
-    @return $list-1;
-  }
-}
-
-// List Reordering
-// ------------------------------
-// reverse list order
-@function reverse-list($list)
-{
-  $reverse-list: () !global;
-  $i: length($list) !global;
-
-  @while $i >= 1 {
-    $reverse-list: append($reverse-list, nth($list, $i)) !global;
-    $i: $i - 1 !global;
-  }
-  @return $reverse-list;
-}
-
-// Dash Appender
-// ------------------------------
-// just append dash to value
-@function append-dash($value:null)
-{
-  @return if($value, unquote('#{$value}-'), null);
-}
 // Dash Appender (with validation)
 // ------------------------------
-// Appends dash if value not equal to $exception
-@function _($value:null, $exception:default) {
-  @return if($value!=$exception, append-dash($value), null);
+// Appends dash for given $value if $value isn't equal to $exception
+// dash can be replaced by any other character by $postfix
+@function _($value:null, $exception:default, $postfix: '-') {
+  @return if($value!=$exception, if($value, unquote('#{$value}#{$postfix}'), null), null);
 }
 
-// Dash Prepender
-// ------------------------------
-// just prepend dash to value
-@function prepend-dash($value:null)
-{
-  @return if($value, unquote("-#{$value}"), null);
-}
 // Dash Prepender (with validation)
 // ------------------------------
-// Prepends dash if value not equal to $exception
-@function __($value:null, $exception:default) {
-  @return if($value!=$exception, prepend-dash($value), null);
+// the same just prepend
+@function __($value:null, $exception:default, $prefix: '-') {
+  @return if($value!=$exception, if($value, unquote('#{$prefix}#{$value}'), null), null);
 }
 
 // Grid Settings Calculator
@@ -190,13 +48,13 @@
 // $columns - number of grid columns
 // $calc-method - method based on what will be made calculation
 // $calc-data - input data for calculation according to selected method
-// @return list of 1:columns number, 2:column width, 3:gap width
+// @return list - 1:columns number, 2:column width, 3:gap width
 @function calc-grid($columns, $calc-method, $calc-data)
 {
   $column: null;
   $gap: null;
 
-  // Gaps By Padding
+  // gaps By Padding
   @if $calc-method==column-gap {
     $px-column: nth($calc-data,1);
     $px-gap: nth($calc-data,2);
@@ -219,14 +77,10 @@
     $gap: (100% - ($ratio * $columns)) / $columns;
   }
 
-  // Gaps by Margin (deprecated)
-
-  // Gapless (deprecated)
-
   @return ($columns, $column, $gap);
 }
 
-// Remove Value's Unit
+// Unit Remover
 // -------------------
 @function ununit($value) {
   @if unitless($value)              { @return $value; }
@@ -237,7 +91,7 @@
   @else if unit($value) == 'rem'    { @return $value / 1rem; }
 }
 
-// Append Specific Unit
+// Unit Appender
 // --------------------
 @function setunit($value, $unit: integer) {
   @if $unit == integer              { @return ununit($value); }
@@ -248,12 +102,11 @@
   @else if $unit == 'rem'           { @return ununit($value)+0rem; }
 }
 
-// Unit Converter
-// --------------
+// Unit Converter (no rounding)
+// ---------------------------
 @function _tounit($value, $unit: null, $pixel-size: 16, $ppi-ratio: 72/96) {
-
   @if $unit {
-      //PX TO UNIT
+    // px
     @if unit($value) == 'px' {
       @if $unit == '%'              { @return setunit($value * 100 / $pixel-size, '%'); }
       @else if $unit == 'px'        { @return $value; }
@@ -262,7 +115,8 @@
       @else if $unit == 'rem'       { @return setunit($value / $pixel-size, rem); }
       @else if $unit == 'unitless'  { @return setunit($value / $pixel-size); }
     }
-    //PERCENT TO UNIT
+    
+    // percent
     @else if unit($value) == '%' {
       $value: round($value * $pixel-size/100) / ($pixel-size/100);
       @if $unit == '%'              { @return $value; }
@@ -272,7 +126,8 @@
       @else if $unit == 'rem'       { @return setunit($value / 100, rem); }
       @else if $unit == 'unitless'  { @return setunit($value / 100); }
     }
-      //EM, REM, UNITLESS TO UNIT
+    
+    // em, rem, unitless
     @else if unit($value) == 'em' or unit($value) == 'rem' or unitless($value) {
       @if $unit == '%'              { @return setunit(ununit($value) * 100, '%'); }
       @else if $unit == 'px'        { @return setunit($value * $pixel-size, px); } //round?
@@ -281,7 +136,8 @@
       @else if $unit == 'rem'       { @return setunit($value, rem); }
       @else if $unit == 'unitless'  { @return setunit($value); }
     }
-      //PT TO UNIT
+    
+    // pt
     @else if unit($value) == 'pt' {
       @if $unit == '%'              { @return setunit(ununit($value) / $ppi-ratio * 100/ununit($pixel-size), '%'); }
       @else if $unit == 'px'        { @return setunit(round($value / $ppi-ratio), px); }
@@ -290,19 +146,25 @@
       @else if $unit == 'rem'       { @return setunit(ununit($value) / $ppi-ratio / $pixel-size, rem); }
       @else if $unit == 'unitless'  { @return setunit(ununit($value) / $ppi-ratio / $pixel-size); }
     }
+    
+    // if no unit detected just return
     @else {
       @return $value;
     }
   }
   @else {
+    // if no unit presented just return
     @return $value;
-    //@return ununit($value);
   }
 }
 
-//trick to get always integer pixel value at the end of browser rendering
-//@todo add $round option to get this trick
+// Unit Converter (with rounding)
+// ------------------------------
+// Converts input $value to given $unit so that returned value
+// become integer pixel at the end of browser rendering
+// $value numeral - any CSS unit or unitless value (eg 100px, 1.4rem, 1.6, 7pt etc)
+// $unit unit - any valid CSS unit (eg rem, '%', px, em etc)
 @function tounit($value, $unit: null) {
   @return _tounit(round(_tounit($value, px)), $unit); //slow
-//  @return _tounit($value, $unit); //speedup
+  // @return _tounit($value, $unit); //fast
 }

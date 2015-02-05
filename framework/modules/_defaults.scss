@@ -199,23 +199,49 @@ $defaults: true !default;
       2, 2,
       3, 3,
       4, 4,
-      5, 5,
     )
   ) !default;
   @include set($Flex, $default-flex, $_media);
 
-  // Flex
+  // Order
   // ----------------------
-  $default-flex: flex (
+  $default-order: order (
     default: (
       1, 1,
       2, 2,
       3, 3,
       4, 4,
-      5, 5,
     )
   ) !default;
-  @include set($Flex, $default-flex, $_media);
+  @include set($Order, $default-order, $_media);
+
+  // Justify-content
+  // ----------------------
+  $default-justify-content: justify-content (
+    default: (
+      start, flex-start,
+      end, flex-end,
+      center, center,
+      between, space-between,
+    )
+  ) !default;
+  @include set($Justify-content, $default-justify-content, $_media);
+
+
+  // Align-content
+  // ----------------------
+  $default-align-set: (
+    default: (
+      start, flex-start,
+      end, flex-end,
+      stretch, stretch,
+      center, center,
+      between, space-between,
+    )
+  ) !default;
+  @include set($Align-content, align-content $default-align-set, $_media);
+  @include set($Align-items, align-items $default-align-set, $_media);
+  @include set($Align-self, align-self $default-align-set, $_media);
 
 
   // Display
@@ -312,8 +338,14 @@ $defaults: true !default;
 
   // Font-Family
   // ---------------------
-//  $font-family: font-family () !default;
-//  @include set($Font-family, $font-family, $_media);
+  $font-family: font-family (
+    default: (
+      sans, $_font-family-sans,
+      serif, $_font-family-serif,
+      mono, $_font-family-mono,
+    ),
+  ) !default;
+  @include set($Font-family, $font-family, $_media);
 
   // Font-Size
   // ---------------------
