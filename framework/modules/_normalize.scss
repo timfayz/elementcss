@@ -114,7 +114,7 @@
   }
   meter {
     display: block;
-    //@include height(1);
+    line-height: inherit;
     width: 100%;
   }
   pre {
@@ -128,7 +128,7 @@
     width: 100%;
     display: block;
     vertical-align: baseline;
-    //@include height(1);
+    line-height: inherit;
   }
   q {
     quotes: "\201C" "\201D" "\2018" "\2019";
@@ -204,7 +204,7 @@
   datalist {}
   keygen {
     margin: 0;
-    //@include min-height(1);
+    line-height: inherit;
     font-family: inherit;
   }
   output {
@@ -213,12 +213,33 @@
   select {
     text-transform: none;
     background: none;
-    //@include min-height(1);
+    line-height: inherit;
   }
-
+  select,
+  textarea,
+  button,
+  input {
+    display: block;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    height: inherit;
+    color: inherit;
+    background: none;
+    line-height: inherit;
+    font-size: inherit;
+    font-family: inherit;
+  }
+  input[type="search"] {
+    -webkit-appearance: textfield;
+    box-sizing: inherit;
+    -moz-box-sizing: inherit;
+    -webkit-box-sizing: inherit;
+  }
   // Inputs
-  // all types except:
-  // radio, checkbox, range?, button, reset, submit, hidden, image?
+  // all types except: radio, checkbox, range?, button, reset, submit, hidden, image?
   select,
   textarea,
   input:not([type]),
@@ -237,20 +258,19 @@
   input[type="url"],
   input[type="week"],
   .#{$input} {
-    box-sizing: border-box;
-    display: block;
-    margin: 0;
-    padding: 0;
+//    box-sizing: border-box;
+//    display: block;
+//    margin: 0;
+//    padding: 0;
+//    border: 0;
+//    outline: 0;
+//    width: 100%;
+//    color: inherit;
+//    line-height: inherit;
     height: auto;
-    width: 100%;
-    color: inherit;
-    font-family: inherit;
-    font-size: inherit;
-    line-height: inherit;
-    vertical-align: middle;
-    //border:1px solid black;
-    border: 0;
-    outline: 0;
+//    font-family: inherit;
+//    font-size: inherit;
+//    vertical-align: middle;
   }
 
   select[readonly],
@@ -297,22 +317,21 @@
 
   input[type="file"], .#{$input}-file {
     box-sizing: border-box;
-    display: block;
-    margin: 0;
-    padding: 0;
+//    display: block;
+//    margin: 0;
+//    padding: 0;
+//    outline: 0;
+//    width: 100%;
+//    color: inherit;
+//    font-family: inherit;
+//    font-size: inherit;
+//    line-height: inherit;
     height: auto;
-    width: 100%;
-    color: inherit;
-    font-family: inherit;
-    font-size: inherit;
-    line-height: inherit;
     vertical-align: middle;
-    outline: 0;
     cursor: $_cursor-pointer;
   }
 
-  // Buttons
-  //@todo range width 100%?
+  // Clickers
   input[type="checkbox"],
   input[type="radio"],
   input[type="color"],
@@ -320,11 +339,11 @@
   input[type="image"],
   .#{$radio},
   .#{$checkbox} {
-    border: 0;
-    outline: 0;
-    margin: 0;
+//    border: 0;
+//    outline: 0;
+//    margin: 0;
+//    line-height: inherit;
     vertical-align: inherit;
-    line-height: inherit;
     cursor: $_cursor-pointer;
   }
   input[type="checkbox"][disabled],
@@ -334,6 +353,7 @@
     cursor: $_cursor-default;
   }
 
+  // Buttons
   button {
     color: inherit;
     overflow: visible;
@@ -346,19 +366,19 @@
   input[type="submit"],
   .#{$button} {
     cursor: $_cursor-pointer;
-    display: block;
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    font-family: inherit;
-    font-size: inherit;
-    line-height: inherit;
+//    display: block;
+//    margin: 0;
+//    padding: 0;
+//    border: 0;
+//    outline: none;
+//    width: 100%;
+//    color: inherit;
+//    font-family: inherit;
+//    font-size: inherit;
+//    background: none;
+//    line-height: inherit;
     text-align: center;
     vertical-align: middle;
-    background: none;
-    //border:1px solid black;
-    border: 0;
-    outline: none;
   }
 
   button[disabled],
@@ -536,18 +556,10 @@
     height: auto;
   }
 
-  input[type="search"] {
-    -webkit-appearance: textfield;
-    -moz-box-sizing: content-box;
-    -webkit-box-sizing: content-box;
-    box-sizing: content-box;
-  }
-
   input[type="search"]::-webkit-search-cancel-button,
   input[type="search"]::-webkit-search-decoration {
     -webkit-appearance: none;
   }
-
 
 }
 

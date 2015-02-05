@@ -55,3 +55,8 @@ Module is the most important component of the framework.
 Each file within the framework folder has unified structure. It makes easier to read existing files (modules) and create new one. You can get initial module template under [templates/module](https://github.com/kalopsia/element/tree/master/templates/module) folder. Line by line explanation and its brief using example you can find under [docs/module](https://github.com/kalopsia/element/tree/master/docs/module) directory.
 
 To understand what is module and how to start using framework, please go to the next chapter.
+
+---
+
+####Please, help us improve these docs!
+Start new issue [here](https://github.com/kalopsia/element/issues/new) if you have found mistake or have any questions, suggestions and problems.

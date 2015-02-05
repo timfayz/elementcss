@@ -55,7 +55,7 @@ $color: color (
     white, #fff,
   ),
 );
-@include classes($Color, $color, $_media);
+@include set($Color, $color, $_media);
 
 // Styles
 // --------------------------------------------
