@@ -1,5 +1,5 @@
 // Media Builder
-// -------------
+// --------------------------------------------------
 // $media-map map - map where key is name of query, value is the query itself. Example:
 //    $media-map: (
 //       mobile:   media '(screen and (max-width: 740px )',
@@ -48,27 +48,30 @@
 
 }
 
-// Class-property Generator (implements set mixin)
-// -----------------------------------------------
+
+// Underlying implementation of set()
+// --------------------------------------------------
 // $property-shortcut string - class prefix for for given CSS property. Example: clr (CSS color)
 // $property-set list - list of class name & CSS value pairs. Example:
-//    $color-set: color ( <- color = valid CSS property name
+//    $color-set: color (
+//                ^-valid CSS property name]
 //        black, #333,
 //        white, #fdfdfd,
-//        ^name  ^value
+//        ^-name ^-value
 //      )
 //    );
 // @render one or more statement like selector { property: value }. Example:
 //    .clr-black {color: #333;} .clr-white {color: #fdfdfd;}
-@mixin _property($property-shortcut, $property-set, $device:null) {
-  $device-prefix: null;
-  $device-postfix: null;
+@mixin _set($property-shortcut, $property-set, $media-name:null) {
+  // initialize vars
+  $media-prefix: null;
+  $media-postfix: null;
   $class-prefix: null;
   $class-postfix: null;
   $selector-before: (null);
   $selector-after: (null);
 
-  //fist value always property name(s)
+  // fist value always property name(s)
   $property: nth($property-set, 1);
   $property-set: nth($property-set, 2);
 
@@ -76,22 +79,23 @@
   @while $i <= length($property-set) {
 
     $initial-value: nth($property-set, $i);
+    
     // step _
     // --------
     // prepend/append/clean device name
     @if $initial-value == prefix {
-      $device-prefix:_($device);
-      $device-postfix:null;
+      $media-prefix:_($media-name);
+      $media-postfix:null;
       $i: $i + 1 !global;
     }
     @if $initial-value == postfix {
-      $device-prefix:null;
-      $device-postfix:__($device);
+      $media-prefix:null;
+      $media-postfix:__($media-name);
       $i: $i + 1 !global;
     }
     @else if $initial-value == unfix {
-      $device-prefix:null;
-      $device-postfix:null;
+      $media-prefix:null;
+      $media-postfix:null;
       $i: $i + 1 !global;
     }
 
@@ -105,21 +109,20 @@
       $i: $i + 1 !global;
     }
 
-
     // step 1
     // ------
     // get class name
     $next-value: nth($property-set, $i);
     $i: $i + 1 !global;
 
-    //if pre/postfix class names are presented
+    // if pre/postfix class names are presented
     @if length($next-value) == 2 {
       $class-prefix: #{nth($next-value, 1)}_;
       $class-postfix: nth($next-value, 2);
     }
-    //if there is only class postfix
+    // if there is only class postfix
     @else {
-      $class-prefix: null; //reset prefix
+      $class-prefix: null; // reset prefix
       $class-postfix: $next-value;
     }
 
@@ -137,7 +140,7 @@
     // construct class
     $class-shortcut: if($property-shortcut!=null and $class-postfix!=null, '#{$property-shortcut}-', $property-shortcut);
     $selector:
-      #{$selector-before}#{'.'}#{$device-prefix}#{$class-prefix}#{$class-shortcut}#{$class-postfix}#{$device-postfix}#{$selector-after};
+      #{$selector-before}#{'.'}#{$media-prefix}#{$class-prefix}#{$class-shortcut}#{$class-postfix}#{$media-postfix}#{$selector-after};
 
     #{$selector} {
       $value: $property-value;
@@ -149,42 +152,79 @@
   }
 }
 
-// Class setter
-// -------------------------------------
-// $property-shortcut string - pass to _property mixin (see above)
-// @todo add '%' and '.'
-// @render
-@mixin set($property-shortcut, $list, $media-map:null) {
-  @if length($list) > 0 {
 
-    @if $media-map {
-      $property-name: nth($list, 1);
-      $property-list: nth($list, 2);
-
-      $media-devices: map-keys($media-map) !global;
-      $property-devices: nths($media-devices, indexes($media-devices, map-keys($property-list)));
-
-      @if length($property-devices) > 0 {
-        @for $i from 1 through length($property-devices) {
-          $device-name: nth($property-devices, $i);
-          $device-property-list: map-get($property-list, $device-name);
-
-          @include media($media-map, $device-name) {
-            @include _property($property-shortcut, $property-name $device-property-list, $device-name);
-          }
-        }
-      }
+// Place _set() mixin under specified media query
+// --------------------------------------------------
+@mixin _media-set($property-shortcut, $property-name, $set-media-list, $set-val-list, $media-map) {
+  @for $i from 1 through length($set-media-list) {
+    $media-name: nth($set-media-list, $i);
+    @include media($media-map, $media-name) {
+      @include _set($property-shortcut, $property-name $set-val-list, $media-name);
     }
-    @else {
-      @include _property($property-shortcut, $list);
-    }
-
   }
 }
 
+
+// Set Generator
+// --------------------------------------------------
+// $property-shortcut string - pass to _set() mixin (see above)
+// $data list/map -
+// $media-map map - map where key = name of media, value = media query
+// @render set of classes
+@mixin set($property-shortcut, $data, $media-map:null) {
+  @if $media-map {
+    // get all available media names
+    $media-list: map-keys($media-map);
+    // retrieve data
+    $property-name:   nth($data, 1);
+    $set-map:         nth($data, 2);
+
+    @each $key, $val in $set-map {
+      // $val == $set-val-list
+      
+      // keyword all
+      // -------------
+      @if $key == all {
+        @include _media-set($property-shortcut, $property-name, $media-list, $val, $media-map);
+      }
+      
+      // keyword media
+      // -------------
+      @else if str-exists($key, media) {
+        // generate $set-val-list under all media except default
+        @if nth($val, 1) == all {
+          // pass $media-list excluding default media
+          // pass $set-val-list excluding all keyword
+          @include _media-set($property-shortcut, $property-name, remove-value($media-list, default), nth($val, 2), $media-map);
+        }
+        
+        // generate $set-val-list under manually specified media
+        @else {
+          // get media list from first item of list
+          $media-list: nth($val, 1);
+          // pass $set-val-list excluding any keywords
+          @include _media-set($property-shortcut, $property-name, $media-list, nth($val, 2), $media-map);
+        }
+      }
+        
+      // no keywords
+      // -------------
+      // generate $set-val-list under one media specified by $key
+      @else {
+        @include _media-set($property-shortcut, $property-name, $key, $val, $media-map);
+      }
+    }
+  }
+  // there is no media just pass
+  @else {
+    @include _set($property-shortcut, $data);
+  }
+}
+
+
 // Class getter
-// -------------------------------------
-// @todo
+// --------------------------------------------------
+// @todo complete
 @function get($mixed-list, $class-name) {
   $property-list: nth($mixed-list, 1); //list with property name
   $property-list: nth($property-list, 2); //list without property name
@@ -241,8 +281,8 @@
 
 
 // Property and value setter
-// -------------------------------------
-// @todo
+// --------------------------------------------------
+// @todo complete
 @mixin property-value($args...) {
   $c: 1 !global;
   @while $c <= length($args) {
@@ -264,7 +304,7 @@
 
 
 // Clearfix
-// -------------
+// --------------------------------------------------
 // clearfix - is technique of overflow correction
 // to block element containing float elements
 @mixin clearfix() {
@@ -284,8 +324,9 @@
   // }
 }
 
+
 // Font-Face
-// -------------
+// --------------------------------------------------
 // Generate bulletproof @font-face rule for your custom fonts.
 @mixin font-face($font-family, $font-path, $font-weight: null, $font-style:null, $version:null, $svg-font-name:null) {
   $query: if($version,'?v=#{$version}', null);
