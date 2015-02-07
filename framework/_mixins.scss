@@ -152,7 +152,7 @@
 // Class setter
 // -------------------------------------
 // $property-shortcut string - pass to _property mixin (see above)
-// @todo
+// @todo add '%' and '.'
 // @render
 @mixin set($property-shortcut, $list, $media-map:null) {
   @if length($list) > 0 {
