@@ -10,13 +10,14 @@
 
 // HELPERS
 // --------------------------------------------------
+//
 @import 'helpers/globals.scss';
 @import 'helpers/classes.scss';
 
 
 // BASE
 // --------------------------------------------------
-// base folder holds the most basic styles of your GUI
+// base folder holds the most basic styles of your GUI are used across the entire app
 @import 'base/normalize.scss';
 @import 'base/type.scss';
 @import 'base/grid.scss';
