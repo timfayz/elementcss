@@ -12,7 +12,7 @@
   $grid-type: flexbox !default; // flexbox, float
   $grid-row-modes: gutter, columned !default;
 
-  $grid-params: calc-grid(12, column-gap, (60px, 20px)) !default;
+  $grid-params: calc-grid(12, gap, 1.5%) !default;
   $grid-media-params: (
     default: $grid-params,
     laptop: $grid-params,
