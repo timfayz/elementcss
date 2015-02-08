@@ -1,4 +1,6 @@
 #ELEMENT - New approach in creating styles for your application
+
+[![Join the chat at https://gitter.im/kalopsia/element](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/kalopsia/element?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 <sub>We are sorry for the language mistakes we have made - we are from Russia.</sub>
 
 ELEMENT is free and open-source CSS framework written in SASS that promotes clean, object-oriented design and encourages rapid prototyping. It helps you to create complex, scalable and elaborate GUI for the contemporary web applications as well as integrate to existing project. It provides thought-out structure and many other features, like theming. ELEMENT is not just framework, but tool and suit of best practices and the most advanced methods from many professionals to make web more robust and easy.
