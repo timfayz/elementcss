@@ -1,6 +1,5 @@
 // Default Variables
 // --------------------------------------------------
-$type-font-family-headings: $_font-family;
 $type-font-size-headings: (
   h1: $_font-size-xlg,
   h2: $_font-size-lg,
@@ -19,7 +18,10 @@ html {
 }
 
 body {
+  direction: if($_left==left, ltr, rtl);
   line-height: tounit($_line-height, rem);
+  font-weight: normal;
+  font-style: normal;
 }
 
 h1, .h1,
@@ -29,12 +31,22 @@ h4, .h4,
 h5, .h5,
 h6, .h6 {
   font-family: $_font-family;
+  text-rendering: optimizelegibility;
 }
+
 @each $header, $font-size in $type-font-size-headings {
   #{$header}, .#{$header} {
-    font-size: vr($font-size, $font:true);
+    font-size: vr($font-size, $font:true); // check
     line-height: vr(auto, $font:$font-size);
   }
+}
+
+small {
+  font-size: 80%;
+}
+
+p {
+
 }
 
 var,
@@ -45,4 +57,13 @@ samp {
   font-family: $_font-family-mono;
 }
 
-// etc
+sub, sup {
+  font-size: 75%;
+  line-height: 0;
+}
+sub {
+  top: -0.5em;
+}
+sup {
+  bottom: -0.25em;
+}

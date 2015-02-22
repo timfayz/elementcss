@@ -1,9 +1,11 @@
-@import '../_.scss'; // import core files
+@import '../_.scss'; // import CSS-ELEMENT
 
 // Default Variables
 // --------------------------------------------------
 $container: true !default;
 
+$container-media: $_media !default;
+$container-media-unit: $_media-unit !default;
 $container-media-params: (
   default: 940px,
   laptop: 940px,
@@ -16,10 +18,10 @@ $container-media-params: (
 // --------------------------------------------------
 @if $container {
 
-  $media-names: nths(map-keys($_media), indexes(map-keys($_media), map-keys($container-media-params)));
+  $media-names: nths(map-keys($container-media), indexes(map-keys($container-media), map-keys($container-media-params)));
   $media-params: nths(map-values($container-media-params), indexes(map-keys($container-media-params), $media-names));
 
-  // base styles
+  // base container
   .container {
     position: relative;
     margin-#{$_left}: auto;
@@ -27,16 +29,16 @@ $container-media-params: (
     @include clearfix();
   }
 
-  // media styles
+  // media containers
   @for $f from 1 through length($media-names) {
-    $name:    nth($media-names, $f);
-    $prefix:  _($name);
-    $param:   nth($media-params, $f);
+    $media-name:    nth($media-names, $f);
+    $media-param:   nth($media-params, $f);
+    $prefix:  _($media-name);
 
-    @include media($_media, $name, $_media-unit) {
-      .container { width: $param; }
+    @include media($media-name, $container-media, $container-media-unit) {
+      .container { width: $media-param; }
       @if $prefix {
-        .#{$prefix}container { width: $param; }
+        .#{$prefix}container { width: $media-param; }
       }
     }
   }

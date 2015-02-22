@@ -8,7 +8,7 @@
 //    );
 // $media-name string - key of corresponding key-value pair in $media-map. Example: mobile or touch
 // $unit unit - convert numbers are presented in query in accordance with $unit
-@mixin media($media-map, $media-name, $unit:$_media-unit) {
+@mixin media($media-name, $media-map:$_media, $unit:$_media-unit) {
   // if media map is not null
   @if $media-map {
     // get query with the associated name
@@ -56,8 +56,6 @@
 // '%' = placeholder, generate no content (need only for @extend operator)
 // '.' = class, default behaviour generate common selectors
 @function _split-set-data($data, $type) {
-  @debug '..._split-set-data()';
-  
   // return property name(s), always comes first
   @if $type == property-name {
     @return nth($data, 1);
@@ -96,7 +94,6 @@
 // $property-set list - list of class name & CSS value pairs.
 // @render one or more statements like: selector {property: value;}
 @mixin _set($property-shortcut, $data, $media-name:null) {
-  @debug '...process _set()';
   // initialize vars of constructor, see example at the end of the mixin
   // -------
   // vars above change during loop
@@ -208,10 +205,10 @@
 
 // Place _set() mixin under specified media query
 // --------------------------------------------------
-@mixin _media-set($property-shortcut, $property-name, $set-media-names, $set-media-values, $media-map) {
+@mixin _media-set($property-shortcut, $property-name, $set-media-names, $set-media-values, $media-map, $media-unit) {
   @for $i from 1 through length($set-media-names) {
     $media-name: nth($set-media-names, $i);
-    @include media($media-map, $media-name) {
+    @include media($media-name, $media-map, $media-unit) {
       @include _set($property-shortcut, append($property-name, $set-media-values), $media-name);
     }
   }
@@ -223,7 +220,7 @@
 // $data list/map - mixed data, can contain CSS property name, selector types, set values etc
 // $media-map map - map where key = name of media, value = media query
 // @render set of classes and/or placeholders
-@mixin set($property-shortcut, $data, $media-map:null) {
+@mixin set($property-shortcut, $data, $media-map:null, $media-unit:$_media-unit) {
   @if $media-map {
     // get all available media query names
     $media-names: map-keys($media-map);
@@ -245,7 +242,7 @@
       @if $key == all {
         // after 'all' key must immediately follow set-values
         $set-values: $val;
-        @include _media-set($property-shortcut, $property-name, $media-names, $set-values, $media-map);
+        @include _media-set($property-shortcut, $property-name, $media-names, $set-values, $media-map, $media-unit);
       }
 
       // keyword 'media'
@@ -257,7 +254,7 @@
           $media-names: remove-value($media-names, default);
           // pass $set-values excluding all keyword
           $set-values: nth($val, 2);
-          @include _media-set($property-shortcut, $property-name, $media-names, $set-values, $media-map);
+          @include _media-set($property-shortcut, $property-name, $media-names, $set-values, $media-map, $media-unit);
         }
         
         // generate $set-values under manually specified media
@@ -266,7 +263,7 @@
           $media-names: nth($val, 1);
           // pass $set-values excluding media names
           $set-values: nth($val, 2);
-          @include _media-set($property-shortcut, $property-name, $media-names, $set-values, $media-map);
+          @include _media-set($property-shortcut, $property-name, $media-names, $set-values, $media-map, $media-unit);
         }
       }
         
@@ -276,7 +273,7 @@
       @else {
         $media-name: $key;
         $set-values: $val;
-        @include _media-set($property-shortcut, $property-name, $media-name, $set-values, $media-map);
+        @include _media-set($property-shortcut, $property-name, $media-name, $set-values, $media-map, $media-unit);
       }
     }
   }
@@ -285,7 +282,6 @@
     @include _set($property-shortcut, $data);
   }
 }
-
 
 // Get Value from Set
 // --------------------------------------------------
