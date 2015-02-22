@@ -1,0 +1,11 @@
+// Container
+// --------------------------------------------------
+// you can add/delete entries according to names that exists in the $_media var
+$container-media-params: (
+  default: 940px,
+  laptop: 940px,
+  tablet: 700px,
+  mobile: 100%,
+);
+
+@import 'path-to/css-element/components/container.scss';

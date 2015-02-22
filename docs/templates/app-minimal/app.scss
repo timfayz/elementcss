@@ -1,0 +1,73 @@
+/*!
+ * Name: App Name
+ * Version: 1.0
+ * Authors: Your Name
+ * Author URL: example.com
+ * Powered by:
+ * CSS-ELEMENT | MIT License | github.com/kalopsia/element
+ */
+
+// CSS-ELEMENT
+// --------------------------------------------------
+// import framework functions, mixins and vars
+@import 'css-element/_.scss';
+
+
+// Global Variables
+// --------------------------------------------------
+// see all available variables in the css-element/_globals.scss
+$_font-size:    1rem;
+$_line-height:  1.7;
+
+$_media-unit: rem;
+$_media: (
+  default: null,
+  mobile:  media 'screen and (max-width:' 740px ')',
+  tablet:  media 'screen and (max-width:' 1024px ')',
+  laptop:  media 'screen and (min-width:' 1366px ')',
+  touch:   '.touch',
+);
+
+
+// Normalize
+// --------------------------------------------------
+// see all available variables in the file
+@import 'css-element/components/normalize.scss';
+
+
+// Grid System
+// --------------------------------------------------
+// see all available variables in the file
+$grid-params: calc-grid(12, gap, 2%);
+@import 'css-element/components/grid.scss';
+
+
+// Sets
+// --------------------------------------------------
+// see all available variables in the file
+@import 'css-element/components/set.scss';
+
+
+// Your Sets
+// --------------------------------------------------
+// the syntax you can see in the documentation (section Usage)
+$color: color (
+  default: (
+    black, #000,
+    white, #fff,
+  ),
+  tablet: (prefix,
+    white, #fff,
+  ),
+  mobile: (prefix,
+    black, #000,
+    white, #fff,
+  ),
+);
+@include set($Color, $color, $_media);
+
+
+// Styles
+// --------------------------------------------------
+// create your own styles here
+

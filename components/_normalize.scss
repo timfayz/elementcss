@@ -1,8 +1,4 @@
-@import '../globals.scss';
-@import '../functions.scss';
-@import '../naming.scss';
-@import '../mixins.scss';
-@import '../vr.scss';
+@import '../_.scss'; // import core files
 
 // Default Variables
 // --------------------------------------------------
@@ -11,10 +7,10 @@
 
 // Output Styles
 // --------------------------------------------------
-//@if $normalize or $normalize==static {
+@if $normalize {
 
   // Basic
-  // --------------------------------
+  // -------------------------
   * {
     box-sizing: border-box;
   }
@@ -23,10 +19,12 @@
   }
 
   ::selection {
-    background-color: $_selection-color;
+    background-color: $_cursor-selection-color;
   }
 
   html {
+    font-family: $_font-family;
+    font-size: tounit($_font-size, auto);
     -ms-text-size-adjust: 100%;
     -webkit-text-size-adjust: 100%;
     text-size-adjust: 100%;
@@ -35,6 +33,7 @@
   body {
     margin:0;
     cursor: $_cursor-default;
+    line-height: tounit($_line-height, auto);
     direction: if($_left==left, ltr, rtl);
     font-size: inherit;
     font-weight: normal;
@@ -43,7 +42,7 @@
   }
 
   h1, h2, h3, h4, h5, h6 {
-    margin:0;
+    margin: 0;
     font-weight: inherit;
     font-size: inherit;
     color: inherit;
@@ -62,7 +61,7 @@
   }
 
   // Formatting
-  // --------------------------------
+  // -------------------------
   abbr {
     &[title] {
       border: none;
@@ -81,7 +80,7 @@
     font-style: italic;
   }
   code {
-    font-family: monospace;
+    font-family: $_font-family-mono;
     font-size: inherit;
   }
   del {
@@ -99,7 +98,7 @@
   ins {}
   kbd {
     font-size: inherit;
-    font-family: monospace;
+    font-family: $_font-family-mono;
   }
   mark {
     background: transparent;
@@ -111,7 +110,7 @@
     width: 100%;
   }
   pre {
-    font-family: monospace;
+    font-family: $_font-family-mono;
     font-size: inherit;
     white-space: pre-wrap;
     margin: 0;
@@ -130,7 +129,7 @@
     text-decoration: line-through;
   }
   samp {
-    font-family: monospace;
+    font-family: $_font-family-mono;
     font-size: inherit;
   }
   small {
@@ -156,12 +155,12 @@
   time {}
   u {}
   var {
-    font-family: monospace;
+    font-family: $_font-family-mono;
   }
 
 
   // Forms
-  // --------------------------------
+  // -------------------------
   form {
     margin:0;
   }
@@ -225,100 +224,61 @@
     font-size: inherit;
     font-family: inherit;
   }
+  // input [type]s:
+  // radio
+  // checkbox
+  // range?
+  // button
+  // reset
+  // submit
+  // hidden
+  // image?
+  // date  
+  // datetime  
+  // datetime-local  
+  // email  
+  // file  
+  // month  
+  // number  
+  // password  
+  // search  
+  // tel  
+  // text  
+  // time  
+  // url  
+  // week
+  
+  select[readonly],
+  textarea[readonly],
+  button[readonly],
+  input:not([type])[readonly],
+  input[readonly],
+  .#{$readonly}
+  {
+    cursor: $_cursor-default;
+  }
+
+  select[disabled],
+  textarea[disabled],
+  button[disabled],
+  input:not([type])[disabled],
+  input[disabled],
+  .#{$disabled}
+  {
+    cursor: $_cursor-default;
+  }
+  
+  // Search
   input[type="search"] {
     -webkit-appearance: textfield;
     box-sizing: inherit;
     -moz-box-sizing: inherit;
     -webkit-box-sizing: inherit;
   }
-  // Inputs
-  // all types except: radio, checkbox, range?, button, reset, submit, hidden, image?
-  select,
-  textarea,
-  input:not([type]),
-  input[type="date"],
-  input[type="datetime"],
-  input[type="datetime-local"],
-  input[type="email"],
-  //input[type="file"],
-  input[type="month"],
-  input[type="number"],
-  input[type="password"],
-  input[type="search"],
-  input[type="tel"],
-  input[type="text"],
-  input[type="time"],
-  input[type="url"],
-  input[type="week"],
-  .#{$input} {
-//    box-sizing: border-box;
-//    display: block;
-//    margin: 0;
-//    padding: 0;
-//    border: 0;
-//    outline: 0;
-//    width: 100%;
-//    color: inherit;
-//    line-height: inherit;
-    height: auto;
-//    font-family: inherit;
-//    font-size: inherit;
-//    vertical-align: middle;
-  }
 
-  select[readonly],
-  textarea[readonly],
-  input:not([type])[readonly],
-  input[type="date"][readonly],
-  input[type="datetime"][readonly],
-  input[type="datetime-local"][readonly],
-  input[type="email"][readonly],
-  input[type="file"][readonly],
-  input[type="month"][readonly],
-  input[type="number"][readonly],
-  input[type="password"][readonly],
-  input[type="search"][readonly],
-  input[type="tel"][readonly],
-  input[type="text"][readonly],
-  input[type="time"][readonly],
-  input[type="url"][readonly],
-  input[type="week"][readonly],
-  .#{$input-readonly} {
-    cursor: $_cursor-default;
-  }
-
-  select[disabled],
-  textarea[disabled],
-  input:not([type])[disabled],
-  input[type="date"][disabled],
-  input[type="datetime"][disabled],
-  input[type="datetime-local"][disabled],
-  input[type="email"][disabled],
-  input[type="file"][disabled],
-  input[type="month"][disabled],
-  input[type="number"][disabled],
-  input[type="password"][disabled],
-  input[type="search"][disabled],
-  input[type="tel"][disabled],
-  input[type="text"][disabled],
-  input[type="time"][disabled],
-  input[type="url"][disabled],
-  input[type="week"][disabled],
-  .#{$input-disabled} {
-    cursor: $_cursor-default;
-  }
-
-  input[type="file"], .#{$input}-file {
+  // File
+  input[type="file"] {
     box-sizing: border-box;
-//    display: block;
-//    margin: 0;
-//    padding: 0;
-//    outline: 0;
-//    width: 100%;
-//    color: inherit;
-//    font-family: inherit;
-//    font-size: inherit;
-//    line-height: inherit;
     height: auto;
     vertical-align: middle;
     cursor: $_cursor-pointer;
@@ -329,62 +289,31 @@
   input[type="radio"],
   input[type="color"],
   input[type="range"],
-  input[type="image"],
-  .#{$radio},
-  .#{$checkbox} {
-//    border: 0;
-//    outline: 0;
-//    margin: 0;
-//    line-height: inherit;
+  input[type="image"]
+  {
     vertical-align: inherit;
     cursor: $_cursor-pointer;
   }
-  input[type="checkbox"][disabled],
-  input[type="radio"][disabled],
-  .#{$radio-disabled},
-  .#{$checkbox-disabled} {
-    cursor: $_cursor-default;
-  }
 
-  // Buttons
+  // Button like
   button {
     color: inherit;
     overflow: visible;
     text-transform: none;
   }
-
   button,
   input[type="button"],
   input[type="reset"],
   input[type="submit"],
   .#{$button} {
     cursor: $_cursor-pointer;
-//    display: block;
-//    margin: 0;
-//    padding: 0;
-//    border: 0;
-//    outline: none;
-//    width: 100%;
-//    color: inherit;
-//    font-family: inherit;
-//    font-size: inherit;
-//    background: none;
-//    line-height: inherit;
     text-align: center;
     vertical-align: middle;
   }
 
-  button[disabled],
-  input[type="button"][disabled],
-  input[type="reset"][disabled],
-  input[type="submit"][disabled],
-  .#{$button-disabled} {
-    cursor: $_cursor-default;
-  }
-
 
   // Images
-  // --------------------------------
+  // -------------------------
   img {
     border: 0;
     max-width: 100%;
@@ -407,7 +336,7 @@
   }
 
   // Links
-  // --------------------------------
+  // -------------------------
   a {
     background: transparent;
     color: inherit;
@@ -417,7 +346,7 @@
     }
     &:hover {
       outline: none;
-      //color: inherit; ??
+      //color: inherit; ?
       cursor: $_cursor-pointer;
     }
     &:active {
@@ -429,7 +358,7 @@
   }
 
   // Lists
-  // --------------------------------
+  // -------------------------
   ul, ol {
     list-style: none;
     position:relative;
@@ -452,7 +381,7 @@
   }
 
   // Media
-  // --------------------------------
+  // -------------------------
   audio {
     //width: 100%;
     display: block;
@@ -471,7 +400,7 @@
 
 
   // Sections
-  // --------------------------------
+  // -------------------------
   main,
   header,
   footer,
@@ -485,7 +414,7 @@
   }
 
   // Tables
-  // --------------------------------
+  // -------------------------
   table {
     line-height: inherit;
     font-size: inherit;
@@ -504,7 +433,7 @@
   }
 
   // Polyfills
-  // --------------------------------
+  // -------------------------
   //Required for Windows 8 Metro split-screen snapping with IE10
   @-ms-viewport{
     width: device-width;
@@ -554,6 +483,4 @@
     -webkit-appearance: none;
   }
 
-//}
-//
-//$normalize: false;
+} $normalize: false;

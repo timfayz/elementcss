@@ -1,0 +1,19 @@
+// Grid System
+// --------------------------------------------------
+// grid.scss generate grid system styles for easy page layout
+// add/delete variables to overwrite/restore default behaviour
+$grid-params: calc-grid(12, column-gap, (60px, 20px));
+$grid-media-params: (
+  default: $grid-params,
+  laptop: $grid-params,
+  tablet: $grid-params,
+  mobile: $grid-params,
+);
+$grid-set: (
+  default: columns offsets pushes pulles,
+  laptop: columns offsets pushes pulles,
+  tablet: columns offsets pushes pulles,
+  mobile: columns offsets pushes pulles,
+);
+
+@import 'path-to/css-element/components/grid.scss';
