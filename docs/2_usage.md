@@ -1,15 +1,17 @@
 #CSS-ELEMENT USAGE
 **[Return to the beginning](https://github.com/kalopsia/element/blob/master/docs/0_preface.md)**<br/>
 
-*First of all it is important to learn the basics of HTML/HTML5, CSS/CSS3 and SASS. At the beginning you may find the framework difficult - different logic, many variables, many files, unknown functions, mixins, methods in creating styles etc. However sometime later when you become better acquainted with SASS and CSS-ELEMENT you realize that the mentioned difficulties are quite simple and logically required to achieve previously mentioned features.*
+*First of all it is important to learn the basics of HTML/HTML5, CSS/CSS3 and SASS. At the beginning you may find framework difficult - different logic, many variables, many files, unknown functions, mixins and methods in creating styles. However sometime later when you learn SASS and CSS-ELEMENT better you realize that the mentioned difficulties are quite simple and logically required to achieve previously mentioned features.*
 
 ##Create New Project
-Let's get started with CSS-ELEMENT on an example. First of all, to make the process easier we need to choose template under `docs/templates/app-*` folder. We choose `app-minimal` to start play without the mess. Copy and paste file `app.scss` from the folder near to the [downloaded](https://github.com/kalopsia/element/archive/master.zip) and extracted `element-master` archive. *master* is automatically added prefix by github - it means you get copy from *master* branch and as a rule it's the latest version of repository. From now on we have a structure as follows:
+Let's get started with CSS-ELEMENT on an example. First of all, to make the process easier we need to choose template under `docs/templates/app-*` folder. We choose `app-minimal` to start play without the mess. Copy and paste file `app.scss` from the folder near to the [downloaded](https://github.com/kalopsia/element/archive/master.zip) and extracted `element-master` archive. *master* prefix is added automatically by github - it means you get copy from *master* branch and as a rule it's the latest version of repository. From now on we need to bring the structure in the following form:
 
 ```
-app.scss
-element-master
+myproject/
+    element-master/
+    app.scss
 ```
+@todo add `sass` command here and warn to change paths!
 
 Lets explore line by line how to use CSS-ELEMENT:
 

@@ -7,31 +7,35 @@
 4. [Conventions](https://github.com/kalopsia/element/blob/master/docs/4_conventions.md)<br/>
 
 ##Preface
-CSS-ELEMENT is free and open-source CSS framework written in SASS that promotes clean, object-oriented design and encourages rapid prototyping. It helps you to create complex, scalable and elaborate GUI for the contemporary web applications as well as integrate to existing project. It provides thought-out structure and many other features, like theming. CSS-ELEMENT is not just framework, but tool and suit of best practices and the most advanced methods from many professionals to make web more robust and easy.
+CSS-ELEMENT is free and open-source CSS framework written in SASS that promotes clean, object-oriented design and encourages rapid prototyping. It helps you to create complex, scalable and elaborate GUI for the contemporary web applications as well as integrate to existing project. The way of working, thought-out structure and features make it possible even recreate other popular frameworks or just create your favorite theme, use it and share. CSS-ELEMENT is not just framework, but tool and suit of best practices and methods from many professionals around the world to make GUI building more maintainable, easier and faster.
 
-CSS-ELEMENT is based on [SASS](http://sass-lang.com/guide) preprocessor. If you use plain CSS to make your styles, you will love preprocessors, particularly SASS.
+The framework is based on [SASS](http://sass-lang.com/guide) preprocessor. If you use plain CSS to make your styles, you will love preprocessors, particularly SASS.
 
-CSS-ELEMENT allows people to choose what they want and generate what they want. Currently framework allow you to outline your desirable GUI and prototype them via classes. A little bit later we present the ways of doing that.
+CSS-ELEMENT allows people to choose what they want and generate what they want. Currently framework allows you to outline your desirable GUI and prototype them via "atomic" classes. A little bit later we present the ways of doing that.
 
-##The Problem
-The key reason of CSS-ELEMENT was to create framework and principe of writing styles that allows you don't think about "aging" and "clogging" styles. Something that allow you prototype GUI as fast as "What You See Is What You Get" editor. It is means that "something" should be modular, abstract, flexible, strict and logical that will differentiate it from other frameworks and methods (like OOCSS, ACSS, BEM, SMACSS) are existing. As a result CSS-ELEMENT can be used to create your own themes using known methods (OOCSS, ACSS, BEM) and absolutely unique styles with a very flexible control mechanism. It is worth noting that CSS-ELEMENT is not easy to use at the first time, but the better you know CSS-ELEMENT, the better you understand the power of this instrument and CSS itself.
+##The Problem or Why I need this yet another framework!?
+The key reason of CSS-ELEMENT was to create framework or principe of building styles that allows you don't think about **"aging"** and **"clogging"** styles. Something that allow you prototype GUI as fast as "What You See Is What You Get" editor if you have good CSS knowledge. It is means that "something" should be modular, abstract, flexible, strict and logical that will differentiate it from other frameworks and methods are existing (OOCSS, ACSS, BEM, SMACSS etc). As a result CSS-ELEMENT can be used not only for creating your own styles (eg using the same well-known methods OOCSS, ACSS, BEM), but even shareable themes with consistent API.
 
-##The Solution
-To solve the problems described above we invent new method in creating styles: **one class** = **one CSS property**. At the firs time it sounds a little bit crazy, but time after time we tested it we realized that it works and it works really good! Thus far the rest of this documentation will explain how to use this method to create your own styles in CSS-ELEMENT way. However as an example CSS-ELEMENT already has well-designed built-in components (like grid system, typography, vertical rhythm and normalize) and well-established practice (like clearfix, hidden text etc). They can be used as they are intended or as an good examples to create new ones.
+As a rule the most of existing frameworks have its own **"look and feel"** which makes it difficult to focus on truly **your** unique design. That is why CSS-ELEMENT doesn't have any predefined "look and feel" (styled forms, buttons etc). It is worth noting the framework is not easy to use at the first time, but the better you know CSS-ELEMENT and CSS itself, the better you understand the power of this instrument.
 
- *CSS-ELEMENT way* means generate CSS selectors that contain only one CSS value and as a rule one property, for this method introduced the term ***set***. *Set* is the set of classes where *one class = one CSS property*. To create *set* we use special mixin, notation and naming rules; it gives ease of creating and using big amount of classes (see section Usage for more information). This approach allow us not to get lost in your own styles when we scale. When you learn more about CSS-ELEMENT and CSS itself you can create GUI on the fly or in WYSIWYG way by applying many CSS classes to HTML elements (similar to OOCSS). As soon as you create sufficient amount of classes you could extend them to more generic classes. But let's not get ahead of ourselves.
+##The Solution or Why you like this tool!
+To solve the problems described above we introduce new method: **one class** = **one CSS property** or **atomic class** (at the moment we can use several properties but with the same CSS value). At the firs time it sounds a little bit crazy, but time after time we tested it we realized that it works and it works really good! Thus far the rest of this documentation will explain how to use this method to create styles *in CSS-ELEMENT way*. CSS-ELEMENT already has well-designed built-in components (grid system, typography, vertical rhythm and normalize) and well-established practice (like clearfix, hidden text etc). However available components designed so they don't affect your "exterior design" and work insensibly. So you don't need to think about how to change here and there to modify default look. Components can be used as they are intended or as an good examples to create new ones.
 
-##Features
-What can I do with CSS-ELEMENT? The framework has different structure, abstraction and thus different features:
-* **Fast Prototyping**. Do not think about how to change here and there to make you styles unique. Just generate what you want. Outline what you want to see and start to prototype your own GUI.
-* **Logical class names**. Every class names enforce to general rules. It provides intuitive and easy remembering.
-* **Flexibility & Deep customization**. CSS-ELEMENT generates nothing by default so that you decide what the component you want to import. Namespace variables allow you to remember them easily as well as control and generate necessary features.
+ *CSS-ELEMENT way* means generate CSS selectors contain only one CSS value and as a rule one property (**atomic classes**). This method introduce new term **set**. **Set** is combined set of atomic classes under the same CSS property(ies). Set can be generated in the main flow as well as under some of @media rules or another CSS selectors. Section *Usage* shows a specific example how it looks like.
+ 
+ To create **set** we use special mixin and notation; it gives ease of creating and using big amount of classes. This approach allows us not to get lost in your own atomic classes when we scale. When you learn more about this tool and CSS itself you can create GUI on the fly or in WYSIWYG way by applying many unified CSS classes to HTML tags without thinking how to organize abstraction level (like we do it in OOCSS method). As soon as you create sufficient amount of classes you could extend them into more generic classes (eg BEM) there is no restrictions. But let's not get ahead of ourselves.
+
+##Features or What can I do with CSS-ELEMENT?
+The framework has different structure, philosophy and thus different features:
+* **Fast Prototyping**. Think and generate what you want in the beginning. Outline what you want to see and start to prototype your desired GUI.
+* **Logical class names**. CSS-ELEMENT has big amount of predefined class names which makes set's class names enforced to general rules. It provides intuitive and easy remembering.
+* **Flexibility & Deep customization**. CSS-ELEMENT generates nothing by default so that you decide what the component you want to import. Namespace variables allow you to remember them easily as well as add/remove/overwrite necessary features.
 * **Best practices**. We merge best experience and ideas from the most popular frameworks and tools like normalize.css, bootstrap and foundation.
 * **Well-designed**. Modular structure of each component make it possible to read source code and learn from the experience.
 * **Normalize & Tags initiating**. CSS-ELEMENT make all HTML tags normalized and looking identical.
 * **Vertical Rhythm**. CSS-ELEMENT provides vertical line-height synchronization. It is mean that all elements follow to invisible vertical grid.
 * **Powerful Grid System (Flexbox included)**. Fully customized grid system which has some "defacto" standards like column offset, pushing, pulling, centering etc. However features (hence code amount) can be easily reduced. Grid system allow you set your own @media queries.
-* **Mobile First**. CSS-ELEMENT way of working allow you manage your CSS @media queries easily and strictly.
+* **Mobile First**. CSS-ELEMENT way of working allow you manage and extend your CSS @media queries easily and strictly.
 
 *The word "easily" suggests that you have solid knowledge of CSS, SASS and HTML.*
 
@@ -42,7 +46,7 @@ Otherwise you will experience difficulties in understanding principles of work a
 
 ##What is CSS framework?
 
-`[edit]` CSS frameworks are pre-prepared libraries that allow you make easier, more standards-compliant styling of web pages using the Cascading Style Sheets language. ([wiki](http://en.wikipedia.org/wiki/CSS_frameworks))
+CSS frameworks are pre-prepared libraries that allow you prototype your CSS GUI easier, with enhanced cross-browser support using the Cascading Style Sheets language. ([wiki](http://en.wikipedia.org/wiki/CSS_frameworks))
 
 ##What is SASS?
 
@@ -80,6 +84,9 @@ both will be compiled into
 
 *Skip if you know nothing about LESS.*<br/>
 Originally I was creating CSS-ELEMENT in LESS, but sometime later I realized that LESS doesn't have enough features to release necessary and pursued ideas. So I switched to SASS. Now there is no doubt after the release of version 3.3 - SASS become the most advanced CSS preprocessor!
+
+##Go Next!
+If you are experienced user of SASS and CSS go to section [Usage](https://github.com/kalopsia/element/blob/master/docs/2_usage.md) and to learn more. If you newbie in this area go to next section [Installation](https://github.com/kalopsia/element/blob/master/docs/1_installation.md) to prepare yourself for using SASS.
 
 ---
 
