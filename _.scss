@@ -8,14 +8,12 @@
 // good examples to create your own. For those who wants understand not only usage but implementation largely - contact me.
 // To learn more about how to work with CSS-ELEMENT, please, see documentation under docs/*.md.
 
-// globals.scss file defines global variables that can be used by any built-in components (components/*.scss) or in your
+// global.scss file defines global variables that can be used by any built-in components (components/*.scss) or in your
 // own components in a particular context. All global vars start with _ (underscore) to avoid name collisions.
-@import "globals.scss";
+@import "global.scss";
 
-// functions.scss and mixins.scss files contain the minimum number of functions and mixins are required to provide full
-// CSS-ELEMENT functionality. Mixins.scss file uses some functions from functions.scss so it depends from the last one.
-@import "functions.scss";
-@import "mixins.scss";
+// utils.scss file contains the minimum number of functions & mixins are required to provide full CSS-ELEMENT functionality.
+@import "utils.scss";
 
 // naming.scss file provides well-designed abbreviations and prefixes to create styles in CSS-ELEMENT way.
 @import "naming.scss";
