@@ -50,6 +50,7 @@ $set-font-size-xxsm:      $_font-size * 0.6 !default;
   // ---------------
   $set-z-index: z-index (
     default: (
+      n1, -1,
       0, 0,
       $Default, $set-z-default,
       $Xsm, $set-z-xsm,
@@ -67,13 +68,6 @@ $set-font-size-xxsm:      $_font-size * 0.6 !default;
     default: (
       0, 0,
       1, 1,
-      $Xxsm, 0.1,
-      $Xsm, 0.2,
-      $Sm, 0.3,
-      $Md, 0.5,
-      $Lg, 0.6,
-      $Xlg, 0.7,
-      $Xxlg, 0.9
     )
   ) !default;
   @include set($Opacity, $set-opacity, $set-media);
@@ -81,22 +75,7 @@ $set-font-size-xxsm:      $_font-size * 0.6 !default;
   // Position
   // ------------------
   $set-position: position (
-    default: (
-      fixed, fixed,
-      relative, relative,
-      absolute, absolute,
-    ),
-    laptop: (prefix,
-      fixed, fixed,
-      relative, relative,
-      absolute, absolute,
-    ),
-    tablet: (prefix,
-      fixed, fixed,
-      relative, relative,
-      absolute, absolute,
-    ),
-    mobile: (prefix,
+    all: (
       fixed, fixed,
       relative, relative,
       absolute, absolute,
@@ -139,45 +118,41 @@ $set-font-size-xxsm:      $_font-size * 0.6 !default;
   // Margin
   // -----------------
   $set-margin-set: (
-    default: (
-      0, 0,
-      auto, auto,
-      $Default, vr($set-size-default),
-      $Xxsm, vr($set-size-xxsm),
-      $Xsm, vr($set-size-xsm),
-      $Sm, vr($set-size-sm),
-      $Md, vr($set-size-md),
-      $Lg, vr($set-size-lg),
-      $Xlg, vr($set-size-xlg),
-      $Xxlg, vr($set-size-xxlg),
-    )
+    0, 0,
+    auto, auto,
+    $Default, vr($set-size-default),
+    $Xxsm, vr($set-size-xxsm),
+    $Xsm, vr($set-size-xsm),
+    $Sm, vr($set-size-sm),
+    $Md, vr($set-size-md),
+    $Lg, vr($set-size-lg),
+    $Xlg, vr($set-size-xlg),
+    $Xxlg, vr($set-size-xxlg),
   ) !default;
-  @include set($Margin, margin $set-margin-set, $set-media);
-  @include set($Margin-top, margin-top $set-margin-set, $set-media);
-  @include set($Margin-right, margin-right $set-margin-set, $set-media);
-  @include set($Margin-bottom, margin-bottom $set-margin-set, $set-media);
-  @include set($Margin-left, margin-left $set-margin-set, $set-media);
+  @include set($Margin, margin $set-margin-set);
+  @include set($Margin-top, margin-top $set-margin-set);
+  @include set($Margin-right, margin-right $set-margin-set);
+  @include set($Margin-bottom, margin-bottom $set-margin-set);
+  @include set($Margin-left, margin-left $set-margin-set);
   
   // Padding
   // -----------------
   $set-padding-set: (
-    default: (
-      0, 0,    
-      $Default, vr($set-size-default),
-      $Xxsm, vr($set-size-xxsm),
-      $Xsm, vr($set-size-xsm),
-      $Sm, vr($set-size-sm),
-      $Md, vr($set-size-md),
-      $Lg, vr($set-size-lg),
-      $Xlg, vr($set-size-xlg),
-      $Xxlg, vr($set-size-xxlg),
-    )
+    0, 0,    
+    $Default, vr($set-size-default),
+    $Xxsm, vr($set-size-xxsm),
+    $Xsm, vr($set-size-xsm),
+    $Sm, vr($set-size-sm),
+    $Md, vr($set-size-md),
+    $Lg, vr($set-size-lg),
+    $Xlg, vr($set-size-xlg),
+    $Xxlg, vr($set-size-xxlg),
   ) !default;
-  @include set($Padding, padding $set-padding-set, $set-media);
-  @include set($Padding-top, padding-top $set-padding-set, $set-media);
-  @include set($Padding-right, padding-right $set-padding-set, $set-media);
-  @include set($Padding-bottom, padding-bottom $set-padding-set, $set-media);
-  @include set($Padding-left, padding-left $set-padding-set, $set-media);
+  @include set($Padding, padding $set-padding-set);
+  @include set($Padding-top, padding-top $set-padding-set);
+  @include set($Padding-right, padding-right $set-padding-set);
+  @include set($Padding-bottom, padding-bottom $set-padding-set);
+  @include set($Padding-left, padding-left $set-padding-set);
   
   // Line-Height
   // ---------------------
@@ -264,7 +239,6 @@ $set-font-size-xxsm:      $_font-size * 0.6 !default;
   ) !default;
   @include set($Justify-content, $set-justify-content, $set-media);
 
-
   // Align-content
   // ----------------------
   $set-align-set: (
@@ -279,29 +253,35 @@ $set-font-size-xxsm:      $_font-size * 0.6 !default;
   @include set($Align-content, align-content $set-align-set, $set-media);
   @include set($Align-items, align-items $set-align-set, $set-media);
   @include set($Align-self, align-self $set-align-set, $set-media);
-
+  
+  // Flex-direction
+  // ----------------------
+  $set-flex-direction: flex-direction (
+    all: (prefix,
+      row, row,
+      row-reverse, row-reverse,
+      column, column,
+      column-reverse, column-reverse,
+      nowrap, nowrap
+    )
+  );
+  @include set($Flex-direction, $set-flex-direction, $set-media);
+        
   // Border
   // --------------------
   $set-border-set: (
-    default: (
       0, 0
-    ),
   ) !default;
-  @include set($Border, border $set-border-set, $set-media);
-  @include set($Border-top, border-top $set-border-set, $set-media);
-  @include set($Border-right, border-right $set-border-set, $set-media);
-  @include set($Border-bottom, border-bottom $set-border-set, $set-media);
-  @include set($Border-left, border-left $set-border-set, $set-media);
+  @include set($Border, border $set-border-set);
+  @include set($Border-top, border-top $set-border-set);
+  @include set($Border-right, border-right $set-border-set);
+  @include set($Border-bottom, border-bottom $set-border-set);
+  @include set($Border-left, border-left $set-border-set);
 
   // Display
   // ----------------------
   $set-display: display (
     default: (
-      none, none,
-      block, block,
-      inline, inline,
-      inline-block, inline-block,
-      flex, flex,
       table, table,
       //table-row, table-row,
       //table-cell, table-cell,
@@ -310,76 +290,44 @@ $set-font-size-xxsm:      $_font-size * 0.6 !default;
       //table-body, table-row-group,
       //table-footer, table-footer-group,
     ),
-    laptop: (prefix,
+    all: (prefix
       none, none,
       block, block,
       inline, inline,
       inline-block, inline-block,
       flex, flex,
     ),
-    tablet: (prefix,
-      none, none,
-      block, block,
-      inline, inline,
-      inline-block, inline-block,
-      flex, flex,
-    ),
-    mobile: (prefix,
-      none, none,
-      block, block,
-      inline, inline,
-      inline-block, inline-block,
-      flex, flex,
-    ),
-    //@todo add portrait, landscape etc
   ) !default;
   @include set($Display, $set-display, $set-media);
 
   // Visibility
   // ----------------------
   $set-visibility: visibility (
-    default: (
+    all: (prefix,
       visible, visible,
       hidden, hidden,
     ),
-    laptop: (prefix,
-      visible, visible,
-      hidden, hidden,
-    ),
-    tablet: (prefix,
-      visible, visible,
-      hidden, hidden,
-    ),
-    mobile: (prefix,
-      visible, visible,
-      hidden, hidden,
-    ),
-    //@todo add portrait, landscape etc
   ) !default;
   @include set($Visibility, $set-visibility, $set-media);
 
   // List-style
   // ----------------------
   $set-list-style: list-style (
-    default: (
-      none, none,
-      disc, disc,
-      square, square
-    )
+    none, none,
+    disc, disc,
+    square, square
   ) !default;
-  @include set($List-style, $set-list-style, $set-media);
+  @include set($List-style, $set-list-style);
 
 
   // Font-Family
   // ---------------------
   $font-family: font-family (
-    default: (
-      sans, $set-font-family-sans,
-      serif, $set-font-family-serif,
-      mono, $set-font-family-mono,
-    ),
+    sans, $set-font-family-sans,
+    serif, $set-font-family-serif,
+    mono, $set-font-family-mono,
   ) !default;
-  @include set($Font-family, $font-family, $set-media);
+  @include set($Font-family, $font-family);
 
   // Font-Size
   // ---------------------
@@ -400,43 +348,35 @@ $set-font-size-xxsm:      $_font-size * 0.6 !default;
   // Font-Weight
   // ---------------------
   $set-font-weight: font-weight (
-    default: (
-      normal, normal,
-      bold, bold
-    ),
+    normal, normal,
+    bold, bold
   ) !default;
-  @include set($Font-weight, $set-font-weight, $set-media);
+  @include set($Font-weight, $set-font-weight);
 
   // Font-Style
   // ---------------------
   $set-font-style: font-style (
-    default: (
-      italic, italic,
-      normal, normal
-    ),
+    italic, italic,
+    normal, normal
   ) !default;
-  @include set($Font-style, $set-font-style, $set-media);
+  @include set($Font-style, $set-font-style);
 
   // Text-Decoration
   // ---------------------
   $set-text-decoration: text-decoration (
-    default: (
-      underline, underline,
-      through, line-through
-    ),
+    underline, underline,
+    through, line-through
   ) !default;
-  @include set($Text-decoration, $set-text-decoration, $set-media);
+  @include set($Text-decoration, $set-text-decoration);
 
   // Text-Transform
   // ---------------------
   $set-text-transform: text-transform (
-    default: (
-      uppercase, uppercase,
-      lowercase, lowercase,
-      capitalize, capitalize
-    ),
+    upper, uppercase,
+    lower, lowercase,
+    capital, capitalize
   ) !default;
-  @include set($Text-transform, $set-text-transform, $set-media);
+  @include set($Text-transform, $set-text-transform);
 
   // Text-Align
   // ---------------------
@@ -462,29 +402,6 @@ $set-font-size-xxsm:      $_font-size * 0.6 !default;
   ) !default;
   @include set($White-space, $set-white-space, $set-media);
 
-  // Text utils
-  // ---------------------
-  $set-text-utils: true !default;
-  @if $set-text-utils {
-    .text-hidden {
-      font: 0/0 a;
-      color: transparent;
-      text-shadow: none;
-      background-color: transparent;
-      border: 0;
-    }
-    .text-clip {
-      white-space:nowrap;
-      overflow:hidden;
-      text-overflow:clip;
-    }
-    .text-ellipsis {
-      white-space:nowrap;
-      overflow:hidden;
-      text-overflow:ellipsis;
-    }
-  }
-
   // Floats
   // ---------------------
   $set-float: float (
@@ -495,13 +412,6 @@ $set-font-size-xxsm:      $_font-size * 0.6 !default;
     ),
   ) !default;
   @include set($Float, $set-float, $set-media);
-
-  // Clearfix
-  // ---------------------
-  $set-clearfix: true !default;
-  @if $set-clearfix {
-    .clearfix { @include clearfix(); }
-  }
 
   // Overflow
   // ---------------------
@@ -518,26 +428,24 @@ $set-font-size-xxsm:      $_font-size * 0.6 !default;
   // Cursor
   // ---------------------
   $set-cursor: cursor (
-    default: (
-      default, $_cursor-default,
-      pointer, $_cursor-pointer,
-      help, $_cursor-help,
-      not-allowed, $_cursor-not-allowed,
-      crosshair, $_cursor-crosshair,
-      move, $_cursor-move,
-      progress, $_cursor-progress,
-      wait, $_cursor-wait,
-      text, $_cursor-text,
-      //n-resize, $_cursor-n-resize,
-      //e-resize, $_cursor-e-resize,
-      //w-resize, $_cursor-w-resize,
-      //s-resize, $_cursor-s-resize,
-      //sw-resize, $_cursor-sw-resize,
-      //ne-resize, $_cursor-sw-resize,
-      //nw-resize, $_cursor-se-resize,
-      //se-resize, $_cursor-se-resize,
-    ),
+    default, $_cursor-default,
+    pointer, $_cursor-pointer,
+    help, $_cursor-help,
+    not-allowed, $_cursor-not-allowed,
+    crosshair, $_cursor-crosshair,
+    move, $_cursor-move,
+    progress, $_cursor-progress,
+    wait, $_cursor-wait,
+    text, $_cursor-text,
+    //n-resize, $_cursor-n-resize,
+    //e-resize, $_cursor-e-resize,
+    //w-resize, $_cursor-w-resize,
+    //s-resize, $_cursor-s-resize,
+    //sw-resize, $_cursor-sw-resize,
+    //ne-resize, $_cursor-sw-resize,
+    //nw-resize, $_cursor-se-resize,
+    //se-resize, $_cursor-se-resize,
   ) !default;
-  @include set($Cursor, $set-cursor, $set-media);
+  @include set($Cursor, $set-cursor);
 
 }
