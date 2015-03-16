@@ -75,13 +75,13 @@ $set-font-size-xxsm:      $_font-size * 0.6 !default;
   // Position
   // ------------------
   $set-position: position (
-    all: (
+    all: (prefix,
       fixed, fixed,
       relative, relative,
       absolute, absolute,
     ),
   ) !default;
-  @include set($Position, $set-position, $set-media);
+  @include set(null, $set-position, $set-media);
 
   // Vertical-Align
   // ----------------
@@ -186,15 +186,7 @@ $set-font-size-xxsm:      $_font-size * 0.6 !default;
       $Xlg, vr($set-size-xlg),
       $Xxlg, vr($set-size-xxlg),
     ),
-    laptop: (prefix,
-      100, 100%,
-      auto, auto,
-    ),
-    tablet: (prefix,
-      100, 100%,
-      auto, auto,
-    ),
-    mobile: (prefix,
+    media: all (prefix,
       100, 100%,
       auto, auto,
     ),
@@ -265,7 +257,7 @@ $set-font-size-xxsm:      $_font-size * 0.6 !default;
       nowrap, nowrap
     )
   );
-  @include set($Flex-direction, $set-flex-direction, $set-media);
+  @include set(null, $set-flex-direction, $set-media);
         
   // Border
   // --------------------
