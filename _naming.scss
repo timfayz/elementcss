@@ -25,7 +25,7 @@ $BR:                    -br !default; // bottom-right
 $BL:                    -bl !default; // bottom-left
 
 // Color
-$Color:                         clr !default;
+$Color:                         c !default; //a
 
 // Background
 $Background:                    bck !default;
@@ -87,7 +87,7 @@ $Box-shadow:                    bxsh !default; //*
 
 // Basic Box Layout
 $Box-sizing:                    bxsz !default; //*
-$Clear:                         clear !default; //*
+$Clear:                         clr !default;
 $Float:                         flt !default;
 $Clip:                          clp !default;
 $Vertical-align:                vra !default;
