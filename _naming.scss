@@ -272,6 +272,16 @@ $Counter-reset:                 cnr !default;
 // Filter
 $Filter:                        flt !default;
 
+// Image
+$Image-orientation:             imo !default;
+$Image-rendering:               imrn !default; //*
+$Image-resolution:              imrs !default; //*
+
+// Replaced Content
+// developer.mozilla.org/en-US/docs/Web/CSS/Replaced_element
+$Object-fit:                    obf !default;
+$Object-position:               obp !default;
+
 // * - exceptions to the rule
 // a - intentional abbreviation of the name
 
