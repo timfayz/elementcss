@@ -1,11 +1,14 @@
-// Container
-// --------------------------------------------------
-// you can add/delete entries according to names that exists in the $_media var
+/* components/base/_container.scss
+   --------------------------------------------------
+ */
+// Container generates .container classes to hold main content wrapped and centered.
+
+// In addition to changing default container params you can delete or
+// add additional containers (use query names from $_media).
 $container-media-params: (
   default: 940px,
   laptop: 940px,
   tablet: 700px,
   mobile: 100%,
 );
-
 //@import 'path-to/css-element/components/container.scss';

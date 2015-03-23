@@ -1,26 +1,24 @@
-// Sets
-// --------------------------------------------------
-// you can overwrite default sets defined in set.scss file
+/* component _set.scss
+   --------------------------------------------------
+ */
+// Generate sets of atomic classes here (syntax can be found in section Usage).
+
+// Default Sets
+// Overwrite default variables to modify/disable default set(s).
 //@import 'path-to/css-element/components/set.scss';
 
-// Your Sets
-// --------------------------------------------------
-// don't hesitate, just play with code and see what you get (syntax can be found in section Usage)
-// use colors from _palette.scss file, like in the example above
+// Custom Sets
+// Don't hesitate, just play with code and see what you get
+// to make color palette consistent use values from _palette.scss file.
 
 // Color
-// -----------
+// -------------------------
 // define set
 $color: color (
-  default: (
-    black, m($colors, black),
-    white, m($colors, white),
-  ),
-  media: (tablet mobile) (
-    prefix,
-    myclr, #abcdef,
-  ),
+  black, m($colors, black),
+  white, m($colors, white),
+  mycolor, #abcdef,
 );
 // generate set
-@include set($Color, $color, $_media);
+@include set($Color, $color);
 
