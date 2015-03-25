@@ -6,7 +6,7 @@ CSS-ELEMENT is free and open-source CSS framework written in SASS that promotes 
 
 [![Join the chat at https://gitter.im/kalopsia/element](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/kalopsia/element?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-**[Download v1.5.0](https://github.com/kalopsia/element/archive/master.zip)**
+**[Download v1.6.0](https://github.com/kalopsia/element/archive/master.zip)**
 
 
 ##FILE STRUCTURE

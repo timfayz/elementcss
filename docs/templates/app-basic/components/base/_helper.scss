@@ -1,4 +1,4 @@
-/* component _helper.scss
+/* @component _helper.scss
    --------------------------------------------------
  */
 // Collection of helper classes from best practise.
@@ -86,11 +86,17 @@
 
 // Clearfix helper
 // Used to contain floats: h5bp.com/q
-.clearfix::before,
 .clearfix::after {
   content: "";
   display: table;
-}
-.clearfix::after {
   clear: both;
 }
+// (deprecated)
+// .clearfix::before,
+// .clearfix::after {
+//   content: "";
+//   display: table;
+// }
+// .clearfix::after {
+//   clear: both;
+// }

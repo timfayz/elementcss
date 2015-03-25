@@ -1,6 +1,3 @@
-/* @imported component _grid.scss
-   --------------------------------------------------
- */
 @import '../_.scss'; // core files
 
 // Default Variables
@@ -175,8 +172,8 @@ $grid-set: (
   $_column: unquote('[class*="_col-"]');
   // columned row mode - automatically breaks child tags on columns
   @if index($grid-row-modes, columned) {
-    ._columned { list-style:none; }
-    $_column: append($_column, unquote('._columned > *'), comma);
+    $_column: append($_column, unquote('[class*="_cols-"] > *'), comma);
+    [class*="_cols-"] { list-style:none; }
   }
   #{$_column} { @include grid(_column); }
 
@@ -210,7 +207,7 @@ $grid-set: (
         $_column-gutter: unquote('._gutter [class*="_col-"]');
         // for columned row
         @if index($grid-row-modes, columned) {
-          $_column-gutter: append($_column-gutter, unquote('._gutter._columned > *'), comma);
+          $_column-gutter: append($_column-gutter, unquote('._gutter[class*="_cols-"] > *'), comma);
         }
         #{$_column-gutter} { @include grid(column-gutter, $media-params); }
       }
@@ -226,7 +223,7 @@ $grid-set: (
 
           $_column-width: unquote('.#{$prefix}col-#{$idx}');
           @if index($grid-row-modes, columned) {
-            $_column-width: append($_column-width, unquote('._columned.#{$prefix}cols-#{$idx} > *'), comma);
+            $_column-width: append($_column-width, unquote('.#{$prefix}cols-#{$idx} > *'), comma);
           }
           #{$_column-width} { @include grid(column-width, $media-params, $i); }
         }
