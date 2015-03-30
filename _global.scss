@@ -48,7 +48,7 @@ $_z-xsm:      -5 !default;
 
 // Cursors
 // -------------------------
-$_cursor-selection-color: null;
+$_cursor-selection-color: null !default;
 
 //basic
 $_cursor-default:       default !default;
