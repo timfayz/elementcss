@@ -1,0 +1,72 @@
+// Globals
+// --------------------------------------------------
+// place your own global variables here, you can overwrite framework variables
+// start with $_*, see element/_global.scss for more available variables
+
+// Text Direction (rtl/ltr)
+// --------------------------------------------------
+// swap values to change direction
+$_left: left;
+$_right: right;
+
+// Typography
+// --------------------------------------------------
+$_font-size:      1rem;
+$_line-height:    1.7;
+
+$_font-size-default:   $_font-size;
+$_font-size-xxlg:      $_font-size * 6;
+$_font-size-xlg:       $_font-size * 3.1;
+$_font-size-lg:        $_font-size * 2.5;
+$_font-size-md:        $_font-size * 1.9;
+$_font-size-sm:        $_font-size * 1.3;
+$_font-size-xsm:       $_font-size * 0.8;
+$_font-size-xxsm:      $_font-size * 0.6;
+
+$_font-family-sans:    'Open Sans', Helvetica, Arial, sans-serif;
+$_font-family-serif:   Georgia, "Times New Roman", Times, serif;
+$_font-family-mono:    Monaco, Menlo, Consolas, "Courier New", monospace;
+
+$_font-family:        $_font-family-sans;
+
+// Sizing
+// --------------------------------------------------
+// by default 1 = 1rem * $_line-height, 2 = 2rem * $_line-height etc
+$_size-default:  1;
+$_size-xxlg:     7;
+$_size-xlg:      5;
+$_size-lg:       4;
+$_size-md:       3;
+$_size-sm:       2;
+$_size-xsm:      0.5;
+$_size-xxsm:     0.25;
+
+// Responsive Partitioning
+// --------------------------------------------------
+$_media-unit: rem;
+$_media: (
+    default:    null,
+    mobile:     media 'screen and (max-width:' 740px ')',
+    tablet:     media 'screen and (max-width:' 1024px ')',
+    laptop:     media 'screen and (min-width:' 1366px ')',
+    touch:      '.touch',
+    //landscape:  media '(orientation: landscape)',
+    //portrait:   media '(orientation: portrait)',
+  );
+
+// Z-index Levels
+// --------------------------------------------------
+$_z-default:  5;
+$_z-xlg:      40;
+$_z-lg:       30;
+$_z-md:       20;
+$_z-sm:       10;
+$_z-xsm:      -5;
+
+// Cursors
+// --------------------------------------------------
+$_cursor-selection-color: null; // place your color here
+
+//basic
+$_cursor-default:       default;
+$_cursor-pointer:       pointer;
