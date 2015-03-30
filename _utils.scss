@@ -24,19 +24,39 @@
 // Font-Face
 // --------------------------------------------------
 // Generate bulletproof @font-face rule for your custom fonts.
-@mixin font-face($font-family, $font-path, $font-weight: null, $font-style:null, $version:null, $svg-font-name:null) {
+// there is great tool: fontsquirrel.com/tools/webfont-generator
+@mixin font-face($font-family, $font-path, $formats:null, $font-weight:normal, $font-style:normal, $svg-font-name:null, $version:null) {
+  $src: ();
+  // append query param to font path it's useful if we
+  // update the font and want to reset browser cache as well
   $query: if($version,'?v=#{$version}', null);
   $add-query: if($version,'&v=#{$version}', null);
   @font-face {
     font-family: $font-family;
     font-weight: $font-weight;
     font-style: $font-style;
-    src: url('#{$font-path}.eot#{$query}');
-    src: url('#{$font-path}.eot?#iefix#{$add-query}') format('embedded-opentype'),
-    url('#{$font-path}.woff#{$query}') format('woff'),
-    url('#{$font-path}.ttf#{$query}') format('truetype')
-    // add path to svg font if presented
-    if($svg-font-name, unquote(",url('#{$font-path}.svg#{$query}##{$svg-font-name}') format('svg')"), null);
+
+    // aggregate each font format separately
+    @if index($formats, eot) {
+      $src: append($src,
+      unquote("url('#{$font-path}.eot#{$query}'); src: url('#{$font-path}.eot?#iefix#{$add-query}') format('embedded-opentype')"), comma);
+    }
+    @if index($formats, woff2) {
+      $src: append($src, unquote("url('#{$font-path}.woff2') format('woff2')"), comma);
+    }
+    @if index($formats, woff) {
+      $src: append($src, unquote("url('#{$font-path}.woff') format('woff')"), comma);
+    }
+    @if index($formats, ttf) {
+      $src: append($src, unquote("url('#{$font-path}.ttf') format('truetype')"), comma);
+    }
+    @if index($formats, svg) {
+      $svg-font-name: if($svg-font-name, $svg-font-name, $font-family);
+      $src: append($src, unquote("url('#{$font-path}.svg#{$query}##{$svg-font-name}') format('svg')"), comma);
+    }
+
+    // render
+    src: $src;
   }
 }
 
