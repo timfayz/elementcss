@@ -1,20 +1,37 @@
-// Keywords
-// --------------------------------------------------
-// useful set of size names
-$Default:     'def' !default;
-$Xxlg:        'xxlg' !default;
-$Xlg:         'xlg' !default;
-$Lg:          'lg' !default;
-$Md:          'md' !default;
-$Sm:          'sm' !default;
-$Xsm:         'xsm' !default;
-$Xxsm:        'xxsm' !default;
+// _naming.scss provides shorthands/abbreviations of all valid CSS properties which intended
+// fot use in creating Sets (one class = one property). For example:
+//    .#{$Padding}-xsm {padding:10px;} -> pdd-xsm {...}
 
-
-// Properties shortcuts (Default style)
-// categorized by w3schools.com/cssref/default.asp
+// Constants
 // --------------------------------------------------
-// Property's Directions
+// set of common size names
+$Max:         min;
+$Default:     def;
+$Xxlg:        xxlg;
+$Xlg:         xlg;
+$Lg:          lg;
+$Md:          md;
+$Sm:          sm;
+$Xsm:         xsm;
+$Xxsm:        xxsm;
+$Min:         min;
+
+// set of common weight names
+$Thin:        100;
+$Extra-Light: 200;
+$Ultra-Light: 200;
+$Light:       300;
+$Normal:      400;
+$Regular:     400;
+$Medium:      500;
+$Semi-Bold:   600;
+$Bold:        700;
+$Extra-Bold:  800;
+$Ultra-Bold:  800;
+$Black:       900;
+
+// Property Direction Shortcuts
+// --------------------------------------------------
 $T:                     -t !default; // top
 $R:                     -r !default; // right
 $B:                     -b !default; // bottom
@@ -23,79 +40,117 @@ $TL:                    -tl !default; // top-left
 $TR:                    -tr !default; // top-right
 $BR:                    -br !default; // bottom-right
 $BL:                    -bl !default; // bottom-left
+$X:                     -x !default; // x axis
+$Y:                     -y !default; // y axis
+
+// Property Shortcuts
+// --------------------------------------------------
+// Categorized by w3schools.com/cssref/default.asp.
+// (!) Designed syntax guarantees good readability, brevity and intuitiveness as well as
+// almost no collisions and repetitions between shorthands of different properties. There
+// are only ~6 exceptions and some of them are very rarely used.
+//
+// Syntax:
+//    1 word = first letter and two subsequent consonants:
+//      [p]o[s]i[t]ion  = pst
+//      [o][v]e[r]flow  = ovr
+//
+//    2 word = first letter, one subsequent consonant and the same for second word:
+//      [b]o[x]-[s][h]adow  = bxsh
+//      [f]o[n]t-[s]i[z]e   = fnsz
+//
+//    3 word = first letter, one subsequent consonant and two first letters of subsequent words:
+//      [a][n]imation-[t]iming-[f]unction = antf
+//      [b]o[r]der-[i]mage-[s]ource       = bris
+//
+//    Properties' direction abbreviated as follows (see previous section):
+//      -top      = -t
+//      -top-left = -tl
+//      -bottom   = -b
+//      -x/-y     = -x/-y
+//
+//    Properties' direction are not words and are always written separately at the end of
+//    shorthand using hyphen:
+//      border-top-color        = [b]o[r]der(-top-)[c]o[l]or        = brcl-t
+//      border-top-left-radius  = [b]o[r]der(-top-left-)[r]a[d]ius  = brrd-tl
+//      margin-bottom           = [m]a[r][g]in(-bottom)             = mrg-b
+//      overflow-x              = [o][v]e[r]flow(-x)                = ovr-x
+//
+// Conventions:
+// *          - exceptions to the rule
+// a          - intentional abbreviation of the name
+// unofficial - properties do not standardized by World Wide Web Consortium
+// Note the there is no shorthands for deprecated CSS properties.
 
 // Color
 $Color:                         c !default; //a
 
 // Background
-$Background:                    bck !default;
-$Background-attachment:         #{$Background}-at !default;
-$Background-break:              #{$Background}-br !default;
-$Background-color:              #{$Background}-co !default;
-$Background-image:              #{$Background}-im !default;
-$Background-position:           #{$Background}-po !default;
-$Background-position-x:         #{$Background}-px !default;
-$Background-position-y:         #{$Background}-py !default;
-$Background-repeat:             #{$Background}-re !default;
-$Background-clip:               #{$Background}-cl !default;
-$Background-origin:             #{$Background}-or !default;
-$Background-size:               #{$Background}-si !default;
+$Background:                    bg !default; //a
+$Background-attachment:         bgat !default;
+$Background-break:              bgbr !default;
+$Background-color:              bgcl !default;
+$Background-image:              bgim !default;
+$Background-position:           bgps !default;
+$Background-position-x:         bgps#{$X} !default;
+$Background-position-y:         bgps#{$Y} !default;
+$Background-repeat:             bgrp !default;
+$Background-clip:               bgcl !default;
+$Background-origin:             bgor !default;
+$Background-size:               bgsz !default;
 
 // Border
 $Border:                        brd !default;
-$Border-top:                    #{$Border}#{$T} !default;
-$Border-right:                  #{$Border}#{$R} !default;
-$Border-bottom:                 #{$Border}#{$B} !default;
-$Border-left:                   #{$Border}#{$L} !default;
-// * to avoid unnecessary repetition and make class names more concise
-// we change word order of color, style, width and radius properties.
+$Border-top:                    brd#{$T} !default;
+$Border-right:                  brd#{$R} !default;
+$Border-bottom:                 brd#{$B} !default;
+$Border-left:                   brd#{$L} !default;
 // color
-$Border-color:                  brc !default;
-$Border-top-color:              #{$Border-color}#{$T} !default;
-$Border-right-color:            #{$Border-color}#{$R} !default;
-$Border-bottom-color:           #{$Border-color}#{$B} !default;
-$Border-left-color:             #{$Border-color}#{$L} !default;
+$Border-color:                  brcl !default;
+$Border-top-color:              drcl#{$T} !default;
+$Border-right-color:            drcl#{$R} !default;
+$Border-bottom-color:           drcl#{$B} !default;
+$Border-left-color:             drcl#{$L} !default;
 // style
-$Border-style:                  brs !default;
-$Border-top-style:              #{$Border-style}#{$T} !default;
-$Border-right-style:            #{$Border-style}#{$R} !default;
-$Border-bottom-style:           #{$Border-style}#{$B} !default;
-$Border-left-style:             #{$Border-style}#{$L} !default;
+$Border-style:                  brst !default;
+$Border-top-style:              brst#{$T} !default;
+$Border-right-style:            brst#{$R} !default;
+$Border-bottom-style:           brst#{$B} !default;
+$Border-left-style:             brst#{$L} !default;
 // width
-$Border-width:                  brw !default;
-$Border-top-width:              #{$Border-width}#{$T} !default;
-$Border-right-width:            #{$Border-width}#{$R} !default;
-$Border-bottom-width:           #{$Border-width}#{$B} !default;
-$Border-left-width:             #{$Border-width}#{$L} !default;
+$Border-width:                  brwd !default;
+$Border-top-width:              brwd#{$T} !default;
+$Border-right-width:            brwd#{$R} !default;
+$Border-bottom-width:           brwd#{$B} !default;
+$Border-left-width:             brwd#{$L} !default;
 // radius
-$Border-radius:                 brr !default;
-$Border-top-right-radius:       #{$Border-radius}#{$TR} !default;
-$Border-top-left-radius:        #{$Border-radius}#{$TL} !default;
-$Border-bottom-right-radius:    #{$Border-radius}#{$BR} !default;
-$Border-bottom-left-radius:     #{$Border-radius}#{$BL} !default;
+$Border-radius:                 brrd !default;
+$Border-top-right-radius:       brrd#{$TR} !default;
+$Border-top-left-radius:        brrd#{$TL} !default;
+$Border-bottom-right-radius:    brrd#{$BR} !default;
+$Border-bottom-left-radius:     brrd#{$BL} !default;
 
 // Border-image
-$Border-image:                  bri !default;
-$Border-image-outset:           #{$Border-image}-ou !default;
-$Border-image-repeat:           #{$Border-image}-re !default;
-$Border-image-slice:            #{$Border-image}-sl !default;
-$Border-image-source:           #{$Border-image}-so !default;
-$Border-image-width:            #{$Border-image}-wi !default;
+$Border-image:                  brim !default;
+$Border-image-outset:           brio !default;
+$Border-image-repeat:           brir !default;
+$Border-image-width:            briw !default;
+$Border-image-source:           bris !default;
+$Border-image-slice:            brisl !default; //*
 
 // Box shadow
-$Box-shadow:                    bxsh !default; //*
+$Box-shadow:                    bxsh !default;
 
 // Basic Box Layout
-$Box-sizing:                    bxsz !default; //*
+$Box-sizing:                    bxsz !default;
+$Vertical-align:                vral !default;
 $Clear:                         clr !default;
 $Float:                         flt !default;
-$Vertical-align:                vra !default;
 $Opacity:                       opc !default;
 $Display:                       dsp !default;
 $Visibility:                    vsb !default;
-$Z-index:                       zi !default;
-$Clip:                          clp !default; //deprecated
-$Clip-path:                     clp !default;
+$Clip-path:                     clpt !default;
+$Z-index:                       z !default; //a
 // Positioning
 $Position:                      pst !default;
 $Top:                           t !default; //a
@@ -104,21 +159,21 @@ $Bottom:                        b !default; //a
 $Left:                          l !default; //a
 // Overflow
 $Overflow:                      ovr !default;
-$Overflow-x:                    #{$Overflow}-x !default;
-$Overflow-y:                    #{$Overflow}-y !default;
-$Overflow-style:                #{$Overflow}-s !default;
+$Overflow-x:                    ovr#{$X} !default;
+$Overflow-y:                    ovr#{$Y} !default;
+$Overflow-style:                ovst !default;
 // Margin
 $Margin:                        mrg !default;
-$Margin-top:                    #{$Margin}#{$T} !default;
-$Margin-right:                  #{$Margin}#{$R} !default;
-$Margin-bottom:                 #{$Margin}#{$B} !default;
-$Margin-left:                   #{$Margin}#{$L} !default;
+$Margin-top:                    mrg#{$T} !default;
+$Margin-right:                  mrg#{$R} !default;
+$Margin-bottom:                 mrg#{$B} !default;
+$Margin-left:                   mrg#{$L} !default;
 // Padding
 $Padding:                       pdd !default;
-$Padding-top:                   #{$Padding}#{$T} !default;
-$Padding-right:                 #{$Padding}#{$R} !default;
-$Padding-bottom:                #{$Padding}#{$B} !default;
-$Padding-left:                  #{$Padding}#{$L} !default;
+$Padding-top:                   pdd#{$T} !default;
+$Padding-right:                 pdd#{$R} !default;
+$Padding-bottom:                pdd#{$B} !default;
+$Padding-left:                  pdd#{$L} !default;
 // Height
 $Height:                        h !default; //a
 $Max-height:                    mxh !default;
@@ -129,358 +184,161 @@ $Max-width:                     mxw !default;
 $Min-width:                     mnh !default;
 
 // Flexbox Layout
-$Align-content:                 alc !default;
-$Align-items:                   ali !default;
-$Align-self:                    als !default;
+$Align-content:                 alcn !default;
+$Align-items:                   alit !default;
+$Align-self:                    alsl !default;
 $Flex:                          flx !default;
-$Flex-basis:                    #{$Flex}-ba !default;
-$Flex-direction:                #{$Flex}-di !default;
-$Flex-flow:                     #{$Flex}-fl !default;
-$Flex-grow:                     #{$Flex}-gr !default;
-$Flex-shrink:                   #{$Flex}-sh !default;
-$Flex-wrap:                     #{$Flex}-wr !default;
-$Justify-content:               jsc !default;
+$Flex-basis:                    flbs !default;
+$Flex-direction:                fldr !default;
+$Flex-flow:                     flfl !default;
+$Flex-grow:                     flgr !default;
+$Flex-shrink:                   flsh !default;
+$Flex-wrap:                     flwr !default;
+$Justify-content:               jscn !default;
 $Order:                         ord !default;
 
 // Line-height
-$Line-height:                   lnh !default;
+$Line-height:                   lnhg !default;
 
 // Text
-// $Text_ is fake prefix to avoid collisions
-$Text_:                         txt !default; //*
-$Text-shadow:                   #{$Text_}-sh !default;
-$Text-align:                    #{$Text_}-al !default;
-$Text-emphasis:                 #{$Text_}-em !default;
-$Text-height:                   #{$Text_}-he !default;
-$Text-indent:                   #{$Text_}-in !default;
-$Text-justify:                  #{$Text_}-ju !default;
-$Text-outline:                  #{$Text_}-ou !default;
-$Text-replace:                  #{$Text_}-re !default;
-$Text-transform:                #{$Text_}-tr !default;
-$Text-wrap:                     #{$Text_}-wr !default;
-$Text-overflow:                 #{$Text_}-ov !default;
+$Text-shadow:                   txsh !default;
+$Text-align:                    txal !default;
+$Text-emphasis:                 txem !default;
+$Text-height:                   txhg !default;
+$Text-indent:                   txin !default;
+$Text-justify:                  txjs !default;
+$Text-outline:                  txot !default;
+$Text-replace:                  txrp !default;
+$Text-transform:                txtr !default;
+$Text-wrap:                     txwr !default;
+$Text-overflow:                 txov !default;
 
 // Text-decoration
-$Text-decoration:               txd !default;
-$Text-decoration-color:         #{$Text-decoration}-co !default;
-$Text-decoration-line:          #{$Text-decoration}-li !default;
-$Text-decoration-style:         #{$Text-decoration}-st !default;
+$Text-decoration:               txdc !default;
+$Text-decoration-color:         txdc !default;
+$Text-decoration-line:          txdl !default;
+$Text-decoration-style:         txds !default;
 
 // Word, Letter, White space, Tab size
-$Tab-size:                      tbs !default;
-$Word-break:                    wrb !default;
-$Word-spacing:                  wrs !default;
-$Word-wrap:                     wrw !default;
-$Letter-spacing:                lts !default;
-$White-space:                   whs !default;
-$White-space-collapse:          #{$White-space}-co !default;
+$Tab-size:                      tbsz !default;
+$Word-break:                    wrbr !default;
+$Word-spacing:                  wrsp !default;
+$Word-wrap:                     wrwr !default;
+$Letter-spacing:                ltsp !default;
+$White-space:                   whsp !default;
+$White-space-collapse:          whsc !default;
 
 // Font
 $Font:                          fnt !default;
-$Font-weight:                   #{$Font}-we !default;
-$Font-style:                    #{$Font}-st !default;
-$Font-variant:                  #{$Font}-va !default;
-$Font-size:                     #{$Font}-sz !default; //*
-$Font-size-adjust:              #{$Font}-sa !default;
-$Font-family:                   #{$Font}-fa !default;
-$Font-effect:                   #{$Font}-ef !default;
-$Font-emphasize:                #{$Font}-em !default;
-$Font-emphasize-position:       #{$Font}-ep !default;
-$Font-emphasize-style:          #{$Font}-es !default;
-$Font-smooth:                   #{$Font}-sm !default;
-$Font-stretch:                  #{$Font}-str !default; //*
+$Font-weight:                   fnwg !default;
+$Font-style:                    fnst !default;
+$Font-variant:                  fnvr !default;
+$Font-size:                     fnsz !default;
+$Font-size-adjust:              fnsa !default;
+$Font-family:                   fnfm !default;
+$Font-effect:                   fnef !default;
+$Font-emphasize:                fnem !default;
+$Font-emphasize-position:       fnep !default;
+$Font-emphasize-style:          fnes !default;
+$Font-smooth:                   fnsm !default;
+$Font-stretch:                  fnstr !default; //*
 
 // Writing Modes
 $Direction:                     drc !default;
-$Unicode-bidi:                  unb !default;
+$Unicode-bidi:                  unbd !default;
 
 // Table
-$Border-collapse:               #{$Border}-co !default;
-$Border-spacing:                #{$Border}-sp !default;
-$Table-layout:                  tbl !default;
-$Caption-side:                  cps !default;
-$Empty-cells:                   emc !default;
+$Border-collapse:               brcll !default; //*
+$Border-spacing:                brsp !default;
+$Table-layout:                  tblt !default;
+$Caption-side:                  cpsd !default;
+$Empty-cells:                   emcl !default;
 
 // List
-$List-style:                    lss !default;
-$List-style-position:           #{$List-style}-po !default;
-$List-style-type:               #{$List-style}-ty !default;
-$List-style-image:              #{$List-style}-im !default;
+$List-style:                    ls !default; //a
+$List-style-position:           lssp !default;
+$List-style-type:               lsst !default;
+$List-style-image:              lsim !default;
 
 // Animation
 $Animation:                     anm !default;
-$Animation-delay:               #{$Animation}-de !default;
-$Animation-direction:           #{$Animation}-di !default;
-$Animation-duration:            #{$Animation}-du !default;
-$Animation-fill-mode:           #{$Animation}-fm !default;
-$Animation-iteration-count:     #{$Animation}-ic !default;
-$Animation-name:                #{$Animation}-na !default;
-$Animation-play-state:          #{$Animation}-ps !default;
-$Animation-timing-function:     #{$Animation}-tm !default;
+$Animation-delay:               andl !default;
+$Animation-direction:           andi !default; //*
+$Animation-duration:            andu !default; //*
+$Animation-fill-mode:           anfm !default;
+$Animation-iteration-count:     anic !default;
+$Animation-name:                annm !default;
+$Animation-play-state:          anps !default;
+$Animation-timing-function:     antf !default;
 
 // Transform
-$Transform:                     trf !default; //*
-$Transform-origin:              #{$Transform}-or !default;
-$Transform-style:               #{$Transform}-st !default;
-$Backface-visibility:           bcv !default;
+$Transform:                     tf !default; //a
+$Transform-origin:              tfor !default;
+$Transform-style:               tfst !default;
+$Backface-visibility:           bcvs !default;
 $Perspective:                   prs !default;
-$Perspective-origin:            #{$Perspective}-or !default;
+$Perspective-origin:            pror !default;
 
 // Transition
-$Transition:                    tri !default; //*
-$Transition-property:           #{$Transition}-pr !default;
-$Transition-duration:           #{$Transition}-du !default;
-$Transition-timing-function:    #{$Transition}-tf !default;
-$Transition-delay:              #{$Transition}-de !default;
+$Transition:                    trn !default;
+$Transition-property:           trpr !default;
+$Transition-duration:           trdr !default;
+$Transition-timing-function:    trtf !default;
+$Transition-delay:              trdl !default;
 
 // User Interface
-$Pointer-events:                pne !default;
+$Pointer-events:                pnev !default;
 $Cursor:                        crs !default;
+$User-select:                   ussl !default; //unofficial
 $Zoom:                          zm !default;
 $Resize:                        rsz !default;
 $Outline:                       otl !default;
-$Outline-color:                 #{$Outline}-co !default;
-$Outline-offset:                #{$Outline}-of !default;
-$Outline-width:                 #{$Outline}-wi !default;
-$Outline-style:                 #{$Outline}-st !default;
+$Outline-color:                 otcl !default;
+$Outline-offset:                otof !default;
+$Outline-width:                 otwd !default;
+$Outline-style:                 otst !default;
 
 // Multi-column Layout
 $Columns:                       clm !default;
-$Column-count:                  #{$Columns}-co !default;
-$Column-fill:                   #{$Columns}-fi !default;
-$Column-gap:                    #{$Columns}-ga !default;
-$Column-rule:                   #{$Columns}-ru !default;
-$Column-rule-color:             #{$Columns}-rc !default;
-$Column-rule-style:             #{$Columns}-rs !default;
-$Column-rule-width:             #{$Columns}-rw !default;
-$Column-span:                   #{$Columns}-sp !default;
-$Column-widht:                  #{$Columns}-wi !default;
+$Column-count:                  clcn !default;
+$Column-fill:                   clfl !default;
+$Column-gap:                    clgp !default;
+$Column-rule:                   clrl !default;
+$Column-rule-color:             clrc !default;
+$Column-rule-style:             clrs !default;
+$Column-rule-width:             clrw !default;
+$Column-span:                   clsp !default;
+$Column-widht:                  clwd !default;
 $Orientation:                   orn !default;
 
 // Paged Media
-$Page-break-before:             pbb !default;
-$Page-break-inside:             pbi !default;
-$Page-break-after:              pba !default;
+$Page-break-before:             pgbb !default;
+$Page-break-inside:             pgbi !default;
+$Page-break-after:              pgba !default;
 $Orphans:                       orp !default;
 $Widows:                        wds !default;
 
 // Generated content
 $Content:                       cnt !default;
 $Quotes:                        qts !default;
-$Counter-increment:             cni !default;
-$Counter-reset:                 cnr !default;
+$Counter-increment:             cnin !default;
+$Counter-reset:                 cnrs !default;
 
 // Filter
 $Filter:                        flt !default;
 
 // Image
-$Image-orientation:             imo !default;
-$Image-rendering:               imrn !default; //*
-$Image-resolution:              imrs !default; //*
+$Image-orientation:             imor !default;
+$Image-rendering:               imrn !default;
+$Image-resolution:              imrs !default;
 
 // Replaced Content
 // developer.mozilla.org/en-US/docs/Web/CSS/Replaced_element
-$Object-fit:                    obf !default;
-$Object-position:               obp !default;
+$Object-fit:                    obft !default;
+$Object-position:               obps !default;
 
-// * - exceptions to the rule
-// a - intentional abbreviation of the name
-
-
-// Properties shortcuts (Emmet style)
-// copypasted from docs.emmet.io/cheat-sheet/, unfortunately much of properties
-// are missed and some of properties don't even exists
-// --------------------------------------------------
-// Visual Formatting
-$EPosition:                      pos !default;
-$ETop:                           t !default;
-$ERight:                         r !default;
-$EBottom:                        b !default;
-$ELeft:                          l !default;
-$EZ-index:                       z !default;
-$EFloat:                         fl !default;
-$EDisplay:                       d !default;
-$EVisibility:                    v !default;
-$EOverflow:                      ov !default;
-$EOverflow-x:                    ovx !default;
-$EOverflow-y:                    ovy !default;
-$EOverflow-style:                ovs !default;
-$EZoom:                          zoo !default;
-$EClip:                          cp !default;
-$EResize:                        rsz !default;
-$ECursor:                        cur !default;
-
-// Margin & Padding
-$EMargin:                        m !default;
-$EMargin-top:                    mt !default;
-$EMargin-right:                  mr !default;
-$EMargin-bottom:                 mb !default;
-$EMargin-left:                   ml !default;
-
-$EPadding:                       p !default;
-$EPadding-top:                   pt !default;
-$EPadding-right:                 pr !default;
-$EPadding-bottom:                pb !default;
-$EPadding-left:                  pl !default;
-
-// Box Sizing
-$EBox-sizing:                    bxz !default;
-$EBox-shadow:                    bxsh !default;
-$EWidth:                         w !default;
-$EHeight:                        h !default;
-$EMax-width:                     maw !default;
-$EMax-height:                    mah !default;
-$EMax-width:                     mih !default;
-$EMax-height:                    mih !default;
-
-// Font
-$EFont:                          f !default;
-$EFont-weight:                   fw !default;
-$EFont-style:                    fs !default;
-$EFont-variant:                  fv !default;
-$EFont-size:                     fz !default;
-$EFont-size-adjust:              fza !default;
-$EFont-family:                   ff !default;
-$EFont-effect:                   fe !default;
-$EFont-emphasize:                fem !default;
-$EFont-emphasize-position:       femp !default;
-$EFont-emphasize-style:          fems !default;
-$EFont-smooth:                   fsm !default;
-$EFont-stretch:                  fst !default;
-
-// Text
-$EVertical-align:                va !default;
-$EText-align:                    ta !default;
-// !Text-align-last
-$EText-decoration:               td !default;
-$EText-emphasis:                 tem !default;
-$EText-height:                   th !default;
-$EText-indent:                   ti !default;
-$EText-justify:                  tj !default;
-$EText-outline:                  to !default;
-$EText-replace:                  tr !default;
-$EText-transform:                tt !default;
-$EText-wrap:                     tw !default;
-$EText-shadow:                   tsh !default;
-$ELine-height:                   lh !default;
-$ELetter-spacing:                lts !default;
-$EWhite-space:                   whs !default;
-$EWhite-space-collapse:          whsc !default;
-$EWord-break:                    wob !default;
-$EWord-spacing:                  wos !default;
-$EWord-wrap:                     wow !default;
-
-// Background
-$EBackground:                    bg !default;
-$EBackground-color:              bgc !default;
-$EBackground-image:              bgi !default;
-$EBackground-repeat:             bgi !default;
-$EBackground-attachment:         bga !default;
-$EBackground-position:           bgp !default;
-$EBackground-position-x:         bgpx !default;
-$EBackground-position-y:         bgpy !default;
-$EBackground-break:              bgb !default;
-$EBackground-clip:               bgcp !default;
-$EBackground-origin:             bgo !default;
-$EBackground-size:               bgz !default;
-
-// Color
-$EColor:                         c !default;
-$EOpacity:                       op !default;
-
-// Generated content
-$EContent:                       ct !default;
-$EQuotes:                        q !default;
-$ECounter-increment:             coi !default;
-$ECounter-reset:                 cor !default;
-
-// Outline
-$EOutline:                       ol !default;
-$EOutline-offset:                olo !default;
-$EOutline-width:                 olw !default;
-$EOutline-style:                 ols !default;
-
-// Tables
-$ETable-layout:                  tbl !default;
-$ECaption-side:                  cps !default;
-$EEmpty-cells:                   ec !default;
-
-// Border
-$EBorder:                        bd !default;
-$EBorder-collapse:               bdcl !default;
-$EBorder-image:                  bdi !default;
-$EBorder-top-image:              bdti !default;
-$EBorder-right-image:            bdri !default;
-$EBorder-bottom-image:           bdbi !default;
-$EBorder-left-image:             bdli !default;
-$EBorder-corner-image:           bdci !default;
-$EBorder-top-left-image:         bdtli !default;
-$EBorder-top-right-image:        bdtri !default;
-$EBorder-bottom-right-image:     bdbri !default;
-$EBorder-bottom-left-image:      bdbli !default;
-$EBorder-length:                 bdlen !default;
-$EBorder-spacing:                bdsp !default;
-$EBorder-style:                  bds !default;
-$EBorder-width:                  bdw !default;
-$EBorder-top:                    bdt !default;
-$EBorder-top-width:              bdtw !default;
-$EBorder-top-style:              bdts !default;
-$EBorder-right:                  bdr !default;
-$EBorder-right-width:            bdrw !default;
-$EBorder-right-style:            bdrs !default;
-$EBorder-bottom:                 bdb !default;
-$EBorder-bottom-width:           bdbw !default;
-$EBorder-bottom-style:           bdbs !default;
-$EBorder-left:                   bdl !default;
-$EBorder-left-width:             bdlw !default;
-$EBorder-left-style:             bdls !default;
-$EBorder-radius:                 bdrad !default;
-$EBorder-top-right-radius:       bdtrrad !default;
-$EBorder-top-left-radius:        bdtlrad !default;
-$EBorder-bottom-right-radius:    bdbrrad !default;
-$EBorder-bottom-left-radius:     bdblrad !default;
-
-// List
-$EList-style:                    lis !default;
-$EList-style-position:           lisp !default;
-$EList-style-type:               list !default;
-$EList-style-image:              lisi !default;
-
-// Print
-$EPage-break-before:             pgbb !default;
-$EPage-break-inside:             pgbi !default;
-$EPage-break-after:              pgba !default;
-$EOrphans:                       orp !default;
-$EWidows:                        wid !default;
-
-// Others
-$EAnimation:                     anim !default;
-$EColumns:                       col !default;
-$EColumn-count:                  colc !default;
-$EColumn-fill:                   colf !default;
-$EColumn-gap:                    colg !default;
-$EColumn-rule:                   colr !default;
-$EColumn-rule-color:             colrc !default;
-$EColumn-rule-style:             colrs !default;
-$EColumn-rule-width:             colrw !default;
-$EColumn-span:                   cols !default;
-$EColumn-widht:                  colw !default;
-$EOrientation:                   ori !default;
-$ETransform:                     trf !default;
-$ETransform-origin:              trfo !default;
-
-
-// Customs selectors (under consideration)
+// Customs Selectors
+// NOTE: under consideration
 // --------------------------------------------------
 $disabled:    'disabled' !default;
 $readonly:    'readonly' !default;
-
-$input:             input !default;
-$button:            btn !default;
-$radio:             radio !default;
-$checkbox:          chbox !default;
-$input-readonly:    #{$input}-#{$readonly} !default;
-$input-disabled:    #{$input}-#{$disabled} !default;
-$radio-disabled:    #{$radio}-#{$disabled} !default;
-$checkbox-disabled: #{$checkbox}-#{$disabled} !default;
-$button-disabled:   #{$button}-#{$disabled} !default;

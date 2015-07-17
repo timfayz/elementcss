@@ -1,9 +1,7 @@
-@import '../_.scss'; // core files
+// _container.scss generates classes for centering a content within.
 
-// Default Variables
+// Define Default Variables
 // --------------------------------------------------
-$container: true !default;
-
 $container-media: $_media !default;
 $container-media-unit: $_media-unit !default;
 $container-media-params: (
@@ -13,34 +11,29 @@ $container-media-params: (
   mobile: 100%,
 ) !default;
 
-
-// Output Styles
+// Render Styles
 // --------------------------------------------------
-@if $container {
+$media-names: nths(map-keys($container-media), indexes(map-keys($container-media), map-keys($container-media-params)));
+$media-params: nths(map-values($container-media-params), indexes(map-keys($container-media-params), $media-names));
 
-  $media-names: nths(map-keys($container-media), indexes(map-keys($container-media), map-keys($container-media-params)));
-  $media-params: nths(map-values($container-media-params), indexes(map-keys($container-media-params), $media-names));
+// Base Container
+._container {
+  position: relative;
+  margin-#{$_left}: auto;
+  margin-#{$_right}: auto;
+}
 
-  // base container
-  ._container {
-    position: relative;
-    margin-#{$_left}: auto;
-    margin-#{$_right}: auto;
-  }
+// Containers Under @media
+@for $f from 1 through length($media-names) {
+  $media-name:  nth($media-names, $f);
+  $media-param:  nth($media-params, $f);
+  $prefix: __($media-name, '_', $ifException:'_');
 
-  // media containers
-  @for $f from 1 through length($media-names) {
-    $media-name:  nth($media-names, $f);
-    $media-param:  nth($media-params, $f);
-    $prefix: __($media-name, '_', $ifException:'_');
-
-    @include media($media-name, $container-media, $container-media-unit) {
-      @if $prefix == _ {
-        ._container { width: $media-param; }
-      } @else {
-        ._container, .#{$prefix}container { width: $media-param; }
-      }
+  @include media($media-name, $container-media, $container-media-unit) {
+    @if $prefix == _ {
+      ._container { width: $media-param; }
+    } @else {
+      ._container, .#{$prefix}container { width: $media-param; }
     }
   }
-
-}
+  }

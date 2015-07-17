@@ -1,0 +1,42 @@
+// _grid.scss provides function for calculating grid system parameters like column width,
+// gap width etc, used by component/_grid.scss.
+
+// calc-grid
+// grid settings calculator
+// $columns - number of grid columns
+// $calc-method - method based on what will be made calculation
+// $calc-data - input data for calculation according to selected method
+// @return list - 1:columns number, 2:column width, 3:gap width
+//     calc-grid(6, gap, 2)         -> 6, 16.66667%, 1
+//     calc-grid(6, column, 2)      -> 2, 50%, 49%
+//     calc-grid(6, column-gap, 1)  -> 6, 16.66667%, 2.17391%
+@function calc-grid($columns, $calc-method, $calc-data)
+{
+  $column: null;
+  $gap: null;
+
+  // gaps by padding
+  @if $calc-method==column-gap {
+    $px-column: nth($calc-data,1);
+    $px-gap: nth($calc-data,2);
+    $px-row: ($columns * $px-column) + ($px-gap * ($columns - 1));
+    $percent-gap: percentage($px-gap/$px-row);
+
+    $column: 100% / $columns;
+    $gap: $percent-gap/2;
+  }
+  @else if $calc-method==gap {
+    $gap: $calc-data;
+
+    $column: 100% / $columns;
+    $gap: $gap/2;
+  }
+  @else if $calc-method==column {
+    $ratio: $calc-data;
+
+    $column: 100% / $columns;
+    $gap: (100% - ($ratio * $columns)) / $columns;
+  }
+
+  @return ($columns, $column, $gap);
+}

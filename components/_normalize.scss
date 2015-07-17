@@ -1,486 +1,475 @@
-@import '../_.scss'; // core files
+// _normalize.scss make all HTML tags normalized and looking identical. HTML tags
+// grouped by function. See http://w3schools.com/tags/ref_byfunc.asp.
 
-// Default Variables
+// Basic
 // --------------------------------------------------
-  $normalize: true !default;
+* {
+  box-sizing: border-box;
+}
+*::before, *::after {
+  box-sizing: border-box;
+}
 
+:host {
+  display: block;
+}
 
-// Output Styles
+html {
+  //font-size: convert-unit($_font-size, auto);
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  cursor: $_cursor-default;
+  //direction: if($_left==left, ltr, rtl);
+  line-height: inherit;
+  font-size: inherit;
+  font-weight: normal;
+  font-style: normal;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  font-weight: inherit;
+  font-size: inherit;
+  color: inherit;
+}
+
+p {
+  margin: 0;
+}
+
+hr {
+  box-sizing: content-box;
+  height: 0;
+  border: none;
+  margin: 0;
+}
+
+// Formatting
 // --------------------------------------------------
-@if $normalize {
-
-  // Basic
-  // -------------------------
-  * {
-    box-sizing: border-box;
-  }
-  *:before, *:after {
-    box-sizing: border-box;
-  }
-
-  ::selection {
-    background-color: $_cursor-selection-color;
-  }
-  
-  html {
-//    font-family: $_font-family;
-    font-size: tounit($_font-size, auto);
-    -ms-text-size-adjust: 100%;
-    -webkit-text-size-adjust: 100%;
-    text-size-adjust: 100%;
-  }
-
-  body {
-    margin: 0;
-    cursor: $_cursor-default;
-    direction: if($_left==left, ltr, rtl);
-    line-height: tounit($_line-height, auto);
-    font-size: inherit;
-    font-weight: normal;
-    font-style: normal;
-  }
-
-  h1, h2, h3, h4, h5, h6 {
-    margin: 0;
-    font-weight: inherit;
-    font-size: inherit;
-    color: inherit;
-  }
-
-  p {
-    margin: 0;
-  }
-
-  hr {
-    box-sizing: content-box;
-    height: 0;
+abbr {
+  &[title] {
     border: none;
-    margin: 0;
   }
-
-  // Formatting
-  // -------------------------
-  abbr {
-    &[title] {
-      border: none;
-    }
-  }
-  address {
-    font-style: inherit;
-  }
-  b {
-    font-weight: bold;
-  }
-  blockquote {
-    margin:0;
-  }
-  cite {
-    font-style: italic;
-  }
-  code {
-    font-family: inherit; // monospace
-    font-size: inherit;
-  }
-  del {
-    text-decoration: line-through;
-  }
-  dfn {
-    font-style: italic;
-  }
-  em {
-    font-style: italic;
-  }
-  i {
-    font-style: italic;
-  }
-  ins {}
-  kbd {
-    font-size: inherit;
-    font-family: inherit; // monospace
-  }
-  mark {
-    background: transparent;
-    color: inherit;
-  }
-  meter {
-    display: block;
-    line-height: inherit;
-    width: 100%;
-  }
-  pre {
-    font-family: inherit; // monospace
-    font-size: inherit;
-    white-space: pre-wrap;
-    margin: 0;
-    overflow: auto;
-  }
-  progress {
-    width: 100%;
-    display: block;
-    vertical-align: baseline;
-    line-height: inherit;
-  }
-  q {
-    quotes: "\201C" "\201D" "\2018" "\2019";
-  }
-  s {
-    text-decoration: line-through;
-  }
-  samp {
-    font-family: inherit; // monospace
-    font-size: inherit;
-  }
-  small {
-    font-size: 80%;
-  }
-  strong {
-    font-weight: bold;
-  }
-  sub, sup {
-    font-size: 75%;
-    line-height: 0;
-    position: relative;
-    vertical-align: baseline;
-  }
-  sub {
-    top: -0.5em;
-  }
-  sup {
-    bottom: -0.25em;
-  }
-  time {}
-  u {}
-  var {
-    font-family: inherit; // monospace
-  }
+}
+address {
+  font-style: inherit;
+}
+b {
+  font-weight: bold;
+}
+blockquote {
+  margin:0;
+}
+cite {
+  font-style: italic;
+}
+code {
+  font-family: inherit; // monospace
+  font-size: inherit;
+}
+del {
+  text-decoration: line-through;
+}
+dfn {
+  font-style: italic;
+}
+em {
+  font-style: italic;
+}
+i {
+  font-style: italic;
+}
+ins {}
+kbd {
+  font-size: inherit;
+  font-family: inherit; // monospace
+}
+mark {
+  background: transparent;
+  color: inherit;
+}
+meter {
+  display: block;
+  line-height: inherit;
+  width: 100%;
+}
+pre {
+  font-family: inherit; // monospace
+  font-size: inherit;
+  white-space: pre-wrap;
+  margin: 0;
+  overflow: auto;
+}
+progress {
+  width: 100%;
+  display: block;
+  vertical-align: baseline;
+  line-height: inherit;
+}
+q {
+  quotes: "\201C" "\201D" "\2018" "\2019";
+}
+s {
+  text-decoration: line-through;
+}
+samp {
+  font-family: inherit; // monospace
+  font-size: inherit;
+}
+small {
+  font-size: 80%;
+}
+strong {
+  font-weight: bold;
+}
+sub, sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+sub {
+  top: -0.5em;
+}
+sup {
+  bottom: -0.25em;
+}
+time {}
+u {}
+var {
+  font-family: inherit; // monospace
+}
 
 
-  // Forms
-  // -------------------------
-  form {
-    margin:0;
-  }
-  fieldset {
-    padding: 0;
-    margin: 0;
-    border: 0;
-  }
-  legend {
-    display: block;
-    width: 100%;
-    padding: 0;
-    border: 0;
-  }
-  label {
-    display: block;
-    width: 100%;
-    border: 0;
-    padding: 0;
-    vertical-align: middle;
-  }
-  textarea {
-    overflow: auto;
-    resize: vertical;
-  }
-  optgroup {
-    color: inherit;
-    font-weight: bold;
-    font: inherit;
-    margin: 0;
-  }
-  option {}
-  datalist {}
-  keygen {
-    margin: 0;
-    line-height: inherit;
-    font-family: inherit;
-  }
-  output {
-    text-decoration: underline;
-  }
-  select {
-    text-transform: none;
-    background: none;
-    line-height: inherit;
-  }
-  select,
-  textarea,
-  button,
-  input {
-    display: block;
-    width: 100%;
-    margin: 0;
-    padding: 0;
-    border: 0;
-    outline: 0;
-    height: inherit;
-    color: inherit;
-    background: none;
-    line-height: inherit;
-    font-size: inherit;
-    font-family: inherit;
-  }
-  // input [type]s:
-  // radio
-  // checkbox
-  // range?
-  // button
-  // reset
-  // submit
-  // hidden
-  // image?
-  // date  
-  // datetime  
-  // datetime-local  
-  // email  
-  // file  
-  // month  
-  // number  
-  // password  
-  // search  
-  // tel  
-  // text  
-  // time  
-  // url  
-  // week
-  
-  select[readonly],
-  textarea[readonly],
-  button[readonly],
-  input:not([type])[readonly],
-  input[readonly],
-  .#{$readonly}
-  {
-    cursor: $_cursor-default;
-  }
+// Forms
+// --------------------------------------------------
+form {
+  margin:0;
+}
+fieldset {
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+legend {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+}
+label {
+  display: block;
+  width: 100%;
+  border: 0;
+  padding: 0;
+  //vertical-align: middle;
+}
+textarea {
+  overflow: auto;
+  resize: vertical;
+}
+optgroup {
+  color: inherit;
+  font-weight: bold;
+  font: inherit;
+  margin: 0;
+}
+option {}
+datalist {}
+keygen {
+  margin: 0;
+  line-height: inherit;
+  font-family: inherit;
+}
+output {
+  text-decoration: underline;
+}
+select {
+  text-transform: none;
+  background: none;
+  line-height: inherit;
+}
+select,
+textarea,
+button,
+input {
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  text-align: inherit;
+  height: inherit;
+  color: inherit;
+  background: none;
+  line-height: inherit;
+  font-size: inherit;
+  font-family: inherit;
+}
+// input [type]s:
+// radio
+// checkbox
+// range?
+// button
+// reset
+// submit
+// hidden
+// image?
+// date
+// datetime
+// datetime-local
+// email
+// file
+// month
+// number
+// password
+// search
+// tel
+// text
+// time
+// url
+// week
 
-  select[disabled],
-  textarea[disabled],
-  button[disabled],
-  input:not([type])[disabled],
-  input[disabled],
-  .#{$disabled}
-  {
-    cursor: $_cursor-default;
-  }
-  
-  // Search
-  input[type="search"] {
-    -webkit-appearance: textfield;
-    box-sizing: inherit;
-    -moz-box-sizing: inherit;
-    -webkit-box-sizing: inherit;
-  }
+select[readonly],
+textarea[readonly],
+button[readonly],
+input:not([type])[readonly],
+input[readonly],
+.#{$readonly}
+{
+  cursor: $_cursor-default;
+}
 
-  // File
-  input[type="file"] {
-    box-sizing: border-box;
-    height: auto;
-    vertical-align: middle;
+select[disabled],
+textarea[disabled],
+button[disabled],
+input:not([type])[disabled],
+input[disabled],
+.#{$disabled}
+{
+  cursor: $_cursor-default;
+}
+
+// Search
+input[type="search"] {
+  -webkit-appearance: textfield;
+  box-sizing: inherit;
+  -moz-box-sizing: inherit;
+  -webkit-box-sizing: inherit;
+}
+
+// File
+input[type="file"] {
+  box-sizing: border-box;
+  height: auto;
+  //vertical-align: middle;
+  cursor: $_cursor-pointer;
+}
+
+// Clickers
+input[type="checkbox"],
+input[type="radio"],
+input[type="color"],
+input[type="range"],
+input[type="image"]
+{
+  vertical-align: inherit;
+  cursor: $_cursor-pointer;
+}
+
+// Button like
+button {
+  color: inherit;
+  overflow: visible;
+  text-transform: none;
+}
+button,
+input[type="button"],
+input[type="reset"],
+input[type="submit"] {
+  //cursor: $_cursor-pointer;
+  //text-align: center;
+  //vertical-align: middle;
+}
+
+
+// Images
+// --------------------------------------------------
+img {
+  border: 0;
+  max-width: 100%;
+  height: auto;
+  vertical-align: middle;
+  -ms-interpolation-mode: bicubic;
+}
+map {}
+area {}
+canvas {
+  display: block;
+  vertical-align: baseline;
+}
+figcaption {
+  display: block;
+}
+figure {
+  margin: 0;
+  display: block;
+}
+
+// Links
+// --------------------------------------------------
+a {
+  background: transparent;
+  color: inherit;
+  text-decoration: none;
+  &:focus {
+    outline: none;
+  }
+  &:hover {
+    outline: none;
+    // color: inherit; X
     cursor: $_cursor-pointer;
   }
+  &:active {
+    outline: none;
+  }
+}
+nav {
+  display: block;
+}
 
-  // Clickers
-  input[type="checkbox"],
-  input[type="radio"],
-  input[type="color"],
-  input[type="range"],
-  input[type="image"]
-  {
-    vertical-align: inherit;
-    cursor: $_cursor-pointer;
-  }
+// Lists
+// --------------------------------------------------
+ul, ol {
+  list-style: none;
+  position: relative;
+  padding: 0;
+  margin: 0;
+}
 
-  // Button like
-  button {
-    color: inherit;
-    overflow: visible;
-    text-transform: none;
-  }
-  button,
-  input[type="button"],
-  input[type="reset"],
-  input[type="submit"],
-  .#{$button} {
-    cursor: $_cursor-pointer;
-    text-align: center;
-    vertical-align: middle;
-  }
+ul {}
+ol {}
+li {
+  //list-style: none;
+}
 
+dl {
+  margin:0;
+}
+dt {}
+dd {
+  margin:0;
+}
 
-  // Images
-  // -------------------------
-  img {
-    border: 0;
-    max-width: 100%;
-    height: auto;
-    vertical-align: middle;
-    -ms-interpolation-mode: bicubic;
-  }
-  map {}
-  area {}
-  canvas {
-    display: block;
-    vertical-align: baseline;
-  }
-  figcaption {
-    display: block;
-  }
-  figure {
-    margin: 0;
-    display: block;
-  }
+// Media
+// --------------------------------------------------
+audio {
+  //width: 100%;
+  display: block;
 
-  // Links
-  // -------------------------
-  a {
-    background: transparent;
-    color: inherit;
-    text-decoration: none;
-    &:focus {
-      outline: none;
-    }
-    &:hover {
-      outline: none;
-      // color: inherit; X
-      cursor: $_cursor-pointer;
-    }
-    &:active {
-      outline: none;
-    }
-  }
-  nav {
-    display: block;
-  }
-
-  // Lists
-  // -------------------------
-  ul, ol {
-    list-style: none;
-    position: relative;
-    padding: 0;
-    margin: 0;
-  }
-
-  ul {}
-  ol {}
-  li {
-    //list-style: none;
-  }
-
-  dl {
-    margin:0;
-  }
-  dt {}
-  dd {
-    margin:0;
-  }
-
-  // Media
-  // -------------------------
-  audio {
-    //width: 100%;
-    display: block;
-
-    &:not([controls]) {
-      display: none;
-      height: 0;
-    }
-  }
-  track {}
-  video {
-    display: block;
-    vertical-align: baseline;
-  }
-
-
-  // Sections
-  // -------------------------
-  main,
-  header,
-  footer,
-  section,
-  article,
-  aside,
-  details,
-  dialog,
-  summary {
-    display: block;
-  }
-
-  // Tables
-  // -------------------------
-  table {
-    line-height: inherit;
-    font-size: inherit;
-    font-variant: normal;
-    font-style: normal;
-    color: inherit;
-    text-align: inherit;
-    border-collapse: collapse;
-    border-spacing: 0;
-  }
-  td {
-    padding: 0;
-  }
-  th {
-    padding: 0;
-  }
-
-  // Polyfills
-  // -------------------------
-  // A hack for HTML5 contenteditable attribute on mobile
-  textarea[contenteditable] {
-    -webkit-appearance: none;
-  }
-
-  //Required for Windows 8 Metro split-screen snapping with IE10
-  @-ms-viewport{
-    width: device-width;
-  }
-
-  audio:not([controls]) {
+  &:not([controls]) {
     display: none;
     height: 0;
   }
+}
+track {}
+video {
+  display: block;
+  vertical-align: baseline;
+}
 
-  [hidden],
-  template {
-    display: none;
-  }
 
-  svg:not(:root) {
-    overflow: hidden;
-  }
+// Sections
+// --------------------------------------------------
+main,
+header,
+footer,
+section,
+article,
+aside,
+details,
+dialog,
+summary {
+  display: block;
+}
 
-  button,
-  html input[type="button"],
-  input[type="reset"],
-  input[type="submit"] {
-    -webkit-appearance: button;
-    cursor: pointer;
-  }
+// Tables
+// --------------------------------------------------
+table {
+  line-height: inherit;
+  font-size: inherit;
+  font-variant: normal;
+  font-style: normal;
+  color: inherit;
+  text-align: inherit;
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+td {
+  padding: 0;
+}
+th {
+  padding: 0;
+}
 
-  button::-moz-focus-inner,
-  input::-moz-focus-inner {
-    border: 0;
-    padding: 0;
-  }
+// Polyfills
+// --------------------------------------------------
+// A hack for HTML5 contenteditable attribute on mobile
+textarea[contenteditable] {
+  -webkit-appearance: none;
+}
 
-  input[type="checkbox"],
-  input[type="radio"] {
-    box-sizing: border-box;
-    padding: 0;
-  }
+//Required for Windows 8 Metro split-screen snapping with IE10
+@-ms-viewport{
+  width: device-width;
+}
 
-  input[type="number"]::-webkit-inner-spin-button,
-  input[type="number"]::-webkit-outer-spin-button {
-    height: auto;
-  }
+audio:not([controls]) {
+  display: none;
+  height: 0;
+}
 
-  input[type="search"]::-webkit-search-cancel-button,
-  input[type="search"]::-webkit-search-decoration {
-    -webkit-appearance: none;
-  }
+[hidden],
+template {
+  display: none;
+}
 
+svg:not(:root) {
+  overflow: hidden;
+}
+
+button,
+html input[type="button"],
+input[type="reset"],
+input[type="submit"] {
+  -webkit-appearance: button;
+  cursor: pointer;
+}
+
+button::-moz-focus-inner,
+input::-moz-focus-inner {
+  border: 0;
+  padding: 0;
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+  box-sizing: border-box;
+  padding: 0;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  height: auto;
+}
+
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none;
 }

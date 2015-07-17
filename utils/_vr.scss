@@ -1,0 +1,68 @@
+// _vr.scss (vertical rhythm) contains 1 function which provides convenient way to control
+// vertical rhythm. Simply put, vertical rhythm means that any input value (eg: line-height,
+// margin, height etc) will always adopts to its fixed base.
+//    If line-height = 14px, then:
+//       0px  ---  ---  -----
+//             a    A     ^
+//      14px  ---  ---   /_\
+//                      /  \
+//      28px  ---  ---  ------
+//      font- 6px 12px  18px
+//      size:
+
+$calc-line-baseline:  8px !default; // any valid CSS unit number
+$calc-line-threshold: 100% !default; // new line jumping threshold
+$calc-line-pitch:     0.5 !default; // > 0
+$calc-line-unit:      rem !default; // any CSS unit
+$calc-line-round:     false !default; // round to integer pixel
+
+// set-line
+// calculates number of lines based on $baseline, $threshold and $font-size.
+//    calc-line(0.25 0.5)          -> 0.4375rem
+//    calc-line(0.25 0.5 1, px)    -> 14px
+//    calc-line(0 0.5 1 important) -> 16px
+// TODO(timur): update examples
+@function calc-line(
+  $values,
+  $baseline: $calc-line-baseline,
+  $unit: $calc-line-unit,
+  $threshold: $calc-line-threshold,
+  $pitch: $calc-line-pitch,
+  $round: $calc-line-round) {
+  $result: ();
+  @each $value in $values {
+    @if type-of($value) == number {
+      @if $value == 0 {
+        $value: 0;
+      } @else if unitless($value) {
+        $value: $value * convert-unit($baseline, rem);
+      } @else {
+        $temp: $baseline;
+        $threshold: ununit($threshold);
+
+        $value: ununit(convert-unit($value, px));
+        $base: ununit(convert-unit($baseline, px)) * ($threshold / 100);
+        $ratio: ceil($value / $base);
+        $calc: $base * ($ratio - 1);
+        @if $pitch <= 0 {
+          @error "@function calc-line(): $pitch must be positive non-zero number."
+        }
+        @while ($value > $calc) {
+          $calc: $calc + $base * $pitch;
+        }
+        $value: $calc / $base * $temp;
+        //@debug INPUT $value CALC $calc;
+      }
+
+      $value: if($round, round-unit($value, $unit), convert-unit($value, $unit));
+      $result: append($result, $value);
+    }
+    @else if $value == important or $value == "!important" {
+      $result: append($result, unquote('!important'));
+    }
+  }
+  @if length($result) == 1 {
+    @return nth($result, 1);
+  }
+  @return $result;
+}

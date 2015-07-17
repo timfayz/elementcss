@@ -81,6 +81,7 @@ Examples:
   border-top-right-radius:  0;                .brr-tr-0
 ```
 
+**DO NOT READ BEYOND** - version 1.9 use different approach.
 
 **Properties abbreviate as one ... + full name of value:**
 [todo]

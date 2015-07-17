@@ -2,14 +2,12 @@
 // Feel free to use them in a particular context of your own styles. Note that all global
 // vars start with _ to avoid name collisions and provide handy auto-completion in IDEs.
 
-// Define Global Variables
-// --------------------------------------------------
 // Text direction (rtl/ltr)
-$_left: left !default;
-$_right: right !default;
+$_left: left;
+$_right: right;
 
 // Responsive partitioning
-$_media-unit: rem !default;
+$_media-unit: rem;
 $_media: (
   default:    null,
   mobile:     media 'screen and (max-width:' 740px ')',
@@ -18,8 +16,8 @@ $_media: (
   touch:      '.touch',
   //landscape:  media '(orientation: landscape)',
   //portrait:   media '(orientation: portrait)',
-) !default;
+);
 
 // Cursors
-$_cursor-default:       default !default;
-$_cursor-pointer:       pointer !default;
+$_cursor-default:       default;
+$_cursor-pointer:       pointer;

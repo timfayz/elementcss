@@ -1,19 +1,19 @@
-#CSS-ELEMENT - brand new way of creating CSS GUI
+#CSSELEMENT - new way of creating CSS
 
-CSS-ELEMENT is free and open-source CSS framework written in SASS that promotes clean, object-oriented design and encourages rapid prototyping. It helps you to create complex, scalable and elaborate GUI for the contemporary web applications as well as integrate to existing project. The way of working, thought-out structure and features make it possible even recreate other popular frameworks or just create your favorite theme, use it and share. CSS-ELEMENT is not just framework, but tool and suit of best practices and methods from many professionals around the world to make GUI building more maintainable, easier and faster.
-
-*We are sorry for the language mistakes we have made - we are from Russia.*
+CSSELEMENT is CSS framework written in SASS that promotes clean, object-oriented design and encourages rapid prototyping. It helps you to create complex, scalable and elaborate GUI for the contemporary web applications as well as integrate to existing project. The way of working, thought-out structure and features make it possible even recreate other popular frameworks or just create your favorite theme, use it and share. CSSELEMENT is not just framework, but tool and suit of best practices and methods from many professionals around the world to make GUI building more maintainable, easier and faster.
 
 [![Join the chat at https://gitter.im/kalopsia/element](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/kalopsia/element?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-**[Download v1.6.0](https://github.com/kalopsia/element/archive/master.zip)**
+**[Download v1.9.0](https://github.com/kalopsia/element/archive/master.zip)**
 
 
 ##FILE STRUCTURE
 ```
 components/   framework components
-docs/         documentation and templates
-_.scss        main file - uniting core files
+docs/         documentation
+templates/    useful templates to get started
+utils/        framework SASS functions & mixins
+_.scss        main file uniting all root _*.scss files
 *.scss        logically separated core files
 LICENSE       license information
 README.md     this is what you are currently reading
@@ -37,7 +37,7 @@ Otherwise you will experience difficulties in understanding principles of work a
 
 
 ##HOW TO PARTICIPATE
-**Your participation to CSS-ELEMENT development is very welcome!**
+**Your participation to CSSELEMENT development is very welcome!**
 If you want to help and contribute this project please make your own pull request or [report issues](https://github.com/kalopsia/element/issues). We are welcome any kind of ideas and support, even merge to the new repository/project.
 
 ##ACKNOWLEDGEMENTS
@@ -58,7 +58,7 @@ List of sources thanks to which this framework is raised.
 - [SASS](http://sass-lang.com/) by Hampton Catlin, Nathan Weizenbaum, Chris Eppstein
 - [LESS](http://lesscss.org/) by Alexis Sellier
 - [HTML5 Boilerplate](http://html5boilerplate.com/) by Nicolas Gallagher, Paul Irish, Mathias Bynens, Divya Manian, and Hans Christian Reinl
-- [Normalize.css](http://necolas.github.io/normalize.css/) by Nicolas Gallagher 
+- [Normalize.css](http://necolas.github.io/normalize.css/) by Nicolas Gallagher
 
 ###Frameworks
 - Bootstrap
