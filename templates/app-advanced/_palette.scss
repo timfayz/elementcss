@@ -1,0 +1,143 @@
+// _palette.scss provides convenient variables and functions for working with colors.
+// Inspired by Google Design Materials. Customize it yourself.
+
+// Define Palette
+// --------------------------------------------------
+$_palette:
+  // rainbow
+  #F4427D // 1 pink
+  #B342F4 // 2 violet
+  #42A1F4 // 3 blue
+  #4CCDEA // 4 cyan
+  #A7E551 // 5 green
+  #F4F442 // 6 yellow
+  #F47E42 // 7 orange
+  #F14545 // 8 red
+  #F4B942 // 9 brown
+  // blacks
+  #090909 // 10 black
+  #fff; // 11 white
+
+// Define Handy Functions
+// --------------------------------------------------
+// p
+// returns adjusted shade of color. Use it to get shade of each palette color.
+//    p(#fedfed, 400);
+@function p($color, $shade) {
+  @if $shade == 200 {     $color: color(adjust, $color, (s:-50, v:+15), hsv) }
+  @elseif $shade == 300 { $color: color(adjust, $color, (s:-30, v:+10), hsv) }
+  @elseif $shade == 400 { $color: color(adjust, $color, (s:-12, v:+2), hsv) }
+  @elseif $shade == 500 { $color: $color }
+  @elseif $shade == 600 { $color: color(adjust, $color, (v:-5, s:+3), hsv) }
+  @elseif $shade == 700 { $color: color(adjust, $color, (v:-10, s:+7), hsv) }
+  @elseif $shade == 800 { $color: color(adjust, $color, (v:-20, s:+10), hsv) }
+  @return $color;
+}
+
+// m
+// useful shortcut for map-get() func. Use it to get colors from $c palette.
+//    m($c, pink500);
+@function m($map, $key) { @return map-get($map, $key); }
+
+// Define Color Palette Map
+// --------------------------------------------------
+// $c palette is map where key - color name, value - actual CSS value.
+// Use 50 100 200 300 .. postfixes to indicate color shades, where 500 is main shade.
+// The lower the number, the lighter the shade.
+$c: (
+  // pink: rose, ruby
+  pink200: p(nth($_palette, 1), 200),
+  pink300: p(nth($_palette, 1), 300),
+  pink400: p(nth($_palette, 1), 400),
+  pink500: p(nth($_palette, 1), 500),
+  pink600: p(nth($_palette, 1), 600),
+  pink700: p(nth($_palette, 1), 700),
+
+  // violet: indigo, purple
+  violet200: p(nth($_palette, 2), 200),
+  violet300: p(nth($_palette, 2), 300),
+  violet400: p(nth($_palette, 2), 400),
+  violet500: p(nth($_palette, 2), 500),
+  violet600: p(nth($_palette, 2), 600),
+  violet700: p(nth($_palette, 2), 700),
+
+  // blue: azure, denim
+  blue200: p(nth($_palette, 3), 200),
+  blue300: p(nth($_palette, 3), 300),
+  blue400: p(nth($_palette, 3), 400),
+  blue500: p(nth($_palette, 3), 500),
+  blue600: p(nth($_palette, 3), 600),
+  blue700: p(nth($_palette, 3), 700),
+
+  // cyan: aqua, sky blue
+  cyan200: p(nth($_palette, 4), 200),
+  cyan300: p(nth($_palette, 4), 300),
+  cyan400: p(nth($_palette, 4), 400),
+  cyan500: p(nth($_palette, 4), 500),
+  cyan600: p(nth($_palette, 4), 600),
+  cyan700: p(nth($_palette, 4), 700),
+
+  // green: lime, teal
+  green200: p(nth($_palette, 5), 200),
+  green300: p(nth($_palette, 5), 300),
+  green400: p(nth($_palette, 5), 400),
+  green500: p(nth($_palette, 5), 500),
+  green600: p(nth($_palette, 5), 600),
+  green700: p(nth($_palette, 5), 700),
+
+  // yellow: gold, maize
+  yellow200: p(nth($_palette, 6), 200),
+  yellow300: p(nth($_palette, 6), 300),
+  yellow400: p(nth($_palette, 6), 400),
+  yellow500: p(nth($_palette, 6), 500),
+  yellow600: p(nth($_palette, 6), 600),
+  yellow700: p(nth($_palette, 6), 700),
+
+  //orange: amber, rust
+  orange200: p(nth($_palette, 7), 200),
+  orange300: p(nth($_palette, 7), 300),
+  orange400: p(nth($_palette, 7), 400),
+  orange500: p(nth($_palette, 7), 500),
+  orange600: p(nth($_palette, 7), 600),
+  orange700: p(nth($_palette, 7), 700),
+
+  // red: rusty, lava
+  red200: p(nth($_palette, 8), 200),
+  red300: p(nth($_palette, 8), 300),
+  red400: p(nth($_palette, 8), 400),
+  red500: p(nth($_palette, 8), 500),
+  red600: p(nth($_palette, 8), 600),
+  red700: p(nth($_palette, 8), 700),
+
+  // brown: sepia, umber
+  brown200: p(nth($_palette, 9), 200),
+  brown300: p(nth($_palette, 9), 300),
+  brown400: p(nth($_palette, 9), 400),
+  brown500: p(nth($_palette, 9), 500),
+  brown600: p(nth($_palette, 9), 600),
+  brown700: p(nth($_palette, 9), 700),
+
+  // gray: silver, platinum
+  gray200: #fbfbfb,
+  gray300: #f0f0f0,
+  gray400: #dedede,
+  gray500: #aaa,
+  gray600: #424242,
+  gray700: #303030,
+  gray800: #252525,
+  gray900: #131313,
+
+  // black shades
+  black: nth($_palette, 10),
+  blackHigh: rgba(nth($_palette, 10), .54),
+  blackMid: rgba(nth($_palette, 10), .26),
+  blackLow: rgba(nth($_palette, 10), .12),
+
+  // white shades
+  white: nth($_palette, 11),
+  whiteHigh: rgba(nth($_palette, 11), .70),
+  whiteMid: rgba(nth($_palette, 11), .30),
+  whiteLow: rgba(nth($_palette, 11), .12),
+
+  //other colors..
+);

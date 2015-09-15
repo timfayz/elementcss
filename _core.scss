@@ -1,0 +1,33 @@
+/*!
+ * elementcss v2.0.0 - new way of creating CSS GUI
+ * The MIT License (MIT)
+ * Copyright (c) 2015 elementcss Authors
+*/
+// _core.scss imports all core elementcss files. They contain only the required minimum
+// like default variables, CSS property shorthands, functions and mixins to provide core
+// elementcss functionality. They don't generate anything by default. All core files
+// have inline docs with examples and description of each function and mixin. For any
+// questions, bugs and issues contact me or create new issue on github.com. To learn
+// more about elementcss usage see docs/*.md.
+
+// Globals
+// Variables intentionally start with _ to avoid name collisions and provide handy
+// auto-completion in IDEs. [Explain] Text direction (rtl/ltr)
+$_left: left !default;
+$_right: right !default;
+$_unit: rem !default;
+
+// Core files
+// Files that do not begin with "css-" prefix consist only of utility functions.
+// The rest of files consist mostly of mixins and intended to generate actual CSS
+// content.
+@import "core/names.scss";
+@import "core/math.scss";
+@import "core/unit.scss";
+@import "core/string.scss";
+@import "core/list-map.scss";
+@import "core/color.scss";
+@import "core/metrics.scss";
+@import "core/css-utils.scss";
+@import "core/css-set.scss";
+@import "core/css-grid.scss";

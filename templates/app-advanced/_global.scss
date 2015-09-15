@@ -1,0 +1,23 @@
+// _global.scss defines global variables used by built-in components (components/*.scss).
+// Feel free to use them in a particular context of your own styles. Note that all global
+// vars start with _ to avoid name collisions and provide handy auto-completion in IDEs.
+
+// Text direction (rtl/ltr)
+$_left: left;
+$_right: right;
+
+// Responsive partitioning
+$_media-unit: rem;
+$_media: (
+  default:    null,
+  mobile:     media 'screen and (max-width:' 740px ')',
+  tablet:     media 'screen and (max-width:' 1024px ')',
+  laptop:     media 'screen and (min-width:' 1366px ')',
+  touch:      '.touch',
+  //landscape:  media '(orientation: landscape)',
+  //portrait:   media '(orientation: portrait)',
+);
+
+// Cursors
+$_cursor-default:       default;
+$_cursor-pointer:       pointer;

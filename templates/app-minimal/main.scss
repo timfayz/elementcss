@@ -1,0 +1,37 @@
+/*!
+ * Name: App Name
+ * Version: 1.0
+ * Authors: Your Name
+ * Author URL: example.com
+ */
+
+@import 'css-element/_.scss';
+
+// without @media
+@include set($Padding, padding (
+  sm, 20px,
+  xsm, 10px,
+));
+
+// under @media
+@include set($Color, color (
+  tablet: (
+    black, #000,
+    white, #fff,
+  ),
+  mobile: (
+    prefix,
+    black, #111,
+    white, #fdfdfd,
+  ),
+), $_media);
+
+// result
+// .pdd-sm {padding:20px;}
+// .pdd-xsm {padding:10px;}
+// @media ... {
+//    .c-black {color:#000;}
+//    .c-white {color:#fff;}
+//    .mobile-c-black {color:#111;}
+//    .mobile-c-black {color:#fdfdfd;}
+// }
