@@ -46,7 +46,7 @@ cp -a elementcss/template/app-basic/. ./
 ls
 index.html  main.scss  elementcss/
 ```
-* Check import path to elementcss core:
+* Check import path to elementcss core in `main.scss`:
 ```
 ...
 @import "path-to/elemetcss/core.scss"
@@ -81,12 +81,10 @@ LICENSE       license information
 README.md     this is what you are currently reading
 ```
 
-##Requirements
-Please, before using elementcss or reading the source code you need to learn HTML/HTML5, CSS/CSS3 and basics of Sass.
-Otherwise you will experience difficulties in understanding principles of work and efficiency.
-
 
 ##Documentation
+Documentation is under heavy development. The current docs for v1.9.0 and below.
+
 0. [Preface](https://github.com/timfayz/elementcss/blob/master/docs/0-preface.md)<br/>
 1. [Installation](https://github.com/timfayz/elementcss/blob/master/docs/1-installation.md)<br/>
 2. [Usage](https://github.com/timfayz/elementcss/blob/master/docs/2-usage.md)<br/>
@@ -95,4 +93,4 @@ Otherwise you will experience difficulties in understanding principles of work a
 
 
 ##How to participate
-If you want to help and contribute this project please make your own pull request or [report issues](https://github.com/kalopsia/element/issues). We are very welcome to any kind of ideas and support, even merge to the new repo/project.
+If you want to help and contribute this project please make your own pull request or [report issues](https://github.com/timfayz/elementcss/issues). We are very welcome to any kind of ideas and support, even merge to the new repo/project.

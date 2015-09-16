@@ -5,22 +5,21 @@
  * Author URL: example.com
  */
 
-// APP
+// App
 // --------------------------------------------------
 // main.scss it is your entry point that composes all other files. Root files shouldn't
 // generate any CSS content - only for importing, mixins, functions, variables etc.
-@import 'path-to/csselement/_.scss'; // (!) check the path
+@import 'path-to/elementcss/core.scss'; // (!) check the path
 @import '_global.scss';
 @import '_palette.scss';
 
 
-// COMPONENTS
+// Components
 // --------------------------------------------------
 // components/ folder contains logically separated files that generate parts of your
 // CSS GUI. Don't hesitate, just play with code and see what you get. Don't forget to
 // use color palette from _palette.scss file.
-@import 'components/_imported.scss';
 @import 'components/_helper.scss';
-@import 'components/_set-type.scss';
-@import 'components/_set-layout.scss';
-@import 'components/_set-styling.scss';
+@import 'components/_type.scss';
+@import 'components/_layout.scss';
+@import 'components/_styling.scss';

@@ -95,8 +95,8 @@ $width-height-set: (
     auto, auto,
   ),
 );
-$s: add($s, $Height, height $width-height-set, $_media);
-$s: add($s, $Width, width $width-height-set, $_media);
+$s: add($s, $Height, height $width-height-set, $media);
+$s: add($s, $Width, width $width-height-set, $media);
 
 // Position
 $s: add($s, $Position, position (
@@ -105,7 +105,7 @@ $s: add($s, $Position, position (
     relative, relative,
     absolute, absolute,
   ),
-), $_media);
+), $media);
 
 // Z-index
 $s: add($s, $Z-index, z-index (
@@ -127,7 +127,7 @@ $s: add($s, $Display, display (
     inline-block, inline-block,
     flex, flex,
   ),
-), $_media);
+), $media);
 
 // Floats
 $s: add($s, $Float, float (
@@ -142,7 +142,7 @@ $s: add($s, $Visibility, visibility (
     visible, visible,
     hidden, hidden,
   ),
-), $_media);
+), $media);
 
 // Opacity
 $s: add($s, $Opacity, opacity (
@@ -211,12 +211,12 @@ $s: add($s, null, flex-direction (
     column-reverse, column-reverse,
     nowrap, nowrap
   )
-), $_media);
+), $media);
 
 // Cursor
 $s: add($s, $Cursor, cursor (
-  default, $_cursor-default,
-  pointer, $_cursor-pointer,
+  default, default,
+  pointer, pointer,
   //not-allow, not-allowed,
   //help, help,
   //move, move,
@@ -228,4 +228,4 @@ $s: add($s, $Cursor, cursor (
 // Render Styles
 // --------------------------------------------------
 // render all stored sets
-@include sets($s, $_media);
+@include sets($s, $media);
