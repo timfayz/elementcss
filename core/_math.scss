@@ -1,0 +1,68 @@
+// _math.scss contains basic math function.
+
+// gcd
+// stands for Greatest Common Divisor.
+//    gcd(8, 12)  -> 4
+//    gcd(15, 5)  -> 5
+//    gcd(81, 27) -> 27
+//    gcd(32, 65) -> 1
+// http://rosettacode.org/wiki/Greatest_common_divisor#JavaScript
+@function gcd($a, $b) {
+  @if ($b != 0) {
+    @return gcd($b, $a % $b);
+  } @else {
+    @return abs($a);
+  }
+}
+
+// pow
+// returns the base to the exponent power, that is, raises a number to the power.
+//    pow(2, 2) -> 4
+//    pow(2, 3) -> 8
+//    pow(2, 4) -> 16
+//    pow(3, 2) -> 9
+@function pow($base, $exp, $prec: 12) {
+  // Handles decimal exponents by trying to convert them into a fraction
+  @if (floor($exp) != $exp) {
+    $prec2 : pow(10, $prec);
+    $exp: round($exp * $prec2);
+    $denominator: gcd($exp, $prec2);
+    @return root(pow($base, $exp / $denominator), $prec2 / $denominator, $prec);
+  }
+
+  $value: $base;
+  @if $exp > 1 {
+    @for $i from 2 through $exp {
+      $value: $value * $base;
+    }
+  } @else if $exp < 1 {
+    @for $i from 0 through -$exp {
+      $value: $value / $base;
+    }
+  }
+
+  @return $value;
+}
+
+// root
+// takes root of a number.
+//    root(8, 3)  -> 2
+//    root(9)     -> 3
+// http://rosettacode.org/wiki/Nth_root#JavaScript
+@function root($num, $n: 2, $prec: 12) {
+  $x: 1;
+  @for $i from 0 through $prec {
+    $x: 1 / $n * (($n - 1) * $x + ($num / pow($x, $n - 1)));
+  }
+  @return $x;
+}
+
+// limit
+// limits $val within the $min, $max range.
+//    limit(300, 0, 255)  -> 255
+//    limit(-300, 0, 255) -> 0
+@function limit($val, $min, $max) {
+  @if $val < $min { @return $min; }
+  @if $val > $max { @return $max; }
+  @return $val;
+}

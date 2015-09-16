@@ -1,0 +1,136 @@
+// _unit.scss contains useful functions for CSS unit manipulations.
+
+// trim-unit
+// returns a number without a unit for a given $val.
+//    trim-unit(100px)   -> 100
+//    trim-unit(20.5%)   -> 20.5
+//    trim-unit(360deg)  -> 360
+@function trim-unit($val) {
+  @return $val / ($val - $val + 1);
+}
+
+// append-unit
+// returns a number with any unit appended according to $unit for a given $val.
+//    append-unit(100px, rem) -> 100rem
+//    append-unit(100, px)    -> 100px
+//    append-unit(30, '%')    -> 30%
+//    append-unit(10, em)     -> 10em
+@function append-unit($val, $unit) {
+  $units: (
+    'px':   0px,
+    'in':   0in,
+    'pt':   0pt,
+    'mm':   0mm,
+    'cm':   0cm,
+    'pc':   0pc,
+    'q':    0q,
+    'ex':   0ex,
+    'ch':   0ch,
+    '%':    0%,
+    '':     0,
+    'em':   0em,
+    'rem':  0rem,
+    'vh':   0vh,
+    'vw':   0vw,
+    'vmin': 0vmin,
+    'vmax': 0vmax,
+    'deg':  0deg,
+  );
+  $zero: map-get($units, $unit);
+  @if $zero == null {
+    @error "@function append-unit(): `#{$unit}` is not supported";
+  } @else {
+    @return trim-unit($val)+$zero;
+  }
+}
+
+// convert-unit
+// returns converted number with CSS unit according to $unit for a given $val. $val
+// must be a number (100px, 1rem, 1, 7pt etc). If $unit = `detect` function converts
+// $val into the same unit detected. Supported units: rem, '%', '' (unitless), px,
+// pt, cm, mm, q, in. $parent used to calculate relative units like rem, %, vh etc
+// and always must be in px.
+//    convert-unit(2foo, '%')     -> error: `foo` is not supported.
+//    convert-unit(16px, '%')     -> 100%
+//    convert-unit(2em, px)       -> 32px
+//    convert-unit(1.423rem, px)  -> 22.768px
+//    convert-unit(14pt, px)      -> 18.66667px
+@function convert-unit($val, $unit: detect, $parent: 16, $ppi: 96) {
+  // keep unit of input value
+  $u: unit($val);
+  // if requested unit is the same as input - return untouched
+  @if $u == $unit {
+    @return $val;
+  }
+  @if $unit == detect {
+    $unit: $u;
+  }
+  //$val: trim-unit($val);
+  $in: null; // intermediate inch
+  @if      $u == 'px'   { $in: $val/$ppi; }
+  @else if $u == 'pt'   { $in: $val/$ppi * $ppi/72; }
+  @else if $u == 'cm'   { $in: $val/2.54 * $ppi/96; }
+  @else if $u == 'mm'   { $in: $val/25.4; }
+  @else if $u == 'q'    { $in: $val/25.4 * 4; }
+  @else if $u == 'in'   { $in: $val; }
+  @else if $u == 'rem'
+        or $u == 'em'
+        or $u == ''     { $in: ($val*16) / $ppi; }
+  @else if $u == '%'    { $in: ($val*$parent/100) / $ppi; }
+  @else if $u == 'vh'
+        or $u == 'vw'
+        or $u == 'vmin'
+        or $u == 'vmax' { $in: ($parent/100*$val) / $ppi; }
+  // if inch is not calculated return untouched
+  @if $in == null {
+    @return $val;
+  }
+  // factors multiplying by which we get result according to $unit
+  $t1: 96/$parent;
+  $t2: $t1*100;
+  $factors: (
+    'px':   96,
+    'pt':   72,
+    'cm':   2.54,
+    'mm':   25.4,
+    'q':    25.4/4,
+    'pc':   1/6,
+    'in':   1,
+    '%':    $t2,
+    '':     $t1,
+    'rem':  $t1,
+    'em':   $t1,
+    'vh':   $t2,
+    'vw':   $t2,
+    'vmin': $t2,
+    'vmax': $t2,
+  );
+  $f: map-get($factors, $unit);
+  @if $f == null {
+    @error "@function convert/round-unit: `#{$unit}` is not supported.";
+  }
+  @return append-unit($in*$f, $unit);
+}
+
+// round-unit
+// returns converted number with CSS unit according to $unit for a given $val. $val
+// must be a number (100px, 1rem, 1, 7pt etc). Returned value become integer pixel at
+// the end of browser rendering. If $unit = `detect` function converts $val into the
+// same unit detected, but rounded. See convert-unit() for more information.
+// '' (unitless), px, em etc.
+//    round-unit(16.672px, px)      -> 17px
+//    round-unit(23.45%, px)        -> 4px
+//    round-unit(1.423rem, rem)     -> 1.4375rem (1.4375 * 16 = 23px)
+//    round-unit(1.423rem, detect)  -> 1.4375rem
+@function round-unit($val, $unit:detect, $parent: 16, $ppi:96) {
+  @if $unit == detect {
+    $unit: unit($val);
+  }
+  $res: convert-unit($val, px, $parent, $ppi);
+  // if covert-unit() doesn't support specified unit pass $val through
+  @if unit($res) != px {
+    @return $val;
+  }
+  // else round the result px value and convert it into specified $unit
+  @return convert-unit(round($res), $unit, $parent, $ppi);
+}

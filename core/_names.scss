@@ -1,9 +1,10 @@
-// _naming.scss provides shorthands/abbreviations of all valid CSS properties which intended
-// fot use in creating Sets (one class = one property). For example:
+// _names.scss provides shorthands/abbreviations of all valid CSS properties
+// which is intended to use in creating Sets (one class = one property).
 //    .#{$Padding}-xsm {padding:10px;} -> pdd-xsm {...}
+//    .#{$Box-shadow}-out {box-shadow: 0 1px 1px black;} -> bxsh-out {...}
 
 // Constants
-// --------------------------------------------------
+// ----------------------------------------
 // set of common size names
 $Max:         min;
 $Default:     def;
@@ -31,24 +32,24 @@ $Ultra-Bold:  800;
 $Black:       900;
 
 // Property Direction Shortcuts
-// --------------------------------------------------
-$T:                     -t !default; // top
-$R:                     -r !default; // right
-$B:                     -b !default; // bottom
-$L:                     -l !default; // left
-$TL:                    -tl !default; // top-left
-$TR:                    -tr !default; // top-right
-$BR:                    -br !default; // bottom-right
-$BL:                    -bl !default; // bottom-left
-$X:                     -x !default; // x axis
-$Y:                     -y !default; // y axis
+// ----------------------------------------
+$T:   -t !default; // top
+$R:   -r !default; // right
+$B:   -b !default; // bottom
+$L:   -l !default; // left
+$TL:  -tl !default; // top-left
+$TR:  -tr !default; // top-right
+$BR:  -br !default; // bottom-right
+$BL:  -bl !default; // bottom-left
+$X:   -x !default; // x axis
+$Y:   -y !default; // y axis
 
 // Property Shortcuts
-// --------------------------------------------------
+// ----------------------------------------
 // Categorized by w3schools.com/cssref/default.asp.
-// (!) Designed syntax guarantees good readability, brevity and intuitiveness as well as
-// almost no collisions and repetitions between shorthands of different properties. There
-// are only ~6 exceptions and some of them are very rarely used.
+// (!) Designed syntax guarantees good readability, brevity and intuitiveness as well
+// as almost no collisions and repetitions between shorthands of different properties.
+// There are only ~6 exceptions and some of them are very rarely used.
 //
 // Syntax:
 //    1 word = first letter and two subsequent consonants:
@@ -77,10 +78,12 @@ $Y:                     -y !default; // y axis
 //      overflow-x              = [o][v]e[r]flow(-x)                = ovr-x
 //
 // Conventions:
-// *          - exceptions to the rule
-// a          - intentional abbreviation of the name
-// unofficial - properties do not standardized by World Wide Web Consortium
-// Note the there is no shorthands for deprecated CSS properties.
+//    * - exceptions to the rule
+//    a - intentional abbreviation of the name
+//    unofficial - properties do not standardized by World Wide Web Consortium
+//    Note that there is no shorthands for deprecated CSS properties.
+
+$All:                           all !default;
 
 // Color
 $Color:                         c !default; //a
@@ -336,9 +339,3 @@ $Image-resolution:              imrs !default;
 // developer.mozilla.org/en-US/docs/Web/CSS/Replaced_element
 $Object-fit:                    obft !default;
 $Object-position:               obps !default;
-
-// Customs Selectors
-// NOTE: under consideration
-// --------------------------------------------------
-$disabled:    'disabled' !default;
-$readonly:    'readonly' !default;

@@ -1,69 +1,96 @@
-#CSSELEMENT - new way of creating CSS
-
-CSSELEMENT is CSS framework written in SASS that promotes clean, object-oriented design and encourages rapid prototyping. It helps you to create complex, scalable and elaborate GUI for the contemporary web applications as well as integrate to existing project. The way of working, thought-out structure and features make it possible even recreate other popular frameworks or just create your favorite theme, use it and share. CSSELEMENT is not just framework, but tool and suit of best practices and methods from many professionals around the world to make GUI building more maintainable, easier and faster.
+#elementcss
 
 [![Join the chat at https://gitter.im/kalopsia/element](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/kalopsia/element?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-**[Download v1.9.0](https://github.com/kalopsia/element/archive/master.zip)**
+> New way of creating CSS.
+
+elementcss providing minimal, strict toolkit (written in Sass). that promotes clean, object-oriented design and encourages rapid prototyping. It helps you to create complex, scalable and elaborate GUI for the contemporary web applications as well as integrate to existing project. The way of working, thought-out structure and features make it possible even recreate other popular frameworks or just create your favorite theme, use it and share. ElementCSS is not just framework, but tool and suit of best practices and methods from many professionals around the world to make GUI building more maintainable, easier and faster.
+
+**[Download v2.0.0](https://github.com/timfayz/elementcss/archive/master.zip)**
+
+##Features
+ - **grid system**. Flexbox or float-based grid system with customizable number of grids, column number, width, gap. Implements all widely used grid features like changeable column `width`, `push`, `pull`, `offset`, `centering` etc + all delights of the flexbox model.
+
+ - **color utils.** Convert different color models into one another. Adjust, change, scale color params using different color models. Supports `hexadecimal`, `rgb(a)`, `hsb/v(a)`, `hsl(a)` and new CSS4 `color()` function.
+
+ - **unit utils**. Convert, remove, append different CSS units into one another. Using `round-unit()` function makes sure you get integer pixel when the browser finishes rendering. Supports all valid CSS units: `rem`, `px`, `pt`, `%` etc.
+
+ - **vertical rhythm**. Pass a value through `calc-line()` function to snap/restrict any CSS property into invisible grid based on custom baseline (eg your line-height). [edit] Useful for height, margin, padding etc. Automatically calculates the nearest value based on `pitch`, `threshold` and `baseline` params.
+
+ - **init.css**. Get best from both `normalize.css` and `Reset CSS 2.0`. `init.scss` component contains CSS that makes appearance of all HTML tags unified to start styling like from a blank sheet.
+
+ - **helper utils**. Clearfix, image replacement, hiding, visually hiding, text hiding and many more. The most used helper classes designed and gather from best practice.
+
+ - **string utils**. Check occurrence, find, replace, prefix and postfix specified substring.
+
+ - **list/map utils**. Replace, union, append, find indexes and many more handy function to work with lists and maps.
+
+ - **math utils**. Power, root and find great common divider of a number.
 
 
-##FILE STRUCTURE
+##Quick Start
+* [Install Sass](http://sass-lang.com/install)
+* Create project folder:
 ```
-components/   framework components
+mkdir myproject
+cd myproject
+touch index.html
+```
+* Clone repository or [download](https://github.com/kalopsia/element/archive/master.zip)
+```
+git clone https://github.com/timfayz/elementcss
+```
+* Copy content of `templates/app-basic` into your project root:
+```
+cp -a elementcss/template/app-basic/. ./
+ls
+index.html  main.scss  elementcss/
+```
+* Check import path to elementcss core in `main.scss`:
+```
+...
+@import "path-to/elemetcss/core.scss"
+...
+```
+* Compile `main.scss` into `main.css`
+```
+sass --watch main.scss:main.css
+```
+* Link `main.css` into your `index.html` and open it in a browser:
+```
+<!doctype html>
+<html>
+  <head>
+    <link rel="stylesheets" href="main.css">
+  </head>
+  <body>
+    <p class="c-blue">Hello World!</p>
+  </body>
+</html>
+```
+
+
+##File structure
+```
 docs/         documentation
-templates/    useful templates to get started
-utils/        framework SASS functions & mixins
-_.scss        main file uniting all root _*.scss files
-*.scss        logically separated core files
+core/         framework core functions & mixins
+templates/    project templates
+_core.scss    elementcss entry point unites all other core files
+core/*.scss   logically separated core files
 LICENSE       license information
 README.md     this is what you are currently reading
 ```
-Not familiar with github.com or git? To learn more about git go [here (official documentation)](http://git-scm.com/book/en/v2/Getting-Started-About-Version-Control) or just googling "learn git". If you are newbie who often face the git and github.com, but you don't even know what the difference between them. Here is useful quote:
-
-> Git is a revision control system, a tool to manage your source code history. GitHub is a hosting service for Git repositories. So they are not the same thing: Git the tool, GitHub the service for projects that uses Git.
 
 
-##REQUIREMENTS
-Please, before using or reading the source code you need to learn HTML/HTML5, CSS/CSS3 and basics of SASS.
-Otherwise you will experience difficulties in understanding principles of work and efficiency. If you know nothing about previously mentioned technologies go to [w3schools.com](http://w3schools.com) to gain some basic knowledge.
+##Documentation
+Documentation is under heavy development. The current docs for v1.9.0 and below.
+
+0. [Preface](https://github.com/timfayz/elementcss/blob/master/docs/0-preface.md)<br/>
+1. [Installation](https://github.com/timfayz/elementcss/blob/master/docs/1-installation.md)<br/>
+2. [Usage](https://github.com/timfayz/elementcss/blob/master/docs/2-usage.md)<br/>
+3. [Structure](https://github.com/timfayz/elementcss/blob/master/docs/3-structure.md)<br/>
+4. [Conventions](https://github.com/timfayz/elementcss/blob/master/docs/4-conventions.md)<br/>
 
 
-##GET STARTED
-0. [Preface](https://github.com/kalopsia/element/blob/master/docs/0_preface.md)<br/>
-1. [Installation](https://github.com/kalopsia/element/blob/master/docs/1_installation.md)<br/>
-2. [Usage](https://github.com/kalopsia/element/blob/master/docs/2_usage.md)<br/>
-3. [Structure](https://github.com/kalopsia/element/blob/master/docs/3_structure.md)<br/>
-4. [Conventions](https://github.com/kalopsia/element/blob/master/docs/4_conventions.md)<br/>
-
-
-##HOW TO PARTICIPATE
-**Your participation to CSSELEMENT development is very welcome!**
-If you want to help and contribute this project please make your own pull request or [report issues](https://github.com/kalopsia/element/issues). We are welcome any kind of ideas and support, even merge to the new repository/project.
-
-##ACKNOWLEDGEMENTS
-List of sources thanks to which this framework is raised.
-
-###Online resources
-- [w3schools.com](http://w3schools.com/)
-- [Mozilla Developer Network](https://developer.mozilla.org/en-US/docs/Web)
-- [Paulirish.com](http://paulirish.com/) by Paul Irish
-- [CSS-Tricks.com](css-tricks.com) by Chris Coyier
-- [Caniuse.com](caniuse.com) by Tim Brown
-- [Meyerweb.com](http://meyerweb.com/) by Eric A. and Kathryn S. Meyer
-- [nicolasgallagher.com](http://nicolasgallagher.com/) by Nicolas Gallagher
-- [Nicewebtype.com](http://nicewebtype.com/) by Tim Brown
-- Just numerous contributors that help to evolve their favorite projects :)
-
-###Tools
-- [SASS](http://sass-lang.com/) by Hampton Catlin, Nathan Weizenbaum, Chris Eppstein
-- [LESS](http://lesscss.org/) by Alexis Sellier
-- [HTML5 Boilerplate](http://html5boilerplate.com/) by Nicolas Gallagher, Paul Irish, Mathias Bynens, Divya Manian, and Hans Christian Reinl
-- [Normalize.css](http://necolas.github.io/normalize.css/) by Nicolas Gallagher
-
-###Frameworks
-- Bootstrap
-- Foundation
-- FlatUI
-- Gridlover
-- Golden Grid System
-- and many others
+##How to participate
+If you want to help and contribute this project please make your own pull request or [report issues](https://github.com/timfayz/elementcss/issues). We are very welcome to any kind of ideas and support, even merge to the new repo/project.
