@@ -135,7 +135,7 @@
 //    ...
 //    ._container {width: 960px}
 //    @media (max-width: 480px) { ._container, .mobile-container {width: 100%;} }
-@mixin container($params, $media) {
+@mixin container($params, $media:null) {
   @if type-of($params) != map {
     $params: (default: $params);
   }
@@ -152,7 +152,11 @@
       @if $prefix == _ {
         ._container { width: $param; }
       } @else {
-        ._container, .#{$prefix}container { width: $param; }
+        $s: unquote('._container');
+        @if $prefix {
+          $s: append($s, unquote('.#{$prefix}container'), comma)
+        }
+        #{$s} { width: $param; }
       }
     }
   }

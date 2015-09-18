@@ -6,7 +6,7 @@
 
 elementcss providing minimal, strict toolkit (written in Sass). that promotes clean, object-oriented design and encourages rapid prototyping. It helps you to create complex, scalable and elaborate GUI for the contemporary web applications as well as integrate to existing project. The way of working, thought-out structure and features make it possible even recreate other popular frameworks or just create your favorite theme, use it and share. ElementCSS is not just framework, but tool and suit of best practices and methods from many professionals around the world to make GUI building more maintainable, easier and faster.
 
-**[Download v2.0.0](https://github.com/timfayz/elementcss/archive/master.zip)**
+**[Download v2.1.0](https://github.com/timfayz/elementcss/archive/master.zip)**
 
 ##Features
  - **grid system**. Flexbox or float-based grid system with customizable number of grids, column number, width, gap. Implements all widely used grid features like changeable column `width`, `push`, `pull`, `offset`, `centering` etc + all delights of the flexbox model.
@@ -73,10 +73,9 @@ sass --watch main.scss:main.css
 ##File structure
 ```
 docs/         documentation
-core/         framework core functions & mixins
 templates/    project templates
-_core.scss    elementcss entry point unites all other core files
-core/*.scss   logically separated core files
+core/         files containing  core functions & mixins
+_core.scss    elementcss entry point unites all files in core/
 LICENSE       license information
 README.md     this is what you are currently reading
 ```
