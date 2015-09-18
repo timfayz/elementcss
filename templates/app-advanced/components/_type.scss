@@ -100,12 +100,12 @@ $s: add($s, $List-style, list-style (
 // --------------------------------------------------
 html {
   font-family: $_font-family;
-  line-height: $_line-height;
+  line-height: round-unit($_line-height, em);
   @include media(default) {
     font-size: $_font-size;
   }
-  //@include media(tablet, $_media) { font-size: 14px; }
-  //@include media(mobile, $_media) { font-size: 13px; }
+  //@include media(tablet, $media) { font-size: 14px; }
+  //@include media(mobile, $media) { font-size: 13px; }
 }
 
 body {
@@ -141,4 +141,4 @@ sup {
 }
 
 // render all stored sets
-@include sets($s, $_media);
+@include sets($s, $media);

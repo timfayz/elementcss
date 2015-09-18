@@ -5,33 +5,14 @@
  * Author URL: example.com
  */
 
-@import 'css-element/_.scss';
+@import 'path-to/elementcss/core.scss';
 
-// without @media
-@include set($Padding, padding (
-  sm, 20px,
-  xsm, 10px,
+// generate set
+@include set($Color, color (
+  blue, #5948FF,
+  green, #509D2C,
 ));
 
-// under @media
-@include set($Color, color (
-  tablet: (
-    black, #000,
-    white, #fff,
-  ),
-  mobile: (
-    prefix,
-    black, #111,
-    white, #fdfdfd,
-  ),
-), $_media);
-
 // result
-// .pdd-sm {padding:20px;}
-// .pdd-xsm {padding:10px;}
-// @media ... {
-//    .c-black {color:#000;}
-//    .c-white {color:#fff;}
-//    .mobile-c-black {color:#111;}
-//    .mobile-c-black {color:#fdfdfd;}
-// }
+// .c-blue  {color:#5948FF;}
+// .c-green {color:#509D2C;}

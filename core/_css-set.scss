@@ -291,12 +291,12 @@
 // sets
 // generates sets from $storage.
 //    @include sets($s) -> .pdd-def {padding: 20px;}
-@mixin sets($storage, $query-map:null, $media-unit:$_unit) {
+@mixin sets($storage, $query-map:null) {
   @if length($storage) == 0 or $storage == null {
     @error '@mixin sets(): nothing to render - 1st argument is empty.';
   }
   @each $query-name, $sets in $storage {
-    @include media($query-name, $query-map, $media-unit) {
+    @include media($query-name, $query-map) {
       @each $s in $sets {
         //$s: nth($s, 1); extract list: ((a b c d)) -> a b c d
         @if $s {
@@ -313,7 +313,7 @@
 //      -> .bg-red {background: #ff1b2e;}
 //    @include set(indent, (margin padding) (sm, 20px));
 //      -> .indent-sm {margin: 20px; padding: 20px;}
-@mixin set($property-shortcut, $data, $query-map:null, $media-unit:$_unit) {
+@mixin set($property-shortcut, $data, $query-map:null) {
   $storage: add((), $property-shortcut, $data, $query-map);
-  @include sets($storage, $query-map, $media-unit);
+  @include sets($storage, $query-map);
 }

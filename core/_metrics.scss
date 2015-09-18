@@ -1,6 +1,6 @@
-// _grid.scss provides 2 functions: one for calculating grid system parameters like
-// column width, gap width etc; second converts arbitrary values into values fixed
-// ones according to your base-line ("snapping").
+// _metrics.scss provides 2 functions: first converts arbitrary values into values
+// fixed ones according to your base-line ("snapping"); second for calculating grid
+// system parameters like column width, gap width etc.
 
 // calc-line
 //
