@@ -43,6 +43,87 @@
   @return if($value!=$exception, if($value, unquote('#{$prefix}#{$value}'), null), null);
 }
 
+
+// Exclude value by name from list
+// ------------------------------
+@function remove-value($list, $value:null, $separator:auto)
+{
+  $output: () !global;
+  //  @if $value {
+  @each $val-of-first in $list {
+    @if $val-of-first != $value {
+      $output: append($output, $val-of-first, $separator) !global;
+    }
+  }
+
+  @return $output;
+  //  }
+  //  @else {
+  //    @return $list;
+  //  }
+}
+
+// Remove value by index from list
+// ------------------------------
+@function remove($list, $index:null, $separator:auto)
+{
+  $output: () !global;
+  @if $index {
+    @each $val-of-first in $list {
+      @if $val-of-first != $index {
+        $output: append($output, $val-of-first, $separator) !global;
+      }
+    }
+
+    @return $output;
+  }
+  @else {
+    @return $list;
+  }
+}
+
+
+// Check if word exists in the string
+// ---------------------------------
+// @return null if word doesn't exists else return 1
+// or index of word (if length of word == 1)
+@function str-exists($string, $word) {
+  $word-length: str-length($word);
+
+  @if $word-length <= str-length($string) {
+    @if $word-length > 1 {
+      $next: 0;
+      @for $i from 1 through $word-length {
+        $letter: str-slice($word, $i, $i);
+
+        $curr: str-index($string, $letter);
+        @if $curr == null {
+          @return null;
+        }
+
+        @if $i > 1 and $next - $curr != -1 {
+          @return null;
+        }
+
+        $next: str-index($string, $letter);
+        @if $next == null {
+          @return null;
+        }
+
+      }
+      @return true;
+    }
+
+    @else if $word-length == 1 {
+      @return str-index($string, $word);
+
+    } @else {
+      @return null;
+    }
+  }
+}
+
+
 // Grid Settings Calculator
 // ------------------------------
 // $columns - number of grid columns
