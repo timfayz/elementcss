@@ -1,105 +1,66 @@
-// Clearfix
-// -------------
-// clearfix - is technique of overflow correction
-// to block element containing float elements
-@mixin clearfix()
-{
-  // new
-  &:after {
-    content: "";
-    display: table;
-    clear: both;
-  }
-  // old
-//  &:before,
-//  &:after {
-//    content: " ";
-//    display: table;
-//  }
-//  &:after {
-//    clear: both;
-//  }
-}
-
-// Font-Face
-// -------------
-@mixin font-face($font-family, $font-path, $font-weight: null, $font-style:null, $version:null, $svg-font-name:null)
-{
-  $query: if($version,'?v=#{$version}', null);
-  @if $svg-font-name {
-    @font-face {
-      font-family: $font-family;
-      font-weight: $font-weight;
-      font-style: $font-style;
-      src: url('#{$font-path}.eot#{$query}');
-      src: url('#{$font-path}.eot?#iefix#{prepend-dash($version)}') format('embedded-opentype'),
-      url('#{$font-path}.woff#{$query}') format('woff'),
-      url('#{$font-path}.ttf#{$query}') format('truetype'),
-      url('#{$font-path}.svg#{$query}##{$svg-font-name}') format('svg');
-    }
-  }
-  @else { //@todo kill off
-    @font-face {
-      font-family: $font-family;
-      src: url('#{$font-path}.eot#{$query}');
-      src: url('#{$font-path}.eot?#iefix#{prepend-dash($query)}') format('embedded-opentype'),
-      url('#{$font-path}.woff#{$query}') format('woff'),
-      url('#{$font-path}.ttf#{$query}') format('truetype');
-    }
-  }
-}
-
 // Media Builder
 // -------------
-@mixin media($media-map, $media-name:null, $unit:$_media-unit, $no-query:null) {
-  $string: ();
-  $query: null;
-  $query-type: null;
-
-  //if query map is presented
-  @if $media-name {
+// $media-map map - map where key is name of query, value is the query itself. Example:
+//    $media-map: (
+//       mobile:   media '(screen and (max-width: 740px )',
+//       touch:    '.touch',
+//       ^name     ^query
+//    );
+// $media-name string - key of corresponding key-value pair in $media-map. Example: mobile or touch
+// $unit unit - convert numbers are presented in query in accordance with $unit
+@mixin media($media-map, $media-name, $unit:$_media-unit) {
+  // if media map is not null
+  @if $media-map {
+    // get query with the associated name
     $query: map-get($media-map, $media-name);
-  }
-  //if only media query is presented
-  @else {
-    $query: $media-map;
-  }
 
-  @if $query {
-    @for $i from 1 through length($query) {
-      $value: nth($query, $i);
+    // if query is presented in the map
+    @if $query {
+      $query-string: ();
+      $query-type: null;
+      
+      // fetch query string from key's value
+      @for $i from 1 through length($query) {
+        $value: nth($query, $i);
+        // if first item in the query list is keyword 'media' the content must be under @media rule
+        // else under simple CSS selector, like .myclass { @content; }
+        @if $i == 1 { $query-type: if($value==media, media, selector); }
+        
+        // if query's item is number - convert it according to $unit unit
+        $value: if(type-of($value)==number, tounit($value, $unit), unquote($value));
+        
+        // fetch string
+        $query-string: append($query-string, if($value!=media, $value, null));
+      }
 
-      @if $i == 1 {
-        $query-type: if($value==media, media, string);
+      @if $query-type == media {
+        @media #{$query-string} { @content; }
+      } 
+      @else if $query-type == selector{
+        #{$query-string} &      { @content; }
       }
-      $value: if(type-of($value)==number, tounit($value, $unit), unquote($value));
-      $string: append($string, if($value!=media, $value, null));
+      
+    // render content with no query
+    } @else {
+      @content;
     }
-
-    @if $query-type==media {
-      @media #{$string} {
-        @content;
-      }
-    }
-    @else {
-      #{$string} & {
-        @content;
-      }
-    }
-  }
-  @else {
-    @content;
   }
 
 }
 
-// Property generator
-// -------------------------------------
-// $properties - any CSS property(es)
-// $class-property-shortcut - CSS class prefix
-// @return
-@mixin _property($property-shortcut, $list, $device:null)
-{
+// Class-property Generator (implements set mixin)
+// -----------------------------------------------
+// $property-shortcut string - class prefix for for given CSS property. Example: clr (CSS color)
+// $property-set list - list of class name & CSS value pairs. Example:
+//    $color-set: color ( <- color = valid CSS property name
+//        black, #333,
+//        white, #fdfdfd,
+//        ^name  ^value
+//      )
+//    );
+// @render one or more statement like selector { property: value }. Example:
+//    .clr-black {color: #333;} .clr-white {color: #fdfdfd;}
+@mixin _property($property-shortcut, $property-set, $device:null) {
   $device-prefix: null;
   $device-postfix: null;
   $class-prefix: null;
@@ -107,14 +68,14 @@
   $selector-before: (null);
   $selector-after: (null);
 
-  //fist value always property(ies) name(s)
-  $property: nth($list, 1);
-  $property-list: nth($list, 2);
+  //fist value always property name(s)
+  $property: nth($property-set, 1);
+  $property-set: nth($property-set, 2);
 
   $i: 1 !global;
-  @while $i <= length($property-list) {
+  @while $i <= length($property-set) {
 
-    $initial-value: nth($property-list, $i);
+    $initial-value: nth($property-set, $i);
     // step _
     // --------
     // prepend/append/clean device name
@@ -137,7 +98,7 @@
     // step 0
     // ------
     // get selectors if presented
-    $first-value: nth($property-list, $i);
+    $first-value: nth($property-set, $i);
     @if length($first-value) == 3 {
       $selector-before: nth($first-value, 1);
       $selector-after: nth($first-value, 3);
@@ -148,7 +109,7 @@
     // step 1
     // ------
     // get class name
-    $next-value: nth($property-list, $i);
+    $next-value: nth($property-set, $i);
     $i: $i + 1 !global;
 
     //if pre/postfix class names are presented
@@ -165,7 +126,7 @@
     // step 2
     // ------
     // get property value
-    $next-value: nth($property-list, $i);
+    $next-value: nth($property-set, $i);
     $i: $i + 1 !global;
 
     // append null for correct handling values within the loop
@@ -190,25 +151,25 @@
 
 // Class setter
 // -------------------------------------
-//
-// @return
-@mixin set($property-shortcut, $list, $media:null) {
-  //@todo multi each $list in $args {}
+// $property-shortcut string - pass to _property mixin (see above)
+// @todo
+// @render
+@mixin set($property-shortcut, $list, $media-map:null) {
   @if length($list) > 0 {
 
-    @if $media {
+    @if $media-map {
       $property-name: nth($list, 1);
       $property-list: nth($list, 2);
 
-      $media-devices: map-keys($media) !global;
-      $devices: nths($media-devices, indexes($media-devices, map-keys($property-list)));
+      $media-devices: map-keys($media-map) !global;
+      $property-devices: nths($media-devices, indexes($media-devices, map-keys($property-list)));
 
-      @if length($devices) > 0 {
-        @for $i from 1 through length($devices) {
-          $device-name: nth($devices, $i);
+      @if length($property-devices) > 0 {
+        @for $i from 1 through length($property-devices) {
+          $device-name: nth($property-devices, $i);
           $device-property-list: map-get($property-list, $device-name);
 
-          @include media($media, $device-name) {
+          @include media($media-map, $device-name) {
             @include _property($property-shortcut, $property-name $device-property-list, $device-name);
           }
         }
@@ -223,8 +184,8 @@
 
 // Class getter
 // -------------------------------------
+// @todo
 @function get($mixed-list, $class-name) {
-
   $property-list: nth($mixed-list, 1); //list with property name
   $property-list: nth($property-list, 2); //list without property name
   $property-device: nth($mixed-list, 2);
@@ -279,9 +240,9 @@
 }
 
 
-
 // Property and value setter
 // -------------------------------------
+// @todo
 @mixin property-value($args...) {
   $c: 1 !global;
   @while $c <= length($args) {
@@ -298,5 +259,46 @@
     #{$property-name}: get($mixed-list, $class-name);
 
     $c: $c + 2 !global;
+  }
+}
+
+
+// Clearfix
+// -------------
+// clearfix - is technique of overflow correction
+// to block element containing float elements
+@mixin clearfix() {
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+  // (deprecated)
+  // &:before,
+  // &:after {
+  //   content: " ";
+  //   display: table;
+  // }
+  // &:after {
+  //   clear: both;
+  // }
+}
+
+// Font-Face
+// -------------
+// Generate bulletproof @font-face rule for your custom fonts.
+@mixin font-face($font-family, $font-path, $font-weight: null, $font-style:null, $version:null, $svg-font-name:null) {
+  $query: if($version,'?v=#{$version}', null);
+  $add-query: if($version,'&v=#{$version}', null);
+  @font-face {
+    font-family: $font-family;
+    font-weight: $font-weight;
+    font-style: $font-style;
+    src: url('#{$font-path}.eot#{$query}');
+    src: url('#{$font-path}.eot?#iefix#{$add-query}') format('embedded-opentype'),
+    url('#{$font-path}.woff#{$query}') format('woff'),
+    url('#{$font-path}.ttf#{$query}') format('truetype')
+    // add path to svg font if presented
+    if($svg-font-name, unquote(",url('#{$font-path}.svg#{$query}##{$svg-font-name}') format('svg')"), null);
   }
 }
