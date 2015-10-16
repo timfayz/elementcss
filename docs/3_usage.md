@@ -33,15 +33,15 @@ If you want to understand what is in the module itself and what exactly means th
 ##Creating Project Styles
 
 Lets imagine we need to create a simple web app that must be responsible, has beautiful typography.
-
-First of all we need to choose template under ``templates/app-*`` folder where do we start. As you are newbie we choose ``app-minimal`` template. Copy and paste contents of the ``templates/app-minimal`` near to the whole *element* folder. From now on we have a structure as follows:
+TODO: due to lack of knowledge how to use ELEMENT and how its using looks like we need...
+First of all we need to choose template under ``templates/app-*`` folder. As you are newbie we choose ``app-minimal`` template where do we start. Copy and paste contents of the ``templates/app-minimal`` near to the whole *element* folder. From now on we have a structure as follows:
 
 ```
-main.scss
+app.scss
 element
 ```
 
-Lets explore line by line a very basic usage which is the basis of ``app-minimal/main.scss``:
+Lets explore line by line a very basic usage which is the basis of ``app-minimal/app.scss``:
 
 ```SCSS
 // 1. Make short description of your project. This is special comment block that gives strangers
@@ -67,7 +67,7 @@ Lets explore line by line a very basic usage which is the basis of ``app-minimal
 
 // Global Variables
 // --------------------------------------------
-// Define global variables prepended by _
+// Redefine global variables prepended by _
 $_font-size:    16px;
 $_line-height:  1.7;
 $_media-unit: rem; //converts media values within $_media into the rem unit
