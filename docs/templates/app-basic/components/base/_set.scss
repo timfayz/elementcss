@@ -1,33 +1,26 @@
 // Sets
 // --------------------------------------------------
-// to overwrite
-// $set-list-style: list-style (
-//   default: (
-//     none, none,
-//     disc, disc,
-//     square, square
-//   )
-// );
-// to disable
-// $set-list-style: null;
+// you can overwrite default sets defined in set.scss file
 //@import 'path-to/css-element/components/set.scss';
 
 // Your Sets
 // --------------------------------------------------
+// don't hesitate, just play with code and see what you get (syntax can be found in section Usage)
+// use colors from _palette.scss file, like in the example above
 
 // Color
 // -----------
-// don't hesitate just play with code and see what you get
-// the syntax you can see in the documentation (section Usage)
+// define set
 $color: color (
   default: (
-    black, $hex-black,
-    white, $hex-white,
+    black, m($colors, black),
+    white, m($colors, white),
   ),
   media: (tablet mobile) (
     prefix,
-    green, $hex-green,
+    myclr, #abcdef,
   ),
 );
+// generate set
 @include set($Color, $color, $_media);
 
