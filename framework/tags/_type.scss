@@ -1,0 +1,45 @@
+@import '../_globals.scss';
+@import '../_naming.scss';
+@import '../_functions.scss';
+@import '../_mixins.scss';
+@import '../_vr.scss';
+
+// Default Variables
+// --------------------------------------------------
+  $type: false !default;
+  $type-initiating: true !default;
+
+
+// Output Styles
+// --------------------------------------------------
+@if $type or $type == static {
+
+  @if $type-initiating {
+    #{$_headings} {
+      margin:0;
+      font-weight: inherit;
+      font-size: inherit;
+      color: inherit;
+      text-rendering: optimizelegibility;
+    }
+
+    #{$h1} {}
+    #{$h2} {}
+    #{$h3} {}
+    #{$h4} {}
+    #{$h5} {}
+    #{$h6} {}
+
+    #{$p} {
+      margin: 0;
+    }
+
+    #{$hr} {
+      box-sizing: content-box;
+      height: 0;
+      border: none;
+      margin: 0;
+    }
+  }
+
+} $type: false;

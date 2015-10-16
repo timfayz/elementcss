@@ -1,0 +1,371 @@
+// Global Selectors
+// --------------------------------------------------
+// use this file to reference while making themes
+// @think: share styles by keeping class names via variables
+// @think: $elements-selector: class; //class, tag, both
+
+// KEYWORDS
+// -------------------------------------
+$disabled:    '-disabled';
+$readonly:    '-readonly';
+
+
+
+// TAG NAMING
+// -------------------------------------
+
+// Basic
+// -------------------
+$_all:        '*, *:before, *:after';
+$html:        'html';
+$body:        'body';
+
+
+// Type
+// -------------------
+$_headings:   'h1, h2, h3, h4, h5, h6';
+$h1:          'h1';
+$h2:          'h2';
+$h3:          'h3';
+$h4:          'h4';
+$h5:          'h5';
+$h6:          'h6';
+$p:           'p';
+$hr:          'hr';
+
+// Links
+// -------------------
+$a:           'a';
+$nav:         'nav';
+
+
+// Images
+// -------------------
+$img:         'img';
+$map:         'map';
+$area:        'area';
+$canvas:      'canvas';
+$figcaption:  'figcaption';
+$figure:      'figure';
+
+
+// Media
+// -------------------
+$audio:       'audio';
+$track:       'track';
+$video:       'video';
+
+// Lists
+// -------------------
+$_lists:      'ol, ul';
+$ul:          'ul';
+$ol:          'ol';
+$li:          'li';
+$dl:          'dl';
+$dt:          'dt';
+$dd:          'dd';
+$menu:        'menu';
+
+
+// Tables
+// -------------------
+$table:       'table';
+$caption:     'caption';
+$th:          'th';
+$tr:          'tr';
+$td:          'td';
+$thead:       'thead';
+$tbody:       'tbody';
+$tfoot:       'tfoot';
+$col:         'col';
+$colgroup:    'colgroup';
+
+
+// Sections
+// -------------------
+$main:        'main';
+$div:         'div';
+$span:        'span';
+$header:      'header';
+$footer:      'footer';
+$section:     'section';
+$article:     'article';
+$aside:       'aside';
+$details:     'details';
+$dialog:      'dialog';
+$summary:     'summary';
+
+
+// Formatting
+// -------------------
+// abbreviation
+$abbr:        'abbr';
+// contact information
+$address:     'address';
+// boldened text
+$b:           'b';
+// section that is quoted from another source
+$blockquote:  'blockquote';
+// the title of a work
+$cite:        'cite';
+// piece of computer code
+$code:        'code';
+// text that has been deleted from a document
+$del:         'del';
+// definition term
+$dfn:         'dfn';
+// emphasized text
+$em:          'em';
+// italicized text
+$i:           'i';
+// text that has been inserted into a document
+$ins:         'ins';
+// keyboard input
+$kbd:         'kbd';
+// marked/highlighted text
+$mark:        'mark';
+// scalar measurement within a known range
+$meter:       'meter';
+// preformatted text
+$pre:         'pre';
+// represents the progress of a task
+$progress:    'progress';
+// short quotation
+$q:           'q';
+// text that is no longer correct
+$s:           's';
+// sample output from a computer program
+$samp:        'samp';
+// smaller text
+$small:       'small';
+// important text
+$strong:      'strong';
+// superscript and subscript text
+$_indexes:    'sub, sup';
+$sub:         'sub';
+$sup:         'sup';
+// date/time
+$time:        'time';
+// avoid using
+$u:           'u';
+// Defines a variable
+$var:         'var';
+
+//labeling text with explicit textual annotations
+//@think: ruby, rc, etc
+
+// Forms
+// -------------------
+$form:            'form';
+$fieldset:        'fieldset';
+$legend:          'legend';
+$label:           'label';
+$textarea:        'textarea';
+$select:          'select';
+$optgroup:        'optgroup';
+$option:          'option';
+$datalist:        'datalist';
+$keygen:          'keygen';
+$output:          'output';
+$select:          'select';
+$textarea:        'textarea';
+
+$radio:           'radio';
+$checkbox:        'checkbox';
+
+$clicker:         'clicker';
+//radio & checkbox = clicker
+$_clicker:
+  'input[type="checkbox"],
+    input[type="radio"],
+    input[type="color"],
+    input[type="range"],
+    input[type="image"],
+    .#{$clicker},
+    .#{$radio},
+    .#{$checkbox}';
+$_clicker-disabled:
+  'input[type="checkbox"][disabled],
+    input[type="radio"][disabled],
+    .#{$clicker}.#{$disabled},
+    .#{$radio}.#{$disabled},
+    .#{$checkbox}.#{$disabled}';
+
+$input:           'input';
+//all types except:
+//radio, checkbox, range?, button, reset, submit, hidden, image?
+$_input:
+  'select,
+    textarea,
+    input:not([type]),
+    input[type="date"],
+    input[type="datetime"],
+    input[type="datetime-local"],
+    input[type="email"],
+    input[type="file"],
+    input[type="month"],
+    input[type="number"],
+    input[type="password"],
+    input[type="search"],
+    input[type="tel"],
+    input[type="text"],
+    input[type="time"],
+    input[type="url"],
+    input[type="week"],
+    .#{$input}';
+$_input-disabled:
+  'select[disabled],
+    textarea[disabled],
+    input:not([type])[disabled],
+    input[type="date"][disabled],
+    input[type="datetime"][disabled],
+    input[type="datetime-local"][disabled],
+    input[type="email"][disabled],
+    input[type="file"][disabled],
+    input[type="month"][disabled],
+    input[type="number"][disabled],
+    input[type="password"][disabled],
+    input[type="search"][disabled],
+    input[type="tel"][disabled],
+    input[type="text"][disabled],
+    input[type="time"][disabled],
+    input[type="url"][disabled],
+    input[type="week"][disabled],
+    .#{$input}.#{$disabled}';
+$_input-readonly:
+  'select[readonly],
+    textarea[readonly],
+    input:not([type])[readonly],
+    input[type="date"][readonly],
+    input[type="datetime"][readonly],
+    input[type="datetime-local"][readonly],
+    input[type="email"][readonly],
+    input[type="file"][readonly],
+    input[type="month"][readonly],
+    input[type="number"][readonly],
+    input[type="password"][readonly],
+    input[type="search"][readonly],
+    input[type="tel"][readonly],
+    input[type="text"][readonly],
+    input[type="time"][readonly],
+    input[type="url"][readonly],
+    input[type="week"][readonly],
+    .#{$input}.#{$readonly}';
+
+$button:          'button';
+$button-disabled: 'button.-disabled';
+$_button:
+  'button,
+    input[type="button"],
+    input[type="reset"],
+    input[type="submit"],
+    .#{$button}';
+
+$_button-disabled:
+  'button[disabled],
+    input[type="button"][disabled],
+    input[type="reset"][disabled],
+    input[type="submit"][disabled],
+    .#{$button}.#{$disabled}';
+
+
+// Programming
+// -------------------
+$embed:       'embed';
+$object:      'object';
+
+
+
+// CLASS NAMING
+// ---------------------------------------
+
+
+// Property's Directions
+// -------------------
+$T:                   't-' !default;
+$R:                   'r-' !default;
+$B:                   'b-' !default;
+$L:                   'l-' !default;
+$TL:                  'tl-' !default;
+$TR:                  'tr-' !default;
+$BR:                  'br-' !default;
+$BL:                  'bl-' !default;
+
+
+// Properties shortcuts
+// -------------------
+
+// Positioning
+$Top:                 'top-' !default;
+$Right:               'right-' !default;
+$Bottom:              'bottom-' !default;
+$Left:                'left-' !default;
+$Position:            null !default;
+$Z-index:             'z-index-' !default;
+$Vertical-align:      'align-' !default;
+
+// Content
+$Content:             'content-' !default;
+
+// Lists
+$List-style:          'list-' !default;
+$List-style-type:     'list-' !default;
+
+// Indention
+$Margin:              'margin-' !default;
+$Padding:             'padding-' !default;
+
+// Dimension
+$Width:               'width-' !default;
+$Max-width:           'max-width-' !default;
+$Min-width:           'min-width-' !default;
+$Height:              'height-' !default;
+$Max-height:          'max-height-' !default;
+$Min-height:          'min-height-' !default;
+
+// Background
+$Background:          'grad-' !default;
+$Background-color:    'back-' !default;
+
+// Border
+$Border-radius:       'radius-' !default;
+$Border:              'border-' !default;
+
+// Text
+$Line-height:         'line-' !default;
+$Font-family:         'font-' !default;
+$Font-size:           'font-' !default;
+$Font-weight:         'font-' !default;
+$Font-style:          'font-' !default;
+$Color:               'color-' !default;
+$Word-wrap:           'word-' !default;
+$Word-break:          'word-' !default;
+$Word-spacing:        'word-' !default;
+$White-space:         'space-' !default;
+$Text-align:          'text-' !default;
+$Text-decoration:     'text-' !default;
+$Text-transform:      'text-' !default;
+$Text-rendering:      'text-' !default;
+$Text-shadow:         'text-sh-' !default;
+
+// Transition
+$Transition:          'trans-' !default;
+
+// Shadow
+$Box-shadow:          'shadow-' !default;
+
+// Displaying
+$Display:             null !default;
+
+// Visibility
+$Visibility:          null !default;
+
+// Opacity
+$Opacity:             'opacity-' !default;
+
+// Miliscenios
+$Overflow:            'overflow-' !default;
+$Float:               'float-' !default;
+$Cursor:              'cursor-' !default;
+
+

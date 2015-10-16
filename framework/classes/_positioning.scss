@@ -1,0 +1,125 @@
+@import '../_globals.scss';
+@import '../_naming.scss';
+@import '../_functions.scss';
+@import '../_mixins.scss';
+@import '../_vr.scss';
+
+// Default Variables
+// --------------------------------------------------
+  $positioning: false !default;
+
+  $positioning-exclude: false !default;
+  $positioning-include: diff-list((
+    vertical-align,
+    z-index, position,
+    top, right, bottom, left
+    ), $positioning-exclude) !default;
+
+  $positioning-set: () !default;
+  $positioning-set-default:
+    def_, -$size-default/2,
+    def, $size-default,
+    xxsm, $size-xxsm,
+    xsm, $size-xsm,
+    xsm_, -$size-xsm/2,
+    sm, $size-sm,
+    sm_, -$size-sm/2,
+    md, $size-md,
+    md_, -$size-md/2,
+    lg, $size-lg,
+    xlg, $size-xlg,
+    xxlg, $size-xxlg !default;
+  $positioning-top-set: $positioning-set-default !default;
+  $positioning-right-set: $positioning-set-default !default;
+  $positioning-bottom-set: $positioning-set-default !default;
+  $positioning-left-set: $positioning-set-default !default;
+
+  $positioning-z-index-set:
+    def, $z-index-default,
+    xxsm, $z-index-xxsm,
+    xsm, $z-index-xsm,
+    sm, $z-index-sm,
+    md, $z-index-md,
+    lg, $z-index-lg,
+    xlg, $z-index-xlg,
+    xxlg, $z-index-xxlg
+    !default;
+
+// Mixins & Functions
+// --------------------------------------------------
+
+
+// Output Styles
+// --------------------------------------------------
+@if $positioning or $positioning == static {
+
+  // Position
+  @if in-list(position, $positioning-include) {
+    .#{$Position}fixed    {position:fixed;}
+    .#{$Position}relative {position:relative;}
+    .#{$Position}absolute {position:absolute;}
+    @include property(position, $Position, $positioning-set);
+  }
+
+  // Vertical Align
+  @if in-list(vertical-align, $positioning-include) {
+    .#{$Vertical-align}top     {vertical-align:top;}
+    .#{$Vertical-align}middle  {vertical-align:middle;}
+    .#{$Vertical-align}bottom  {vertical-align:bottom;}
+  }
+
+  // Top, Right, Bottom, Left
+  @if in-list(top, $positioning-include) {
+    .#{$Top}0        {top:0;}
+    .#{$Top}auto     {top:auto;}
+    @include property(top, $Top, $positioning-top-set, $vr);
+  }
+  @if in-list(right, $positioning-include) {
+    .#{$Right}0      {right:0;}
+    .#{$Right}auto   {right:auto;}
+    @include property(right, $Right, $positioning-right-set, $vr);
+  }
+  @if in-list(bottom, $positioning-include) {
+    .#{$Bottom}0     {bottom:0;}
+    .#{$Bottom}auto  {bottom:auto;}
+    @include property(bottom, $Bottom, $positioning-bottom-set, $vr);
+  }
+  @if in-list(left, $positioning-include) {
+    .#{$Left}0       {left:0;}
+    .#{$Left}auto    {left:auto;}
+    @include property(left, $Left, $positioning-left-set, $vr);
+  }
+
+  // Z-index
+  @if in-list(z-index, $positioning-include) {
+    @include property(z-index, $Z-index, $positioning-z-index-set);
+  }
+
+}
+
+@if $positioning or $positioning == responsive {
+
+  // Position Responsive
+  @if in-list(position, $positioning-include) {
+
+    $screens:       break-list(united, $screen-list, $screen-breakpoint);
+    $screen-names:  break-list(united, $screen-list, $screen-breakpoint, $screen-name-list);
+    $f: 1;
+    @while $f <= length($screens) {
+      $screen: nth($screens, $f);
+      $screen-name: nth($screen-names, $f);
+
+      @media #{get-media(closed, $screen, $screen-list, $screen-breakpoint)} {
+        .#{$screen-name}-#{$Position}static     {position:static;}
+        .#{$screen-name}-#{$Position}fixed      {position:fixed;}
+        .#{$screen-name}-#{$Position}absolute   {position:absolute;}
+      }
+
+      $f: $f + 1;
+    }
+
+  }
+
+}
+
+$positioning: false;

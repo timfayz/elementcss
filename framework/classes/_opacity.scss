@@ -1,0 +1,36 @@
+@import '../_globals.scss';
+@import '../_naming.scss';
+@import '../_functions.scss';
+@import '../_mixins.scss';
+
+// Default Variables
+// --------------------------------------------------
+  $opacity: false !default;
+
+  $opacity-set-default:
+    xxsm, 0.1,
+    xsm, 0.2,
+    md, 0.4,
+    lg, 0.6,
+    xlg, 0.7,
+    xxlg, 0.9 !default;
+  $opacity-set:   () !default;
+  $opacity-transition:  null !default;
+
+
+// Mixins & Functions
+// --------------------------------------------------
+
+
+
+// Output Styles
+// --------------------------------------------------
+@if $opacity or $opacity == static {
+
+  @include property(opacity, $Opacity, $opacity-set-default);
+  @include property(opacity, $Opacity, $opacity-set);
+
+  [class*="#{$Opacity}"] {transitions: $opacity-transition;}
+
+} $opacity: false;
+
