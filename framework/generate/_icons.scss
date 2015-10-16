@@ -1,0 +1,65 @@
+@import '../_globals.scss';
+@import '../_naming.scss';
+@import '../_functions.scss';
+@import '../_mixins.scss';
+
+// Default Variables
+// --------------------------------------------------
+  $icons: false !default;
+
+  $icons-font-name: false !default;
+  //@todo: process list
+  $icons-prefix: icon !default;
+  $icons-set: () !default;
+
+// Mixins
+// --------------------------------------------------
+
+
+// Output Styles
+// --------------------------------------------------
+@if $icons or $icons == static {
+
+  @if $icons-font-name {
+    [class^="#{$icons-prefix}-"],
+    [class*=" #{$icons-prefix}-"],
+    .prefix-#{$icons-prefix},
+    .postfix-#{$icons-prefix} {
+      font-family: $icons-font-name;
+      speak: none;
+      font-style: normal;
+      font-weight: normal;
+      font-variant: normal;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-transform: none;
+    }
+    .prefix-#{$icons-prefix}:before {
+      content:attr(title);
+      margin-right:0.4em;
+    }
+    .postfix-#{$icons-prefix}:after {
+      content:attr(title);
+      margin-left:0.4em;
+    }
+
+    @if $modernizr {
+      .no-fontface .prefix-#{$icons-prefix}:before,
+      .no-fontface .postfix-#{$icons-prefix}:after
+      {display:none;}
+    }
+  }
+
+  $f: 1;
+  @while $f <= length($icons-set) {
+    $name: nth($icons-set, 1);
+    $value: nth($icons-set, 2);
+
+    .#{$icons-prefix}-#{$name}:before {
+      content: "#{$value}";
+    }
+
+    $f: $f + 2;
+  }
+
+} $icons: false;

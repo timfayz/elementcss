@@ -1,8 +1,7 @@
 @import '../_globals.scss';
-@import '../_naming.scss';
+@import '../naming';
 @import '../_functions.scss';
 @import '../_mixins.scss';
-//@import '../_vr.scss';
 
 //@todo
 
@@ -16,7 +15,7 @@
 // Mixins & Functions
 // --------------------------------------------------
 
-  //code
+  //codee
 
 
 // Output Styles
