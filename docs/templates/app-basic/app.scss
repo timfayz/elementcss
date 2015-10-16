@@ -15,8 +15,7 @@
 // Root files shouldn't generate any CSS content, only for importing, mixins, functions, variables etc
 @import 'path-to/css-element/_.scss'; // (!) check the path
 @import 'globals.scss';
-@import 'functions.scss';
-@import 'mixins.scss';
+@import 'utils.scss';
 
 
 // COMPONENTS

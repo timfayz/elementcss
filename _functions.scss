@@ -158,8 +158,7 @@
     $column: 100% / $columns;
     $gap: (100% - ($ratio * $columns)) / $columns;
   }
-  @debug ($columns, $column, $gap);
-
+  
   @return ($columns, $column, $gap);
 }
 
