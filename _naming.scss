@@ -48,7 +48,7 @@ $Border-right:                  #{$Border}#{$R} !default;
 $Border-bottom:                 #{$Border}#{$B} !default;
 $Border-left:                   #{$Border}#{$L} !default;
 // * to avoid unnecessary repetition and make class names more concise
-// we change word order for color, style, width and radius properties
+// we change word order of color, style, width and radius properties.
 // color
 $Border-color:                  brc !default;
 $Border-top-color:              #{$Border-color}#{$T} !default;
@@ -94,7 +94,7 @@ $Opacity:                       opc !default;
 $Display:                       dsp !default;
 $Visibility:                    vsb !default;
 $Z-index:                       zi !default;
-$Clip:                          clp !default; // deprecated
+$Clip:                          clp !default; //deprecated
 $Clip-path:                     clp !default;
 // Positioning
 $Position:                      pst !default;

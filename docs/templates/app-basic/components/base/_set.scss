@@ -1,13 +1,16 @@
-/* component _set.scss
+/* @third-party _set.scss
    --------------------------------------------------
  */
-// Generate sets of atomic classes here (syntax can be found in section Usage).
-
 // Default Sets
+
 // Overwrite default variables to modify/disable default set(s).
 //@import 'path-to/css-element/components/set.scss';
 
+/* @component _set.scss
+   --------------------------------------------------
+ */
 // Custom Sets
+// Generate sets of atomic classes here (syntax can be found in section Usage).
 // Don't hesitate, just play with code and see what you get
 // to make color palette consistent use values from _palette.scss file.
 
