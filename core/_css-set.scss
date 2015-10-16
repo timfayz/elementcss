@@ -15,7 +15,7 @@
 //    _generate-set(c, color, '%', (red, red), desktop)
 //    .extend {@extend %c-red;}
 //      -> .extend {color: red;}
-@mixin _generate-set($property-shortcut, $property-name, $selector-type, $set-values, $media-name:null) {
+@mixin _generate-set($property-shortcut, $property-name, $selector-type, $set-values, $query-name:null) {
   // Initialize constructor variables
   // ---------------
   // Variables changing during loop:
@@ -35,13 +35,13 @@
     // ---------------
     // Prepend/append/clean media query name.
     @if $current == prefix {
-      $query-prefix: __($media-name);
+      $query-prefix: __($query-name);
       $query-postfix:null;
       $i: $i + 1;
     }
     @if $current == postfix {
       $query-prefix:null;
-      $query-postfix: _($media-name);
+      $query-postfix: _($query-name);
       $i: $i + 1;
     }
     @else if $current == unfix {
@@ -145,9 +145,8 @@
 }
 
 // _split-set-data
-// retrieve 3 types of data from $data.
-// 1:property-name, 2:selector-type, 3:set-values
-// TODO(timur): add examples
+// retrieves 3 types of data from $data. 1 = property-name, 2 = selector-type,
+// 3 = set-values
 @function _split-set-data($data, $type) {
   // Get Property Name(s)
   // ---------------
@@ -193,43 +192,50 @@
   }
 }
 
-// _get-sets
-// returns map of set data. Retrieve sets from $data, store into single map and return.
+// _get-set-map
+// returns map of set's data. Retrieve sets from $data, store into single map and return.
 //    _get-sets(bg, background (green, #84ed28))
 //      -> (default: (bg background () (green, #84ed28)))
 //    _get-sets(pdd, padding (def, 20px), null)
 //      -> (default: (pdd padding () (def, 20px)))
-@function _get-sets($property-shortcut, $data, $query-map:null) {
+@function _get-set-map($property-shortcut, $data, $query-map:null) {
   // fetch data
   $data: _split-set-data($data, property-name set-values selector-type);
   $property-name: nth($data, 1);
   $set-values:    nth($data, 2);
   $selector-type: nth($data, 3);
 
-  $result-map: (); // result map
-  @if $query-map {
-    // get all available media query names
-    $media-names: map-keys($query-map);
-
+  $result-map: (); // resulting map
+  @if type-of($set-values) == map {
     $result-names: (); // result media names
     @each $key, $val in $set-values {
-      // Keyword 'all'
-      // -------------
-      // under all media queries
-      @if $key == all {
-        $result-names: $media-names;
-        $set-values: $val;
-      }
+      @if $key == all or has-prefix($key, query) {
+        @if $query-map == null {
+          @error '@function add()/@mixin set(): provide query map for `#{$property-name}` set - 4th/3nd argument is empty.';
+        }
+        @if length($query-map) == 2 and type-of(nth($query-map, 2)) == map {
+          $query-map: nth($query-map, 2);
+        }
+        $query-names: map-keys($query-map);
 
-      // Keyword 'media*'
-      // --------------
-      // under specified media queries
-      @else if has-prefix($key, media) {
-        $specified-names: nth($val, 1);
-        // if 1st item = 'all', then generate under all media except default, else
-        // under list of specified media
-        $result-names: if($specified-names == all, value-remove($media-names, default), $specified-names);
-        $set-values: nth($val, 2);
+        // Keyword 'all'
+        // -------------
+        // under all queries
+        @if $key == all {
+          $result-names: join(default, $query-names);
+          $set-values: $val;
+        }
+
+        // Keyword 'query*'
+        // --------------
+        // under specified queries
+        @else if has-prefix($key, query) {
+          $specified-names: nth($val, 1);
+          // if 1st item == 'all' generate under all queries except default,
+          // else under list of specified queries
+          $result-names: if($specified-names == all, value-remove($query-names, default), $specified-names);
+          $set-values: nth($val, 2);
+        }
       }
 
       // No keywords
@@ -257,34 +263,26 @@
 // store sets into a given $storage variable.
 //    $s: ();
 //    $s: add($s, pdd, padding (def, 20px));
-//      -> (default: null (null (pdd padding () (def, 20px))))
+//    $s: add($s, mrg, margin (def, 20px));
+//      -> (default: (pdd padding () (def, 20px)) (mrg margin () (def, 20px)))
 @function add($storage, $property-shortcut, $data, $query-map:null) {
-  $property-shortcut: if($property-shortcut == none, null, $property-shortcut);
   @if length($data) == 0 or $data == null  {
-    @error '@function add()/@mixin set(): nothing to store - 3th/2nd argument is empty.';
+    @error '@function add()/@mixin set(): nothing to store of `#{$property-shortcut}` set - 3th/2nd argument is empty.';
   }
 
-  $data-type: type-of(_split-set-data($data, set-values));
-  @if $data-type == map and $query-map == null {
-    @error '@function add()/@mixin set(): provide media map for your set - 4th/3nd argument is empty.';
-  }
-
-  @if $data-type == list and $query-map != null {
-    $query-map: null;
-  }
-
-  $_: _get-sets($property-shortcut, $data, $query-map);
-  @return map-union($storage, $_);
+  // !default variables can't be null, instead we use none
+  $property-shortcut: if($property-shortcut == none, null, $property-shortcut);
+  @return map-union($storage, _get-set-map($property-shortcut, $data, $query-map));
 }
 
-// pass
+// pass-add
 // pass input values and return untouched $storage.
 // Useful if you want to stash a given set for a while.
 //    add($store, pdd, padding (lg, 100px)); -> [add new set to $store]
-//    ok, but what if I want to stash my previous set for while?
-//    If so let's rename add() into pass()
-//    pass($store, pdd, padding (lg, 100px)); -> [now $store remains untouched]
-@function pass($storage, $property-shortcut, $data, $query-map:null) {
+//      ok, but what if I want to stash my previous set for while?
+//      If so let's rename add() into pass-add()
+//    pass-add($store, pdd, padding (lg, 100px)); -> [now $store remains untouched]
+@function pass-add($storage, $property-shortcut, $data, $query-map:null) {
   @return $storage;
 }
 
@@ -294,6 +292,9 @@
 @mixin sets($storage, $query-map:null) {
   @if length($storage) == 0 or $storage == null {
     @error '@mixin sets(): nothing to render - 1st argument is empty.';
+  }
+  @if length($storage) > 1 and $query-map == null {
+    @error '@function add()/@mixin set(): provide query map for your set - 4th/3nd argument is empty.';
   }
   @each $query-name, $sets in $storage {
     @include media($query-name, $query-map) {
@@ -317,3 +318,8 @@
   $storage: add((), $property-shortcut, $data, $query-map);
   @include sets($storage, $query-map);
 }
+
+// pass-set
+// passes a given set and output nothing.
+// Useful if you want to stash a given set for a while.
+@mixin pass-set($property-shortcut, $data, $query-map:null) {}
