@@ -8,32 +8,85 @@
  * Font Awesome | MIT License | github.com/FortAwesome/Font-Awesome
  */
 
+// GLOBAL VARIABLES
+// --------------------------------------------------
+
+// Element Variables
+// -------------------------
+// here you can overwrite global element variables start with $_*
+// see element/_globals.scss for more available variables
+
+// type settings
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:300&subset=latin,cyrillic);
+$_font-family: 'Open Sans', Arial, sans-serif;
+$_font-size:    20px;
+$_line-height:  1.7;
+
+// responsive partitioning
+$_media-unit: rem;
+$_media:
+  (
+    default:    null,
+    mobile:     media 'screen and (max-width:' 740px ')',
+    tablet:     media 'screen and (max-width:' 1024px ')',
+    laptop:     media 'screen and (min-width:' 1366px ')',
+    touch:      '.touch',
+    // medianame:  media 'valid @media rule query',
+    // or
+    // medianame: 'valid CSS selector',
+  );
+
+// Application Variables
+// -------------------------
+// place your own variables here, the color scheme below it's just example
+// and can be deleted
+
+// Color Schemes
+// --------------
+// Basic Colors
+$hex-black:         #222;
+$hex-black-darken:  #111;
+
+$hex-white:         #fefefe;
+$hex-white-darken:  #fff;
+
+// Rainbow Colors
+$hex-blue:            #2185CA;
+$hex-blue-darken:     $hex-blue - #222;
+
+$hex-green:           #4FC14F;
+$hex-green-darken:    $hex-green - #222;
+
+$hex-red:             #E6453F;
+$hex-red-darken:      $hex-red - #111;
+
+$hex-yellow:          #F2CB30;
+$hex-yellow-darken:   $hex-yellow - #222;
+
+// Additional Examples
+$rgb-black:         rgb(0, 0, 0);
+$hsl-white:         hsl(0, 0, 100);
+$pcn-transparent:   transparent; // pcn = predefined color name
+
+
 // HELPERS
 // --------------------------------------------------
-//
-@import 'helpers/globals.scss';
-@import 'helpers/classes.scss';
-
-
-// BASE
-// --------------------------------------------------
-// base folder holds the most basic styles of your GUI are used across the entire app
-@import 'base/normalize.scss';
-@import 'base/type.scss';
-@import 'base/grid.scss';
+// helpers folder contains only files that do not generate any CSS content
+// for example: mixins, functions and variables
+@import 'helpers/functions.scss';
+@import 'helpers/mixins.scss';
 
 
 // COMPONENTS
 // --------------------------------------------------
 // components folder holds logical separated parts of your GUI
-//@import 'components/animation.scss';
-//@import 'components/forms.scss';
-//@import 'components/images.scss';
-//etc
+// @import 'components/animation.scss';
+// @import 'components/forms.scss';
+// ...
+// (!) don't forget to change import paths to element/framework folder in the files below
+@import 'components/base.scss';
+@import 'components/classes.scss';
 
-// VENDORS
-// --------------------------------------------------
-// here you can import
-//@import 'path-to/font-awesome-4.x.x/css/font-awesome.min.css';
-
+// you first component :)
+@import 'components/helloworld.scss';
 
