@@ -9,7 +9,7 @@
 
   // Grid Parameters
   // -------------------
-  $grid-type: flexbox, floats !default;
+  $grid-type: flexbox !default; // flexbox, floats
   $grid-row-modes: gutter, columned !default;
 
   $grid-params: calc-grid(12, column-gap, (60px, 20px)) !default;
