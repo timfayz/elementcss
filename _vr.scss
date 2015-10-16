@@ -1,0 +1,113 @@
+// MAKE EASY THINGS DIFFICULT.
+// PLEASE DO NOT READ THIS IF YOU HAVE POOR SASS KNOWLEADGE AND HAVEN'T READ ANY DOCUMENTATION!
+// You may never use this component if it confuse you!)
+
+// Default Variables
+// --------------------------------------------------
+$_vr: true !default;
+
+
+// new line jumping threshold
+$_vr-line-threshold:      84% !default;
+$_vr-line-unit:           rem !default; // rem, px, pt
+$_vr-line-unit-fallback:  false !default;
+$_vr-line-height:         ununit(tounit($_line-height, rem)) !default;
+$_vr-line-pitch:          0.5 !default;
+
+
+// Mixins & Functions
+// --------------------------------------------------
+
+// Line Magnet (explain)
+// $line-height must be prepared in advance
+@function _vr-line-sticker($value, $line-height: $_vr-line-height, $pitch: $_vr-line-pitch, $font:false)
+{
+  $value: ununit(tounit($value, rem));
+
+  $ratio: ceil($value / $line-height);
+  $calc: $line-height * ($ratio - 1) + ($line-height * $pitch);
+  $return: if($calc <= $value, $ratio, $ratio - $pitch);
+
+  @return $return;
+}
+
+// New Line Calculator
+// calculate number of lines based on input data
+@function _vr-lines-by-font($font-size, $line-height: $_vr-line-height, $threshold: $_vr-line-threshold)
+{
+  $font-size: ununit(tounit($font-size, rem));
+  $threshold: ununit($threshold);
+
+  @return ceil( $font-size / ($line-height * ($threshold/100)) );
+}
+
+// VR Value Handler
+// handle each value and synchronize to vertical rhythm
+@function _vr-value-handler($value, $unit, $font, $vr)
+{
+  // calculate number of lines
+  @if type-of($value) == number and $value!=0 {
+    @if unitless($value) {
+      $value: if($font, $value, $value * $_vr-line-height);
+      @return tounit($value, $unit);
+    }
+    @else {
+      @if $vr {
+        $value: if($font, $value, _vr-line-sticker($value) * $_vr-line-height);
+        @return tounit($value, $unit);
+      }
+      @else {
+        @return $value; // pass
+      }
+    }
+  }
+  // calculate number of lines by font size
+  @else if $value==auto and type-of($font)==number {
+    @if $vr {
+      $lines-number: _vr-lines-by-font($font);
+      @return tounit($lines-number * $_vr-line-height, $unit);
+    }
+    @else {
+      @return null; //pass
+    }
+  }
+  // !important
+  @else if $value == important {
+    @return unquote('!'+$value);
+  }
+  @return $value;
+
+}
+
+// Return VR Value
+// -----------------------------
+// only expose list values and pass through vr handler function
+@function vr($list, $unit: $_vr-line-unit, $font:false, $vr:$_vr)
+{
+  $values: ();
+
+  @each $value in $list {
+    $value: _vr-value-handler($value, $unit, $font, $vr);
+    $values: append($values, $value);
+  }
+
+  @return $values;
+}
+
+
+// VR Property
+// -----------------------------
+//
+@mixin vr-property($property, $list, $unit: $_vr-line-unit, $font:false, $vr:$_vr, $fallback: $_vr-line-unit-fallback) {
+  @if $property==font-size {
+    $font: true;
+  }
+
+  @if $fallback and $unit!=px {
+    #{$property}: vr($list, px, $font);
+  }
+
+  // #{$property}: if($offset == null, calc(#{$value} + #{$offset}), $value);
+  $value: vr($list, $unit, $font, $vr);
+  #{$property}: $value;
+}

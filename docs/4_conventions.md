@@ -1,12 +1,12 @@
-#ELEMENT CONVENTIONS
+#CSS-ELEMENT CONVENTIONS
 **[Return to the beginning](https://github.com/kalopsia/element/blob/master/docs/0_preface.md)**<br/>
 
 To create really convenient and reusable styles we should follow some rules. Since the main idea of ELEMENT is using a big amount of classes we take care about class naming and make it logical, intuitive and "ease of remembering" as much as possible. Thus far all classes that you will generate should obey to some rules. Most of all conventions came from best practice in creating styles.
 
-For simplification and standardization purposes general conventions are already defined in the ELEMENT itself. **Full list of available abbreviations** that is presented in examples below available under ``framework/_naming.scss`` file. This file can be imported anywhere and used for creating standardized class names.
+For simplification and standardization purposes general conventions are already defined in the ELEMENT itself. **Full list of available abbreviations** are presented in the examples below available under ``framework/_naming.scss``. This file can be imported anywhere and used for creating standardized class names.
 
-
-##General Naming Conventions
+##CSS Naming Conventions
+###General Conventions
 
 **All class names must be lowercase**
 
@@ -27,9 +27,9 @@ Examples:
   transition:               inherit;          .shadow-inhe
 ```
 
-**We should avoid using big amount of digits in class names and use deliberate set of names instead:**
+**We should avoid using big amount of digits in class names and use size names instead:**
 
-The most descriptive and convenient set of names for this purposes is presented below:
+The most descriptive, mature and convenient set of names for this purposes are presented below:
   - `xxsm` = the smallest value
   - `xsm` = smaller value
   - `sm` = small value
@@ -59,12 +59,13 @@ This set of names can be used in many cases:
   - z-index
   - margin, padding
   - font-size, line-height
+  - border (line thickness)
   - amount of opacity
   - amount of alpha chanel in RGBA\HSLA colors <br>
   etc
   
 
-##CSS Properties Naming Conventions
+###CSS Properties
 
 **Words indicating directions of properties abbreviate as first letter of direction and must be always presented in class name:**
 
@@ -117,7 +118,7 @@ Exception:
   * For hypothetical cases where you may need to apply classes with the same values, eg `display: inherit;` and `position: inherit`. Just prefix four first letters of these properties like `.disp-inherit` and `posi-inherit`.
 
 
-##CSS Measurement Values Naming Conventions
+###CSS Measurement Values
 
 **Measurement values abbreviate as sign(positive have no prefix and negative have "n" prefix) + digits + two letter from CSS unit's name:**
 
@@ -156,14 +157,14 @@ Examples:
   any-property:             -10rem;           .classname-n10re
 ```
 
-##CSS Color Values Naming Conventions
+###CSS Color Values
 
 **Basic color keywords values abbreviated as `k` letter + name of keyword (or shortened version):**
 
   - `kccolor` = `currentColor` value
   - `ktrans` = `transparent` value
   - `kgreen` = for one word keyword colors like `Green`,`Red`, `Blue` we make no abbreviation and write full name
-  - `kliggol` = for long keyword colors like `[Lig]ht[Gol]denRodYellow` we get only 3 first letters from two first words <br>
+  - `kdarkoli` = for long keyword colors like `[Dark][Oli]veGreen` we get only 4 first letters from first word and 3 from second <br>
   *Full list of keyword color available [here](http://www.w3schools.com/cssref/css_colornames.asp).*
 
 Examples:
@@ -186,17 +187,48 @@ Examples:
 | property-name:          | value;          | class name
   background-color:         #222;             .back-clr-black
   background-color:         rgba(0,0,0,0.3);  .back-clr-rblack_s
-  background-color:         ;               .color-kred
-  background-color:         ;         .color-kcadblu
+  background-color:         hsl(0,0,0,1);     .back-clr-hblack
 ```
 
-  
-##Predefined Conventions
+For alpha channel we use size names (see the beginning of the page). See example:
+```
+| property-name:          | value;          | class name
+  color:                    rgba(0,0,0,0);    .color-rblack_
+  color:                    rgba(0,0,0,0.3);  .color-rblack_s
+  color:                    rgba(0,0,0,0.5);  .color-rblack_m
+  color:                    rgba(0,0,0,0.8);  .color-rblack_l
+  color:                    hsl(0,0,0,1);     .color-rblack
+```
+
+
+###CSS Complex Values
+
+**For complex CSS values there is no strict rules**
+
+As a rule we abbreviate complex values as one general and demonstrative word. For example:
+```
+| property-name:          | value;                              | class name
+  box-shadow:               0 1px 4px rgba(0, 0, 0, 0.3),
+                            0 0 40px rgba(0, 0, 0, 0.1) inset;    .shadow-effectname
+```
+
+##Variable Naming Conventions
+
+**Variables should be namespaced**
+
+Let's be less verbose and just see some examples:
+```
+| variable-name:          | value;
+  $hex-dark:                #333;
+  $hex-light:               #fdfdfd;
+  $rgb-dark:                rgb(10,10,10);
+  $rgb-light:               rgb(200,200,200);
+  $button-sm:               50px;
+  $button-lg:               150px;
+```
+As you can every variable has it own namespace/prefix. Just make sure that every set of related variables have its own unified namespace/prefix. As a rule we set namespace according to filename of components. For example component `_grid.scss` contains variables start with `$grid-*` etc.
+
 TODO:
-- only properties is predefined not values (why only properties?)
-- selectors conventions
-- complex sets of values should be named by one general word
-- variable naming conventions
 - project structure conventions
 
 
@@ -210,5 +242,5 @@ Standardized names and rules are very important for the several reasons:
 
 ---
 
-####Please, help us improve these docs!
+####Let's do something better together!
 Start new issue [here](https://github.com/kalopsia/element/issues/new) if you have found mistake or have any questions, suggestions and problems.

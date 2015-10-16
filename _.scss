@@ -1,0 +1,26 @@
+// CSS-ELEMENT - brand new way of creating CSS GUI.
+// The MIT License (MIT)
+// Copyright (c) 2015
+//
+// Root files (css-element/*.scss) contain only the required minimum like variables, predefined class names, functions and mixins
+// to create your own styles and logically separated components in CSS-ELEMENT way. They don't generate any CSS styles.
+// As an example CSS-ELEMENT already has well-designed built-in components that can be used as they are intended or as an
+// good examples to create your own. For those who wants understand not only usage but implementation largely - contact me.
+// To learn more about how to work with CSS-ELEMENT, please, see documentation under docs/*.md.
+
+// globals.scss file defines global variables that can be used by any built-in components (components/*.scss) or in your
+// own components in a particular context. All global vars start with _ (underscore) to avoid name collisions.
+@import "globals.scss";
+
+// functions.scss and mixins.scss files contain the minimum number of functions and mixins are required to provide full
+// CSS-ELEMENT functionality. Mixins.scss file uses some functions from functions.scss so it depends from the last one.
+@import "functions.scss";
+@import "mixins.scss";
+
+// naming.scss file provides well-designed abbreviations and prefixes to create styles in CSS-ELEMENT way.
+@import "naming.scss";
+
+// vr.scss (vertical rhythm) file contains 1 function and 1 mixin that provide convenient way to control vertical rhythm.
+// Vertical rhythm in the context means line-height always adopts to its fixed base independently of font-size values.
+@import "vr.scss";
+

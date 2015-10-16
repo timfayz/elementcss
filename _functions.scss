@@ -2,10 +2,10 @@
 // ------------------------------
 // returns list - positions of a values in $list-1 that exists in $list-2
 @function indexes($list-1, $list-2) {
-  $output: () !global;
+  $output: ();
 
   @each $value-of-2 in $list-2 {
-    $output: append($output, index($list-1, $value-of-2)) !global;
+    $output: append($output, index($list-1, $value-of-2));
   }
 
   @return $output;
@@ -16,11 +16,11 @@
 // ------------------------------
 // returns list - a specific items in a list-1 by list of indexes
 @function nths($list, $indexes) {
-  $output: () !global;
+  $output: ();
 
   @each $index in $indexes {
     @if $index {
-      $output: append($output, nth($list, $index)) !global;
+      $output: append($output, nth($list, $index));
     }
   }
 
@@ -48,11 +48,11 @@
 // ------------------------------
 @function remove-value($list, $value:null, $separator:auto)
 {
-  $output: () !global;
+  $output: ();
   //  @if $value {
   @each $val-of-first in $list {
     @if $val-of-first != $value {
-      $output: append($output, $val-of-first, $separator) !global;
+      $output: append($output, $val-of-first, $separator);
     }
   }
 
@@ -67,11 +67,11 @@
 // ------------------------------
 @function remove($list, $index:null, $separator:auto)
 {
-  $output: () !global;
+  $output: ();
   @if $index {
     @each $val-of-first in $list {
       @if $val-of-first != $index {
-        $output: append($output, $val-of-first, $separator) !global;
+        $output: append($output, $val-of-first, $separator);
       }
     }
 
@@ -121,11 +121,12 @@
       @return null;
     }
   }
+  
+  @return null;
 }
 
-
 // Grid Settings Calculator
-// ------------------------------
+// -------------------------
 // $columns - number of grid columns
 // $calc-method - method based on what will be made calculation
 // $calc-data - input data for calculation according to selected method
@@ -135,7 +136,7 @@
   $column: null;
   $gap: null;
 
-  // gaps By Padding
+  // gaps by padding
   @if $calc-method==column-gap {
     $px-column: nth($calc-data,1);
     $px-gap: nth($calc-data,2);
@@ -157,9 +158,11 @@
     $column: 100% / $columns;
     $gap: (100% - ($ratio * $columns)) / $columns;
   }
+  @debug ($columns, $column, $gap);
 
   @return ($columns, $column, $gap);
 }
+
 
 // Unit Remover
 // -------------------
@@ -183,20 +186,24 @@
   @else if $unit == 'rem'           { @return ununit($value)+0rem; }
 }
 
-// Unit Converter (no rounding)
+// Unit Converter (without rounding)
 // ---------------------------
 @function _tounit($value, $unit: null, $pixel-size: 16, $ppi-ratio: 72/96) {
+  @if $unit == 'auto' {
+    $unit: unit($value)
+  }
+  
   @if $unit {
     // px
     @if unit($value) == 'px' {
-      @if $unit == '%'              { @return setunit($value * 100 / $pixel-size, '%'); }
-      @else if $unit == 'px'        { @return $value; }
+      @if $unit == 'px'             { @return $value; }
+      @else if $unit == '%'         { @return setunit($value * 100 / $pixel-size, '%'); }
       @else if $unit == 'pt'        { @return setunit($value * $ppi-ratio, pt); }
       @else if $unit == 'em'        { @return setunit($value / $pixel-size, em); }
       @else if $unit == 'rem'       { @return setunit($value / $pixel-size, rem); }
-      @else if $unit == 'unitless'  { @return setunit($value / $pixel-size); }
+      @else if $unit == ''          { @return setunit($value / $pixel-size); }
     }
-    
+
     // percent
     @else if unit($value) == '%' {
       $value: round($value * $pixel-size/100) / ($pixel-size/100);
@@ -205,9 +212,9 @@
       @else if $unit == 'pt'        { @return setunit($value * $pixel-size/100 * $ppi-ratio, pt); }
       @else if $unit == 'em'        { @return setunit($value / 100, em); }
       @else if $unit == 'rem'       { @return setunit($value / 100, rem); }
-      @else if $unit == 'unitless'  { @return setunit($value / 100); }
+      @else if $unit == ''          { @return setunit($value / 100); }
     }
-    
+
     // em, rem, unitless
     @else if unit($value) == 'em' or unit($value) == 'rem' or unitless($value) {
       @if $unit == '%'              { @return setunit(ununit($value) * 100, '%'); }
@@ -215,9 +222,9 @@
       @else if $unit == 'pt'        { @return setunit(ununit($value) * $pixel-size * $ppi-ratio, pt); }
       @else if $unit == 'em'        { @return setunit($value, em); }
       @else if $unit == 'rem'       { @return setunit($value, rem); }
-      @else if $unit == 'unitless'  { @return setunit($value); }
+      @else if $unit == ''          { @return setunit($value); }
     }
-    
+
     // pt
     @else if unit($value) == 'pt' {
       @if $unit == '%'              { @return setunit(ununit($value) / $ppi-ratio * 100/ununit($pixel-size), '%'); }
@@ -225,16 +232,16 @@
       @else if $unit == 'pt'        { @return $value; }
       @else if $unit == 'em'        { @return setunit(ununit($value) / $ppi-ratio / $pixel-size, em); }
       @else if $unit == 'rem'       { @return setunit(ununit($value) / $ppi-ratio / $pixel-size, rem); }
-      @else if $unit == 'unitless'  { @return setunit(ununit($value) / $ppi-ratio / $pixel-size); }
+      @else if $unit == ''          { @return setunit(ununit($value) / $ppi-ratio / $pixel-size); }
     }
-    
-    // if no unit detected just return
+
+    // if unit is not detected just return
     @else {
       @return $value;
     }
   }
+  // if $unit is not defined just return
   @else {
-    // if no unit presented just return
     @return $value;
   }
 }
@@ -244,8 +251,12 @@
 // Converts input $value to given $unit so that returned value
 // become integer pixel at the end of browser rendering
 // $value numeral - any CSS unit or unitless value (eg 100px, 1.4rem, 1.6, 7pt etc)
-// $unit unit - any valid CSS unit (eg rem, '%', px, em etc)
-@function tounit($value, $unit: null) {
-  @return _tounit(round(_tounit($value, px)), $unit); //slow
-  // @return _tounit($value, $unit); //fast
+// $unit unit - any valid CSS unit:
+// rem, '%', '' (unitless), px, em, auto (auto detection), etc
+@function tounit($value, $unit: auto) {
+  @if $unit == 'auto' {
+    @return _tounit(round(_tounit($value, px)), unit($value));
+  } @else {
+    @return _tounit(round(_tounit($value, px)), $unit);
+  }
 }

@@ -1,0 +1,409 @@
+// Media Builder
+// --------------------------------------------------
+// $media-map map - map where key is name of query, value is the query itself. Example:
+//    $media-map: (
+//       mobile:   media '(screen and (max-width: 740px )',
+//       touch:    '.touch',
+//       ^name     ^query
+//    );
+// $media-name string - key of corresponding key-value pair in $media-map. Example: mobile or touch
+// $unit unit - convert numbers are presented in query in accordance with $unit
+@mixin media($media-map, $media-name, $unit:$_media-unit) {
+  // if media map is not null
+  @if $media-map {
+    // get query with the associated name
+    $media-query: map-get($media-map, $media-name);
+
+    // if query is presented in the map
+    @if $media-query {
+      $query-string: ();
+      $query-type: null;
+      
+      // fetch query string from key's value
+      @for $i from 1 through length($media-query) {
+        $value: nth($media-query, $i);
+        // if first item of query is 'media' keyword the content must be under @media rule
+        // else under simple CSS selector, like .myclass {@content;}
+        @if $i == 1 {
+          $query-type: if($value==media, media, selector);
+        }
+        
+        // if one of the query item is number - convert it according to $unit unit
+        $value: if(type-of($value)==number, tounit($value, $unit), unquote($value));
+        
+        // fetch query string
+        $query-string: append($query-string, if($value!=media, $value, null));
+      }
+
+      @if $query-type == media {
+        @media #{$query-string} {@content;}
+      } 
+      @else if $query-type == selector{
+        // selector & {@content} (deprecated?)
+        #{$query-string} {@content;}
+      }
+      
+    // render content with no query
+    } @else {
+      @content;
+    }
+  }
+
+}
+
+// Helper function for set() mixin
+// Gets selector type(s) identifiers from second item of $data ('%' or '.')
+// '%' = placeholder, generate no content (need only for @extend operator)
+// '.' = class, default behaviour generate common selectors
+@function _split-set-data($data, $type) {
+  @debug '..._split-set-data()';
+  
+  // return property name(s), always comes first
+  @if $type == property-name {
+    @return nth($data, 1);
+  }
+  
+  // get selector type(s) near after $property-name
+  $selector-type: ();
+  $i: 1; $types: nth($data, 2);
+  @while ($i <= 2 and $i <= length($types)) and (nth($types, $i) == '%' or nth($types, $i) == '.') {
+    $selector-type: append($selector-type, nth($types, $i));
+    $i: $i + 1;
+  }
+  
+  // get set values
+  $set-values: ();  
+  // if selector type(s) detected
+  @if length($selector-type) > 0 {
+    // get after $selector-type
+    $set-values: nth($data, 3);
+  } @else {
+    // get after $property-name
+    $set-values: nth($data, 2);
+  }
+
+  // return according to $type
+  @if $type == selector-type {
+    @return $selector-type;
+  } @else { // set-values
+    @return $set-values;
+  }
+}
+
+// Underlying implementation of set()
+// --------------------------------------------------
+// $property-shortcut string - class prefix for for given CSS property. Example: clr (CSS color)
+// $property-set list - list of class name & CSS value pairs.
+// @render one or more statements like: selector {property: value;}
+@mixin _set($property-shortcut, $data, $media-name:null) {
+  @debug '...process _set()';
+  // initialize vars of constructor, see example at the end of the mixin
+  // -------
+  // vars above change during loop
+  $media-prefix: null;
+  $media-postfix: null;
+  $class-prefix: null;
+  $class-postfix: null;
+  $selector-before: (null);
+  $selector-after: (null);
+  // vars above are constant
+  $property-name: _split-set-data($data, property-name);
+  $selector-type: _split-set-data($data, selector-type);
+  $set-values: _split-set-data($data, set-values);
+
+  $i: 1; // offset
+  @while $i <= length($set-values) {
+    // set cursor of the loop
+    $current: nth($set-values, $i);
+    
+    // step _
+    // --------
+    // prepend/append/clean media query name
+    @if $current == prefix {
+      $media-prefix:_($media-name);
+      $media-postfix:null;
+      $i: $i + 1;
+    }
+    @if $current == postfix {
+      $media-prefix:null;
+      $media-postfix:__($media-name);
+      $i: $i + 1;
+    }
+    @else if $current == unfix {
+      $media-prefix:null;
+      $media-postfix:null;
+      $i: $i + 1;
+    }
+
+    // step 0
+    // ------
+    // get selectors if presented
+    $current: nth($set-values, $i);
+    @if length($current) == 3 {
+      $selector-before: nth($current, 1);
+      $selector-after: nth($current, 3);
+      $i: $i + 1;
+    }
+
+    // step 1
+    // ------
+    // get class name
+    $current: nth($set-values, $i);
+    $i: $i + 1;
+
+    // if pre/postfix class names are presented
+    @if length($current) == 2 {
+      $class-prefix: #{nth($current, 1)}_;
+      $class-postfix: nth($current, 2);
+    }
+    // if there is only class postfix
+    @else {
+      $class-prefix: null; // reset prefix
+      $class-postfix: $current;
+    }
+
+    // step 2
+    // ------
+    // get property value
+    $current: nth($set-values, $i);
+    $i: $i + 1;
+
+    // append null for correct handling values within the loop
+    $property-value: $current, null;
+
+    // step 3
+    // ------
+    // construct selector
+    $class-shortcut: if($property-shortcut!=null and $class-postfix!=null, '#{$property-shortcut}-', $property-shortcut);
+    @for $i from 1 through length($selector-type) {
+      @if $i > 0 {
+        // set type by default
+        $type: '.';
+        
+        // get specific type if presented
+        @if length($selector-type) > 0 {
+          $type: nth($selector-type, $i);
+        }
+
+        // construct
+        $selector:
+          #{$selector-before}#{$type}#{$media-prefix}#{$class-prefix}#{$class-shortcut}#{$class-postfix}#{$media-postfix}#{$selector-after};
+        // [any CSS selector]+[. / %]+[   laptop-   ]+[  myprefix-  ]+[    border-    ]+[  -black-thin ]+[   -laptop    ]+[any CSS selector]
+        // notes: constructor use either $media-prefix or $media-postfix, but not both at once
+
+        // render
+        #{$selector} {
+          $value: $property-value;
+          // if set has several CSS properties at once specify the same value for all of them
+          @each $property in $property-name {
+            #{$property}: $value;
+          }
+        }
+      }
+    }
+
+  }
+}
+
+
+// Place _set() mixin under specified media query
+// --------------------------------------------------
+@mixin _media-set($property-shortcut, $property-name, $set-media-names, $set-media-values, $media-map) {
+  @for $i from 1 through length($set-media-names) {
+    $media-name: nth($set-media-names, $i);
+    @include media($media-map, $media-name) {
+      @include _set($property-shortcut, append($property-name, $set-media-values), $media-name);
+    }
+  }
+}
+
+// Set Generator
+// --------------------------------------------------
+// $property-shortcut string - pass to _set() mixin (see above)
+// $data list/map - mixed data, can contain CSS property name, selector types, set values etc
+// $media-map map - map where key = name of media, value = media query
+// @render set of classes and/or placeholders
+@mixin set($property-shortcut, $data, $media-map:null) {
+  @if $media-map {
+    // get all available media query names
+    $media-names: map-keys($media-map);
+
+    // get constants see _split-set-data
+    $property-name: append((), _split-set-data($data, property-name));
+    $selector-type: _split-set-data($data, selector-type);
+    $set-values: _split-set-data($data, set-values);
+
+    // merge selector type(s) and property-name into one list
+    @if length($selector-type) >= 1 {
+      $property-name: append($property-name, $selector-type);
+    }
+
+
+    @each $key, $val in $set-values {
+      // keyword 'all'
+      // -------------
+      @if $key == all {
+        // after 'all' key must immediately follow set-values
+        $set-values: $val;
+        @include _media-set($property-shortcut, $property-name, $media-names, $set-values, $media-map);
+      }
+
+      // keyword 'media'
+      // --------------
+      @else if str-exists($key, media) {
+        // generate $set-values under all media except default
+        @if nth($val, 1) == all {
+          // pass $media-names excluding default media
+          $media-names: remove-value($media-names, default);
+          // pass $set-values excluding all keyword
+          $set-values: nth($val, 2);
+          @include _media-set($property-shortcut, $property-name, $media-names, $set-values, $media-map);
+        }
+        
+        // generate $set-values under manually specified media
+        @else {
+          // get media names from first item of list
+          $media-names: nth($val, 1);
+          // pass $set-values excluding media names
+          $set-values: nth($val, 2);
+          @include _media-set($property-shortcut, $property-name, $media-names, $set-values, $media-map);
+        }
+      }
+        
+      // no keywords
+      // -------------
+      // generate $set-values under one media specified by $key
+      @else {
+        $media-name: $key;
+        $set-values: $val;
+        @include _media-set($property-shortcut, $property-name, $media-name, $set-values, $media-map);
+      }
+    }
+  }
+  // there is no media just pass
+  @else {
+    @include _set($property-shortcut, $data);
+  }
+}
+
+
+// Get Value from Set
+// --------------------------------------------------
+// @todo complete
+@function get($mixed-list, $class-name) {
+  $property-list: nth($mixed-list, 1); //list with property name
+  $property-list: nth($property-list, 2); //list without property name
+  $property-device: nth($mixed-list, 2);
+
+  $list: if($property-device and $property-device != _, map-get($property-list, $property-device), $property-list);
+
+  $i: 1;
+  @while $i <= length($list) {
+
+    $initial-value: nth($list, $i);
+    // step _
+    // --------
+    // prepend/append/clean device name
+    @if $initial-value == prefix {
+      $i: $i + 1;
+    }
+    @if $initial-value == postfix {
+      $i: $i + 1;
+    }
+    @else if $initial-value == unfix {
+      $i: $i + 1;
+    }
+
+    // step 0
+    // ------
+    // get selectors if presented
+    $first-value: nth($list, $i);
+    @if length($first-value) == 3 {
+      $i: $i + 1;
+    }
+
+    // step 1
+    // ------
+    // get class name
+    $class-value: nth($list, $i);
+    $i: $i + 1;
+
+    // step 2
+    // ------
+    // get property value
+    $property-value: nth($list, $i);
+    $i: $i + 1;
+
+    // step 3
+    // ------
+    // return property and value
+    @if $class-value == $class-name {
+      @return $property-value;
+    }
+  }
+  @return null;
+}
+
+
+// Get Property and Value from Set
+// --------------------------------------------------
+// @todo complete
+@mixin get($args...) {
+  $i: 1;
+  @while $i <= length($args) {
+    //get property name, list value, etc
+    $mixed-list: nth($args, $i);
+    $property-list: nth($mixed-list, 1);
+    $property-name: nth($property-list, 1);
+
+    //get class name for searching value
+    $class-name: nth($args, $i + 1);
+
+    //output CSS property
+    #{$property-name}: get($mixed-list, $class-name);
+
+    $i: $i + 2;
+  }
+}
+
+
+// Clearfix
+// --------------------------------------------------
+// clearfix - is technique of overflow correction
+// to block element containing float elements
+@mixin clearfix() {
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+  // (deprecated)
+  // &:before,
+  // &:after {
+  //   content: " ";
+  //   display: table;
+  // }
+  // &:after {
+  //   clear: both;
+  // }
+}
+
+
+// Font-Face
+// --------------------------------------------------
+// Generate bulletproof @font-face rule for your custom fonts.
+@mixin font-face($font-family, $font-path, $font-weight: null, $font-style:null, $version:null, $svg-font-name:null) {
+  $query: if($version,'?v=#{$version}', null);
+  $add-query: if($version,'&v=#{$version}', null);
+  @font-face {
+    font-family: $font-family;
+    font-weight: $font-weight;
+    font-style: $font-style;
+    src: url('#{$font-path}.eot#{$query}');
+    src: url('#{$font-path}.eot?#iefix#{$add-query}') format('embedded-opentype'),
+    url('#{$font-path}.woff#{$query}') format('woff'),
+    url('#{$font-path}.ttf#{$query}') format('truetype')
+    // add path to svg font if presented
+    if($svg-font-name, unquote(",url('#{$font-path}.svg#{$query}##{$svg-font-name}') format('svg')"), null);
+  }
+}

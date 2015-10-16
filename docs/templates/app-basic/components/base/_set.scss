@@ -1,0 +1,33 @@
+// Sets
+// -------------------------
+// to overwrite
+// $set-list-style: list-style (
+//   default: (
+//     none, none,
+//     disc, disc,
+//     square, square
+//   )
+// );
+// to disable
+// $set-list-style: null;
+@import 'path-to/css-element/components/set.scss';
+
+// Your Sets
+// -------------------------
+
+// Color
+// -----------
+// don't hesitate just play with code and see what you get
+// the syntax you can see in the documentation (section Usage)
+$color: color (
+  default: (
+    black, $hex-black,
+    white, $hex-white,
+  ),
+  media: (tablet mobile) (
+    prefix,
+    green, $hex-green,
+  ),
+);
+@include set($Color, $color, $_media);
+
