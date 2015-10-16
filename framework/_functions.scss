@@ -301,8 +301,7 @@
 
 //trick to get always integer pixel value at the end of browser rendering
 //@todo add $round option to get this trick
-//@todo exclude pt?
 @function tounit($value, $unit: null) {
-  @return _tounit(round(_tounit($value, px)), $unit); //on (slow)
-//  @return _tounit($value, $unit); //off (speedup)
+  @return _tounit(round(_tounit($value, px)), $unit); //slow
+//  @return _tounit($value, $unit); //speedup
 }

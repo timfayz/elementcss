@@ -13,7 +13,7 @@ $color: color (
     white, #fff,
   ),
 );
-@include classes($Color, $color, $_media);
+@include set($Color, $color, $_media);
 
 // Background
 // ------------------
@@ -21,12 +21,12 @@ $background-color: background-color (
 	black, $color-black,
 	green, $color-green,
 );
-@include classes($Background-color, $background-color);
+@include set($Background-color, $background-color);
 
 $background: background (
 	nature, url('../images/backs/blur-nature.jpg') no-repeat center 60%,
 );
-@include classes($Background, $background);
+@include set($Background, $background);
 
 
 // Box-shadow
@@ -34,23 +34,23 @@ $background: background (
 $box-shadow: box-shadow (
     gray, 0px 1px 10px $rgba-gray,
 );
-@include classes($Box-shadow, $box-shadow);
+@include set($Box-shadow, $box-shadow);
 
 // Text-shadow
 // ------------------
 $text-shadow: text-shadow (
     gray, 0px 1px 2px $rgba-gray,
 );
-@include classes($Text-shadow, $text-shadow);
+@include set($Text-shadow, $text-shadow);
 
 // Border
 // ------------------
 $border-set: (
 	blackd, 1px solid $color-black-dark,
 );
-@include classes($Border, border $border-set);
-@include classes($Border-top, border-top $border-set);
-@include classes($Border-bottom, border-bottom $border-set);
-@include classes($Border-left, border-left $border-set);
-@include classes($Border-right, border-right $border-set);
+@include set($Border, border $border-set);
+@include set($Border-top, border-top $border-set);
+@include set($Border-bottom, border-bottom $border-set);
+@include set($Border-left, border-left $border-set);
+@include set($Border-right, border-right $border-set);
 
