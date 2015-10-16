@@ -22,7 +22,6 @@
   $border-right-set:    $border-set !default;
   $border-bottom-set:   $border-set !default;
   $border-left-set:     $border-set !default;
-  $border-transition:   null !default;
 
   $border-radius-set:               () !default;
   $border-top-left-radius-set:      $border-radius-set !default;
@@ -30,11 +29,10 @@
   $border-bottom-right-radius-set:  $border-radius-set !default;
   $border-bottom-left-radius-set:   $border-radius-set !default;
 
-  $border-top-radius-set:           $border-radius-set !default;
-  $border-right-radius-set:         $border-radius-set !default;
-  $border-bottom-radius-set:        $border-radius-set !default;
-  $border-left-radius-set:          $border-radius-set !default;
-  $border-radius-transition:        null !default;
+  $border-top-radius-set:           () !default;
+  $border-right-radius-set:         () !default;
+  $border-bottom-radius-set:        () !default;
+  $border-left-radius-set:          () !default;
 
 
 
@@ -112,7 +110,5 @@
     @include property((border-bottom-left-radius, border-top-left-radius), #{$Border-radius}#{$L}, (0,0));
     @include property((border-bottom-left-radius, border-top-left-radius), #{$Border-radius}#{$L}, $border-bottom-left-radius-set);
   }
-
-  [class*="#{$Border}"] {transitions: $border-transition;}
 
 } $border: false;
