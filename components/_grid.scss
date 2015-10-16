@@ -172,11 +172,11 @@ $grid-set: (
 
   // Column
   // --------------
-  $_column: unquote('._row [class*="_col-"]');
+  $_column: unquote('[class*="_col-"]');
   // columned row mode - automatically breaks child tags on columns
   @if index($grid-row-modes, columned) {
     ._columned { list-style:none; }
-    $_column: append($_column, unquote('._row._columned > *'), comma);
+    $_column: append($_column, unquote('._columned > *'), comma);
   }
   #{$_column} { @include grid(_column); }
 
