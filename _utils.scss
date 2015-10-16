@@ -95,11 +95,11 @@
 // ------------------------------
 // _() - appends dash for given $value if $value isn't equal to $exception
 // dash can be replaced by any other character by $postfix
-@function _($value:null, $exception:default, $dash: '-') {
+@function _($value:null, $exception:default, $dash:'-') {
   @return if($value!=$exception, if($value, unquote('#{$value}#{$dash}'), null), null);
 }
 // __() - prepend dash like the previous
-@function __($value:null, $exception:default, $dash: '-') {
+@function __($value:null, $exception:default, $dash:'-') {
   @return if($value!=$exception, if($value, unquote('#{$dash}#{$value}'), null), null);
 }
 
