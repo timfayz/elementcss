@@ -75,13 +75,13 @@ $calc-line-round:     false !default; // round to integer pixel
 // according to selected method. If method is `column-gap` you must provide 2 params.
 // $return specify what the param(s) of grid to return: `all` -> (col number, col width,
 // gap width), `columns` -> (col number), `column` -> (col width), `gap` -> (gap width).
-//    calc-grid(all, 6 gap 2%)                -> 6  16.66667% 1%
-//    calc-grid(gap, 6 gap 2%)                -> 1%
+//    calc-grid(all, 6 gap 2%)                -> 6 16.66667% 2%
+//    calc-grid(gap, 6 gap 2%)                -> 2%
 //    calc-grid(column, 6 gap 2%)             -> 16.66667%
-//    calc-grid(all, 6 column 6%)             -> 2 50% 49%
-//    calc-grid(all, 6 column-gap 60px 20px)  -> 6 16.66667% 2.17391% *
+//    calc-grid(all, 6 column 6%)             -> 6 16.66667% 10.66667%
+//    calc-grid(all, 6 column-gap 60px 20px)  -> 6 16.66667% 4.34783% *
 //    * if your container's width is 480px ((60+20)*6), then resulting column and
-//    gap widths will 60px and 20px resp.
+//    gap widths will 60px and 20px respectively
 $calc-grid-data: null !default;
 @function calc-grid($return, $data:$calc-grid-data) {
   @if length($data) < 3 {
@@ -90,34 +90,25 @@ $calc-grid-data: null !default;
   @if nth($data, 2) == column-gap and length($data) < 4 {
       @error "@mixin grid(): `column-gap` calc method requires 2 values after method declaration. Please, check the syntax.";
   }
-
   $columns: nth($data, 1);
   $calc-method: nth($data, 2);
   $calc-data: if(length($data) == 4, slice($data, 3), nth($data, 3));
 
-  // gaps by padding
-  $column: null;
+  $column: 100% / $columns; // constant
   $gap: null;
   @if $calc-method==gap {
     $gap: $calc-data;
-
-    $column: 100% / $columns;
-    $gap: $gap/2;
   }
   @else if $calc-method==column {
-    $ratio: $calc-data;
-
-    $column: 100% / $columns;
-    $gap: (100% - ($ratio * $columns)) / $columns;
+    $gap: (100% - ($calc-data * $columns)) / $columns;
   }
   @else if $calc-method==column-gap {
-    $px-column: nth($calc-data,1);
-    $px-gap: nth($calc-data,2);
+    $px-column: nth($calc-data, 1);
+    $px-gap: nth($calc-data, 2);
     $px-row: ($columns * $px-column) + ($px-gap * ($columns - 1));
     $percent-gap: percentage($px-gap/$px-row);
 
-    $column: 100% / $columns;
-    $gap: $percent-gap/2;
+    $gap: $percent-gap;
   }
 
   @if $return == all          { @return $columns $column $gap; }
