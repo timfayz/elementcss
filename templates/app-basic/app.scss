@@ -1,20 +1,21 @@
 /*!
- * Name:
- * Version: 
- * Authors: Emil & Timur
- * Author URL: 
+ * Name: App Name
+ * Version: 1.0
+ * Authors: Your Name
+ * Author URL: example.com
  * Powered by:
- * ELEMENT | MIT License | github.com/kalopsia/element
+ * Element | MIT License | github.com/kalopsia/element
+ * Font Awesome | MIT License | github.com/FortAwesome/Font-Awesome
  */
 
 // HELPERS
-// ------------------------------------------------------------
+// --------------------------------------------------
 @import 'helpers/globals.scss';
 @import 'helpers/classes.scss';
 
 
 // BASE
-// ------------------------------------------------------------
+// --------------------------------------------------
 // base folder holds the most basic styles of your GUI
 @import 'base/normalize.scss';
 @import 'base/type.scss';
@@ -22,15 +23,16 @@
 
 
 // COMPONENTS
-// ------------------------------------------------------------
-// components folder holds logical separated components of your GUI
+// --------------------------------------------------
+// components folder holds logical separated parts of your GUI
+@import 'components/animation.scss';
 //@import 'components/forms.scss';
 //@import 'components/images.scss';
-
+//etc
 
 // VENDORS
-// ------------------------------------------------------------
-// vendors folder holds any third-party projects
-//@import 'vendors/font-awesome-4.1.0/css/font-awesome.min.css';
+// --------------------------------------------------
+// here you can import
+//@import 'path-to/font-awesome-4.x.x/css/font-awesome.min.css';
 
 

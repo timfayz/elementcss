@@ -1,6 +1,14 @@
-// TYPOGRAPHY MODULE
-// ------------------------------------------------------------
+// Typography
+// -------------------------
+// here you can change headings font-size and font-family
+$type-font-family-headings: $_font-family;
+$type-font-size-headings: (
+        h1: $_font-size-xlg,
+        h2: $_font-size-lg,
+        h3: $_font-size-md,
+        h4: $_font-size-sm,
+        h5: $_font-size-xsm,
+        h6: $_font-size-xxsm,
+);
 
-@import url(http://fonts.googleapis.com/css?family=Open+Sans:300&subset=latin,cyrillic);
-
-@import '../vendors/element/framework/modules/type.scss';
+@import 'path-to-element/modules/type.scss';
