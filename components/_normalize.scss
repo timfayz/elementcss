@@ -24,7 +24,7 @@
   
   html {
     font-family: $_font-family;
-    font-size: tounit($_font-size, unit($_font-size));
+    font-size: tounit($_font-size, auto);
     -ms-text-size-adjust: 100%;
     -webkit-text-size-adjust: 100%;
     text-size-adjust: 100%;
@@ -34,7 +34,7 @@
     margin: 0;
     cursor: $_cursor-default;
     direction: if($_left==left, ltr, rtl);
-    line-height: tounit($_line-height, rem);
+    line-height: tounit($_line-height, auto);
     font-size: inherit;
     font-weight: normal;
     font-style: normal;

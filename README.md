@@ -1,6 +1,6 @@
 #CSS-ELEMENT - brand new way of creating CSS GUI
 
-CSS-ELEMENT is free and open-source CSS framework written in SASS that promotes clean, object-oriented design and encourages rapid prototyping. It helps you to create complex, scalable and elaborate GUI for the contemporary web applications as well as integrate to existing project. It provides thought-out structure and many other features, like theming. CSS-ELEMENT is not just framework, but tool and suit of best practices and the most advanced methods from many professionals to make web more robust and easy.
+CSS-ELEMENT is free and open-source CSS framework written in SASS that promotes clean, object-oriented design and encourages rapid prototyping. It helps you to create complex, scalable and elaborate GUI for the contemporary web applications as well as integrate to existing project. The way of working, thought-out structure and features make it possible even recreate other popular frameworks or just create your favorite theme, use it and share. CSS-ELEMENT is not just framework, but tool and suit of best practices and methods from many professionals around the world to make GUI building more maintainable, easier and faster.
 
 *We are sorry for the language mistakes we have made - we are from Russia.*
 
@@ -18,7 +18,7 @@ _.scss        main file - uniting core files
 LICENSE       license information
 README.md     this is what you are currently reading
 ```
-Not familiar with github.com or git? To learn more about git go [here (official documentation)](http://git-scm.com/book/en/v2/Getting-Started-About-Version-Control) or just googling "learn git". For newbies that doesn't know anything about git, github. Here is the difference between them:
+Not familiar with github.com or git? To learn more about git go [here (official documentation)](http://git-scm.com/book/en/v2/Getting-Started-About-Version-Control) or just googling "learn git". If you are newbie who often face the git and github.com, but you don't even know what the difference between them. Here is useful quote:
 
 > Git is a revision control system, a tool to manage your source code history. GitHub is a hosting service for Git repositories. So they are not the same thing: Git the tool, GitHub the service for projects that uses Git.
 
@@ -37,7 +37,7 @@ Otherwise you will experience difficulties in understanding principles of work a
 
 
 ##HOW TO PARTICIPATE
-**Your participation to ELEMENT development is very welcome!**
+**Your participation to CSS-ELEMENT development is very welcome!**
 If you want to help and contribute this project please make your own pull request or [report issues](https://github.com/kalopsia/element/issues). We are welcome any kind of ideas and support, even merge to the new repository/project.
 
 ##ACKNOWLEDGEMENTS
