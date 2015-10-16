@@ -25,7 +25,7 @@ $BR:                    -br !default; // bottom-right
 $BL:                    -bl !default; // bottom-left
 
 // Color
-$Color:                         c !default; //a
+$Color:                         clr !default;
 
 // Background
 $Background:                    bck !default;
@@ -87,7 +87,7 @@ $Box-shadow:                    bxsh !default; //*
 
 // Basic Box Layout
 $Box-sizing:                    bxsz !default; //*
-$Clear:                         clr !default;
+$Clear:                         clear !default; //*
 $Float:                         flt !default;
 $Clip:                          clp !default;
 $Vertical-align:                vra !default;
@@ -218,7 +218,7 @@ $Animation-play-state:          #{$Animation}-ps !default;
 $Animation-timing-function:     #{$Animation}-tm !default;
 
 // Transform
-$Transform:                     trm !default; //*
+$Transform:                     trf !default; //*
 $Transform-origin:              #{$Transform}-or !default;
 $Transform-style:               #{$Transform}-st !default;
 $Backface-visibility:           bcv !default;
@@ -226,7 +226,7 @@ $Perspective:                   prs !default;
 $Perspective-origin:            #{$Perspective}-or !default;
 
 // Transition
-$Transition:                    trn !default; //*
+$Transition:                    tri !default; //*
 $Transition-property:           #{$Transition}-pr !default;
 $Transition-duration:           #{$Transition}-du !default;
 $Transition-timing-function:    #{$Transition}-tf !default;
@@ -277,7 +277,7 @@ $Filter:                        flt !default;
 
 
 // Properties shortcuts (Emmet style)
-// copied from docs.emmet.io/cheat-sheet/, unfortunately much of properties
+// copypasted from docs.emmet.io/cheat-sheet/, unfortunately much of properties
 // are missed and some of properties don't even exists
 // --------------------------------------------------
 // Visual Formatting
