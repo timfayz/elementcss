@@ -1,267 +1,126 @@
 // KEYWORDS
 // -------------------------------------
 
-$Default:     def !default;
-$Xxlg:        xxlg !default;
-$Xlg:         xlg !default;
-$Lg:          lg !default;
-$Md:          md !default;
-$Sm:          sm !default;
-$Xsm:         xsm !default;
-$Xxsm:        xxsm !default;
+$Default:     'def' !default;
+$Xxlg:        'xxlg' !default;
+$Xlg:         'xlg' !default;
+$Lg:          'lg' !default;
+$Md:          'md' !default;
+$Sm:          'sm' !default;
+$Xsm:         'xsm' !default;
+$Xxsm:        'xxsm' !default;
 
-$disabled:    disabled !default;
-$readonly:    readonly !default;
-
-
-// TAG NAMING
-// -------------------------------------
-
-// Basic
-// -------------------
-$html:        'html';
-$body:        'body';
-
-// Type
-// -------------------
-$h1:          'h1';
-$h2:          'h2';
-$h3:          'h3';
-$h4:          'h4';
-$h5:          'h5';
-$h6:          'h6';
-$p:           'p';
-$hr:          'hr';
-
-// Links
-// -------------------
-$a:           'a';
-$nav:         'nav';
-
-// Images
-// -------------------
-$img:         'img';
-$map:         'map';
-$area:        'area';
-$canvas:      'canvas';
-$figcaption:  'figcaption';
-$figure:      'figure';
-
-// Media
-// -------------------
-$audio:       'audio';
-$track:       'track';
-$video:       'video';
-
-// Lists
-// -------------------
-$_lists:      'ol, ul';
-$ul:          'ul';
-$ol:          'ol';
-$li:          'li';
-$dl:          'dl';
-$dt:          'dt';
-$dd:          'dd';
-$menu:        'menu';
-
-// Tables
-// -------------------
-$table:       'table';
-$caption:     'caption';
-$th:          'th';
-$tr:          'tr';
-$td:          'td';
-$thead:       'thead';
-$tbody:       'tbody';
-$tfoot:       'tfoot';
-$col:         'col';
-$colgroup:    'colgroup';
-
-// Sections
-// -------------------
-$main:        'main';
-$div:         'div';
-$span:        'span';
-$header:      'header';
-$footer:      'footer';
-$section:     'section';
-$article:     'article';
-$aside:       'aside';
-$details:     'details';
-$dialog:      'dialog';
-$summary:     'summary';
-
-// Formatting
-// -------------------
-// abbreviation
-$abbr:        'abbr';
-// contact information
-$address:     'address';
-// boldened text
-$b:           'b';
-// section that is quoted from another source
-$blockquote:  'blockquote';
-// the title of a work
-$cite:        'cite';
-// piece of computer code
-$code:        'code';
-// text that has been deleted from a document
-$del:         'del';
-// definition term
-$dfn:         'dfn';
-// emphasized text
-$em:          'em';
-// italicized text
-$i:           'i';
-// text that has been inserted into a document
-$ins:         'ins';
-// keyboard input
-$kbd:         'kbd';
-// marked/highlighted text
-$mark:        'mark';
-// scalar measurement within a known range
-$meter:       'meter';
-// preformatted text
-$pre:         'pre';
-// represents the progress of a task
-$progress:    'progress';
-// short quotation
-$q:           'q';
-// text that is no longer correct
-$s:           's';
-// sample output from a computer program
-$samp:        'samp';
-// smaller text
-$small:       'small';
-// important text
-$strong:      'strong';
-// superscript and subscript text
-$sub:         'sub';
-$sup:         'sup';
-// date/time
-$time:        'time';
-// avoid using
-$u:           'u';
-// Defines a variable
-$var:         'var';
-
-//labeling text with explicit textual annotations
-//@think: ruby, rc, etc
-
-// Forms
-// -------------------
-$form:              'form';
-$fieldset:          'fieldset';
-$legend:            'legend';
-$label:             'label';
-$textarea:          'textarea';
-$select:            'select';
-$optgroup:          'optgroup';
-$option:            'option';
-$datalist:          'datalist';
-$keygen:            'keygen';
-$output:            'output';
-$select:            'select';
-$textarea:          'textarea';
-
-$input:             'input';
-$input-readonly:    '#{$input}.-#{$readonly}';
-$input-disabled:    '#{$input}.-#{$disabled}';
-
-$radio:             'radio';
-$radio-disabled:    '#{$radio}.-#{$disabled}';
-
-$checkbox:          'checkbox';
-$checkbox-disabled: '#{$checkbox}.-#{$disabled}';
-
-$button:            'button';
-$button-disabled:   '#{$button}.-#{$disabled}';
-
-// Programming
-// -------------------
-$embed:             'embed';
-$object:            'object';
+$disabled:    'disabled' !default;
+$readonly:    'readonly' !default;
 
 
-// CLASS NAMING
+// PROPERTY NAMING
 // ---------------------------------------
 
 // Property's Directions
 // -------------------
-$T:                   't-' !default; //top
-$R:                   'r-' !default; //right
-$B:                   'b-' !default; //bottom
-$L:                   'l-' !default; //left
-$TL:                  'tl-' !default; //top-left
-$TR:                  'tr-' !default; //top-right
-$BR:                  'br-' !default; //bottom-right
-$BL:                  'bl-' !default; //bottom-left
+$T:                   't' !default; //top
+$R:                   'r' !default; //right
+$B:                   'b' !default; //bottom
+$L:                   'l' !default; //left
+$TL:                  'tl' !default; //top-left
+$TR:                  'tr' !default; //top-right
+$BR:                  'br' !default; //bottom-right
+$BL:                  'bl' !default; //bottom-left
 
 // Properties shortcuts
 // -------------------
 
 // Positioning
-$Top:                 'top-' !default;
-$Right:               'right-' !default;
-$Bottom:              'bottom-' !default;
-$Left:                'left-' !default;
+$Top:                 'top' !default;
+$Right:               'right' !default;
+$Bottom:              'bottom' !default;
+$Left:                'left' !default;
 $Position:            null !default;
-$Z-index:             'z-' !default;
-$Vertical-align:      'align-' !default;
+$Z-index:             'z' !default;
+$Vertical-align:      'align' !default;
 
 // Content
-$Content:             'content-' !default;
+$Content:             'content' !default;
 
 // Lists
-$List-style:          'list-' !default;
-$List-style-type:     'list-' !default;
+$List:                'list' !default;
+$List-style:          $List !default;
+$List-style-type:     $List !default;
 
 // Indention
-$Margin:              'marg-' !default;
-$Padding:             'padd-' !default;
+$Margin:              'marg' !default;
+$Margin-top:          #{$Margin}-#{$T} !default;
+$Margin-right:        #{$Margin}-#{$R} !default;
+$Margin-bottom:       #{$Margin}-#{$B} !default;
+$Margin-left:         #{$Margin}-#{$L} !default;
+
+$Padding:             'padd' !default;
+$Padding-top:         #{$Padding}-#{$T} !default;
+$Padding-right:       #{$Padding}-#{$R} !default;
+$Padding-bottom:      #{$Padding}-#{$B} !default;
+$Padding-left:        #{$Padding}-#{$L} !default;
 
 // Dimension
-$Width:               'width-' !default;
-$Max-width:           'max-width-' !default;
-$Min-width:           'min-width-' !default;
-$Height:              'height-' !default;
-$Max-height:          'max-height-' !default;
-$Min-height:          'min-height-' !default;
+$Width:               'width' !default;
+$Max-width:           'max-#{$Width}' !default;
+$Min-width:           'min-#{$Width}' !default;
+$Height:              'height' !default;
+$Max-height:          'max-#{$Height}' !default;
+$Min-height:          'min-#{$Height}' !default;
 
 // Background
-$Background:          'grad-' !default;
-$Background-color:    'back-' !default;
-$Background-size:     null !default;
+$Background:          'back' !default;
+$Background-color:    '#{$Background}-clr' !default;
+$Background-image:    '#{$Background}-img' !default;
+$Background-size:     #{$Background} !default;
+$Background-repeat:   #{$Background} !default;
 
 // Border
-$Border-radius:       'radius-' !default;
-$Border:              'border-' !default;
+$Border:                      'border' !default;
+$Border-top:                  '#{$Border}-#{$T}' !default;
+$Border-right:                '#{$Border}-#{$R}' !default;
+$Border-bottom:               '#{$Border}-#{$B}' !default;
+$Border-left:                 '#{$Border}-#{$L}' !default;
+$Border-radius:               'radius' !default;
+$Border-top-right-radius:     '#{$Border-radius}-#{$TR}' !default;
+$Border-top-left-radius:      '#{$Border-radius}-#{$TL}' !default;
+$Border-bottom-right-radius:  '#{$Border-radius}-#{$BR}' !default;
+$Border-bottom-left-radius:   '#{$Border-radius}-#{$BL}' !default;
+$Border-top-radius:           '#{$Border-radius}-#{$T}' !default;
+$Border-right-radius:         '#{$Border-radius}-#{$R}' !default;
+$Border-bottom-radius:        '#{$Border-radius}-#{$B}' !default;
+$Border-left-radius:          '#{$Border-radius}-#{$L}' !default;
 
 // Text
-$Line-height:         'line-' !default;
-$Font-family:         'font-' !default;
-$Font-size:           'font-' !default;
-$Font-weight:         'font-' !default;
-$Font-style:          'font-' !default;
-$Color:               'color-' !default;
-$Word-wrap:           'word-' !default;
-$Word-break:          'word-' !default;
-$Word-spacing:        'word-' !default;
-$White-space:         'space-' !default;
-$Text-align:          'text-' !default;
-$Text-decoration:     'text-' !default;
-$Text-transform:      'text-' !default;
-$Text-rendering:      'text-' !default;
-$Text-shadow:         'text-sh-' !default;
+$Line-height:         'line' !default;
+$Color:               'color' !default;
+$Font:                'font' !default;
+$Font-family:         $Font !default;
+$Font-size:           $Font !default;
+$Font-weight:         $Font !default;
+$Font-style:          $Font !default;
+$Word:                'word' !default;
+$Word-wrap:           $Word !default;
+$Word-break:          $Word !default;
+$Word-spacing:        $Word !default;
+$White-space:         'space' !default;
+$Text:                'text' !default;
+$Text-align:          $Text !default;
+$Text-decoration:     $Text !default;
+$Text-transform:      $Text !default;
+$Text-rendering:      $Text !default;
+$Text-shadow:         '#{$Text}-sh' !default;
+$Text-indent:         'indent' !default;
 
 // Transition
-$Transition:          'trans-' !default;
+$Transition:          'animate' !default;
 
 // Filter
-$Filter:              'filter-' !default;
+$Filter:              'filter' !default;
 
 // Shadow
-$Box-shadow:          'shadow-' !default;
+$Box-shadow:          'shadow' !default;
 
 // Displaying
 $Display:             null !default;
@@ -270,11 +129,155 @@ $Display:             null !default;
 $Visibility:          null !default;
 
 // Opacity
-$Opacity:             'opacity-' !default;
+$Opacity:             'opacity' !default;
 
 // Miliscenios
-$Overflow:            'overflow-' !default;
-$Overflow-x:          'overflow-x-' !default;
-$Overflow-y:          'overflow-y-' !default;
-$Float:               'float-' !default;
-$Cursor:              'cursor-' !default;
+$Overflow:            'over' !default;
+$Overflow-x:          '#{$Overflow}-x' !default;
+$Overflow-y:          '#{$Overflow}-y' !default;
+$Float:               'float' !default;
+$Cursor:              'cursor' !default;
+
+
+
+// TAG NAMING (under discussion)
+// -------------------------------------
+
+// Basic
+// -------------------
+$html:        'html' !default;
+$body:        'body' !default;
+
+// Type
+// -------------------
+$h1:          'h1' !default;
+$h2:          'h2' !default;
+$h3:          'h3' !default;
+$h4:          'h4' !default;
+$h5:          'h5' !default;
+$h6:          'h6' !default;
+$p:           'p' !default;
+$hr:          'hr' !default;
+
+// Links
+// -------------------
+$a:           'a' !default;
+$nav:         'nav' !default;
+
+// Images
+// -------------------
+$img:         'img' !default;
+$map:         'map' !default;
+$area:        'area' !default;
+$canvas:      'canvas' !default;
+$figcaption:  'figcaption' !default;
+$figure:      'figure' !default;
+
+// Media
+// -------------------
+$audio:       'audio' !default;
+$track:       'track' !default;
+$video:       'video' !default;
+
+// Lists
+// -------------------
+$ul:          'ul' !default;
+$ol:          'ol' !default;
+$li:          'li' !default;
+$dl:          'dl' !default;
+$dt:          'dt' !default;
+$dd:          'dd' !default;
+$menu:        'menu' !default;
+
+// Tables
+// -------------------
+$table:       'table' !default;
+$caption:     'caption' !default;
+$th:          'th' !default;
+$tr:          'tr' !default;
+$td:          'td' !default;
+$thead:       'thead' !default;
+$tbody:       'tbody' !default;
+$tfoot:       'tfoot' !default;
+$col:         'col' !default;
+$colgroup:    'colgroup' !default;
+
+// Sections
+// -------------------
+$main:        'main' !default;
+$div:         'div' !default;
+$span:        'span' !default;
+$header:      'header' !default;
+$footer:      'footer' !default;
+$section:     'section' !default;
+$article:     'article' !default;
+$aside:       'aside' !default;
+$details:     'details' !default;
+$dialog:      'dialog' !default;
+$summary:     'summary' !default;
+
+// Formatting
+// -------------------
+$abbr:        'abbr' !default;
+$address:     'address' !default;
+$b:           'b' !default;
+$blockquote:  'blockquote' !default;
+$cite:        'cite' !default;
+$code:        'code' !default;
+$del:         'del' !default;
+$dfn:         'dfn' !default;
+$em:          'em' !default;
+$i:           'i' !default;
+$ins:         'ins' !default;
+$kbd:         'kbd' !default;
+$mark:        'mark' !default;
+$meter:       'meter' !default;
+$pre:         'pre' !default;
+$progress:    'progress' !default;
+$q:           'q' !default;
+$s:           's' !default;
+$samp:        'samp' !default;
+$small:       'small' !default;
+$strong:      'strong' !default;
+$sub:         'sub' !default;
+$sup:         'sup' !default;
+$time:        'time' !default;
+$u:           'u' !default;
+$var:         'var' !default;
+
+//labeling text with explicit textual annotations
+//@think: ruby, rc, etc
+
+// Forms
+// -------------------
+$form:              'form' !default;
+$fieldset:          'fieldset' !default;
+$legend:            'legend' !default;
+$label:             'label' !default;
+$textarea:          'textarea' !default;
+$select:            'select' !default;
+$optgroup:          'optgroup' !default;
+$option:            'option' !default;
+$datalist:          'datalist' !default;
+$keygen:            'keygen' !default;
+$output:            'output' !default;
+$select:            'select' !default;
+$textarea:          'textarea' !default;
+$input:             'input' !default;
+$radio:             'radio' !default;
+$checkbox:          'checkbox' !default;
+$button:            'button' !default;
+
+// Programming
+// -------------------
+$embed:             'embed' !default;
+$object:            'object' !default;
+
+
+// @todo CUSTOMS SELECTORS
+// ---------------------------------------
+$input-readonly:    '#{$input}.-#{$readonly}' !default;
+$input-disabled:    '#{$input}.-#{$disabled}' !default;
+$radio-disabled:    '#{$radio}.-#{$disabled}' !default;
+$checkbox-disabled: '#{$checkbox}.-#{$disabled}' !default;
+$button-disabled:   '#{$button}.-#{$disabled}' !default;

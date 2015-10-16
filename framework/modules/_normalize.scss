@@ -226,7 +226,7 @@
   input[type="datetime"],
   input[type="datetime-local"],
   input[type="email"],
-  input[type="file"],
+  //input[type="file"],
   input[type="month"],
   input[type="number"],
   input[type="password"],
@@ -248,7 +248,8 @@
     font-size: inherit;
     line-height: inherit;
     vertical-align: middle;
-    border:1px solid black;
+    //border:1px solid black;
+    border: 0;
     outline: 0;
   }
 
@@ -294,6 +295,22 @@
     cursor: $_cursor-default;
   }
 
+  input[type="file"], .#{$input}-file {
+    box-sizing: border-box;
+    display: block;
+    margin: 0;
+    padding: 0;
+    height: auto;
+    width: 100%;
+    color: inherit;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    vertical-align: middle;
+    outline: 0;
+    cursor: $_cursor-pointer;
+  }
+
   // Buttons
   //@todo range width 100%?
   input[type="checkbox"],
@@ -308,6 +325,7 @@
     margin: 0;
     vertical-align: inherit;
     line-height: inherit;
+    cursor: $_cursor-pointer;
   }
   input[type="checkbox"][disabled],
   input[type="radio"][disabled],
@@ -338,7 +356,8 @@
     text-align: center;
     vertical-align: middle;
     background: none;
-    border:1px solid black;
+    //border:1px solid black;
+    border: 0;
     outline: none;
   }
 
@@ -385,7 +404,7 @@
     }
     &:hover {
       outline: none;
-      color: inherit;
+      //color: inherit; ??
       cursor: $_cursor-pointer;
     }
     &:active {
@@ -398,7 +417,7 @@
 
   // Lists
   // --------------------------------
-  ul, li {
+  ul, ol {
     list-style: none;
     position:relative;
     padding: 0;
@@ -408,7 +427,7 @@
   ul {}
   ol {}
   li {
-    list-style: none;
+    //list-style: none;
   }
 
   dl {

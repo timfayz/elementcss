@@ -5,7 +5,7 @@
 
 // Default Variables
 // --------------------------------------------------
-  $type: false !default;
+  $type: true !default;
 
   $type-font-family-headings: $_font-family-sans !default;
   $type-font-size-headings: (
@@ -44,4 +44,5 @@
   samp {
     font-family: $_font-family-mono;
   }
+
 }

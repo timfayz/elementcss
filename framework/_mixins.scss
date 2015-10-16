@@ -16,7 +16,7 @@
 
 // Font-Face
 // -------------
-@mixin font-face($font-path, $font-family, $font-weight: null, $font-style:null, $version:null, $svg-font-name:null)
+@mixin font-face($font-family, $font-path, $font-weight: null, $font-style:null, $version:null, $svg-font-name:null)
 {
   $query: if($version,'?v=#{$version}', null);
   @if $svg-font-name {
@@ -86,12 +86,15 @@
 
 }
 
+@function ad($value, $check) {
+  @return if($value, append-dash($value), null);
+}
 // Property generator
 // -------------------------------------
 // $properties - any CSS property(es)
 // $class-property-shortcut - CSS class prefix
 // @return
-@mixin property($property, $property-shortcut, $list, $device:null)
+@mixin _property($property-shortcut, $list, $device:null)
 {
   $device-prefix: null;
   $device-postfix: null;
@@ -100,10 +103,14 @@
   $selector-before: (null);
   $selector-after: (null);
 
-  $i: 1 !global;
-  @while $i <= length($list) {
+  //fist value always property(ies) name(s)
+  $property: nth($list, 1);
+  $property-list: nth($list, 2);
 
-    $initial-value: nth($list, $i);
+  $i: 1 !global;
+  @while $i <= length($property-list) {
+
+    $initial-value: nth($property-list, $i);
     // step _
     // --------
     // prepend/append/clean device name
@@ -126,19 +133,18 @@
     // step 0
     // ------
     // get selectors if presented
-    $first-value: nth($list, $i);
+    $first-value: nth($property-list, $i);
     @if length($first-value) == 3 {
       $selector-before: nth($first-value, 1);
       $selector-after: nth($first-value, 3);
-      @debug $selector-before;
       $i: $i + 1 !global;
     }
 
 
     // step 1
     // ------
-    // get class name and/or additional selector
-    $next-value: nth($list, $i);
+    // get class name
+    $next-value: nth($property-list, $i);
     $i: $i + 1 !global;
 
     //if pre/postfix class names are presented
@@ -155,7 +161,7 @@
     // step 2
     // ------
     // get property value
-    $next-value: nth($list, $i);
+    $next-value: nth($property-list, $i);
     $i: $i + 1 !global;
 
     // append null for correct handling values within the loop
@@ -164,8 +170,9 @@
     // step 3
     // ------
     // construct class
+    $class-shortcut: if($property-shortcut!=null and $class-postfix!=null, '#{$property-shortcut}-', $property-shortcut);
     $selector:
-      #{$selector-before}#{'.'}#{$device-prefix}#{$class-prefix}#{$property-shortcut}#{$class-postfix}#{$device-postfix}#{$selector-after};
+      #{$selector-before}#{'.'}#{$device-prefix}#{$class-prefix}#{$class-shortcut}#{$class-postfix}#{$device-postfix}#{$selector-after};
 
     #{$selector} {
       $value: $property-value;
@@ -177,26 +184,115 @@
   }
 }
 
-// Property Set generator
+// Class - one property generator
 // -------------------------------------
-// $media -
-// $class-property-shortcut - CSS class prefix
+//
 // @return
-@mixin property-media($media, $property, $property-shortcut, $list) {
-  //@each $list in $args {
+@mixin classes($property-shortcut, $list, $media:null) {
+  //@todo multi each $list in $args {}
   @if length($list) > 0 {
-    $media-devices: map-keys($media) !global;
-    $devices: nths($media-devices, indexes($media-devices, map-keys($list)));
 
-    @if length($devices) > 0 {
-      @for $i from 1 through length($devices) {
-        $device: nth($devices, $i);
-        $property-list: map-get($list, $device);
+    @if $media {
+      $property-name: nth($list, 1);
+      $property-list: nth($list, 2);
 
-        @include media($media, $device) {
-          @include property($property, $property-shortcut, $property-list, $device:$device);
+      $media-devices: map-keys($media) !global;
+      $devices: nths($media-devices, indexes($media-devices, map-keys($property-list)));
+
+      @if length($devices) > 0 {
+        @for $i from 1 through length($devices) {
+          $device-name: nth($devices, $i);
+          $device-property-list: map-get($property-list, $device-name);
+
+          @include media($media, $device-name) {
+            @include _property($property-shortcut, $property-name $device-property-list, $device-name);
+          }
         }
       }
     }
+    @else {
+      @include _property($property-shortcut, $list);
+    }
+
+  }
+}
+
+// Class getter
+// -------------------------------------
+@function class-value($mixed-list, $class-name) {
+
+  $property-list: nth($mixed-list, 1); //list with property name
+  $property-list: nth($property-list, 2); //list without property name
+  $property-device: nth($mixed-list, 2);
+
+  $list: if($property-device and $property-device != _, map-get($property-list, $property-device), $property-list);
+
+  $i: 1 !global;
+  @while $i <= length($list) {
+
+    $initial-value: nth($list, $i);
+    // step _
+    // --------
+    // prepend/append/clean device name
+    @if $initial-value == prefix {
+      $i: $i + 1 !global;
+    }
+    @if $initial-value == postfix {
+      $i: $i + 1 !global;
+    }
+    @else if $initial-value == unfix {
+      $i: $i + 1 !global;
+    }
+
+    // step 0
+    // ------
+    // get selectors if presented
+    $first-value: nth($list, $i);
+    @if length($first-value) == 3 {
+      $i: $i + 1 !global;
+    }
+
+    // step 1
+    // ------
+    // get class name
+    $class-value: nth($list, $i);
+    $i: $i + 1 !global;
+
+    // step 2
+    // ------
+    // get property value
+    $property-value: nth($list, $i);
+    $i: $i + 1 !global;
+
+    // step 3
+    // ------
+    // return property and value
+    @if $class-value == $class-name {
+      @return $property-value;
+    }
+  }
+  @return null;
+}
+
+
+
+// Property and value setter
+// -------------------------------------
+@mixin property-value($args...) {
+  $c: 1 !global;
+  @while $c <= length($args) {
+
+    //get property name, list value, etc
+    $mixed-list: nth($args, $c);
+    $property-list: nth($mixed-list, 1);
+    $property-name: nth($property-list, 1);
+
+    //get class name for searching value
+    $class-name: nth($args, $c + 1);
+
+    //output CSS property
+    #{$property-name}: class-value($mixed-list, $class-name);
+
+    $c: $c + 2 !global;
   }
 }

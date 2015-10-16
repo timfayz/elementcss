@@ -1,0 +1,30 @@
+// Element Variables
+// --------------------------------------------
+$_font-size:    20px;
+$_line-height:  1.7;
+$_font-family: 'Open Sans', sans-serif;
+$_media-unit: rem;
+$_media:
+  (
+    default:    null,
+    mobile:     (media 'screen and (max-width:' 740px ')'),
+    tablet:     (media 'screen and (max-width:' 1024px ')'),
+    laptop:     (media 'screen and (min-width:' 1366px ')'),
+    landscape:  (media '(orientation: landscape)'),
+    portrait:   (media '(orientation: portrait)'),
+    touch:      ('.touch'),
+  );
+
+// App Variables
+// --------------------------------------------
+$rgba-gray: rgba(0, 0, 0, 0.3);
+
+$color-black-dark: 	#222;
+$color-black: 		#333;
+$color-black-light: #444;
+
+$color-white-dark: 	#f1f1f1;
+$color-white: 		#fdfdfd;
+$color-white-light: #fff;
+
+$color-green: green;

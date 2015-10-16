@@ -3,7 +3,7 @@
 
 ELEMENT is free and open-source CSS framework written in SASS that promotes clean, object-oriented design and encourages rapid prototyping. It helps you to create complex and elaborate GUI for the contemporary web applications as well as integrate to existing project. It provides thought-out structure and many other features, like theming. ELEMENT is not just framework, but tool and suit of best practices and the most advanced methods from many professionals to make web more robust and easy.
 
-**[Download v1.0](https://github.com/kalopsia/element/archive/master.zip)**
+**[Download v1.1.0](https://github.com/kalopsia/element/archive/master.zip)**
 
 
 ##FILE STRUCTURE
@@ -26,6 +26,7 @@ Otherwise you will experience difficulties in understanding principles of work a
 1. [Installation](https://github.com/kalopsia/element/blob/master/docs/1_installation.md)<br/>
 2. [Structure](https://github.com/kalopsia/element/blob/master/docs/2_structure.md)<br/>
 3. [Usage](https://github.com/kalopsia/element/blob/master/docs/3_usage.md)<br/>
+4. [Conventions](https://github.com/kalopsia/element/blob/master/docs/4_conventions.md)<br/>
 
 
 ##HOW TO PARTICIPATE

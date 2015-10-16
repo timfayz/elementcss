@@ -1,0 +1,447 @@
+@import '../globals.scss';
+@import '../naming.scss';
+@import '../functions.scss';
+@import '../mixins.scss';
+@import '../vr.scss';
+
+// Default Variables
+// --------------------------------------------------
+$defaults: true !default;
+
+// Output Styles
+// --------------------------------------------------
+@if $defaults {
+
+  // Border
+  // --------------------
+  $default-border-set: (
+    default: (
+      0, 0
+    )
+  ) !default;
+  @include classes($Border, border $default-border-set, $_media);
+  @include classes($Border-top, border-top $default-border-set, $_media);
+  @include classes($Border-right, border-right $default-border-set, $_media);
+  @include classes($Border-bottom, border-bottom $default-border-set, $_media);
+  @include classes($Border-left, border-left $default-border-set, $_media);
+
+  // Position
+  // ------------------
+  $default-position: position (
+    default: (
+      fixed, fixed,
+      relative, relative,
+      absolute, absolute,
+    ),
+    laptop: (prefix,
+      fixed, fixed,
+      relative, relative,
+      absolute, absolute,
+    ),
+    tablet: (prefix,
+      fixed, fixed,
+      relative, relative,
+      absolute, absolute,
+    ),
+    mobile: (prefix,
+      fixed, fixed,
+      relative, relative,
+      absolute, absolute,
+    ),
+  ) !global !default;
+  @include classes($Position, $default-position, $_media);
+
+  // Vertical-Align
+  // ----------------
+  $default-vertical-align: vertical-align (
+    default: (
+      top, top,
+      middle, middle,
+      bottom, bottom,
+    ),
+  ) !global !default;
+  @include classes($Vertical-align, $default-vertical-align, $_media);
+
+  // Top, Right, Bottom, Left
+  // ------------------------
+  $default-top-right-bottom-left-set: (
+    default: (
+      0, 0,
+      auto, auto,
+      $Default, vr($_size-default),
+      $Xxsm, vr($_size-xxsm),
+      $Xsm, vr($_size-xsm),
+      $Sm, vr($_size-sm),
+      $Md, vr($_size-md),
+      $Lg, vr($_size-lg),
+      $Xlg, vr($_size-xlg),
+      $Xxlg, vr($_size-xxlg),
+    ),
+  ) !global !default;
+  @include classes($Top, top $default-top-right-bottom-left-set, $_media);
+  @include classes($Right, right $default-top-right-bottom-left-set, $_media);
+  @include classes($Bottom, bottom $default-top-right-bottom-left-set, $_media);
+  @include classes($Left, left $default-top-right-bottom-left-set, $_media);
+
+  // Z-index
+  // ---------------
+  $default-z-index: z-index (
+    default: (
+      0, 0,
+      $Default, $_z-default,
+      $Xsm, $_z-xsm,
+      $Sm, $_z-sm,
+      $Md, $_z-md,
+      $Lg, $_z-lg,
+      $Xlg, $_z-xlg,
+    )
+  ) !global !default;
+  @include classes($Z-index, $default-z-index, $_media);
+
+  // Margin
+  // -----------------
+  $default-margin-set: (
+    default: (
+      0, 0,
+      auto, auto,
+      $Default, vr($_size-default),
+      $Xxsm, vr($_size-xxsm),
+      $Xsm, vr($_size-xsm),
+      $Sm, vr($_size-sm),
+      $Md, vr($_size-md),
+      $Lg, vr($_size-lg),
+      $Xlg, vr($_size-xlg),
+      $Xxlg, vr($_size-xxlg),
+    )
+  ) !global !default;
+  @include classes($Margin, margin $default-margin-set, $_media);
+  @include classes($Margin-top, margin-top $default-margin-set, $_media);
+  @include classes($Margin-right, margin-right $default-margin-set, $_media);
+  @include classes($Margin-bottom, margin-bottom $default-margin-set, $_media);
+  @include classes($Margin-left, margin-left $default-margin-set, $_media);
+
+  // Padding
+  // -----------------
+  $default-padding-set: (
+    default: (
+      0, 0,
+      $Default, vr($_size-default),
+      $Xxsm, vr($_size-xxsm),
+      $Xsm, vr($_size-xsm),
+      $Sm, vr($_size-sm),
+      $Md, vr($_size-md),
+      $Lg, vr($_size-lg),
+      $Xlg, vr($_size-xlg),
+      $Xxlg, vr($_size-xxlg),
+    )
+  ) !global !default;
+  @include classes($Padding, padding $default-padding-set, $_media);
+  @include classes($Padding-top, padding-top $default-padding-set, $_media);
+  @include classes($Padding-right, padding-right $default-padding-set, $_media);
+  @include classes($Padding-bottom, padding-bottom $default-padding-set, $_media);
+  @include classes($Padding-left, padding-left $default-padding-set, $_media);
+
+  // Opacity
+  // -----------------
+  $default-opacity: opacity (
+    default: (
+      0, 0,
+      1, 1,
+      $Xxsm, 0.1,
+      $Xsm, 0.2,
+      $Sm, 0.3,
+      $Md, 0.5,
+      $Lg, 0.6,
+      $Xlg, 0.7,
+      $Xxlg, 0.9
+    )
+  ) !global !default;
+  @include classes($Opacity, $default-opacity, $_media);
+
+  // Height, Width
+  // ----------------------
+  $default-width-height-set: (
+    default: (
+      0, 0,
+      100, 100%,
+      auto, auto,
+      $Default, vr($_size-default),
+      $Xxsm, vr($_size-xxsm),
+      $Xsm, vr($_size-xsm),
+      $Sm, vr($_size-sm),
+      $Md, vr($_size-md),
+      $Lg, vr($_size-lg),
+      $Xlg, vr($_size-xlg),
+      $Xxlg, vr($_size-xxlg),
+    ),
+    laptop: (prefix,
+      100, 100%,
+      auto, auto,
+    ),
+    tablet: (prefix,
+      100, 100%,
+      auto, auto,
+    ),
+    mobile: (prefix,
+      100, 100%,
+      auto, auto,
+    ),
+  ) !global !default;
+  @include classes($Height, height $default-width-height-set, $_media);
+  @include classes($Width, width $default-width-height-set, $_media);
+
+  // Display
+  // ----------------------
+  $default-display: display (
+    default: (
+      none, none,
+      block, block,
+      inline, inline,
+      inline-block, inline-block,
+      table, table,
+      //table-row, table-row,
+      //table-cell, table-cell,
+      //table-caption, table-caption,
+      //table-header, table-header-group,
+      //table-body, table-row-group,
+      //table-footer, table-footer-group,
+    ),
+    laptop: (prefix,
+      none, none,
+      block, block,
+      inline, inline,
+      inline-block, inline-block,
+    ),
+    tablet: (prefix,
+      none, none,
+      block, block,
+      inline, inline,
+      inline-block, inline-block,
+    ),
+    mobile: (prefix,
+      none, none,
+      block, block,
+      inline, inline,
+      inline-block, inline-block,
+    ),
+    //@todo add portrait, landscape etc
+  ) !global !default;
+  @include classes($Display, $default-display, $_media);
+
+  // Visibility
+  // ----------------------
+  $default-visibility: visibility (
+    default: (
+      visible, visible,
+      hidden, hidden,
+    ),
+    laptop: (prefix,
+      visible, visible,
+      hidden, hidden,
+    ),
+    tablet: (prefix,
+      visible, visible,
+      hidden, hidden,
+    ),
+    mobile: (prefix,
+      visible, visible,
+      hidden, hidden,
+    ),
+    //@todo add portrait, landscape etc
+  ) !global !default;
+  @include classes($Visibility, $default-visibility, $_media);
+
+  // List-style
+  // ----------------------
+  $default-list-style: list-style (
+    default: (
+      none, none,
+      disc, disc,
+      square, square
+    )
+  ) !global !default;
+  @include classes($List-style, $default-list-style, $_media);
+
+  // Line-Height
+  // ---------------------
+  $default-line-height: line-height (
+    default: (
+      $Default, vr($_size-default),
+      $Xxsm, vr($_size-xxsm),
+      $Xsm, vr($_size-xsm),
+      $Sm, vr($_size-sm),
+      $Md, vr($_size-md),
+      $Lg, vr($_size-lg),
+      $Xlg, vr($_size-xlg),
+      $Xxlg, vr($_size-xxlg),
+    ),
+  ) !global !default;
+  @include classes($Line-height, $default-line-height, $_media);
+
+  // Font-Family
+  // ---------------------
+  $font-family: font-family () !global !default;
+  @include classes($Font-family, $font-family, $_media);
+
+  // Font-Size
+  // ---------------------
+  $default-font-size: font-size (
+    default: (
+      $Default, $_font-size-default,
+      $Xxsm, $_font-size-xxsm,
+      $Xsm, $_font-size-xsm,
+      $Sm, $_font-size-sm,
+      $Md, $_font-size-md,
+      $Lg, $_font-size-lg,
+      $Xlg, $_font-size-xlg,
+      $Xxlg, $_font-size-xxlg
+    ),
+  ) !global !default;
+  @include classes($Font-size, $default-font-size, $_media);
+
+  // Font-Weight
+  // ---------------------
+  $default-font-weight: font-weight (
+    default: (
+      normal, normal,
+      bold, bold
+    ),
+  ) !global !default;
+  @include classes($Font-weight, $default-font-weight, $_media);
+
+  // Font-Style
+  // ---------------------
+  $default-font-style: font-style (
+    default: (
+      italic, italic,
+      normal, normal
+    ),
+  ) !global !default;
+  @include classes($Font-style, $default-font-style, $_media);
+
+  // Text-Decoration
+  // ---------------------
+  $default-text-decoration: text-decoration (
+    default: (
+      underline, underline,
+      through, line-through
+    ),
+  ) !global !default;
+  @include classes($Text-decoration, $default-text-decoration, $_media);
+
+  // Text-Transform
+  // ---------------------
+  $default-text-transform: text-transform (
+    default: (
+      upper, uppercase,
+      lower, lowercase,
+      capital, capitalize
+    ),
+  ) !global !default;
+  @include classes($Text-transform, $default-text-transform, $_media);
+
+  // Text-Align
+  // ---------------------
+  $default-text-align: text-align (
+    default: (
+      left, left,
+      right, right,
+      center, center,
+      justify, justify,
+    ),
+  ) !global !default;
+  @include classes($Text-align, $default-text-align, $_media);
+
+  // White-space
+  // ---------------------
+  $default-white-space: white-space (
+    default: (
+      pre, pre,
+      pre-wrap, pre-wrap,
+      pre-line, pre-line,
+      nowrap, nowrap,
+    ),
+  ) !global !default;
+  @include classes($White-space, $default-white-space, $_media);
+
+
+  // Floats
+  // ---------------------
+  $default-float: float (
+    default: (
+      left, left,
+      right, right,
+      none, none,
+    ),
+  ) !global !default;
+  @include classes($Float, $default-float, $_media);
+
+  // Overflow
+  // ---------------------
+  $default-overflow-set: (
+    default: (
+      auto, auto,
+      hidden, hidden,
+    ),
+  ) !global !default;
+  @include classes($Overflow, overflow $default-overflow-set, $_media);
+  @include classes($Overflow-x, overflow-x $default-overflow-set, $_media);
+  @include classes($Overflow-y, overflow-y $default-overflow-set, $_media);
+
+
+  // Cursor
+  // ---------------------
+  $default-cursor: cursor (
+    default: (
+      default, $_cursor-default,
+      pointer, $_cursor-pointer,
+      help, $_cursor-help,
+      not-allowed, $_cursor-not-allowed,
+      //crosshair, $_cursor-crosshair,
+      //move, $_cursor-move,
+      //progress, $_cursor-progress,
+      //wait, $_cursor-wait,
+      //text, $_cursor-text,
+      //n-resize, $_cursor-n-resize,
+      //e-resize, $_cursor-e-resize,
+      //w-resize, $_cursor-w-resize,
+      //s-resize, $_cursor-s-resize,
+      //sw-resize, $_cursor-sw-resize,
+      //ne-resize, $_cursor-sw-resize,
+      //nw-resize, $_cursor-se-resize,
+      //se-resize, $_cursor-se-resize,
+    ),
+  ) !global !default;
+  @include classes($Cursor, $default-cursor, $_media);
+
+  $default-utilities: true !global !default;
+
+  @if $default-utilities {
+    .clearfix {
+      @include clearfix();
+    }
+
+    .text-hidden {
+      font: 0/0 a;
+      color: transparent;
+      text-shadow: none;
+      background-color: transparent;
+      border: 0;
+    }
+
+    .text-clip {
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:clip;
+    }
+
+    .text-ellipsis {
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+  }
+
+}
+
+$defaults: false;

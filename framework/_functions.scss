@@ -82,15 +82,34 @@
   @return $output;
 }
 
-// Exclude one value from list
+// Exclude value by name from list
 // ------------------------------
-@function exclude-value($list, $value:null)
+@function remove-value($list, $value:null, $separator:null)
 {
   $output: () !global;
-  @if $value {
+//  @if $value {
     @each $val-of-first in $list {
       @if $val-of-first != $value {
-        $output: append($output, $val-of-first) !global;
+        $output: append($output, $val-of-first, $separator) !global;
+      }
+    }
+
+    @return $output;
+//  }
+//  @else {
+//    @return $list;
+//  }
+}
+
+// Remove value by index from list
+// ------------------------------
+@function remove($list, $index:null, $separator:null)
+{
+  $output: () !global;
+  @if $index {
+    @each $val-of-first in $list {
+      @if $val-of-first != $index {
+        $output: append($output, $val-of-first, $separator) !global;
       }
     }
 
@@ -99,6 +118,20 @@
   @else {
     @return $list;
   }
+}
+
+// Merge two lists
+// ------------------------------
+@function merge($list1, $list2, $separator:comma) {
+  $out: null;
+  @for $i from 1 through length($list1) {
+    $out: append($out, nth($list1, $i), $separator);
+  }
+  @for $i from 1 through length($list2) {
+    $out: append($out, nth($list2, $i), $separator);
+  }
+
+  @return remove-value($out, null, $separator);
 }
 
 // Computes the difference of lists
@@ -110,7 +143,7 @@
     @each $val-of-first in $list-1 {
       @each $val-of-second in $list-2 {
         @if $val-of-first == $val-of-second {
-          $list-1: exclude-value($list-1, $val-of-first);
+          $list-1: remove-value($list-1, $val-of-first);
         }
       }
     }
@@ -145,9 +178,10 @@
   @return if($value, unquote('#{$value}-'), null);
 }
 // Dash Appender (with validation)
+// ------------------------------
 // Appends dash if value not equal to $exception
-@function _($device:null, $exception:default) {
-  @return if($device==$exception, null, append-dash($device));
+@function _($value:null, $exception:default) {
+  @return if($value!=$exception, append-dash($value), null);
 }
 
 // Dash Prepender
@@ -158,9 +192,10 @@
   @return if($value, unquote("-#{$value}"), null);
 }
 // Dash Prepender (with validation)
+// ------------------------------
 // Prepends dash if value not equal to $exception
-@function __($device:null, $exception:default) {
-  @return if($device==$exception, null, prepend-dash($device));
+@function __($value:null, $exception:default) {
+  @return if($value!=$exception, prepend-dash($value), null);
 }
 
 // Grid Settings Calculator

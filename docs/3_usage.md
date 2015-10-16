@@ -41,7 +41,7 @@ main.scss
 element
 ```
 
-Lets explore line by line a very basic usage which is the basis of ``app-minimal/main.scss``: **(remake!)**
+Lets explore line by line a very basic usage which is the basis of ``app-minimal/main.scss``:
 
 ```SCSS
 // 1. Make short description of your project. This is special comment block that gives strangers
@@ -66,62 +66,126 @@ Lets explore line by line a very basic usage which is the basis of ``app-minimal
 // of default globals you can find in the ``framework/_globals.scss`` file.
 
 // Global Variables
-// ----------------
-$_line-height:         1.7;
-$_font-size:           100%;
+// --------------------------------------------
+// Define global variables prepended by _
+$_font-size:    16px;
+$_line-height:  1.7;
+$_media-unit: rem; //converts media values within $_media into the rem unit
+$_media:
+  (
+    default:    null,
+    mobile:     (media 'screen and (max-width:' 740px ')'),
+    tablet:     (media 'screen and (max-width:' 1024px ')'),
+    laptop:     (media 'screen and (min-width:' 1366px ')'),
+    landscape:  (media '(orientation: landscape)'),
+    portrait:   (media '(orientation: portrait)'),
+    touch:      ('.touch'),
+  );
 //etc
 
 
-// 3. Initiate and normalize all tags. HTML tags within ``_normalize.scss`` are grouped by function
-// as presented at w3schools.com/tags/ref_byfunc.asp page.
+// 3. Activating modules. If we need some ELEMENT's features we must import each module separately
+// to generate its content and make it work.
+// The reasons to import modules separately are:
+// - order of styles are generated in the document's flow
+// - reimporting the same modules but with different settings
 
-// Normalize
-// ---------------
-// just activate module
-$normalize: true;
+// Normalize Module
+// -----------------
+// Normalize initiates and normalize all tags. HTML tags within ``_normalize.scss`` are grouped by
+// function as presented at w3schools.com/tags/ref_byfunc.asp page.
+$normalize: true; //this line isn't necessary, because all modules active by default
+@import 'path/to/element/framework/modules/normalize.scss'; //import module
 
 
-// 4. Define necessary classes and parameters by variables.
-
-// Define Classes
-// ------------------
-// Uncomment/comment necessary variables to make appropriate module work. This is necessary, because
-// they doesn't active by default.
-
-// For example, to activate grid system and change some settings we need to make the following:
+// Grid System Module
+// --------------------
+// Grid system creates layout of all HTML elements.
 $grid: true;
+// If you need to change grid settings make the following:
 $grid-calc-data: (
     columns: 12,
-    calc-method: column-gap,
-    calc-data: (60px, 20px),
-) !default;
-// We set 10 column grid system and 1% gap between columns. Other available options you can find
+    calc-method: gap,
+    calc-data: 1.5%,
+);
+// Here we set 12 column grid system and 1.5% gap between columns. Other available options you can find
 // within appropriate module.
+@import 'path/to/element/framework/modules/grid.scss';
 
-// Inactive modules
-//$utilities: true;
-//$icons: true;
 
-// Now we need to import modules that we have activated and generate content.
-// You can import the whole bunch of modules via "_all.scss" file which is simple shortcut importing all files
-// within 'framework/modules' folder:
-@import 'element/framework/modules/_all.scss';
+// Defaults Module
+// -----------------
+// Generate the basic predefined styles. For more information see the source code
+$defaults: true;
+@import 'path/to/element/framework/modules/defaults.scss';
 
-// Hence, instead of the line above you can import modules separately:
-// @import 'element/framework/modules/_grid.scss';
-// @import 'element/framework/modules/_utilities.scss';
-// etc
 
-// The reasons to import modules separately are:
-// - changing the order of generated styles in the flow
-// - generate the same module, but differently tuned
+// 4. Creating low level classes. Low level abstraction means one class contains only one CSS property.
+// It sounds crazy but it works! This is one of the key ELEMENT's concepts. Due to big amount of low
+// level classes we get unprecedented flexibility and uniqueness in building design.
+
+// Classes
+// ------------------
+// Let's take example how we can create them easily with line by line explanation:
+
+//name of variable should match to real CSS property name
+//it is necessary to improve readability in a future
+$color: color //first value "color" defines CSS property on which classes will be based
+(
+  //classes without media query
+  default: (
+
+    //postfix, value,
+    black, #333,              //-> .color-black {color:#333;}
+    white, #fff,              //-> .color-white {color:#fff;}
+    //(prefix, postfix), value,
+    (no, black), #fff,        //-> .no_color-black {color:white;}
+
+    //('selector before'_'selector after'),
+    ('a '_':hover'),
+    black, #333,              //-> a .color-black:hover {color:#333;}
+    green, green,             //-> a .color-green:hover {color:green;}
+    (a, green--hover), green, //-> a .a_color-green--hover:hover {color:green;}
+
+    //clear selectors
+    (''_''),
+    black, #333,              //-> .color-black {color:#333;}
+  ),
+
+  //classes under media query (see $_media var)
+  //@media screen and (max-width: ...rem) {
+  mobile: (
+    black, #333,              //-> .color-black {color:#333;}
+    //activate auto-prefixing
+    prefix,
+    black, #333,              //-> .mobile-color-black {color:#333;}
+    green, green,             //-> .mobile-color-green {color:green;}
+    //activate auto-postfixing
+    postfix,
+    black, #333,              //-> .color-black-mobile {color:#333;}
+    green, green,             //-> .color-green-mobile {color:green;}
+    //deactivate
+    unfix,
+    black, #333,              //-> .color-black {color:#333;}
+    white, #fff,              //-> .color-white {color:white;}
+  ),
+  //}
+);
+
+//"classes" mixin generates classes in accordance to values and names inside $color variable
+//- first argument sets prefix for CSS classes. All variables defining CSS prefixes begin with a
+//  capital. Full list of predefined prefixes you can find under framework/_naming.scss file
+//- second argument is what we defined above.
+//- third argument is media map which will be used to create CSS classes under media queries;
+@include classes($Color, $color, $_media);
 
 // Styles
-// -------
-// There is your own styles
+// --------------------------------------------
+// create your own styles here
 
 ```
 
 ##Creating Module
 
-If you want to create your own module, go to ``templates/module`` folder.
+If you want to create your own module explore the source files and go to ``templates/module`` folder
+for more information.
