@@ -1,5 +1,8 @@
-// Default Variables
-// --------------------------------------------------
+/* component _type.scss
+   --------------------------------------------------
+ */
+// Add/delete/modify you typography rules here.
+
 $type-font-size-headings: (
   h1: $_font-size-xlg,
   h2: $_font-size-lg,
@@ -9,9 +12,6 @@ $type-font-size-headings: (
   h6: $_font-size-xxsm,
 );
 
-
-// Output Styles
-// --------------------------------------------------
 html {
   font-family: $_font-family;
   font-size: tounit($_font-size, unit($_font-size));

@@ -1,5 +1,7 @@
-// Helpers
-// --------------------------------------------------
+/* component _helper.scss
+   --------------------------------------------------
+ */
+// Collection of helper classes from best practise.
 
 // Text utils
 .text-hidden {
@@ -20,7 +22,7 @@
   text-overflow:ellipsis;
 }
 
-// Prevent callout
+// Prevent callout (auto phone number detection on android)
 .nocallout {
   -webkit-touch-callout: none;
 }
