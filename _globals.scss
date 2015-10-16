@@ -8,19 +8,9 @@ $_right: right !default;
 $_font-size:      1rem !default;
 $_line-height:    1.7 !default;
 
-$_font-size-default:   $_font-size !default;
-$_font-size-xxlg:      $_font-size * 6 !default;
-$_font-size-xlg:       $_font-size * 3.1 !default;
-$_font-size-lg:        $_font-size * 2.5 !default;
-$_font-size-md:        $_font-size * 1.9 !default;
-$_font-size-sm:        $_font-size * 1.3 !default;
-$_font-size-xsm:       $_font-size * 0.8 !default;
-$_font-size-xxsm:      $_font-size * 0.6 !default;
-
-$_font-family-sans:    Helvetica, Arial, sans-serif !default;
-$_font-family-serif:   Georgia, "Times New Roman", Times, serif !default;
-$_font-family-mono:    Monaco, Menlo, Consolas, "Courier New", monospace !default;
-
+$_font-family-sans:   Helvetica, Arial, sans-serif !default;
+$_font-family-serif:  Georgia, "Times New Roman", Times, serif !default;
+$_font-family-mono:   Monaco, Menlo, Consolas, "Courier New", monospace !default;
 $_font-family:        $_font-family-sans !default;
 
 // Sizing

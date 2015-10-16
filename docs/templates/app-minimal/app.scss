@@ -51,19 +51,30 @@ $grid-params: calc-grid(12, gap, 2%);
 // Your Sets
 // --------------------------------------------------
 // the syntax you can see in the documentation (section Usage)
-$color: color (
+$color: color // "color" is valid CSS property
+(
   default: (
-    black, #000,
-    white, #fff,
+    black, #000,              // .clr-black {color:#000;}
+    white, #fff,              // .clr-white {color:#fff;}
+    (no, black), #fff,        // .no_clr-black {color:#fff;}
+    ('a '_':hover'),
+    (a, black--hover), #000,  // a .a_clr-black--hover:hover {color:#000;}
+    (a, white--hover), #fff,  // a .a_clr-white--hover:hover {color:#fff;}
+    (''_''),
+    green, green,             // .clr-black {color:green;}
+    red, red,                 // .clr-black {color:red;}
   ),
-  tablet: (prefix,
-    white, #fff,
-  ),
-  mobile: (prefix,
-    black, #000,
-    white, #fff,
+  mobile: (
+    prefix, // postfix also available
+    black, #000,              // .mobile-clr-black {color:#000;}
+    white, #000,              // .clr-black-mobile {color:#000;}
+    unfix,
+    green, DarkGreen,         // .clr-green {color:DarkGreen ;}
+    red, DarkRed,             // .clr-red {color:DarkRed;}
   ),
 );
+
+// Let's generate $color set by including set() mixin.
 @include set($Color, $color, $_media);
 
 

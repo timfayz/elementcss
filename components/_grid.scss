@@ -4,6 +4,10 @@
 // --------------------------------------------------
 $grid: true !default;
 
+// Grid Partitioning
+$grid-media: $_media !default;
+$grid-media-unit: $_media-unit !default;
+
 // Grid Parameters
 $grid-type: flexbox !default; // flexbox, float
 $grid-row-modes: gutter, columned !default;
@@ -156,7 +160,7 @@ $grid-set: (
     $media-params: map-get($grid-media-params, $media-name);
     $prefix: _($media-name);
 
-    @include media($_media, $media-name, $_media-unit) {
+    @include media($media-name, $grid-media, $grid-media-unit) {
       // Columns & Rows Modes
       // --------------------
       // row and column modes
