@@ -2,7 +2,7 @@
 @import '../functions.scss';
 @import '../naming.scss';
 @import '../mixins.scss';
-@import '../_vr.scss';
+@import '../vr.scss';
 
 // Default Variables
 // --------------------------------------------------
@@ -11,25 +11,18 @@
 
 // Output Styles
 // --------------------------------------------------
-@if $normalize or $normalize==static {
+//@if $normalize or $normalize==static {
 
   // Basic
   // --------------------------------
   * {
-    -moz-box-sizing: border-box;
-    -webkit-box-sizing: border-box;
     box-sizing: border-box;
   }
   *:before, *:after {
-    -moz-box-sizing: border-box;
-    -webkit-box-sizing: border-box;
     box-sizing: border-box;
   }
 
   ::selection {
-    background-color: $_selection-color;
-  }
-  ::-moz-selection {
     background-color: $_selection-color;
   }
 
@@ -561,6 +554,6 @@
     -webkit-appearance: none;
   }
 
-}
-
-$normalize: false;
+//}
+//
+//$normalize: false;
