@@ -120,20 +120,6 @@
   }
 }
 
-// Merge two lists
-// ------------------------------
-@function merge($list1, $list2, $separator:comma) {
-  $out: null;
-  @for $i from 1 through length($list1) {
-    $out: append($out, nth($list1, $i), $separator);
-  }
-  @for $i from 1 through length($list2) {
-    $out: append($out, nth($list2, $i), $separator);
-  }
-
-  @return remove-value($out, null, $separator);
-}
-
 // Computes the difference of lists
 // ------------------------------
 // subtract list-2 from list-1
