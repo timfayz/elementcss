@@ -168,5 +168,5 @@ After playing with `app-minimal` we recommend you to try `app-basic` template. I
 
 ---
 
-####Let's do something better together!
+####Let's do something better!
 Start new issue [here](https://github.com/kalopsia/element/issues/new) if you have found mistake or have any questions, suggestions and problems.

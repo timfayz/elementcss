@@ -3,18 +3,12 @@
 
 To create really convenient and reusable styles we should follow some rules. Since the main idea of ELEMENT is using a big amount of classes we take care about class naming and make it logical, intuitive and "ease of remembering" as much as possible. Thus far all classes that you will generate should obey to some rules. Most of all conventions came from best practice in creating styles.
 
-For simplification and standardization purposes general conventions are already defined in the ELEMENT itself. **Full list of available abbreviations** are presented in the examples below available under ``framework/_naming.scss``. This file can be imported anywhere and used for creating standardized class names.
+For simplification and standardization purposes CSS property prefixes conventions are already defined in the ELEMENT itself. **Full list of available properties' abbreviations** available in ``_naming.scss`` file. This file can be imported anywhere and used for standardized and concise class names.
 
 ##CSS Naming Conventions
 ###General Conventions
 
 **All class names must be lowercase**
-
-Examples:
-```
-| property-name:          | value;          | class name
-  long-property-name:       a value;          .long-name-value
-```
 
 **Common keyword values that apply to all properties abbreviated as four first letters:**
  - `inhe` = `inherit`
@@ -23,8 +17,8 @@ Examples:
 Examples:
 ```
 | property-name:          | value;          | class name
-  box-shadow:               initial;          .shadow-init
-  transition:               inherit;          .shadow-inhe
+  font:                     initial;          .fnt-init
+  animation:                inherit;          .anm-inhe
 ```
 
 **We should avoid using big amount of digits in class names and use size names instead:**
@@ -45,12 +39,12 @@ If the above set is not enough we can use:
 Examples:
 ```
 | property-name:          | value;          | class name
-  width:                    0;                .width-0
-  width:                    0.25rem;          .width-xxsm
-  width:                    0.5rem;           .width-xsm
-  width:                    1rem;             .width-sm
-  margin:                   180px;            .marg-xlg
-  padding:                  180px;            .padd-xlg
+  width:                    0;                .wdt-0
+  width:                    0.25rem;          .wdt-xxsm
+  width:                    0.5rem;           .wdt-xsm
+  width:                    1rem;             .wdt-sm
+  margin:                   180px;            .mrg-xlg
+  padding:                  180px;            .pdd-xlg
 ```
 
 This set of names can be used in many cases:
@@ -81,41 +75,27 @@ This set of names can be used in many cases:
 Examples:
 ```
 | property-name:          | value;          | class name
-  top:                      0;                .top-0
-  right:                    0;                .right-0
-  border-top:               0;                .border-t-0
-  border-top-right-radius:  0;                .radius-tr-0
+  top:                      0;                .t-0
+  right:                    0;                .r-0
+  border-left:              0;                .brd-l-0
+  border-top-right-radius:  0;                .brr-tr-0
 ```
 
-Exceptions:
-  * The properties `top`, `right`, `bottom`, `left` are not abbreviated.
 
-
-**Properties with a string values abbreviate as one word of property (or shortened version) + full name of value:**
+**Properties abbreviate as one ... + full name of value:**
+[todo]
 
 Examples:
 ```
 | property-name:          | value;          | class name
-  word-break:               all-break;        .word-all-break
-  overflow-y:               auto;             .over-y-auto
-  margin-right:             auto;             .marg-r-auto
-  vertical-align:           center;           .vertical-center
-  text-align:               center;           .text-center
+  word-break:               all-break;        .wrb-all-break
+  overflow-y:               auto;             .ovr-y-auto
+  margin-right:             auto;             .mrg-r-auto
+  vertical-align:           center;           .vra-center
 ```
 
-
-**The most popular and frequently used properties with a demonstrative string values have no abbreviation. Instead, we just use full name of these values without property shorthand:**
-
-Examples:
-```
-| property-name:          | value;          | class name
-  display:                  block;            .block
-  position:                 absolute;         .absolute
-  visibility:               visible;          .visible
-```
-
-Exception:
-  * For hypothetical cases where you may need to apply classes with the same values, eg `display: inherit;` and `position: inherit`. Just prefix four first letters of these properties like `.disp-inherit` and `posi-inherit`.
+###CSS Values
+[todo]
 
 
 ###CSS Measurement Values
@@ -170,10 +150,10 @@ Examples:
 Examples:
 ```
 | property-name:          | value;          | class name
-  color:                    currentColor;     .color-kccolor
-  color:                    transparent;      .color-ktrans
-  color:                    red;              .color-kred
-  color:                    CadetBlue;        .color-kcadblu
+  color:                    currentColor;     .c-kccolor
+  color:                    transparent;      .c-ktrans
+  color:                    red;              .c-kred
+  color:                    CadetBlue;        .c-kcadblu
 ```
 
 **Numerical color values abbreviated as one letter(type of color) + name of color's visual sense + name of alpha channel (if presented):**
@@ -185,19 +165,19 @@ Examples:
 Examples:
 ```
 | property-name:          | value;          | class name
-  background-color:         #222;             .back-clr-black
-  background-color:         rgba(0,0,0,0.3);  .back-clr-rblack_s
-  background-color:         hsl(0,0,0,1);     .back-clr-hblack
+  background-color:         #222;             .bck-co-black
+  background-color:         rgba(0,0,0,0.3);  .bck-co-rblack_s
+  background-color:         hsl(0,0,0,1);     .bck-co-hblack
 ```
 
 For alpha channel we use size names (see the beginning of the page). See example:
 ```
 | property-name:          | value;          | class name
-  color:                    rgba(0,0,0,0);    .color-rblack_
-  color:                    rgba(0,0,0,0.3);  .color-rblack_s
-  color:                    rgba(0,0,0,0.5);  .color-rblack_m
-  color:                    rgba(0,0,0,0.8);  .color-rblack_l
-  color:                    hsl(0,0,0,1);     .color-rblack
+  color:                    rgba(0,0,0,0);    .c-rblack_
+  color:                    rgba(0,0,0,0.3);  .c-rblack_s
+  color:                    rgba(0,0,0,0.5);  .c-rblack_m
+  color:                    rgba(0,0,0,0.8);  .c-rblack_l
+  color:                    hsl(0,0,0,1);     .c-rblack
 ```
 
 
@@ -209,7 +189,7 @@ As a rule we abbreviate complex values as one general and demonstrative word. Fo
 ```
 | property-name:          | value;                              | class name
   box-shadow:               0 1px 4px rgba(0, 0, 0, 0.3),
-                            0 0 40px rgba(0, 0, 0, 0.1) inset;    .shadow-effectname
+                            0 0 40px rgba(0, 0, 0, 0.1) inset;    .bxsh-effectname
 ```
 
 ##Variable Naming Conventions
@@ -226,10 +206,7 @@ Let's be less verbose and just see some examples:
   $button-sm:               50px;
   $button-lg:               150px;
 ```
-As you can every variable has it own namespace/prefix. Just make sure that every set of related variables have its own unified namespace/prefix. As a rule we set namespace according to filename of components. For example component `_grid.scss` contains variables start with `$grid-*` etc.
-
-TODO:
-- project structure conventions
+As you can every variable has it own namespace/prefix. Just make sure that every set of related variables have its own unified namespace/prefix. As a rule we set namespace according to filename of components. For example component `_grid.scss` contains variables all start with `$grid-*` etc.
 
 
 ##Why we should follow naming rules and use standardized class prefixes?
