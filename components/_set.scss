@@ -1,4 +1,7 @@
-@import '../_.scss'; // import core files
+/* @imported component _set.scss
+   --------------------------------------------------
+ */
+@import '../_.scss'; // core files
 
 // Default Variables
 // --------------------------------------------------
@@ -18,14 +21,14 @@ $set-z-xlg:       $_z-xlg !default;
 // Sizing (n = n * line-height)
 // -------------------------
 // eg 3 = 3 * line-height
-$set-size-default:    $_size-default !default;
-$set-size-xxsm:       $_size-xxsm !default;
-$set-size-xsm:        $_size-xsm !default;
-$set-size-sm:         $_size-sm !default;
-$set-size-md:         $_size-md !default;
-$set-size-lg:         $_size-lg !default;
-$set-size-xlg:        $_size-xlg !default;
-$set-size-xxlg:       $_size-xxlg !default;
+$set-size-default:  $_size-default !default;
+$set-size-xxsm:     $_size-xxsm !default;
+$set-size-xsm:      $_size-xsm !default;
+$set-size-sm:       $_size-sm !default;
+$set-size-md:       $_size-md !default;
+$set-size-lg:       $_size-lg !default;
+$set-size-xlg:      $_size-xlg !default;
+$set-size-xxlg:     $_size-xxlg !default;
 
 // Typography
 // -------------------------
@@ -158,6 +161,7 @@ $set-font-size-xxsm:      $_font-size * 0.6 !default;
   // ---------------------
   $set-line-height: line-height (
     default: (
+      null, $_line-height,
       $Default, vr($set-size-default),
       $Xxsm, vr($set-size-xxsm),
       $Xsm, vr($set-size-xsm),
