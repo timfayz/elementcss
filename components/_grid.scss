@@ -154,24 +154,17 @@ $grid-set: (
 
   $grid-media-names: nths(map-keys($_media), indexes(map-keys($_media), map-keys($grid-set)));
 
-  // go through each device (@media rule)
+  // Generate Grid
+  // ---------------
+  // go through each @media query
   @for $f from 1 through length($grid-media-names) {
     $media-name:   nth($grid-media-names, $f);
     $media-params: map-get($grid-media-params, $media-name);
     $prefix: _($media-name);
 
     @include media($media-name, $grid-media, $grid-media-unit) {
-      // Columns & Rows Modes
+      // Gutter Mode
       // --------------------
-      // row and column modes
-      // @todo .-float
-      .#{$prefix}row            {flex-direction: row;}
-      .#{$prefix}row-reverse    {flex-direction: row-reverse;}
-      .#{$prefix}column         {flex-direction: column;}
-      .#{$prefix}column-reverse {flex-direction: column-reverse;}
-      .#{$prefix}nowrap         {flex-wrap: nowrap;}
-
-      // gutter mode
       @if index($grid-row-modes, gutter) {
         .-gutter                    { @include grid(row-indent, $media-params); }
         .-gutter > [class*="col-"]  { @include grid(column-indent, $media-params); }

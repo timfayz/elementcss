@@ -23,7 +23,7 @@
   }
   
   html {
-    font-family: $_font-family;
+//    font-family: $_font-family;
     font-size: tounit($_font-size, auto);
     -ms-text-size-adjust: 100%;
     -webkit-text-size-adjust: 100%;
@@ -429,6 +429,11 @@
 
   // Polyfills
   // -------------------------
+  // A hack for HTML5 contenteditable attribute on mobile
+  textarea[contenteditable] {
+    -webkit-appearance: none;
+  }
+
   //Required for Windows 8 Metro split-screen snapping with IE10
   @-ms-viewport{
     width: device-width;
