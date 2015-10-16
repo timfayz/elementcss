@@ -1,0 +1,127 @@
+// Color Palettes
+// --------------------------------------------------
+$palette:
+  #F4427D // pink
+  #B342F4 // violet
+  #42A1F4 // blue
+  #4CCDEA // cyan
+  #A7E551 // green
+  #F4F442 // yellow
+  #F47E42 // orange
+  #F14545 // red
+  #F4B942 // brown
+  // blacks
+  #999
+  #111
+  #fff;
+
+// shade returns adjusted shade of color, add/delete/customize it yourself
+@function shade($color, $shade) {
+  @if $shade == 200 {     @return adjust-color($color, $lightness:+20%, $saturation:-20%)}
+  @elseif $shade == 300 { @return adjust-color($color, $lightness: +14%, $saturation:-14%) }
+  @elseif $shade == 400 { @return adjust-color($color, $lightness: +5%, $saturation:-5%) }
+  // 500 is default
+  @elseif $shade == 600 { @return adjust-color($color, $lightness:-5%, $saturation:+0%)}
+  @elseif $shade == 700 { @return adjust-color($color, $lightness:-10%, $saturation:-3%)}
+  @elseif $shade == 800 { @return adjust-color($color, $lightness:-15%, $saturation:-4%)}
+}
+
+// $colors palette is map where key - color name, value - actual CSS value
+// use 50 100 200 300 ... 900 postfixes to indicate color shades
+$colors: (
+  // pink: rose, ruby
+  pink200: shade(nth($palette, 1), 200),
+  pink300: shade(nth($palette, 1), 300),
+  pink400: shade(nth($palette, 1), 400),
+  pink500: nth($palette, 1),
+  pink600: shade(nth($palette, 1), 600),
+  pink700: shade(nth($palette, 1), 700),
+
+  // violet: indigo, purple
+  violet200: shade(nth($palette, 2), 200),
+  violet300: shade(nth($palette, 2), 300),
+  violet400: shade(nth($palette, 2), 400),
+  violet500: nth($palette, 2),
+  violet600: shade(nth($palette, 2), 600),
+  violet700: shade(nth($palette, 2), 700),
+
+  // blue: azure, denim
+  blue200: shade(nth($palette, 3), 200),
+  blue300: shade(nth($palette, 3), 300),
+  blue400: shade(nth($palette, 3), 400),
+  blue500: nth($palette, 3),
+  blue600: shade(nth($palette, 3), 600),
+  blue700: shade(nth($palette, 3), 700),
+
+  // cyan: aqua, sky blue
+  cyan200: shade(nth($palette, 4), 200),
+  cyan300: shade(nth($palette, 4), 300),
+  cyan400: shade(nth($palette, 4), 400),
+  cyan500: nth($palette, 4),
+  cyan600: shade(nth($palette, 4), 600),
+  cyan700: shade(nth($palette, 4), 700),
+
+  // green: lime, teal
+  green200: shade(nth($palette, 5), 200),
+  green300: shade(nth($palette, 5), 300),
+  green400: shade(nth($palette, 5), 400),
+  green500: nth($palette, 5),
+  green600: shade(nth($palette, 5), 600),
+  green700: shade(nth($palette, 5), 700),
+
+  // yellow: gold, maize
+  yellow200: shade(nth($palette, 6), 200),
+  yellow300: shade(nth($palette, 6), 300),
+  yellow400: shade(nth($palette, 6), 400),
+  yellow500: nth($palette, 6),
+  yellow600: shade(nth($palette, 6), 600),
+  yellow700: shade(nth($palette, 6), 700),
+
+  //orange: amber, rust
+  orange200: shade(nth($palette, 7), 200),
+  orange300: shade(nth($palette, 7), 300),
+  orange400: shade(nth($palette, 7), 400),
+  orange500: nth($palette, 7),
+  orange600: shade(nth($palette, 7), 600),
+  orange700: shade(nth($palette, 7), 700),
+
+  // red: rusty, lava
+  red200: shade(nth($palette, 8), 200),
+  red300: shade(nth($palette, 8), 300),
+  red400: shade(nth($palette, 8), 400),
+  red500: nth($palette, 8),
+  red600: shade(nth($palette, 8), 600),
+  red700: shade(nth($palette, 8), 700),
+
+  // brown: sepia, umber
+  brown200: shade(nth($palette, 9), 200),
+  brown300: shade(nth($palette, 9), 300),
+  brown400: shade(nth($palette, 9), 400),
+  brown500: nth($palette, 9),
+  brown600: shade(nth($palette, 9), 600),
+  brown700: shade(nth($palette, 9), 700),
+
+  // gray: silver, platinum
+  gray200: nth($palette, 10) + #353535,
+  gray300: nth($palette, 10) + #222,
+  gray400: nth($palette, 10) + #111,
+  gray500: nth($palette, 10),
+  gray600: nth($palette, 10) - #111,
+  gray700: nth($palette, 10) - #222,
+
+  // black shades
+  black: rgba(nth($palette, 11), .87),
+  blackDark: rgba(nth($palette, 11), .54),
+  blackLight: rgba(nth($palette, 11), .26),
+  blackLighter: rgba(nth($palette, 11), .12),
+
+  // white shades
+  white: nth($palette, 12),
+  whiteLighter: rgba(nth($palette, 12), .70),
+  whiteLight: rgba(nth($palette, 12), .30),
+  whiteDark: rgba(nth($palette, 12), .12),
+);
+
+// m() useful shortcut for map-get() to get colors from palette
+// for example: m($colors, pink500);
+@function m($map, $key) {@return map-get($map, $key)}
