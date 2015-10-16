@@ -89,12 +89,13 @@ $Box-shadow:                    bxsh !default; //*
 $Box-sizing:                    bxsz !default; //*
 $Clear:                         clr !default;
 $Float:                         flt !default;
-$Clip:                          clp !default;
 $Vertical-align:                vra !default;
 $Opacity:                       opc !default;
 $Display:                       dsp !default;
 $Visibility:                    vsb !default;
 $Z-index:                       zi !default;
+$Clip:                          clp !default; // deprecated
+$Clip-path:                     clp !default;
 // Positioning
 $Position:                      pst !default;
 $Top:                           t !default; //a
@@ -107,13 +108,13 @@ $Overflow-x:                    #{$Overflow}-x !default;
 $Overflow-y:                    #{$Overflow}-y !default;
 $Overflow-style:                #{$Overflow}-s !default;
 // Margin
-$Margin:                        m !default; //a
+$Margin:                        mrg !default;
 $Margin-top:                    #{$Margin}#{$T} !default;
 $Margin-right:                  #{$Margin}#{$R} !default;
 $Margin-bottom:                 #{$Margin}#{$B} !default;
 $Margin-left:                   #{$Margin}#{$L} !default;
 // Padding
-$Padding:                       p !default; //a
+$Padding:                       pdd !default;
 $Padding-top:                   #{$Padding}#{$T} !default;
 $Padding-right:                 #{$Padding}#{$R} !default;
 $Padding-bottom:                #{$Padding}#{$B} !default;
@@ -179,7 +180,7 @@ $Font:                          fnt !default;
 $Font-weight:                   #{$Font}-we !default;
 $Font-style:                    #{$Font}-st !default;
 $Font-variant:                  #{$Font}-va !default;
-$Font-size:                     #{$Font}-sz !default;
+$Font-size:                     #{$Font}-sz !default; //*
 $Font-size-adjust:              #{$Font}-sa !default;
 $Font-family:                   #{$Font}-fa !default;
 $Font-effect:                   #{$Font}-ef !default;
