@@ -9,10 +9,10 @@
 
   // Grid Parameters
   // -------------------
-  $grid-type: flexbox !default; // flexbox, floats
+  $grid-type: flexbox !default; // flexbox, float
   $grid-row-modes: gutter, columned !default;
 
-  $grid-params: calc-grid(12, column-gap, (60px, 20px)) !default;
+  $grid-params: calc-grid(12, gap, 1.5%) !default;
   $grid-media-params: (
     default: $grid-params,
     laptop: $grid-params,
@@ -51,19 +51,17 @@
 
     // Row Types
     // --------------------
-    @if $element==_row-floats and index($type, flexbox) {
+    @if $element==_row-float and index($type, flexbox) {
       display: block;
-      position: relative;
-      box-sizing: border-box;
       padding: 0;
+      box-sizing: border-box;
       @include clearfix();
     }
     @else if $element==_row-flexbox and index($type, flexbox) {
-      flex-wrap: if($_left == left, wrap, wrap-reverse);
       display: flex;
-      position: relative;
-      box-sizing: border-box;
       padding: 0;
+      box-sizing: border-box;
+      flex-wrap: if($_left == left, wrap, wrap-reverse);
     }
     @else if $element==row-indent {
       margin-#{$_left}: -$gap-width * 2;
@@ -71,26 +69,25 @@
 
     // Column Types
     // --------------------
-    @else if $element==_column-floats and index($type, floats) {
+    @else if $element==_column-float and index($type, float) {
       float: $_left;
       display: block;
       box-sizing: border-box;
-      position: relative; // need for push, pull
       min-height:1px; // no folding on empty column
     }
     @else if $element==_column-flexbox and index($type, flexbox) {
       display: flex;
       box-sizing: border-box;
-      position: relative; // need for push, pull
+      flex-direction: column; // full width of elements inside
       flex:0 1 auto; // no folding on empty column
       min-height:1px; // no folding on empty column
     }
-    @else if $element==column-width-floats and index($type, floats) {
+    @else if $element==column-width-float and index($type, float) {
       width: if($i==0, auto, $column-width * $i);
     }
     @else if $element==column-width-flexbox and index($type, flexbox) {
       flex-basis: if($i==0, auto, $column-width * $i);
-      max-width: none;
+      max-width: if($i==0, none, $column-width * $i);
     }
     @else if $element==column-indent {
       padding-#{$_left}: $gap-width * 2;
@@ -134,84 +131,113 @@
 
   // Initialise Grid
   // ---------------
-  // floats row
-  .row                        { @include grid(_row-floats); }
-  .row > [class*="col-"]      { @include grid(_column-floats); }
+  // float row
+  .-float                               { @include grid(_row-float); } //.-float.row
+  .-float.row-reverse > [class*="col-"] { float: right;}
+  .-float.column > [class*="col-"]      { clear: both;}
+  .-float > [class*="col-"]             { @include grid(_column-float); }
 
   // flexbox row
-  .row-flex                   { @include grid(_row-flexbox); }
-  .row-flex > [class*="col-"] { @include grid(_column-flexbox); }
+  .-flex          { @include grid(_row-flexbox); }
+  [class*="col-"] { @include grid(_column-flexbox); }
 
-  // row columned - automatically breaks child elements on columns
+  // columned mode - automatically breaks child elements on columns
   @if index($grid-row-modes, columned) {
-    .-columned                  { list-style:none; }
-    .row.-columned > *          { @include grid(_column-floats); }
-    .row-flex.-columned > *     { @include grid(_column-flexbox); }
+    .-columned            { list-style:none; }
+    .-float.-columned > * { @include grid(_column-float); }
+    .-flex.-columned > *  { @include grid(_column-flexbox); }
+  }
+  
+  // gutter mode - defines gutters between columns
+  @if index($grid-row-modes, gutter) {
+    .-gutter { position: relative; }
   }
 
-  $grid-devices: nths(map-keys($_media), indexes(map-keys($_media), map-keys($grid-set)));
+  $grid-media-list: nths(map-keys($_media), indexes(map-keys($_media), map-keys($grid-set)));
 
   // go through each device (@media rule)
-  @for $f from 1 through length($grid-devices) {
-    $name:   nth($grid-devices, $f);
-    $params: map-get($grid-media-params, $name);
-    $prefix: _($name);
+  @for $f from 1 through length($grid-media-list) {
+    $media-name:   nth($grid-media-list, $f);
+    $params: map-get($grid-media-params, $media-name);
+    $prefix: _($media-name);
 
-    @include media($_media, $name) {
+    @include media($_media, $media-name) {
       // Columns & Rows Modes
       // --------------------
-      // row gutter - defines gutters between columns
+      // row and column modes
+      // @todo .-float
+      .#{$prefix}row            {flex-direction: row;}
+      .#{$prefix}row-reverse    {flex-direction: row-reverse;}
+      .#{$prefix}column         {flex-direction: column;}
+      .#{$prefix}column-reverse {flex-direction: column-reverse;}
+      .#{$prefix}nowrap         {flex-wrap: nowrap;}
+
+      // gutter mode
       @if index($grid-row-modes, gutter) {
         .-gutter                    { @include grid(row-indent, $params); }
         .-gutter > [class*="col-"]  { @include grid(column-indent, $params); }
         @if index($grid-row-modes, columned) {
-          .-gutter.-columned > *      { @include grid(column-indent, $params); }
+          .-gutter.-columned > * { @include grid(column-indent, $params); }
         }
       }
 
-      // columns width
-      @if index(map-get($grid-set, $name), columns) {
+      @if index(map-get($grid-set, $media-name), columns) {
+        // Column Width
+        // ------------
         @for $i from 0 through nth($params, 1) {
           $idx: if($i == 0, 'auto', $i);
-          .row > .#{$prefix}col-#{$idx}          { @include grid(column-width-floats, $params, $i); }
-          .row-flex > .#{$prefix}col-#{$idx}     { @include grid(column-width-flexbox, $params, $i); }
+          .-float > .#{$prefix}col-#{$idx}  { @include grid(column-width-float, $params, $i); }
+          .#{$prefix}col-#{$idx}   { @include grid(column-width-flexbox, $params, $i); }
           @if index($grid-row-modes, columned) {
-            .row.-columned.#{$prefix}cols-#{$idx} > *      { @include grid(column-width-floats, $params, $i); }
-            .row-flex.-columned.#{$prefix}cols-#{$idx} > * { @include grid(column-width-flexbox, $params, $i); }
+            .-float.-columned.#{$prefix}cols-#{$idx} > *  { @include grid(column-width-float, $params, $i); }
+            .-flex.-columned.#{$prefix}cols-#{$idx} > *   { @include grid(column-width-flexbox, $params, $i); }
           }
         }
 
-        // column centering for both floats and flexbox
-        .#{$prefix}centred   { @include grid(column-centred); }
-        .#{$prefix}uncentred { @include grid(column-uncentred); }
-        // floats type additions
-        @if index($grid-type, floats) {
-          .row > .#{$prefix}centred   { float:none; }
-          .row > .#{$prefix}uncentred { float:$_left; }
+        // Column Centering
+        // ----------------
+        // column centering for both float and flexbox
+        .#{$prefix}main-center    { @include grid(column-centred); }
+        .#{$prefix}main-uncenter  { @include grid(column-uncentred); }
+        .#{$prefix}center         {
+          @include grid(column-centred);
+          align-self: center;
+        }
+        .#{$prefix}uncenter         {
+          @include grid(column-uncentred);
+          align-self: auto;
+        }
+        
+        // float type additions
+        @if index($grid-type, float) {
+          .-float > .#{$prefix}main-center   { float:none; }
+          .-float > .#{$prefix}main-uncenter { float:$_left; }
         }
       }
 
-      // Column Offsets
-      // --------------
-      @if index(map-get($grid-set, $name), offsets) {
+      // Offsets
+      // ----------
+      @if index(map-get($grid-set, $media-name), offsets) {
         @for $i from 1 through nth($params, 1) {
           .#{$prefix}offset-#{$i} { @include grid(column-offset, $params, $i); }
         }
         .#{$prefix}unoffset { @include grid(column-unoffset); }
       }
 
-      // Column Push
-      // ------------
-      @if index(map-get($grid-set, $name), pushes) {
+      // Push
+      // --------
+      @if index(map-get($grid-set, $media-name), pushes) {
+        [class*="push-"] { position: relative; }
         @for $i from 1 through nth($params, 1) {
           .#{$prefix}push-#{$i} { @include grid(column-push, $params, $i); }
         }
         .#{$prefix}unpush { @include grid(column-unpush); }
       }
 
-      // Column Pull
-      // -----------
-      @if index(map-get($grid-set, $name), pulls) {
+      // Pull
+      // -------
+      @if index(map-get($grid-set, $media-name), pulls) {
+        [class*="pull-"] { position: relative; }
         @for $i from 1 through nth($params, 1) {
           .#{$prefix}pull-#{$i} { @include grid(column-pull, $params, $i); }
         }

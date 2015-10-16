@@ -20,8 +20,8 @@
 // -----------
 $color: color (
   default: (
-    black, $color-black,
-    white, $color-white,
+    black, $hex-black,
+    white, $hex-white,
   ),
 );
 @include set($Color, $color, $_media);
