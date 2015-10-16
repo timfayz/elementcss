@@ -1,24 +1,10 @@
-//@todo: $var: break-list(..); unify place where to define and var names.
-//@todo: _app-basic-tempate.scss, _app-advanced-tempate.scss
-//@todo: _lists.scss, _animation.scss, _table.scss
 //@check: each file comliance with module template
-//@check: redefining vars across files!
+//@check: redefining vars across files (!global)
+//@check: !default flags
 
-@import '_normalize.scss';
-@import '_grid.scss';
-@import '_dimension.scss';
-@import '_positioning.scss';
-@import '_indention.scss';
-@import '_displaying.scss';
-@import '_background.scss';
-@import '_opacity.scss';
-@import '_visibility.scss';
-@import '_utilities.scss';
-@import '_border.scss';
-@import '_lists.scss';
-@import '_text.scss';
-@import '_icons.scss';
-@import '_shadow.scss';
-@import '_transition.scss';
-@import '_filter.scss';
-@import '_content.scss';
+@import 'normalize.scss';
+@import 'typography.scss';
+@import 'grid.scss';
+@import 'icons.scss';
+@import 'properties.scss';
+@import 'utilities.scss';

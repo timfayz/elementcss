@@ -1,13 +1,17 @@
-// Global Selectors
-// --------------------------------------------------
-// use this file to reference while making themes
-// @think: share styles by keeping class names via variables
-// @think: $elements-selector: class; //class, tag, both
-
 // KEYWORDS
 // -------------------------------------
-$disabled:    'disabled';
-$readonly:    'readonly';
+
+$Default:     def !default;
+$Xxlg:        xxlg !default;
+$Xlg:         xlg !default;
+$Lg:          lg !default;
+$Md:          md !default;
+$Sm:          sm !default;
+$Xsm:         xsm !default;
+$Xxsm:        xxsm !default;
+
+$disabled:    disabled !default;
+$readonly:    readonly !default;
 
 
 // TAG NAMING
@@ -175,9 +179,8 @@ $button-disabled:   '#{$button}.-#{$disabled}';
 
 // Programming
 // -------------------
-$embed:       'embed';
-$object:      'object';
-
+$embed:             'embed';
+$object:            'object';
 
 
 // CLASS NAMING
@@ -193,7 +196,6 @@ $TL:                  'tl-' !default; //top-left
 $TR:                  'tr-' !default; //top-right
 $BR:                  'br-' !default; //bottom-right
 $BL:                  'bl-' !default; //bottom-left
-
 
 // Properties shortcuts
 // -------------------
@@ -272,7 +274,7 @@ $Opacity:             'opacity-' !default;
 
 // Miliscenios
 $Overflow:            'overflow-' !default;
+$Overflow-x:          'overflow-x-' !default;
+$Overflow-y:          'overflow-y-' !default;
 $Float:               'float-' !default;
 $Cursor:              'cursor-' !default;
-
-
