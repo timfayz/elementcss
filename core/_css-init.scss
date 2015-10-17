@@ -1,0 +1,7 @@
+// _css-init.scss simply contain init.css source code under init() mixin.
+// See https://github.com/timfayz/init.css
+
+@mixin init() {
+
+  @content;
+}
