@@ -1,0 +1,87 @@
+// _list-map.scss provides functions for working with SASS lists and maps.
+
+// indexes
+// index getter Return new list with indexes of $list-1 values that exists in $list-2
+//    indexes(a b c d, c g f a) -> 3 null null 1
+//    indexes(1 2 3 4, 2 1 4 3) -> 2 1 4 null
+@function indexes($list-1, $list-2) {
+  $result: ();
+  @each $value-of-2 in $list-2 {
+    $result: append($result, index($list-1, $value-of-2));
+  }
+  @return $result;
+}
+
+// nths
+// nth getter Return new list with items from $list by indexes
+//    nths(a b c d, 3 1)        -> c a
+//    nths(alisa bob mark, 1 2) -> alisa bob
+@function nths($list, $indexes) {
+  $result: ();
+  @each $index in $indexes {
+    @if $index {
+      $result: append($result, nth($list, $index));
+    }
+  }
+  @return $result;
+}
+
+// value-remove
+// remove item list by value name
+//    value-remove(a b c d, c)        -> a b d
+//    value-remove(a b c d, a, comma) -> b, c, d
+//    value-remove(1 3 4 7, 2, comma) -> 1, 3, 4, 7
+@function value-remove($list, $value:null, $separator:auto) {
+  $result: ();
+  @each $val-of-first in $list {
+    @if $val-of-first != $value {
+      $result: append($result, $val-of-first, $separator);
+    }
+  }
+  @return $result;
+}
+
+// nth-remove
+// remove item list by index
+//    nth-remove(1 2 3 4, 1, comma) -> 2, 3, 4
+//    nth-remove(a b c d, 2)        -> a c d
+@function nth-remove($list, $index:null, $separator:auto) {
+  $result: ();
+  @if type-of($index) == number {
+    @for $i from 1 through length($list) {
+      @if $i != $index {
+        $result: append($result, nth($list, $i), $separator);
+      }
+    }
+    @return $result;
+  } @else {
+    @return $list;
+  }
+}
+
+// map-append-val
+// appends $value by $key to the $map. If $key exists appends to existing
+// values, if doesn't return map with new $key and $value.
+//    map-append-val((a:1, b:2, c:3), b, 4 5 6, comma)  -> (a: 1, b: (2, 4 5 6), c: 3)
+//    map-append-val((a:1, b:2, c:3), c, 10)            -> (a: 1, b: 2, c: 3 10)
+//    map-append-val((a:1, b:2), c, 10)                 -> (a: 1, b: 2, c: 10)
+@function map-append-val($map, $key, $value, $separator:auto) {
+  $values: map-get($map, $key);
+  $result: (
+    //$key: if($values!=null, append($values, $value, $separator), $value),
+    $key: append($values, $value, $separator),
+  );
+  @return map-merge($map, $result);
+}
+
+// map-union
+// merge $map2 into $map1. If there are the same keys values from $map2
+// appending to existing values of $map1. If aren't new keys created.
+//    map-union((a:1, b:2, c:3), (a:10, b:5, f:35)) -> (a: 1 10, b: 2 5, c: 3, f: null 35)
+//    map-union((c:1 2, b:3 4), (a:foo, b:5, f:9))  -> (c: 1 2, b: 3 4 5, a: foo, f: null 9)
+@function map-union($map1, $map2) {
+  @each $key, $val in $map2 {
+    $map1: map-append-val($map1, $key, $val);
+  }
+  @return $map1;
+}

@@ -1,0 +1,16 @@
+// _global.scss defines global variables used throughout the project.
+// Vars start with _ is elementcss default vars.
+
+// Text direction (rtl/ltr)
+$_left: left;
+$_right: right;
+
+// Responsive partitioning
+$media: em (
+  mobile:     '@media screen and (max-width: 740px)',
+  tablet:     '@media screen and (max-width: 1024px)',
+  laptop:     '@media screen and (min-width: 1366px)',
+  touch:      '.touch',
+  //landscape:  media '(orientation: landscape)',
+  //portrait:   media '(orientation: portrait)',
+);

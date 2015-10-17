@@ -1,0 +1,116 @@
+// _unit.scss is functions implementing CSS Unit manipulations.
+
+// ununit
+// unit Remover
+// @return $value just without unit: ununit(1rem) = 1
+//    ununit(100px)   -> 100
+//    ununit(20%)     -> 20
+//    ununit(360deg)  -> 360
+@function ununit($value) {
+  @if unitless($value)              { @return $value; }
+  @else if unit($value) == '%'      { @return $value / 1%; }
+  @else if unit($value) == 'px'     { @return $value / 1px; }
+  @else if unit($value) == 'pt'     { @return $value / 1pt; }
+  @else if unit($value) == 'em'     { @return $value / 1em; }
+  @else if unit($value) == 'rem'    { @return $value / 1rem; }
+  @else if unit($value) == 'deg'    { @return $value / 1deg; }
+  @else if unit($value) == 'vh'     { @return $value / 1vh; }
+  @else if unit($value) == 'vw'     { @return $value / 1vw; }
+  @else if unit($value) == 'vmax'   { @return $value / 1vmax; }
+  @else if unit($value) == 'vmin'   { @return $value / 1vmin; }
+}
+
+// append-unit
+// unit Appender
+// @return $value with new unit: append-unit(100px, rem) = 100rem
+//    append-unit(100, px)  -> 100px
+//    append-unit(30, '%')  -> 30%
+//    append-unit(10, em)   -> 10em
+@function append-unit($value, $unit) {
+  @if $unit == '%'                  { @return ununit($value)+0%; }
+  @else if $unit == 'px'            { @return ununit($value)+0px; }
+  @else if $unit == 'pt'            { @return ununit($value)+0pt; }
+  @else if $unit == 'em'            { @return ununit($value)+0em; }
+  @else if $unit == 'rem'           { @return ununit($value)+0rem; }
+  @else if $unit == 'deg'           { @return ununit($value)+0deg; }
+  @else if $unit == 'vh'            { @return ununit($value)+0vh; }
+  @else if $unit == 'vw'            { @return ununit($value)+0vw; }
+  @else if $unit == 'vmin'          { @return ununit($value)+0vmin; }
+  @else if $unit == 'vmax'          { @return ununit($value)+0vmax; }
+}
+
+// _convert-unit
+// unit converter (without rounding).
+// $value - any CSS unit or unitless value: 100px, 1.4rem, 1.6, 7pt etc
+// $unit - any valid CSS unit: rem, '%', '' (unitless), px, em, detect (auto detection) etc
+//    convert-unit(16px, '%')                  -> 100%
+//    convert-unit(2em, px)                    -> 32px
+//    convert-unit(16px, '%', 8)               -> 200%
+//    convert-unit(1.423rem, px)               -> 22.768px
+//    convert-unit(14pt, px, $ppi-ratio:72/96) -> 19px
+$unit-pixel-size: 16 !default;
+$unit-ppi-ratio:  72/96 !default;
+@function convert-unit($value, $unit: detect, $pixel-size: $unit-pixel-size, $ppi-ratio: $unit-ppi-ratio) {
+  @if $unit == detect {
+    $unit: unit($value)
+  }
+  // px
+  @if unit($value) == 'px' {
+    @if $unit == 'px'             { @return $value; }
+    @else if $unit == '%'         { @return append-unit($value * 100 / $pixel-size, '%'); }
+    @else if $unit == 'pt'        { @return append-unit($value * $ppi-ratio, pt); }
+    @else if $unit == 'em'        { @return append-unit($value / $pixel-size, em); }
+    @else if $unit == 'rem'       { @return append-unit($value / $pixel-size, rem); }
+    @else if $unit == ''          { @return append-unit($value / $pixel-size); }
+  }
+  // percent
+  @else if unit($value) == '%' {
+    $value: ($value * $pixel-size/100) / ($pixel-size/100);
+    @if $unit == '%'              { @return $value; }
+    @else if $unit == 'px'        { @return append-unit($value * $pixel-size/100, px); }
+    @else if $unit == 'pt'        { @return append-unit($value * $pixel-size/100 * $ppi-ratio, pt); }
+    @else if $unit == 'em'        { @return append-unit($value / 100, em); }
+    @else if $unit == 'rem'       { @return append-unit($value / 100, rem); }
+    @else if $unit == ''          { @return append-unit($value / 100); }
+  }
+  // em, rem, unitless
+  @else if unit($value) == 'em' or unit($value) == 'rem' or unitless($value) {
+    @if $unit == '%'              { @return append-unit(ununit($value) * 100, '%'); }
+    @else if $unit == 'px'        { @return append-unit($value * $pixel-size, px); } //round?
+    @else if $unit == 'pt'        { @return append-unit(ununit($value) * $pixel-size * $ppi-ratio, pt); }
+    @else if $unit == 'em'        { @return append-unit($value, em); }
+    @else if $unit == 'rem'       { @return append-unit($value, rem); }
+    @else if $unit == ''          { @return append-unit($value); }
+  }
+  // pt
+  @else if unit($value) == 'pt' {
+    @if $unit == '%'              { @return append-unit(ununit($value) / $ppi-ratio * 100/ununit($pixel-size), '%'); }
+    @else if $unit == 'px'        { @return append-unit($value / $ppi-ratio, px); }
+    @else if $unit == 'pt'        { @return $value; }
+    @else if $unit == 'em'        { @return append-unit(ununit($value) / $ppi-ratio / $pixel-size, em); }
+    @else if $unit == 'rem'       { @return append-unit(ununit($value) / $ppi-ratio / $pixel-size, rem); }
+    @else if $unit == ''          { @return append-unit(ununit($value) / $ppi-ratio / $pixel-size); }
+  }
+  // if unit is not detected just return
+  @else {
+    @return $value;
+  }
+}
+
+// convert-unit
+// unit converter (with rounding)
+// converts input $value to given $unit so that returned value
+// become integer pixel at the end of browser rendering.
+// $unit:auto converts any input value to the same unit.
+//    round-unit(1.423rem, px)    -> 23px
+//    round-unit(16.672px, px)    -> 17px
+//    round-unit(23.45%, px)      -> 4px
+//    round-unit(23.45%, em)      -> 0.25em
+//    round-unit(1.423rem, rem)   -> 1.4375rem (1.4375 * 16 = 23px)
+//    round-unit(1.423rem, detect)  -> 1.4375rem
+@function round-unit($value, $unit:detect, $pixel-size:$unit-pixel-size) {
+  @if $unit == detect {
+    $unit: unit($value);
+  }
+  @return convert-unit(round(convert-unit($value, px)), $unit, $pixel-size);
+}

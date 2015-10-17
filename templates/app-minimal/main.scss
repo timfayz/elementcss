@@ -1,0 +1,18 @@
+/*!
+ * Name: App Name
+ * Version: 1.0
+ * Authors: Your Name
+ * Author URL: example.com
+ */
+
+@import 'path-to/elementcss/core.scss';
+
+// generate set
+@include set($Color, color (
+  blue, #5948FF,
+  green, #509D2C,
+));
+
+// result
+// .c-blue  {color:#5948FF;}
+// .c-green {color:#509D2C;}

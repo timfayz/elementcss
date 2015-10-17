@@ -1,69 +1,25 @@
-// Text Direction (rtl/ltr)
-// -------------------------
+// _global.scss defines global variables used by built-in components (components/*.scss).
+// Feel free to use them in a particular context of your own styles. Note that all global
+// vars start with _ to avoid name collisions and provide handy auto-completion in IDEs.
+
+// Define Global Variables
+// --------------------------------------------------
+// Text direction (rtl/ltr)
 $_left: left !default;
 $_right: right !default;
 
-// Typography
-// -------------------------
-$_font-size:      1rem !default;
-$_line-height:    1.7 !default;
-
-$_font-family-sans:   Helvetica, Arial, sans-serif !default;
-$_font-family-serif:  Georgia, "Times New Roman", Times, serif !default;
-$_font-family-mono:   Monaco, Menlo, Consolas, "Courier New", monospace !default;
-$_font-family:        $_font-family-sans !default;
-
-// Sizing
-// -------------------------
-$_size-default:  1 !default;
-$_size-xxlg:     7 !default;
-$_size-xlg:      5 !default;
-$_size-lg:       4 !default;
-$_size-md:       3 !default;
-$_size-sm:       2 !default;
-$_size-xsm:      0.5 !default;
-$_size-xxsm:     0.25 !default;
-
-// Responsive Partitioning
-// -------------------------
+// Responsive partitioning
 $_media-unit: rem !default;
 $_media: (
-    default:    null,
-    mobile:     media 'screen and (max-width:' 740px ')',
-    tablet:     media 'screen and (max-width:' 1024px ')',
-    laptop:     media 'screen and (min-width:' 1366px ')',
-    touch:      '.touch',
-    //landscape:  media '(orientation: landscape)',
-    //portrait:   media '(orientation: portrait)',
-  ) !default;
-
-// Z-index Levels
-// -------------------------
-$_z-default:  5 !default;
-$_z-xlg:      40 !default;
-$_z-lg:       30 !default;
-$_z-md:       20 !default;
-$_z-sm:       10 !default;
-$_z-xsm:      -5 !default;
+  default:    null,
+  mobile:     media 'screen and (max-width:' 740px ')',
+  tablet:     media 'screen and (max-width:' 1024px ')',
+  laptop:     media 'screen and (min-width:' 1366px ')',
+  touch:      '.touch',
+  //landscape:  media '(orientation: landscape)',
+  //portrait:   media '(orientation: portrait)',
+) !default;
 
 // Cursors
-// -------------------------
-$_cursor-selection-color: null !default;
-
-//basic
 $_cursor-default:       default !default;
 $_cursor-pointer:       pointer !default;
-$_cursor-not-allowed:   not-allowed !default;
-$_cursor-crosshair:     crosshair !default;
-$_cursor-help:          help !default;
-$_cursor-move:          move !default;
-$_cursor-progress:      progress !default;
-$_cursor-text:          text !default;
-$_cursor-wait:          wait !default;
-//news
-$_cursor-n-resize:    n-resize !default;
-$_cursor-s-resize:    s-resize !default;
-$_cursor-e-resize:    e-resize !default;
-$_cursor-w-resize:    w-resize !default;
-$_cursor-sw-resize:   sw-resize !default;
-$_cursor-se-resize:   se-resize !default;

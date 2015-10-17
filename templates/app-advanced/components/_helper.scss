@@ -1,7 +1,5 @@
-/* @component _helper.scss
-   --------------------------------------------------
- */
-// Collection of helper classes from best practise.
+// _helper.scss is a collection of helper classes from best practise.
+// Customize it yourself.
 
 // Text utils
 .text-hidden {
@@ -10,16 +8,6 @@
   text-shadow: none;
   background-color: transparent;
   border: 0;
-}
-.text-clip {
-  white-space:nowrap;
-  overflow:hidden;
-  text-overflow:clip;
-}
-.text-ellipsis {
-  white-space:nowrap;
-  overflow:hidden;
-  text-overflow:ellipsis;
 }
 
 // Prevent callout (auto phone number detection on android)
@@ -91,12 +79,3 @@
   display: table;
   clear: both;
 }
-// (deprecated)
-// .clearfix::before,
-// .clearfix::after {
-//   content: "";
-//   display: table;
-// }
-// .clearfix::after {
-//   clear: both;
-// }

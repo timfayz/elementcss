@@ -1,0 +1,34 @@
+// _set-styling.scss adds visual styles. Do not forget to use colors from _palette.scss.
+// Customize it yourself.
+
+$s: (); // temp sets storage
+
+// Define Sets
+// --------------------------------------------------
+// Color
+$s: add($s, $Color, color (
+  green, green,
+));
+
+// Border
+$border-set: (
+  0, 0,
+  solid, 1px solid,
+);
+$s: add($s, $Border, border $border-set);
+$s: add($s, $Border-top, border-top $border-set);
+$s: add($s, $Border-right, border-right $border-set);
+$s: add($s, $Border-bottom, border-bottom $border-set);
+$s: add($s, $Border-left, border-left $border-set);
+
+// etc...
+
+// Render Styles
+// --------------------------------------------------
+// cursor selection color
+::selection {
+  background-color: gray;
+}
+
+// render all stored sets
+@include sets($s, $media);

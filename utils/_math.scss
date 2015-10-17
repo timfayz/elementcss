@@ -1,0 +1,89 @@
+// _math.scss description
+
+// gcd
+// stands for Greatest Common Divisor.
+//    gcd(8, 12)  -> 4
+//    gcd(15, 5)  -> 5
+//    gcd(81, 27) -> 27
+//    gcd(32, 65) -> 1
+// http://rosettacode.org/wiki/Greatest_common_divisor#JavaScript
+@function gcd($a, $b) {
+  @if ($b != 0) {
+    @return gcd($b, $a % $b);
+  } @else {
+    @return abs($a);
+  }
+}
+
+// pow
+// returns the base to the exponent power, that is, raises a number to the power.
+//    pow(2, 2) -> 4
+//    pow(2, 3) -> 8
+//    pow(2, 4) -> 16
+//    pow(3, 2) -> 9
+@function pow($base, $exponent, $prec: 12) {
+  // Handles decimal exponents by trying to convert them into a fraction
+  @if (floor($exponent) != $exponent) {
+    $prec2 : pow(10, $prec);
+    $exponent: round($exponent * $prec2);
+    $denominator: gcd($exponent, $prec2);
+    @return root(pow($base, $exponent / $denominator), $prec2 / $denominator, $prec);
+  }
+
+  $value: $base;
+  @if $exponent > 1 {
+    @for $i from 2 through $exponent {
+      $value: $value * $base;
+    }
+  } @else if $exponent < 1 {
+    @for $i from 0 through -$exponent {
+      $value: $value / $base;
+    }
+  }
+
+  @return $value;
+}
+
+// root
+// takes root of a number.
+//    root(8, 3)  -> 2
+//    root(9)     -> 3
+// http://rosettacode.org/wiki/Nth_root#JavaScript
+@function root($num, $n: 2, $prec: 12) {
+  $x: 1;
+  @for $i from 0 through $prec {
+    $x: 1 / $n * (($n - 1) * $x + ($num / pow($x, $n - 1)));
+  }
+  @return $x;
+}
+
+// limit
+// limits $value within the $min, $max range.
+//    limit(300, 0, 255)  -> 255
+//    limit(-300, 0, 255) -> 0
+@function limit($value, $min, $max) {
+  @if $value < $min { @return $min; }
+  @if $value > $max { @return $max; }
+  @return $value;
+}
+
+// scale
+// fluidly scales $value within the $min, $max range.
+//    scale(10, +100, 0, 100) -> 100
+//    scale(10, +20, 0, 100)  -> 28
+//    scale(10, -20, 0, 100)  -> 8
+//    scale(10, -100, 0, 100) -> 0
+@function scale($value, $amount, $min:0, $max:100) {
+  @if $amount > 0 {
+    $value: $value + ($max - $value) * ($amount / 100.0);
+    @if $value > $max {
+      $value: $max;
+    }
+  } @else if $amount < 0 {
+    $value: $value + ($value * $amount / 100.0);
+    @if $value < $min {
+      $value: $min;
+    }
+  }
+  @return $value;
+}

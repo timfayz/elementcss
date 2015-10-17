@@ -1,0 +1,144 @@
+// _set-type.scss adds typography styles.
+// Customize it yourself.
+
+$s: (); // temp sets storage
+
+// Define Basic Variables
+// --------------------------------------------------
+// Font families
+$_font-family-sans:   Helvetica, Arial, sans-serif;
+$_font-family-serif:  Georgia, "Times New Roman", Times, serif;
+$_font-family-mono:   Monaco, Menlo, Consolas, "Courier New", monospace;
+
+// Main properties
+$_baseline:       8px;
+$_font-size:      16px;
+$_line-height:    calc-line(24px, $_baseline);
+$_font-family:    $_font-family-sans;
+
+// Set calc-line() baseline relative to line-height
+$calc-line-baseline: $_line-height;
+$calc-line-threshold: 90%;
+// Type set (name, font-size, line-height, font-weight)
+$_type-max:       disp4  112px  calc-line(112px) $Light;
+$_type-xxlg:      disp3  56px   calc-line(56px)  $Normal;
+$_type-xlg:       disp2  45px   calc-line(45px)  $Normal;
+$_type-lg:        disp1  34px   calc-line(34px)  $Normal;
+$_type-md:        head   24px   calc-line(24px)  $Normal;
+$_type-sm:        titl   20px   calc-line(20px)  $Medium;
+$_type-xsm:       subh   16px   calc-line(16px)  $Normal;
+$_type-xxsm:      butt   14px   calc-line(14px)  $Medium;
+$_type-min:       capt   12px   calc-line(12px)  $Normal;
+$_type-default:   body   14px   calc-line(14px)  $Normal;
+
+// Define Sets
+// --------------------------------------------------
+// Name, Font-Size, Line-Height, Font-weight
+$s: add($s, _txt, (font-size, line-height, font-weight) (
+  nth($_type-default, 1), nth($_type-default, 2) _ nth($_type-default, 3) _ nth($_type-default, 4),
+  nth($_type-max, 1),     nth($_type-max, 2) _ nth($_type-max, 3) _ nth($_type-max, 4),
+  nth($_type-xxlg, 1),    nth($_type-xxlg, 2) _ nth($_type-xxlg, 3) _ nth($_type-xxlg, 4),
+  nth($_type-xlg, 1),     nth($_type-xlg, 2) _ nth($_type-xlg, 3) _ nth($_type-xlg, 4),
+  nth($_type-lg, 1),      nth($_type-lg, 2) _ nth($_type-lg, 3) _ nth($_type-lg, 4),
+  nth($_type-md, 1),      nth($_type-md, 2) _ nth($_type-md, 3) _ nth($_type-md, 4),
+  nth($_type-sm, 1),      nth($_type-sm, 2) _ nth($_type-sm, 3) _ nth($_type-sm, 4),
+  nth($_type-xsm, 1),     nth($_type-xsm, 2) _ nth($_type-xsm, 3) _ nth($_type-xsm, 4),
+  nth($_type-xxsm, 1),    nth($_type-xxsm, 2) _ nth($_type-xxsm, 3) _ nth($_type-xxsm, 4),
+  nth($_type-min, 1),     nth($_type-min, 2) _ nth($_type-min, 3) _ nth($_type-min, 4),
+));
+
+// Font-Weight
+$s: add($s, $Font-weight, font-weight (
+  normal, normal,
+  bold, bold,
+));
+
+// Font-Style
+$s: add($s, $Font-style, font-style (
+  italic, italic,
+  normal, normal,
+));
+
+// Text-Decoration
+$s: add($s, $Text-decoration, text-decoration (
+  underline, underline,
+  through, line-through
+));
+
+// Text-Transform
+$s: add($s, $Text-transform, text-transform (
+  upper, uppercase,
+  lower, lowercase,
+  capital, capitalize
+));
+
+// Text-Align
+$s: add($s, $Text-align, text-align (
+  left, left,
+  right, right,
+  center, center,
+  justify, justify,
+));
+
+// White-space
+$s: add($s, $White-space, white-space (
+  pre, pre,
+  pre-wrap, pre-wrap,
+  pre-line, pre-line,
+  nowrap, nowrap,
+));
+
+// List-style
+$s: add($s, $List-style, list-style (
+  none, none,
+  disc, disc,
+  square, square
+));
+
+
+// Render Styles
+// --------------------------------------------------
+html {
+  font-family: $_font-family;
+  line-height: round-unit($_line-height, em);
+  @include media(default) {
+    font-size: $_font-size;
+  }
+  //@include media(tablet, $media) { font-size: 14px; }
+  //@include media(mobile, $media) { font-size: 13px; }
+}
+
+body {
+  direction: if($_left==left, ltr, rtl);
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-size-adjust: 100%;
+  text-rendering: optimizeLegibility;
+}
+
+small {
+  @extend .fnsz-mono !optional;
+}
+
+var,
+code,
+kbd,
+pre,
+samp {
+  @extend .fnfm-mono !optional;
+}
+
+sub,
+sup {
+  font-size: 75%;
+  line-height: 0;
+}
+sub {
+  top: -0.5em;
+}
+sup {
+  bottom: -0.25em;
+}
+
+// render all stored sets
+@include sets($s, $media);
