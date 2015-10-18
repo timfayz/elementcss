@@ -30,3 +30,18 @@
   }
   @return $res;
 }
+
+// nth-retrieve
+// returns new list with items from $list by $indexes.
+//    nth-retrieve(a b c d, 1 2)          -> a b
+//    nth-retrieve(a b c d, 3 1 6)        -> c a
+//    nth-retrieve(a b c d, 1 3 4, comma) -> a, c, d
+@function nth-retrieve($list, $indexes, $separator:auto) {
+  $res: ();
+  @each $i in $indexes {
+    @if $i and $i <= length($list) {
+      $res: append($res, nth($list, $i), $separator);
+    }
+  }
+  @return $res;
+}
