@@ -1,2 +1,32 @@
 // _list.scss provides functions for working with lists. Note that in Sass the first
 // index of list item is 1 and not 0.
+
+// slice
+// returns new list with items from $list splitted by $start and $end indexes. When
+// $start is greater than $end it returns list without items between $start and $end.
+//          1 2 3 4
+//    slice(a b c d, 2)       -> b c d
+//    slice(a b c d, 2, 3)    -> b c
+//    slice(a b c d, $end:3)  -> a b c
+//    slice(a b c d, 4, 2)    -> a b d  (no items b/w 2 and 4)
+//    slice(a b c d, 3, 1)    -> a c d  (no items b/w 1 and 3)
+@function slice($list, $start:1, $end:length($list)) {
+  $res: ();
+  @if length($list) < $start {
+    @return $res;
+  }
+  @if $start <= $end {
+    @for $i from 1 through length($list) {
+      @if $i >= $start and $i <= $end {
+        $res: append($res, nth($list, $i));
+      }
+    }
+  } @else {
+    @for $i from 1 through length($list) {
+      @if $i <= $end or $i >= $start {
+        $res: append($res, nth($list, $i));
+      }
+    }
+  }
+  @return $res;
+}
