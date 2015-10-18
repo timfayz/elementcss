@@ -119,3 +119,59 @@
   }
   @return $res;
 }
+
+// indexes
+// returns new list with indexes of existing values from $list-1 according to $mode.
+// Return modes: inter - intersection, diff - symmetric difference, abs-* - absolute
+// intersection or difference:
+//    inter      - indexes of $list-1 values that exists in $list-2;
+//    abs-inter  - the same, but suppressing repeating items;
+//    diff       - indexes of $list-1 values as if we subtract $list-2 from $list-1;
+//    abs-diff   - the same, but suppressing repeating items.
+//            1 2 3 4 5 6
+//    indexes(a a b b c c, a f c, inter)      -> 1 2 5 6
+//    indexes(a a b b c c, a f c, abs-inter)  -> 1 5
+//    indexes(a a b b c c, a f c c, diff)     -> 2 3 4
+//    indexes(a a b b c c, a f c, diff)       -> 2 3 4 6
+//    indexes(a a b b c c, a f c, abs-diff)   -> 3 4
+@function indexes($list-1, $list-2, $mode:inter) {
+  $res: ();
+  @if length($list-1) == 0 {
+    @return $res;
+  }
+  @if $mode == inter {
+    @for $i from 1 through length($list-1) {
+      $val-1: nth($list-1, $i);
+      @if index($list-2, $val-1) {
+        $res: append($res, $i);
+      }
+    }
+  } @else if $mode == abs-inter {
+    $excl: ();
+    @for $i from 1 through length($list-1) {
+      $val-1: nth($list-1, $i);
+      @if index($excl, $val-1) == null and index($list-2, $val-1) {
+        $excl: append($excl, $val-1);
+        $res: append($res, $i);
+      }
+    }
+  } @else if $mode == diff {
+    @for $i from 1 through length($list-1) {
+      $val-1: nth($list-1, $i);
+      $t: index($list-2, $val-1);
+      @if $t {
+        $list-2: nth-remove($list-2, $t);
+      } @else {
+        $res: append($res, $i);
+      }
+    }
+  } @else if $mode == abs-diff {
+    @for $i from 1 through length($list-1) {
+      $val-1: nth($list-1, $i);
+      @if index($list-2, $val-1) == null {
+        $res: append($res, $i);
+      }
+    }
+  }
+  @return $res;
+}
