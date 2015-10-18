@@ -210,3 +210,22 @@
     @return nth-retrieve($list-1, $indexes, $separator);
   }
 }
+
+// union
+// returns new list with items from $list-1 + items from $list-2 that do not exists
+// in $list-1. If $mode = abs it returns the same but no repeating elements.
+//    union(a a b c, a a f f)           -> a a b c f f
+//    union(a a b c, a a a f f)         -> a a b c a f f
+//    union(a a b c, a a a f f, abs)    -> a b c f
+//    union(a (b b) a, f (b b) f)       -> a (b b) a f f
+//    union(a (b b) a, f (b b) f, abs)  -> a (b b) f
+@function union($list-1, $list-2, $mode:null, $separator:auto) {
+  @if $mode == abs {
+    $diff: indexes($list-2, $list-1, abs-diff);
+    $temp: join($list-1, nth-retrieve($list-2, $diff));
+    @return nth-retrieve($temp, indexes($temp, $temp, abs-inter), $separator);
+  } @else {
+    $indexes: indexes($list-2, $list-1, diff);
+    @return join($list-1, nth-retrieve($list-2, $indexes), $separator);
+  }
+}
