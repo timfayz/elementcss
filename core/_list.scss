@@ -175,3 +175,38 @@
   }
   @return $res;
 }
+
+// inter(section)
+// returns new list with items exists in both $list-1 and $list-2. If $mode = abs
+// it returns the same but no repeating elements.
+//    inter(a a b c, a a b f)           -> a a b
+//    inter(a a b c, a a a b f)         -> a a a b
+//    inter(a a b c, a a a b f, abs)    -> a b
+//    inter(a (b b) a, f (b b) f)       -> (b b)
+//    inter(a (b b) a, f (b b) f, abs)  -> (b b)
+@function inter($list-1, $list-2, $mode:null, $separator:auto) {
+  @if $mode == abs {
+    $indexes: indexes($list-2, $list-1, abs-inter);
+    @return nth-retrieve($list-2, $indexes, $separator);
+  } @else {
+    $indexes: indexes($list-2, $list-1, inter);
+    @return nth-retrieve($list-2, $indexes, $separator);
+  }
+}
+
+// diff(erence)
+// returns new list with items as if we subtract $list-2 from $list-1.
+//    diff(a a b c c, a b f)           -> a c c
+//    diff(a a b c c, a b f, abs)      -> c c
+//    diff(a a b c c, a a b f)         -> c c
+//    diff(a (b b) a, f (b b) f)       -> a a
+//    diff(a (b b) a, f (b b) f, abs)  -> a a
+@function diff($list-1, $list-2, $mode:null, $separator:auto) {
+  @if $mode == abs {
+    $indexes: indexes($list-1, $list-2, abs-diff);
+    @return nth-retrieve($list-1, $indexes, $separator);
+  } @else {
+    $indexes: indexes($list-1, $list-2, diff);
+    @return nth-retrieve($list-1, $indexes, $separator);
+  }
+}
