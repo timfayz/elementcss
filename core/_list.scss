@@ -45,3 +45,33 @@
   }
   @return $res;
 }
+
+// nth-remove
+// returns new list excluding items by $indexes.
+//    nth-remove(a b c d, 2)        -> a c d
+//    nth-remove(a b c d, 3 2)      -> a d
+//    nth-remove(a b c d, 1, comma) -> b, c, d
+@function nth-remove($list, $indexes, $separator:auto) {
+  $res: ();
+  @for $i from 1 through length($list) {
+    @if index($indexes, $i) == null {
+      $res: append($res, nth($list, $i), $separator);
+    }
+  }
+  @return $res;
+}
+
+// value-remove
+// returns new list without an item removed by $val name.
+//    value-remove(a b c d, c)            -> a b d
+//    value-remove(a b c (d e), a (d e))  -> b c
+//    value-remove(a b c d, b, comma)     -> a, c, d
+@function value-remove($list, $vals, $separator:auto) {
+  $res: ();
+  @each $list-val in $list {
+    @if index($vals, $list-val) == null {
+      $res: append($res, $list-val, $separator);
+    }
+  }
+  @return $res;
+}
