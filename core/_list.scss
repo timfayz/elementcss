@@ -75,3 +75,47 @@
   }
   @return $res;
 }
+
+// nth-replace
+// returns new list replacing items by index and new value. $map must be a map where
+// key = index of item to replace, value = new value for this item.
+//    nth-replace(a b c d, (1:z, 3:x))      -> z b x d
+//    nth-replace(a b c d, (6:x))           -> a b c d
+//    nth-replace(a b c d, (2:z x), comma)  -> a, z x, c, d
+@function nth-replace($list, $map, $separator:auto) {
+  $res: ();
+  @if type-of($map) == map {
+    @for $i from 1 through length($list) {
+      $val: nth($list, $i);
+      @debug $i, $val;
+      $new: map-get($map, $i);
+      @if $new {
+        $res: append($res, $new, $separator);
+      } @else {
+        $res: append($res, $val, $separator);
+      }
+    }
+  }
+  @return $res;
+}
+
+// value-replace
+// returns new list replacing items by value. $map must be a map where
+// key = name of item value to replace, value = new value for this item.
+//    value-replace(a b c d, (b:w, a:z))      -> z b x d
+//    value-replace(a b c d, (e:w))           -> a b c d
+//    value-replace(a b c d, (b:w z), comma)  -> a, w z, c, d
+@function value-replace($list, $map, $separator:auto) {
+  $res: ();
+  @if type-of($map) == map {
+    @each $val in $list {
+      $new: map-get($map, $val);
+      @if $new {
+        $res: append($res, $new, $separator);
+      } @else {
+        $res: append($res, $val, $separator);
+      }
+    }
+  }
+  @return $res;
+}
