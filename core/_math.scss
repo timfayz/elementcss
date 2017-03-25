@@ -23,7 +23,7 @@
 //    pow(3, 2) -> 9
 @function pow($base, $exp, $prec: 12) {
   // Handles decimal exponents by trying to convert them into a fraction
-  @if (floor($exp) != $exp) {
+  @if floor($exp) != $exp {
     $prec2 : pow(10, $prec);
     $exp: round($exp * $prec2);
     $denominator: gcd($exp, $prec2);
@@ -65,4 +65,45 @@
   @if $val < $min { @return $min; }
   @if $val > $max { @return $max; }
   @return $val;
+}
+
+// scale
+// fluidly scales $val within the $min, $max range.
+//    scale(10, +100, 0, 100) -> 100
+//    scale(10, +20, 0, 100)  -> 28
+//    scale(10, -20, 0, 100)  -> 8
+//    scale(10, -100, 0, 100) -> 0
+@function scale($val, $amount, $min:0, $max:100) {
+  @if $amount > 0 {
+    $val: $val + ($max - $val) * ($amount / 100.0);
+    @if $val > $max {
+      $val: $max;
+    }
+  } @else if $amount < 0 {
+    $val: $val + ($val * $amount / 100.0);
+    @if $val < $min {
+      $val: $min;
+    }
+  }
+  @return $val;
+}
+
+// max
+// return the maximum value
+@function max($args...) {
+  $max: nth($args, 1);
+  @each $a in $args {
+    $max: if($a > $max, $a, $max);
+  }
+  @return $max;
+}
+
+// min
+// return the minimum value
+@function min($args...) {
+  $min: nth($args, 1);
+  @each $a in $args {
+    $min: if($a < $min, $a, $min);
+  }
+  @return $min;
 }
