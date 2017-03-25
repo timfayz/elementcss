@@ -1,33 +1,29 @@
 /*!
- * elementcss v2.0.0 + init.css v1.0.0 | MIT License | Copyright (c) Timur Fayzrakhmanov
- * https://github.com/timfayz/elementcss, https://github.com/timfayz/init.css
- */
-
-// _core.scss imports all core elementcss files. They contain only the required minimum
-// like default variables, CSS property shorthands, functions and mixins to provide core
-// elementcss functionality. They don't generate anything by default. All core files
-// have inline docs with examples and description of each function and mixin. For any
-// questions, bugs and issues contact me or create new issue on github.com. To learn
-// more about elementcss usage see docs/*.md.
-
-// Globals
-// Variables intentionally start with _ to avoid name collisions and provide handy
-// auto-completion in IDEs. [Explain] Text direction (rtl/ltr)
-$_left: left !default;
-$_right: right !default;
-$_unit: rem !default;
-
-// Core files
-// Files that do not begin with "css-" prefix consist only of utility functions.
+* elementcss v2.9.0 | MIT License | (c) 2013-2016 Timur Fayzrakhmanov
+* https://github.com/timfayz/elementcss
+*/
+// _core.scss is entry point of elementcss. It imports all files under a core/.
+// By default, elementcss doesn't generate anything unless you call or @include
+// something explicitly. Each function and mixin has well-written inline
+// documentation and usage examples so use them as API docs.
+//
+// Functions/mixins starting with _ (underscore) are "unexported" and just used
+// internally to implement more general ones. Don't use them and just skip if
+// you read source files as API docs. For any questions, bugs and issues
+// contact me or create new issue on github. To learn more about using
+// elementcss see *.md files under a docs/.
+//
+// Files that do not begin with "css-" prefix consist only of Sass functions.
 // The rest of files consist mostly of mixins and intended to generate actual CSS
-// content.
-@import "core/names.scss";
+// code.
 @import "core/math.scss";
 @import "core/unit.scss";
 @import "core/string.scss";
-@import "core/list-map.scss";
+@import "core/map.scss";
+@import "core/list.scss";
 @import "core/color.scss";
 @import "core/metrics.scss";
+@import "core/var.scss";
 @import "core/css-utils.scss";
-@import "core/css-set.scss";
+@import "core/css-sem.scss";
 @import "core/css-grid.scss";
