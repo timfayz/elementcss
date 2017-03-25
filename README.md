@@ -1,4 +1,4 @@
-#elementcss
+# elementcss
 
 [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/timfayz/elementcss?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
@@ -8,7 +8,7 @@
 
 **[Download v2.9.0](https://github.com/timfayz/elementcss/archive/master.zip)**
 
-##Features
+## Features
 elementcss is a minimalistic toolkit of Sass functions and mixins. It allows your to create your own GUI framework on top of it.
 
 - **grid system**. Powerful `grid()` mixin to generate flexbox or float-based grid system with unlimited number of breakpoints and customizable number of columns, width, gap in each breakpoint. Implements all widely used grid features like changeable column `width`, `push`, `pull`, `offset`, `centering` etc.
@@ -32,7 +32,7 @@ elementcss is a minimalistic toolkit of Sass functions and mixins. It allows you
 - **math utils**. Basic math functions. `pow()`, `root()`, `gcd()` to power, root and find great common divider of a number.
 
 
-##Quick Start
+## Quick Start
 * [Install Sass](http://sass-lang.com/install)
 * Create project folder and go inside:
 ```
@@ -62,7 +62,7 @@ sass --watch main.scss:main.css
 * `main.css` already linked, just open `index.html` in your browser and check the result.
 
 
-##File structure
+## File structure
 ```
 docs/         documentation
 templates/    project templates
@@ -72,10 +72,10 @@ LICENSE       license information
 README.md     this is what you are currently reading
 ```
 
-##API
+## API
 At the moment there is no API page. However all core files have well-written inline docs with examples and description of each function and mixin. Files splitted and organized so that you can read them as API reference.
 
-###Color utils
+### Color utils
 - [`shade($clr, $percentage)`](https://github.com/timfayz/elementcss/blob/master/core/_color.scss#L3)
 - `tint($clr, $percentage)`
 - `convert-color($clr, $model)`
@@ -83,12 +83,12 @@ At the moment there is no API page. However all core files have well-written inl
 - `brightness($clr, $algorithm:$brightness-algorithm)`
 - `color($action, $clr, $props, $model:hsl)`
 
-##Documentation
+## Documentation
 Documentation is under heavy development. The current docs for v1.9.0 and below.
 
 1. [API](https://github.com/timfayz/elementcss/blob/master/docs/0-preface.md)<br/>
 1. [Usage](https://github.com/timfayz/elementcss/blob/master/docs/2-usage.md)<br/>
 1. [Changelog](https://github.com/timfayz/elementcss/blob/master/docs/2-usage.md)<br/>
 
-##Contributing
+## Contributing
 If you want to help and contribute this project please make your own pull request or [report issues](https://github.com/timfayz/elementcss/issues). We are very welcome to any kind of ideas and support, even tp merge into new repo or project.
