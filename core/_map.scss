@@ -1,0 +1,133 @@
+// _map.scss provides wide range of functions to work with maps. Note that the
+// first index of Sass maps is 1, but not 0.
+// TODO merge map-join/-append -> map-union($mode:pre/pre-join etc)
+// TODO map-inter()/diff()
+
+// m
+// multidimensional analog of built-in map-get() function.
+//    $map: (text: 16px, img: (sm: 10px 20px, md: 30px 40px));
+//    m($map, text)         -> 16px
+//    m($map, img)          -> (sm: 10px 20px, md: 30px 40px)
+//    m($map, img, sm)      -> 10px 20px
+//    m($map, img, sm, foo) -> null
+@function m($map, $keys...) {
+  @if length($keys) > 0 {
+    @if length(nth($keys, 1)) > 1 {
+      $keys: nth($keys, 1);
+    }
+    @each $k in $keys {
+      $map: if(type-of($map) == map, map-get($map, $k), null);
+    }
+  }
+  @return $map;
+}
+
+// nth-key
+// returns key by sequence number of $map. Return null if $n is more than
+// length of the $map.
+@function nth-key($map, $n) {
+  $r: nth($map, $n);
+  @return if(length($r) == 2, nth($r, 1), null);
+}
+
+// nth-value
+// returns value by sequence number of $map. Return null if $n is more than
+// length of the $map.
+@function nth-value($map, $n) {
+  $r: nth($map, $n);
+  @return if(length($r) == 2, nth($r, 2), null);
+}
+
+// map-empty
+// checks if map is empty. Returns true if all map values is equal to null.
+//    $m1: (a:(), b:null);
+//    $m2: (a:(), b:null, c:false, d:'');
+//    map-empty($m1) -> true
+//    map-empty($m2) -> false
+//    map-empty($m1, hard) -> true
+//    map-empty($m2, hard) -> true
+@function map-empty($m, $mode:false) {
+  @if $mode == hard {
+    @each $k, $v in $m {
+      @if $v != null and length($v) != 0 and $v != '' and $v != false { @return false; }
+    }
+  } @else {
+    @each $k, $v in $m {
+      @if $v != null and length($v) != 0 { @return false; }
+    }
+  }
+  @return true;
+}
+
+// map-replace
+// returns new map overwriting $map1 items by key-value pairs from $map2.
+// Unlike native map-merge() function which has similar purpose, map-replace()
+// doesn't add new items if associated key isn't presented.
+//    map-replace((one:1,two:2), (one:0,two:0,three:0)) -> (one:0,two:0)
+//   *map-merge((one:1,two:2), (one:0,two:0,three:0)) -> (one:0,two:0,three:0)
+// See also map-remove()
+@function map-replace($map1, $map2) {
+  @each $k2, $v2 in $map2 {
+    @if map-has-key($map1, $k2) {
+      $map1: map-merge($map1, ($k2: $v2));
+    }
+  }
+  @return $map1;
+}
+
+// map-union (union)
+// returns new map adding new items or values to existing items from $map2.
+// $mode controls how values are adding. before - `pre`,after - `post` (default).
+//    $map: (a:1, b:2, c:3);
+//    map-append($map, (a:T))             -> (a:1 T, b:2, c:3)
+//    map-append($map, (b:T T, d:F))      -> (a:1, b:2 (T T), c:3, d:F)
+//    map-append($map, (b:T T, d:F), pre) -> (a:1, b:(T T) 2, c:3, d:F)
+// TODO update examples
+@function map-union($map1, $map2, $mode:post, $separator:auto) {
+  @if length($map1) == 0 {
+    @return $map2;
+  }
+  @each $k, $v in $map2 {
+    $old: map-get($map1, $k);
+    $v: if(length($mode)>1, wrap($v), $v);
+    @if $old == null {
+      $map1: map-merge($map1, ($k:$v));
+    } @else {
+      $new: if(nth($mode,1)==post, join($old, $v), join($v, $old));
+      $map1: map-merge($map1, ($k:$new));
+      //$map1: map-merge($map1, (
+      //  $k: if($mode == pre, join(wrap($v), $old, $separator), append(wrap($old), $v, $separator))
+      //));
+    }
+  }
+  @return $map1;
+}
+
+// map-list
+// return new list converting $map into simple list
+//    map-to-list((a:1, b:2, c:3))        -> (a 1 b 2 c 3)
+//    map-to-list((a:1, b:2, c:3), comma) -> (a, 1, b, 2, c, 3)
+@function map-list($map, $separator:auto) {
+  @if length($map) == 0 {
+    @return $map;
+  }
+  $res: ();
+  @each $k, $v in $map {
+    $res: join($res, $k $v, $separator);
+  }
+  @return $res;
+}
+
+// map-get-key
+// returns key of the $map for a given $val. Return null if $val is not found.
+@function map-get-key($map, $val) {
+  @if type-of($map) != map and length($map) == 0 {
+    @return $map;
+  }
+  @each $k, $v in $map {
+    @if $val == $v {
+      @return $k;
+    }
+  }
+  @return null;
+}
