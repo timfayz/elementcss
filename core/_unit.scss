@@ -1,5 +1,71 @@
 // _unit.scss contains useful functions for CSS unit manipulations.
 
+// Map of zero units. It's used for appending the unit to unitless value. See
+// append-unit() for more information.
+$_unit-zeroes: (
+  'px':   0px,
+  'in':   0in,
+  'pt':   0pt,
+  'pc':   0pc,
+  'mm':   0mm,
+  'cm':   0cm,
+  'q':    0q,
+  'ex':   0ex,
+  'ch':   0ch,
+  '':     0,
+  'em':   0em,
+  'rem':  0rem,
+  '%':    0%,
+  'vh':   0vh,
+  'vw':   0vw,
+  'vmin': 0vmin,
+  'vmax': 0vmax,
+  'deg':  0deg,
+  'grad': 0grad,
+  'rad':  0rad,
+  'turn': 0turn,
+  's':    0s,
+  'ms':   0ms,
+);
+
+// <length> type factors. If you multiply any pixel value say by factor from
+// 'pt', you get actual pt value, but in the original unit. See convert-length()
+// function.
+$_unit-px-factors: (
+  'px':   1,
+  'pt':   72/96,
+  'pc':   6/96,
+  'cm':   2.54/96,
+  'mm':   0.254/96,
+  'q':    0.0635/96, // 0.254/4 - quarter-millimeter
+  'in':   1/96,
+  '':     1/16,
+  'rem':  1/16,
+  'em':   1/16,
+  '%':    6.25, // 1/16*100
+  'vh':   6.25,
+  'vw':   6.25,
+  'vmin': 6.25,
+  'vmax': 6.25,
+);
+
+// <angle> type factors. Multiplying turn value by any factor according to
+// 'unit' key, you converted" value, but in the original unit. See
+// convert-angle() function.
+$_unit-turn-factors: (
+  '':     360, // unitless is implicitly a CSS degree
+  'turn': 1,
+  'deg':  360,
+  'grad': 400,
+  'rad':  6.283185306,
+);
+
+// <time> type factors. Due to small number of time units it's not in use now.
+$_unit-second-factors: (
+  's': 1,
+  'ms': 1000,
+);
+
 // trim-unit
 // returns a number without a unit for a given $val.
 //    trim-unit(100px)   -> 100
@@ -16,27 +82,7 @@
 //    append-unit(30, '%')    -> 30%
 //    append-unit(10, em)     -> 10em
 @function append-unit($val, $unit) {
-  $units: (
-    'px':   0px,
-    'in':   0in,
-    'pt':   0pt,
-    'mm':   0mm,
-    'cm':   0cm,
-    'pc':   0pc,
-    'q':    0q,
-    'ex':   0ex,
-    'ch':   0ch,
-    '%':    0%,
-    '':     0,
-    'em':   0em,
-    'rem':  0rem,
-    'vh':   0vh,
-    'vw':   0vw,
-    'vmin': 0vmin,
-    'vmax': 0vmax,
-    'deg':  0deg,
-  );
-  $zero: map-get($units, $unit);
+  $zero: map-get($_unit-zeroes, $unit);
   @if $zero == null {
     @error "@function append-unit(): `#{$unit}` is not supported";
   } @else {
@@ -44,93 +90,157 @@
   }
 }
 
-// convert-unit
-// returns converted number with CSS unit according to $unit for a given $val. $val
-// must be a number (100px, 1rem, 1, 7pt etc). If $unit = `detect` function converts
-// $val into the same unit detected. Supported units: rem, '%', '' (unitless), px,
-// pt, cm, mm, q, in. $parent used to calculate relative units like rem, %, vh etc
-// and always must be in px.
-//    convert-unit(2foo, '%')     -> error: `foo` is not supported.
-//    convert-unit(16px, '%')     -> 100%
-//    convert-unit(2em, px)       -> 32px
-//    convert-unit(1.423rem, px)  -> 22.768px
-//    convert-unit(14pt, px)      -> 18.66667px
-@function convert-unit($val, $unit: detect, $parent: 16, $ppi: 96) {
-  // keep unit of input value
+// convert-length
+// converts a given $val according to CSS length $unit. $val
+// must be a number (100px, 1rem, 1, 7pt etc). Returns error if $unit isn't
+// supported. $parent is unitless pixel value used to calculate relative
+// lengths like rem, em, %, vh etc, due to their dependence on parent length
+// (default is 16). $ppi is unitless number used to calculate actual length on
+// screens with different pixel density (default is 96). Supported units: rem,
+// '%', unitless, px, pt, pc, cm, mm, q, in, vh, vw, vmin, vmax.
+//    convert-length(2foo, '%')     -> error: `foo` is not supported.
+//    convert-length(16px, '%')     -> 100%
+//    convert-length(2em, px)       -> 32px
+//    convert-length(1.423rem, px)  -> 22.768px
+//    convert-length(14pt, px)      -> 18.66667px
+@function convert-length($val, $unit, $parent: 16, $ppi: 96) {
+  // keep input value unit
   $u: unit($val);
-  // if requested unit is the same as input - return untouched
+  // if requested unit is the same as input
   @if $u == $unit {
-    @return $val;
+    // just multiply by ppi ratio
+    @return $val*$ppi/96;
   }
-  @if $unit == detect {
-    $unit: $u;
+  // if unit is different
+  @else {
+    $px: null;
+    // convert any input value to pixel
+    @if      $u == 'px'   { $px: $val; }
+    @else if $u == 'rem'
+          or $u == 'em'
+          or $u == ''     { $px: $val*$parent; }        // > px
+    @else if $u == '%'    { $px: $val*$parent/100; }    // > px
+    @else if $u == 'pt'   { $px: $val * 96/72; }        // > px
+    @else if $u == 'pc'   { $px: $val/6 * 96; }         // > in > px
+    @else if $u == 'cm'   { $px: $val/2.54 * 96; }      // > in > px
+    @else if $u == 'mm'   { $px: $val/25.4 * 96; }      // > in > px
+    @else if $u == 'q'    { $px: $val/101.6 * 96; }     // > in > px
+    @else if $u == 'in'   { $px: $val*96; }             // > px
+    @else if $u == 'vh'
+          or $u == 'vw'
+          or $u == 'vmin'
+          or $u == 'vmax' { $px: $val*$parent/100; }    // > px
+    @else {
+      @error "@function convert/round-length: `#{$u}` is not supported.";
+    }
+    // get pixel-to-unit factor multiplying by which we get the final result
+    $f: map-get($_unit-px-factors, $unit);
+    @if $f == null {
+      @error "@function convert/round-length: `#{$unit}` is not supported.";
+    }
+    // multiply pixel value by factor, ppi ratio and append the unit
+    @return append-unit($px*$f*$ppi/96, $unit);
   }
-  //$val: trim-unit($val);
-  $in: null; // intermediate inch
-  @if      $u == 'px'   { $in: $val/$ppi; }
-  @else if $u == 'pt'   { $in: $val/$ppi * $ppi/72; }
-  @else if $u == 'cm'   { $in: $val/2.54 * $ppi/96; }
-  @else if $u == 'mm'   { $in: $val/25.4; }
-  @else if $u == 'q'    { $in: $val/25.4 * 4; }
-  @else if $u == 'in'   { $in: $val; }
-  @else if $u == 'rem'
-        or $u == 'em'
-        or $u == ''     { $in: ($val*16) / $ppi; }
-  @else if $u == '%'    { $in: ($val*$parent/100) / $ppi; }
-  @else if $u == 'vh'
-        or $u == 'vw'
-        or $u == 'vmin'
-        or $u == 'vmax' { $in: ($parent/100*$val) / $ppi; }
-  // if inch is not calculated return untouched
-  @if $in == null {
-    @return $val;
-  }
-  // factors multiplying by which we get result according to $unit
-  $t1: 96/$parent;
-  $t2: $t1*100;
-  $factors: (
-    'px':   96,
-    'pt':   72,
-    'cm':   2.54,
-    'mm':   25.4,
-    'q':    25.4/4,
-    'pc':   1/6,
-    'in':   1,
-    '%':    $t2,
-    '':     $t1,
-    'rem':  $t1,
-    'em':   $t1,
-    'vh':   $t2,
-    'vw':   $t2,
-    'vmin': $t2,
-    'vmax': $t2,
-  );
-  $f: map-get($factors, $unit);
-  @if $f == null {
-    @error "@function convert/round-unit: `#{$unit}` is not supported.";
-  }
-  @return append-unit($in*$f, $unit);
 }
 
-// round-unit
-// returns converted number with CSS unit according to $unit for a given $val. $val
-// must be a number (100px, 1rem, 1, 7pt etc). Returned value become integer pixel at
-// the end of browser rendering. If $unit = `detect` function converts $val into the
-// same unit detected, but rounded. See convert-unit() for more information.
-// '' (unitless), px, em etc.
-//    round-unit(16.672px, px)      -> 17px
-//    round-unit(23.45%, px)        -> 4px
-//    round-unit(1.423rem, rem)     -> 1.4375rem (1.4375 * 16 = 23px)
-//    round-unit(1.423rem, detect)  -> 1.4375rem
-@function round-unit($val, $unit:detect, $parent: 16, $ppi:96) {
+// round-length
+// converts a given $val according to CSS length $unit. $val must be a number
+// (100px, 1rem, 1, 7pt etc). The main difference b/w convert-length() and
+// round-length() is the returned value is always an integer pixel at the end
+// of browser rendering. If $unit = `detect` function converts $val into the
+// same unit it has, but rounded. See convert-length() for more information.
+//    round-length(16.672px, px)   -> 17px
+//    round-length(23.45%, px)     -> 4px
+//    round-length(1.423rem, rem)  -> 1.4375rem (1.4375 * 16 = 23px)
+//    round-length(1.423rem)       -> 1.4375rem (unit is detected automatically)
+@function round-length($val, $unit:detect, $parent: 16, $ppi:96) {
+  $res: convert-length($val, px, $parent, $ppi);
+  // round the resulting px value and convert it into specified $unit
   @if $unit == detect {
     $unit: unit($val);
   }
-  $res: convert-unit($val, px, $parent, $ppi);
-  // if covert-unit() doesn't support specified unit pass $val through
-  @if unit($res) != px {
+  @return convert-length(round($res), $unit, $parent, $ppi);
+}
+
+// convert-angle
+// converts a given $val according to CSS angle $unit. $val must be a number
+// (1rad, 20deg, 0.5turn etc). Returns error if $unit isn't supported. By
+// default, the output unit is unitless degree.  Supported angle units: deg,
+// grad, rad, unitless (deg), turn.
+//    convert-angle(2foo, deg)    -> error: `foo` is not supported.
+//    convert-angle(1rad, deg)    -> 57.29578deg
+//    convert-angle(1turn, grad)  -> 400grad
+//    convert-angle(400grad)      -> 360 (convert to unitless degree by default)
+//    convert-angle(400deg)       -> 400
+@function convert-angle($val, $unit:'', $round: true) {
+  // keep input value unit
+  $u: unit($val);
+  // if requested unit is the same as input
+  @if $u == $unit {
     @return $val;
   }
-  // else round the result px value and convert it into specified $unit
-  @return convert-unit(round($res), $unit, $parent, $ppi);
+  // if unit is different
+  @else {
+    $turn: null;
+    // convert any input angle to turn
+    @if      $u == 'deg'
+          or $u == ''       { $turn: $val/360; }
+    @else if $u == 'grad'   { $turn: $val/400; }
+    @else if $u == 'rad'    { $turn: $val/6.283185306; }
+    @else if $u == 'turn'   { $turn: $val; }
+    @else {
+      @error "@function convert-angle: `#{$u}` is not supported.";
+    }
+    // get a turn-to-unit factor multiplying by which we get the final result
+    $f: map-get($_unit-turn-factors, $unit);
+    @if $f == null {
+      @error "@function convert-angle: `#{$unit}` is not supported.";
+    }
+    // multiply turn value by factor and append the unit if specified
+    @if $unit == '' {
+      @return trim-unit($turn*$f);
+    }
+    @return append-unit($turn*$f, $unit);
+  }
 }
+
+// convert-time
+// converts a given $val according to CSS time $unit. $val must be a number
+// (1ms, 20s, 5). Returns error if $unit isn't supported. By
+// default, the output unit is opposite unit, i.e. ms -> s, s -> ms.
+// Supported time units: ms, s.
+//    convert-time(2foo, ms)  -> error: `foo` is not supported.
+//    convert-time(2, ms)     -> 2ms
+//    convert-time(200ms, s)  -> 0.2s
+//    convert-time(5s, ms)    -> 5000ms
+//    convert-time(1s)        -> 1000ms
+//    convert-time(1ms)       -> 0.001s
+@function convert-time($val, $unit:null) {
+  // keep input value unit
+  $u: unit($val);
+  // if requested unit is the same as input
+  @if $u == $unit {
+    @return $val;
+  }
+  // if unit is different
+  @else {
+    @if $u == 's'       { @return append-unit($val*1000, 'ms'); }
+    @else if $u == 'ms' { @return append-unit($val/1000, 's'); }
+    @else if $u == ''   {
+      @if $unit == 'ms'       { @return append-unit($val, 'ms'); }
+      @else if $unit == 's'   { @return append-unit($val, 's'); }
+      @error "@function convert-time: `#{$unit}` is not supported.";
+    }
+    @else {
+      @error "@function convert-time: `#{$u}` is not supported.";
+    }
+  }
+}
+
+// calc-unit
+// TODO
+@function calc-unit($args...) {
+  @each $a in $args {
+  }
+}
+
