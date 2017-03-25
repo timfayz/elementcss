@@ -75,20 +75,20 @@ README.md     this is what you are currently reading
 ## API
 At the moment there is no API page. However all core files have well-written inline docs with examples and description of each function and mixin. Files splitted and organized so that you can read them as API reference.
 
-### Color utils
-- [`shade($clr, $percentage)`](https://github.com/timfayz/elementcss/blob/master/core/_color.scss#L3)
-- `tint($clr, $percentage)`
-- `convert-color($clr, $model)`
-- `contrast-color($clr, $dark, $light, $algorithm:sRGB)`
-- `brightness($clr, $algorithm:$brightness-algorithm)`
-- `color($action, $clr, $props, $model:hsl)`
+[//]: # (### Color utils)
+[//]: # (- [`shade($clr, $percentage)`](https://github.com/timfayz/elementcss/blob/master/core/_color.scss#L3))
+[//]: # (- `tint($clr, $percentage)`)
+[//]: # (- `convert-color($clr, $model)`)
+[//]: # (- `contrast-color($clr, $dark, $light, $algorithm:sRGB)`)
+[//]: # (- `brightness($clr, $algorithm:$brightness-algorithm)`)
+[//]: # (- `color($action, $clr, $props, $model:hsl)`)
 
 ## Documentation
 Documentation is under heavy development. The current docs for v1.9.0 and below.
 
-1. [API](https://github.com/timfayz/elementcss/blob/master/docs/0-preface.md)<br/>
-1. [Usage](https://github.com/timfayz/elementcss/blob/master/docs/2-usage.md)<br/>
-1. [Changelog](https://github.com/timfayz/elementcss/blob/master/docs/2-usage.md)<br/>
+1. [API](https://github.com/timfayz/elementcss/blob/master/docs/0_preface.md)<br/>
+1. [Usage](https://github.com/timfayz/elementcss/blob/master/docs/2_usage.md)<br/>
+1. [Conventions](https://github.com/timfayz/elementcss/blob/master/docs/4_conventions.md)<br/>
 
 ## Contributing
 If you want to help and contribute this project please make your own pull request or [report issues](https://github.com/timfayz/elementcss/issues). We are very welcome to any kind of ideas and support, even tp merge into new repo or project.
