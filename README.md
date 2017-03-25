@@ -75,13 +75,15 @@ README.md     this is what you are currently reading
 ## API
 At the moment there is no API page. However all core files have well-written inline docs with examples and description of each function and mixin. Files splitted and organized so that you can read them as API reference.
 
-[//]: # (### Color utils)
-[//]: # (- [`shade($clr, $percentage)`](https://github.com/timfayz/elementcss/blob/master/core/_color.scss#L3))
-[//]: # (- `tint($clr, $percentage)`)
-[//]: # (- `convert-color($clr, $model)`)
-[//]: # (- `contrast-color($clr, $dark, $light, $algorithm:sRGB)`)
-[//]: # (- `brightness($clr, $algorithm:$brightness-algorithm)`)
-[//]: # (- `color($action, $clr, $props, $model:hsl)`)
+<!---
+### Color utils
+- [`shade($clr, $percentage)`](https://github.com/timfayz/elementcss/blob/master/core/_color.scss#L3)
+- `tint($clr, $percentage)`
+- `convert-color($clr, $model)`
+- `contrast-color($clr, $dark, $light, $algorithm:sRGB)`
+- `brightness($clr, $algorithm:$brightness-algorithm)`
+- `color($action, $clr, $props, $model:hsl)`
+-->
 
 ## Documentation
 Documentation is under heavy development. The current docs for v1.9.0 and below.
