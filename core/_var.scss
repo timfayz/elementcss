@@ -1,0 +1,20 @@
+// _var.scss provides ...
+
+@function v($var) {
+  // check if var() feature exists before return
+  @return var(--#{$var});
+}
+
+@mixin v($name, $var, $args...) {
+  #{--#{$name}}: $var;
+  @content;
+  @if length($args) > 0 {
+    @each $a in $args {}
+  }
+}
+
+@mixin rv($name, $var, $args...) {
+  :root {
+    @content;
+  }
+}

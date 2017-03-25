@@ -9,14 +9,14 @@ $s: (); // temp sets storage
 $calc-line-baseline: $_line-height;
 $calc-line-threshold: 100%;
 // Spacing variables
-$_size-default:  $Default   calc-line(1);
-$_size-xxlg:     $Xxlg      calc-line(7);
-$_size-xlg:      $Xlg       calc-line(5);
-$_size-lg:       $Lg        calc-line(4);
-$_size-md:       $Md        calc-line(3);
-$_size-sm:       $Sm        calc-line(2);
-$_size-xsm:      $Xsm       calc-line(0.5);
-$_size-xxsm:     $Xxsm      calc-line(0.25);
+$sz-default:  $Default   calc-line(1);
+$sz-xxlg:     $Xxlg      calc-line(7);
+$sz-xlg:      $Xlg       calc-line(5);
+$sz-lg:       $Lg        calc-line(4);
+$sz-md:       $Md        calc-line(3);
+$sz-sm:       $Sm        calc-line(2);
+$sz-xsm:      $Xsm       calc-line(0.5);
+$sz-xxsm:     $Xxsm      calc-line(0.25);
 
 // Define Sets
 // --------------------------------------------------
@@ -24,14 +24,14 @@ $_size-xxsm:     $Xxsm      calc-line(0.25);
 $trbl-set: (
   0, 0,
   auto, auto,
-  nth($_size-default, 1), nth($_size-default, 2),
-  nth($_size-xxlg, 1), nth($_size-xxlg, 2),
-  nth($_size-xlg, 1), nth($_size-xlg, 2),
-  nth($_size-lg, 1), nth($_size-lg, 2),
-  nth($_size-md, 1), nth($_size-md, 2),
-  nth($_size-sm, 1), nth($_size-sm, 2),
-  nth($_size-xsm, 1), nth($_size-xsm, 2),
-  nth($_size-xxsm, 1), nth($_size-xxsm, 2),
+  nth($sz-default, 1), nth($sz-default, 2),
+  nth($sz-xxlg, 1), nth($sz-xxlg, 2),
+  nth($sz-xlg, 1), nth($sz-xlg, 2),
+  nth($sz-lg, 1), nth($sz-lg, 2),
+  nth($sz-md, 1), nth($sz-md, 2),
+  nth($sz-sm, 1), nth($sz-sm, 2),
+  nth($sz-xsm, 1), nth($sz-xsm, 2),
+  nth($sz-xxsm, 1), nth($sz-xxsm, 2),
 );
 $s: add($s, $Top, top $trbl-set);
 $s: add($s, $Right, right $trbl-set);
@@ -42,14 +42,14 @@ $s: add($s, $Left, left $trbl-set);
 $margin-set: (
   0, 0,
   auto, auto,
-  nth($_size-default, 1), nth($_size-default, 2),
-  nth($_size-xxlg, 1), nth($_size-xxlg, 2),
-  nth($_size-xlg, 1), nth($_size-xlg, 2),
-  nth($_size-lg, 1), nth($_size-lg, 2),
-  nth($_size-md, 1), nth($_size-md, 2),
-  nth($_size-sm, 1), nth($_size-sm, 2),
-  nth($_size-xsm, 1), nth($_size-xsm, 2),
-  nth($_size-xxsm, 1), nth($_size-xxsm, 2),
+  nth($sz-default, 1), nth($sz-default, 2),
+  nth($sz-xxlg, 1), nth($sz-xxlg, 2),
+  nth($sz-xlg, 1), nth($sz-xlg, 2),
+  nth($sz-lg, 1), nth($sz-lg, 2),
+  nth($sz-md, 1), nth($sz-md, 2),
+  nth($sz-sm, 1), nth($sz-sm, 2),
+  nth($sz-xsm, 1), nth($sz-xsm, 2),
+  nth($sz-xxsm, 1), nth($sz-xxsm, 2),
 );
 $s: add($s, $Margin, margin $margin-set);
 $s: add($s, $Margin-top, margin-top $margin-set);
@@ -60,14 +60,14 @@ $s: add($s, $Margin-left, margin-left $margin-set);
 // Padding
 $padding-set: (
   0, 0,
-  nth($_size-default, 1), nth($_size-default, 2),
-  nth($_size-xxlg, 1), nth($_size-xxlg, 2),
-  nth($_size-xlg, 1), nth($_size-xlg, 2),
-  nth($_size-lg, 1), nth($_size-lg, 2),
-  nth($_size-md, 1), nth($_size-md, 2),
-  nth($_size-sm, 1), nth($_size-sm, 2),
-  nth($_size-xsm, 1), nth($_size-xsm, 2),
-  nth($_size-xxsm, 1), nth($_size-xxsm, 2),
+  nth($sz-default, 1), nth($sz-default, 2),
+  nth($sz-xxlg, 1), nth($sz-xxlg, 2),
+  nth($sz-xlg, 1), nth($sz-xlg, 2),
+  nth($sz-lg, 1), nth($sz-lg, 2),
+  nth($sz-md, 1), nth($sz-md, 2),
+  nth($sz-sm, 1), nth($sz-sm, 2),
+  nth($sz-xsm, 1), nth($sz-xsm, 2),
+  nth($sz-xxsm, 1), nth($sz-xxsm, 2),
 );
 $s: add($s, $Padding, padding $padding-set);
 $s: add($s, $Padding-top, padding-top $padding-set);
@@ -81,22 +81,22 @@ $width-height-set: (
     0, 0,
     100, 100%,
     auto, auto,
-    nth($_size-default, 1), nth($_size-default, 2),
-    nth($_size-xxlg, 1), nth($_size-xxlg, 2),
-    nth($_size-xlg, 1), nth($_size-xlg, 2),
-    nth($_size-lg, 1), nth($_size-lg, 2),
-    nth($_size-md, 1), nth($_size-md, 2),
-    nth($_size-sm, 1), nth($_size-sm, 2),
-    nth($_size-xsm, 1), nth($_size-xsm, 2),
-    nth($_size-xxsm, 1), nth($_size-xxsm, 2),
+    nth($sz-default, 1), nth($sz-default, 2),
+    nth($sz-xxlg, 1), nth($sz-xxlg, 2),
+    nth($sz-xlg, 1), nth($sz-xlg, 2),
+    nth($sz-lg, 1), nth($sz-lg, 2),
+    nth($sz-md, 1), nth($sz-md, 2),
+    nth($sz-sm, 1), nth($sz-sm, 2),
+    nth($sz-xsm, 1), nth($sz-xsm, 2),
+    nth($sz-xxsm, 1), nth($sz-xxsm, 2),
   ),
   media: all (prefix,
     100, 100%,
     auto, auto,
   ),
 );
-$s: add($s, $Height, height $width-height-set, $media);
-$s: add($s, $Width, width $width-height-set, $media);
+$s: add($s, $Height, height $width-height-set, $m);
+$s: add($s, $Width, width $width-height-set, $m);
 
 // Position
 $s: add($s, $Position, position (
@@ -105,7 +105,7 @@ $s: add($s, $Position, position (
     relative, relative,
     absolute, absolute,
   ),
-), $media);
+), $m);
 
 // Z-index
 $s: add($s, $Z-index, z-index (
@@ -127,7 +127,7 @@ $s: add($s, $Display, display (
     inline-block, inline-block,
     flex, flex,
   ),
-), $media);
+), $m);
 
 // Floats
 $s: add($s, $Float, float (
@@ -142,7 +142,7 @@ $s: add($s, $Visibility, visibility (
     visible, visible,
     hidden, hidden,
   ),
-), $media);
+), $m);
 
 // Opacity
 $s: add($s, $Opacity, opacity (
@@ -211,21 +211,15 @@ $s: add($s, null, flex-direction (
     column-reverse, column-reverse,
     nowrap, nowrap
   )
-), $media);
+), $m);
 
 // Cursor
 $s: add($s, $Cursor, cursor (
   default, default,
   pointer, pointer,
-  //not-allow, not-allowed,
-  //help, help,
-  //move, move,
-  //progress, progress,
-  //wait, wait,
-  //text, text,
 ));
 
 // Render Styles
 // --------------------------------------------------
 // render all stored sets
-@include sets($s, $media);
+@include sets($s, $m);

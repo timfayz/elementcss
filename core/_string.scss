@@ -1,49 +1,53 @@
-// _string.scss provides string manipulation functions.
+// _string.scss provides functions for string manipulations.
 
-// _
-// appends prefix for a given $val. If $val is `null` prepends nothing unless
+// prefix
+// prepends $prefix to a given $val. If $val is `null` prepends nothing unless
 // $onNull is true. If $val is equal to $except, then $val is considered as `null`.
-//    _(inline, '-')                  -> -inline
-//    _(inline, '-', $except:inline)  -> null
-//    _(null, '-')                    -> null
-//    _(null, '-', true)              -> -
-@function _($val, $prefix:'-', $onNull:false, $except:default) {
+//    prefix(inline, '-')                  -> -inline
+//    prefix(inline, '-', $except:inline)  -> null
+//    prefix(null, '-')                    -> null
+//    prefix(null, '-', true)              -> -
+@function prefix($val, $prefix:'-', $onNull:false, $except:root) {
   $val: if($val == $except, null, $val);
   @return if($val, #{$prefix}#{$val}, if($onNull, #{$prefix}, null));
 }
 
-// __
-// appends postfix for a given $val. If $val is `null` appends nothing unless
+// postfix
+// appends $postfix to a given $val. If $val is `null` appends nothing unless
 // $onNull is true. If $val is equal to $except, then $val is considered as `null`.
-//    __(inline, '-')                 -> inline-
-//    __(inline, '-', $except:inline) -> null
-//    __(null, '-')                   -> null
-//    __(null, '-', true)             -> -
-@function __($val, $postfix:'-', $onNull:false, $except:default) {
+//    postfix(inline, '-')                 -> inline-
+//    postfix(inline, '-', $except:inline) -> null
+//    postfix(null, '-')                   -> null
+//    postfix(null, '-', true)             -> -
+@function postfix($val, $postfix:'-', $onNull:false, $except:root) {
   $val: if($val == $except, null, $val);
   @return if($val, #{$val}#{$postfix}, if($onNull, #{$postfix}, null));
 }
 
 // _get-num
-// function implementing get-number() and get-numbers(). Return first occurrence
+// function implemens get-number() and get-numbers(). Return first occurrence
 // of a number from the $str and the last index of seeking character. Set $start
-// index if you want to shift start point of searching.
-//    _get-num('foo:.700foobar;')       -> error: `foob` is not supported
-//    _get-num('foo:.700bar;', true)    -> (0.7 9)
-//    _get-num('123.4567px', true, 2)   -> (23.4567 9)
-//    _get-num('123.4567px', false, 2)  -> (23.4567px 11)
-//    _get-num('path/file12.34.jpg')    -> (12.34 15)
-//    _get-num('path/file.12.34.jpg')   -> (12.34 16)
-//    _get-num('path/file..12..34.jpg') -> (12 15)
-@function _get-num($str, $unitless:false, $start: 1) {
-  $str: #{$str};
+// index if you want to shift start point of searching. $unit is true to return
+// number with CSS unit, $sign is true to return signed value.
+//    _get-num('top:.700bar;')                -> error: `bar` is not supported
+//    _get-num('top:-.700rem;')               -> (-0.7rem 13)
+//    _get-num('top:-.700bar;', false)        -> (-0.7 10)
+//    _get-num('top:-.700bar;', false, false) -> (0.7 10)
+//    _get-num('123.456px', false, $start:2)  -> (23.456 8)
+//    _get-num('123.456px', true, $start:4)   -> (0.456px 10)
+//    _get-num('path/file12.34.jpg')          -> (12.34 15)
+//    _get-num('path/file.12.34.jpg')         -> (12.34 16)
+//    _get-num('path/file..12..34.jpg')       -> (12 15)
+@function _get-num($str, $unit:true, $sign:true, $start:1) {
+  // escape input str to prevent evaluating strings/numbers as CSS values
+  $str: unquote('#{$str}');
   $end: str-length($str);
   @if $start > $end {
     @return null;
   }
   $num-chars: '0123456789';
-  $unit-chars: '%pxremtindgvhawcbfjkloqsuyz'; // CSS unit chars
-  //            [     valid    ][ invalid ]
+  $unit-chars: '%pxremtindgvhawcsubfjkloqyz'; // CSS unit chars
+  //            [      valid     ][invalid]
   $res: 0;
   $res-unit: '';
   //$lock: false; // float point occurrence trigger
@@ -83,20 +87,26 @@
   @if $p == $l {
     $l: $l - 1;
     $p: 0;
-    $unitless: true;
+    $unit: false;
   }
 
   // if .[0-9], but not ..[0-9]
   @if $p == 0 and str-slice($str, $f - 1, $f - 1) == '.' and str-slice($str, $f - 2, $f - 2) != '.' {
-    $p: $f - 1;
+    $f: $f - 1; // correct index of first number occurrence
+    $p: $f; // correct index of decimal point
   }
-  $exp: if($p > 0, $l - $p, 0);
 
+  // detect sign if $sign is true
+  @if $sign and str-slice($str, $f - 1, $f - 1) == '-' {
+    $res: -$res;
+  }
+  // set final exponent
+  $exp: if($p > 0, $l - $p, 0);
   // if unitless return immediately
-  @if $unitless {
+  @if $unit == false {
     @return $res/pow(10, $exp) $i;
   }
-  // else resolve unit
+  // else resolve a unit
   @else {
     $break: $l + 5; // valid CSS unit length <= 4
     @while $i < $break {
@@ -114,31 +124,33 @@
 }
 
 // get-number
-// returns first occurrence of a number from $str. Set $unitless to true if you want
-// to return number without any unit. Return null if number is not found, return error
-// if number has invalid CSS unit. $start index shifts start point
-// of searching.
+// returns first occurrence of a number from $str. Set $unit to false to return
+// number without any CSS unit. Set $sign to false to return unsigned number.
+// Return null if number is not found. Return error if number has invalid CSS
+// unit. $start index shifts start point of searching.
 //    get-number('foo:100bar')          -> error `bar` is not supported
 //    get-number('width:100px;')        -> 100px
-//    get-number('width:100px;', true)  -> 100
+//    get-number('width:100px;', false) -> 100
 //    get-number('height:.01rem;')      -> 0.01rem
-@function get-number($str, $unitless:false, $start: 1) {
-  @return nth(_get-num($str, $unitless, $start), 1);
+@function get-number($str, $unit:true, $sign:true, $start:1) {
+  @return nth(_get-num($str, $unit, $sign, $start), 1);
 }
 
-// get-number
-// returns list of numbers in order they occur in $str. Set $unitless to `true` if you
-// want to return numbers without unit. It returns empty list if number(s) is not found,
-// return error if one of a number has invalid CSS unit. $start index shifts start point
-// of searching.
+// get-numbers
+// returns list of numbers in order they occur in $str. Set $unit to true to
+// return numbers without unit any CSS unit. Set $sign to false to return
+// unsigned number. It returns empty list if number(s) is not found, return
+// error if one of a number has invalid CSS unit. $start index shifts start
+// point of searching.
 //    get-numbers('@media (max-width: 745px) and (min-width: 480px)') -> (745px 480px)
-//    get-numbers('20px/16 = 1.25rem')    -> (20px 16 1.25rem)
-//    get-numbers('0.16*50% = 8px', true) -> (0.16 50 8)
-@function get-numbers($str, $unitless:false, $start: 1, $max:null) {
+//    get-numbers('20px/16 = 1.25rem')            -> (20px 16 1.25rem)
+//    get-numbers('-0.16*50% = 8px', false)       -> (-0.16 50 8)
+//    get-numbers('-0.16*50% = 8px', $sign:false) -> (0.16 50% 8px)
+@function get-numbers($str, $unit:true, $sign:true, $start:1, $max:null) {
   $res: ();
   $true: true;
   @while $true {
-    $temp: _get-num($str, $unitless, $start);
+    $temp: _get-num($str, $unit, $sign, $start);
     @if $temp != null {
       $res: append($res, nth($temp, 1));
       $start: nth($temp, 2);
@@ -150,46 +162,55 @@
 }
 
 // str-exists
-// returns `true` if $str contains $substr, `false` if doesn't, `null` if $substring
-// doesn't exists.
+// returns `true` if $str contains $substr, `false` if doesn't, `null` if
+// $substring doesn't exists.
 //    has-postfix('media-mobile', 'mobile')  -> true
 //    has-postfix('media-mobile', 'middle')  -> false
 @function str-exists($str, $substr) {
   // escape input values to prevent evaluating strings as CSS values
-  @if str-index(#{$str}, #{$substr}) != null {
+  @if str-index('#{$str}', '#{$substr}') != null {
     @return true;
   }
   @return false;
 }
 
 // has-prefix
-// returns `true` if $str contains $prefix, `false` if doesn't, `null` if $substring
-// doesn't exists.
+// returns `true` if $str contains $prefix, `false` if doesn't, `null` if
+// $substring doesn't exists.
 //    has-prefix('media-mobile', 'media')   -> true
 //    has-prefix('media-mobile', 'medusa')  -> false
 @function has-prefix($str, $prefix) {
-  @return str-exists($str, $prefix);
+  $str: unquote('#{$str}');
+  $prefix: unquote('#{$prefix}');
+  @if str-length($prefix) > str-length($str) or str-length($prefix) < 1 {
+    @return false;
+  }
+  $i: str-index($str, $prefix);
+  @if $i == 1 {
+    @return true;
+  }
+  @return false;
 }
 
 // has-postfix
-// returns `true` if $str contains $postfix, `false` if doesn't, `null` if $substring
-// doesn't exists.
+// returns `true` if $str contains $postfix, `false` if doesn't, `null` if
+// $substring doesn't exists.
 //    has-postfix('media-mobile', 'mobile')  -> true
 //    has-postfix('media-mobile', 'middle')  -> false
 @function has-postfix($str, $postfix) {
-  $str: #{$str};
-  $postfix: #{$postfix};
-  @if str-length($postfix) <= str-length($str) and str-length($postfix) < 1 {
+  $str: unquote('#{$str}');
+  $prefix: unquote('#{$prefix}');
+  @if str-length($postfix) > str-length($str) or str-length($postfix) < 1 {
     @return false;
   }
-  $is: str-length($str);
-  @for $ip from str-length($postfix) through 1 {
-    $lp: str-slice($postfix, $ip, $ip); // letter of $prefix
-    $ls: str-slice($str, $is, $is); // letter of $string
+  $slen: str-length($str);
+  @for $i from str-length($postfix) through 1 {
+    $lp: str-slice($postfix, $i, $i); // letter of $prefix
+    $ls: str-slice($str, $slen, $slen); // letter of $string
     @if $ls != $lp {
       @return false;
     }
-    $is: $is - 1;
+    $slen: $slen - 1;
   }
   @return true;
 }
@@ -198,21 +219,20 @@
 // implementing str-replace() function. Returns a copy of the $str with the first of
 // $n instances of $old replaced by $new. If $n < 0, there is no limit on the number
 // of replacements.
-//    str-replace('url(ftp://..)', 'ftp', 'https')      -> 'url(https://..)'
-//    str-replace('8px + 8px = 1rem', '1rem', '0')      -> '8px + 8px = 0'
-//    str-replace('a a a a a a', 'a', 'b', 4)           -> 'b b b b a a'
-//    str-replace('a a a a a a', 'a', 'b', -1)          -> 'b b b b b b'
+//   _str-replace('url(ftp://..)', 'ftp', 'https')      -> 'url(https://..)'
+//   _str-replace('8px + 8px = 1rem', '1rem', '0')      -> '8px + 8px = 0'
+//   _str-replace('a a a a a a', 'a', 'b', 4)           -> 'b b b b a a'
+//   _str-replace('a a a a a a', 'a', 'b', -1)          -> 'b b b b b b'
 @function _str-replace($str, $old, $new, $n:1) {
   @if $old == '' {
     @return $str;
   }
   // $n < 0 set no limit to replacements
   @if $n == -1 {
-    $n: 9999999999999999;
+    $n: 99999999;
   }
-  // escape input values to prevent evaluating strings/numbers as CSS values
-  $old: #{$old};
-  $new: #{$new};
+  $old: unquote('#{$old}');
+  $new: unquote('#{$new}');
   $i: str-index($str, $old);
   @while $i != null and $n > 0 {
     $after: str-slice($str, $i + str-length($old), str-length($str));
@@ -261,14 +281,47 @@
 
 // trim-left
 // returns new string without leading $cutset in the $str. If $str doesn't
-// contain leading $cutset it return original $str.
-//    trim-left('@media (max-width: 960px)', '@media') -> '(max-width: 960px)'
+// contain leading $cutset it returns original $str. If $cutset is number the
+// function make cut by fixed length.
+//    trim-left('@media (max-width: 960px)', '@media ') -> '(max-width: 960px)'
+//    trim-left('@media (max-width: 960px)', '@medusa') -> '@media (max-width: 960px)'
+//    trim-left('url(file.png)', 3)                     -> '(file.png)'
 @function trim-left($str, $cutset) {
+  $str: unquote('#{$str}');
   @if $cutset == '' {
     @return $str;
   }
-  @if str-slice($str, 1, str-length($cutset)) == $cutset {
-    @return str-slice($str, str-length($cutset) + 1, str-length($str));
+  @if type-of($cutset) == string {
+    @if str-slice($str, 1, str-length($cutset)) == $cutset {
+      @return str-slice($str, str-length($cutset) + 1, str-length($str));
+    }
+  }
+  @else if type-of($cutset) == number {
+    @return str-slice($str, $cutset+1);
+  }
+  @return $str;
+}
+
+// trim-right
+// returns new string without ending $cutset in the $str. If $str doesn't
+// contain a $cutset at the end function returns original $str. If $cutset is
+// number the function make cut by fixed length from the end of $str.
+//    trim-right('path/filename.png', '.png') -> 'path/filename'
+//    trim-right('path/filename.png', '.jpg') -> 'path/filename.png'
+//    trim-right('path/filename.png', 4)      -> 'path/filename'
+@function trim-right($str, $cutset) {
+  $str: unquote('#{$str}');
+  @if $cutset == '' {
+    @return $str;
+  }
+  $str-len: str-length($str);
+  @if type-of($cutset) == string {
+    @if str-slice($str, $str-len - str-length($cutset) + 1, $str-len) == $cutset {
+      @return str-slice($str, 1, $str-len - str-length($cutset));
+    }
+  }
+  @else if type-of($cutset) == number {
+    @return str-slice($str, 1, $str-len - $cutset);
   }
   @return $str;
 }

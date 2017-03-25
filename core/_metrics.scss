@@ -1,49 +1,52 @@
-// _metrics.scss provides 2 functions: first converts arbitrary values into values
-// fixed ones according to your base-line ("snapping"); second for calculating grid
-// system parameters like column width, gap width etc.
+// _metrics.scss provides 2 functions: first restricts input values into fixed base
+// according to your baseline ("snapping"); second for calculating grid parameters
+// like column width, gap width etc.
 
 // calc-line
-//
 // provides convenient way to control vertical/horizontal rhythm. It snap any input CSS
-// value (eg: line-height, margin, height etc) and snap it (restrict to fixed base)
-// according to your page layout baseline. Useful to sync values with invisible v/h grid.
+// value (eg line-height, margin, height etc) and restrict it to fixed base according
+// to your page layout baseline. Useful to sync values with invisible v/h grid.
+// TODO: describe arguments, delete comments from default vars
 //    calc-line(1 0.5, 8px)           -> 0.5rem 0.25rem;
 //    calc-line(0.25 0.5 1, $unit:px) -> 2px 4px 8px;
 //    calc-line(0 1 important)        -> 0 0.5rem !important;
-//    TODO(timur): update the example
-//     result:
-//       0px  ---  ---  -----
-//             a    A     ^
-//      14px  ---  ---   /_\
-//                      /  \
-//      28px  ---  ---  ------
-//      font- 6px 12px  18px
-//      size:
-$calc-line-baseline:  8px !default;   // number with valid CSS unit
-$calc-line-unit:      rem !default;   // valid CSS unit
-$calc-line-threshold: 100% !default;  // new line jumping threshold
-$calc-line-pitch:     0.5 !default;   // new line jumping pitch (> 0)
-$calc-line-round:     false !default; // round to integer pixel
+//    calc-line(15px, 16px, px, 100%) -> 16px
+//    calc-line(31px, 16px, px, 100%) -> 32px
+//    calc-line(15px, 16px, px, 60%)  -> 32px
+//    calc-line(31px, 16px, px, 60%)  -> 64px
+//    usage example:
+//      $calc-line-baseline: 22px; (optional) allow to skip constantly entering `baseline` arg
+//      $calc-line-unit: rem;      (optional) allow to skip constantly entering `unit` arg
+//      img { padding: calc-line(0.5 1); height: calc-line(6); } ->
+//      img { padding: 0.6875rem 1.375rem; height: 8.25rem; }
+$calc-line-baseline:  8px !default;     // number with valid CSS unit
+$calc-line-unit:      rem !default;     // valid CSS unit
+$calc-line-threshold: 100% !default;    // new line jumping threshold
+$calc-line-pitch:     1 !default;       // new line jumping pitch (> 0)
+$calc-line-round:     false !default;   // round to integer pixel
+$calc-line-parent:    16 !default;      // round to integer pixel
 @function calc-line(
   $vals,
   $baseline:  $calc-line-baseline,
   $unit:      $calc-line-unit,
-  $threshold: $calc-line-threshold,
+  $thresh:    $calc-line-threshold,
   $pitch:     $calc-line-pitch,
-  $round:     $calc-line-round) {
+  $round:     $calc-line-round,
+  $parent:    $calc-line-parent) {
   $res: ();
   @each $v in $vals {
     @if type-of($v) == number {
       @if unitless($v) {
         @if $v != 0 {
-          $v: $v * convert-unit($baseline, rem);
+          $v: $v * convert-length($baseline, rem);
         }
       } @else {
-        $temp: $baseline;
-        $thresh: trim-unit($threshold);
+        // baseline is always 16px parent
+        $bs: trim-unit(convert-length($baseline, px));
+        $v: trim-unit(convert-length($v, px, $parent));
+        $th: trim-unit($thresh);
 
-        $v: trim-unit(convert-unit($v, px));
-        $base: trim-unit(convert-unit($baseline, px)) * ($thresh / 100);
+        $base: $bs * ($th / 100);
         $ratio: ceil($v / $base);
         $calc: $base * ($ratio - 1);
         @if $pitch <= 0 {
@@ -52,10 +55,9 @@ $calc-line-round:     false !default; // round to integer pixel
         @while ($v > $calc) {
           $calc: $calc + $base * $pitch;
         }
-        $v: $calc / $base * $temp;
+        $v: $calc / $base * $baseline;
       }
-
-      $v: if($round, round-unit($v, $unit), convert-unit($v, $unit));
+      $v: if($round, round-length($v, $unit, $parent), convert-length($v, $unit, $parent));
       $res: append($res, $v);
     }
     @else if $v == important or $v == "!important" {
@@ -82,8 +84,7 @@ $calc-line-round:     false !default; // round to integer pixel
 //    calc-grid(all, 6 column-gap 60px 20px)  -> 6 16.66667% 4.34783% *
 //    * if your container's width is 480px ((60+20)*6), then resulting column and
 //    gap widths will 60px and 20px respectively
-$calc-grid-data: null !default;
-@function calc-grid($return, $data:$calc-grid-data) {
+@function calc-grid($return, $data) {
   @if length($data) < 3 {
     @error "@mixin grid(): wrong number of calc values in 2nd argument. Please, check the syntax.";
   }

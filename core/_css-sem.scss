@@ -1,0 +1,639 @@
+// _css-set.scss implements SEM methodology. File consists of two parts. First
+// defines functions and mixins to work with "sets". Second defines shortcuts
+// for SEM-like class names. To learn more about SEM go to:
+// https://github.com/timfayz/SEM.
+// Common variable naming conventions in this file:
+// $q- query, $c- class, $s- selector, $p- property
+
+// _gen-set
+// analyzes set data and renders actual CSS styles.
+// $s-base - class prefix for a given CSS property.
+// $s-type - type of selectors will be generated ('.', '#', '%', ''), eg:
+//   '%' = placeholder, generates no content (needs only for Sass @extend operator)
+//   '.' = class, generates common class selectors (default behavior)
+// Examples:
+//    _gen-set(background, bg, (green, #84ed28)); -> #bg-green {background: #84ed28;}
+//    _gen-set(color, '.' c, (prefix, red, red), mobile); -> .mobile-c-red {color: red;}
+//    _gen-set(color, '#' c, (prefix, red, red), mobile); -> #mobile-c-red {color: red;}
+//    _gen-set(color, ('.' '#') c, (prefix, red, red), mobile); ->
+//      .mobile-c-red {color: red;}
+//      #mobile-c-red {color: red;}
+//    _gen-set(color, '%' c, (red, red)); -> generates invisible `%c-red` selector
+//      .my-btn {@extend %c-red;} -> .my-btn {color: red;}
+@mixin _gen-set($s-base, $p-name, $v-list, $q-name:null) {
+  // Defaults
+  // ---------------
+  $s-type: '%' '.'; // default selectors to generate
+  // get selector type(s) from it's base if presented
+  @if length($s-base) > 1 {
+    $s-type: nth($s-base, 1);
+    $s-base: nth($s-base, length($s-base));
+  }
+
+  // Constructor vars
+  // ----------------
+  // variables changing during the loop
+  $q-pre: null;     // query name prefix
+  $q-post: null;    // query name postfix
+  $s-bpre: null;    // selector base prefix
+  $s-bpost: null;   // selector base postfix
+  $s-pre: (null);   // selector prefix
+  $s-post: (null);  // selector postfix
+
+  $i: 1; // offset position
+  @while $i <= length($v-list) {
+    // update cursor on each iteration
+    $cur: nth($v-list, $i);
+
+    // Step 0
+    // ---------------
+    // Prepend/append/clean query name
+    @if $cur == prefix {
+      $q-pre: postfix($q-name);
+      $q-post: null;
+      $i: $i + 1;
+    }
+    @if $cur == postfix {
+      $q-pre: null;
+      $q-post: prefix($q-name);
+      $i: $i + 1;
+    }
+    @else if $cur == unfix {
+      $q-pre: null;
+      $q-post: null;
+      $i: $i + 1;
+    }
+
+    // Step 1
+    // ---------------
+    // Get CSS selectors if presented
+    $cur: nth($v-list, $i);
+    @if length($cur) == 3 {
+      $s-pre: nth($cur, 1);
+      $s-post: nth($cur, 3);
+      $i: $i + 1;
+    }
+
+    // Step 2
+    // ---------------
+    // Get pre/post base name
+    $cur: nth($v-list, $i);
+    $i: $i + 1;
+    // if pre/postfix class names are presented
+    @if length($cur) == 2 {
+      $s-bpre: nth($cur, 1);
+      $s-bpost: nth($cur, 2);
+    }
+    // if there is only class postfix
+    @else {
+      $s-bpre: null; // reset prefix
+      $s-bpost: $cur;
+    }
+
+    // Step 3
+    // ---------------
+    // Get property value.
+    $cur: nth($v-list, $i);
+    $i: $i + 1;
+    $p-value: null;
+    @if length($cur) >= 3 and nth($cur, 2) == _ {
+      $p-value: $cur;
+    } @else {
+      // append null for correct handling values within the loop
+      $p-value: $cur, null;
+    }
+
+    // Step 4
+    // ---------------
+    // Get property shortcut
+    // append dash if $s-bpost isn't null and do not start with _
+    $s-bname: if($s-bpost != null
+      // [feature: _-_name -> __name]
+      and str-slice(unquote("#{$s-bpost}"), 1, 1) != '_',
+      postfix($s-base), $s-base);
+
+    // Step 5 (deprecated)
+    // ---------------
+    // Get selector type
+
+    // Step 6
+    // ---------------
+    // Construct selector and render going through each selector type
+    @each $type in $s-type {
+      // construct
+      $selector:
+        unquote("#{$s-pre}#{$type}#{$q-pre}#{$s-bpre}#{$s-bname}#{$s-bpost}#{$q-post}#{$s-post}");
+      //         [selectr]+[./#/%]+[mobil-]+[prefix-]+[bg-/mrg-]+[  name  ]+[-mobile]+[selectr]
+      // the constructor uses either $q-pre or $q-post, but not both at once
+      //@debug SPRE $s-pre TYPE $type QPRE $q-pre SBPRE $s-bpre SBNAME $s-bname SBPOST $s-bpost QPOST $q-post SPOST $s-post;
+      //@debug $selector;
+
+      // render
+      #{$selector} {
+        // if set has several CSS properties at once, here two scenarios:
+        //  1 - specify the same value for all properties if there is only one CSS value
+        //  2 - specify different values for each property comes subsequently, using the
+        //     the following syntax: prefix, (1st property value) _ (2st property value),
+        $n: 1;
+        @for $i from 1 through length($p-name) {
+          // scenario 2
+          @if nth($p-value, 2) == _ {
+            @if $n <= length($p-value) {
+              #{nth($p-name, $i)}: nth($p-value, $n);
+              $n: $n + 2;
+            } @else {
+              #{nth($p-name, $i)}: nth($p-value, $n - 2);
+            }
+          // scenario 1
+          } @else {
+            #{nth($p-name, $i)}: nth($p-value, 1);
+          }
+        }
+      }
+    }
+  }
+}
+
+// add
+// store sets into a given $storage variable.
+//    $s: ();
+//    $s: add($s, pdd, padding (def, 20px));
+//    $s: add($s, mrg, margin (def, 20px));
+//      -> (default: (pdd padding () (def, 20px)) (mrg margin () (def, 20px)))
+@function add($storage, $p-name, $s-base, $set-data) {
+  @if length($set-data) == 0 or $set-data == null  {
+    @return $storage; // nothing to store, pass through
+  }
+  // !default variables can't be null, instead we use none
+  $s-base: if($s-base == none, null, $s-base);
+  @if $storage == null {
+    $storage: ();
+  }
+  // add each new set under unique id: (1: base name data, 2: ..., 3: ...)
+  @return map-merge($storage, (length($storage): $s-base $p-name $set-data));
+}
+
+// pass
+// skips input data and returns untouched $storage.
+@function pass($args...) {
+  @return nth($args,1);
+}
+
+// sets
+// generates sets from $storage.
+//    @include sets($s) -> .pdd-def {padding: 20px;}
+@mixin sets($storage, $query-map:()) {
+  @if length($storage) == 0 or $storage == null {
+    @error '@mixin sets(): nothing to render - 1st argument is empty.';
+  }
+
+  // prepare query map and query name list
+  $q-map: if(length($query-map) == 2 and type-of(nth($query-map, 2)) == map,
+  nth($query-map, 2), $query-map);
+  $q-names: if($q-map, map-keys($q-map), ());
+
+  // Prepare map
+  // ---------------
+  $db: (); // resulting database map
+  @each $k, $v in $storage {
+    // prepare query:set pairs
+    // ---------------
+    @if type-of(nth($v, 3)) == map {
+      // retrieve
+      $p-short: nth($v, 1);
+      $p-name: nth($v, 2);
+      $s-map: nth($v, 3);
+      @each $k, $v in $s-map {
+        $entry: wrap($p-short $p-name $v);
+        //@debug KEY $k VAL $v STORE $entry;
+        // all:
+        // ---------------
+        @if $k == all {
+          // if root isn't specified explicitly
+          @if index($q-names, root) == null {
+            $db: map-union($db, (root:$entry));
+          }
+          // go through all available queries
+          @each $q in $q-names {
+            $db: map-union($db, ($q:$entry));
+          }
+        }
+        // query*:
+        // ---------------
+        @else if has-prefix($k, 'query') {
+          $subq: nth($v, 1); // names after (query: (names) (...))
+          // remove queries from entry
+          $entry: wrap($p-short $p-name unwrap(slice($v, 2)));
+          // all queries, except root
+          @if $subq == all {
+            @each $q in remove($q-names, root) {
+              @if map-get($q-map, $q) { $db: map-union($db, ($q:$entry)); }
+            }
+          }
+          // explicitly specified
+          @else {
+            @each $q in $subq {
+              @if map-get($q-map, $q) { $db: map-union($db, ($q:$entry)); }
+            }
+          }
+        }
+        // root/others:
+        // ---------------
+        @else {
+          $db: map-union($db, ($k:$entry));
+        }
+        //@debug LOOP DB $db;
+      }
+    }
+
+    // no pairs just set list
+    // ---------------
+    @else {
+      $db: map-union($db, (root:wrap($v)));
+    }
+  }
+
+  // Generate map
+  // ---------------
+  //@debug FINAL DB $db;
+  @each $q-name, $entry in $db {
+    @include media($q-name, $query-map) {
+      // go through each set under one query name
+      @each $e in $entry {
+        //@debug E $q-name $e;
+        @include _gen-set(nth($e, 1), nth($e, 2), nth($e, 3), $q-name);
+      }
+    }
+  }
+}
+
+// set
+// generates the only one given set.
+//    @include set(bg, background (red, #ff1b2e))
+//      -> .bg-red {background: #ff1b2e;}
+//    @include set(indent, (margin padding) (sm, 20px));
+//      -> .indent-sm {margin: 20px; padding: 20px;}
+@mixin set($p-name, $s-base, $set-data, $q-map:null) {
+  @include sets(add((), $p-name, $s-base, $set-data), $q-map);
+}
+
+// pass-set
+// skips a given set and output nothing.
+// Useful if you want to stash a given set for a while.
+@mixin pass-set($s-base, $data, $q-map:null) {}
+
+
+
+// SEM's property shortcuts
+// ----------------------------------------
+// TODO rewrite description of the section
+// Here is complete list of valid shorthands for all valid CSS properties.
+// which is intended to use in creating Sets (one class = one property).
+//    .#{$Padding}-xsm {padding:10px;} -> pdd-xsm {...}
+//    .#{$Box-shadow}-out {box-shadow: 0 1px 1px black;} -> bxsh-out {...}
+
+// Categorized by w3schools.com/cssref/default.asp.
+// (!) Designed syntax guarantees good readability, brevity and intuitiveness as well
+// as almost no collisions and repetitions between shorthands of different properties.
+// There are only ~6 exceptions and some of them are very rarely used.
+//
+// Syntax:
+//    1 word = first letter and two subsequent consonants:
+//      [p]o[s]i[t]ion  = pst
+//      [o][v]e[r]flow  = ovr
+//
+//    2 word = first letter, one subsequent consonant and the same for second word:
+//      [b]o[x]-[s][h]adow  = bxsh
+//      [f]o[n]t-[s]i[z]e   = fnsz
+//
+//    3 word = first letter, one subsequent consonant and two first letters of subsequent words:
+//      [a][n]imation-[t]iming-[f]unction = antf
+//      [b]o[r]der-[i]mage-[s]ource       = bris
+//
+//    Properties' direction abbreviated as follows (see previous section):
+//      -top      = -t
+//      -top-left = -tl
+//      -bottom   = -b
+//      -x/-y     = -x/-y
+//
+//    Properties' direction are not words and are always written separately at the end of
+//    shorthand using hyphen:
+//      border-top-color        = [b]o[r]der(-top-)[c]o[l]or        = brcl-t
+//      border-top-left-radius  = [b]o[r]der(-top-left-)[r]a[d]ius  = brrd-tl
+//      margin-bottom           = [m]a[r][g]in(-bottom)             = mrg-b
+//      overflow-x              = [o][v]e[r]flow(-x)                = ovr-x
+//
+// Conventions:
+//    * - exceptions to the rule
+//    a - intentional abbreviation of the name
+//    unofficial - properties do not standardized by World Wide Web Consortium
+//    Note that there is no shorthands for deprecated CSS properties.
+
+// Property directions
+$T:                             -t !default; // top
+$R:                             -r !default; // right
+$B:                             -b !default; // bottom
+$L:                             -l !default; // left
+$TL:                            -tl !default; // top-left
+$TR:                            -tr !default; // top-right
+$BR:                            -br !default; // bottom-right
+$BL:                            -bl !default; // bottom-left
+$X:                             -x !default; // x axis
+$Y:                             -y !default; // y axis
+
+$All:                           all !default;
+
+// Color
+$Color:                         c !default; //a
+
+// Background
+$Background:                    bg !default; //a
+$Background-attachment:         bgat !default;
+$Background-break:              bgbr !default;
+$Background-color:              bgcl !default;
+$Background-image:              bgim !default;
+$Background-position:           bgps !default;
+$Background-position-x:         bgps + $X !default;
+$Background-position-y:         bgps + $Y !default;
+$Background-repeat:             bgrp !default;
+$Background-clip:               bgcl !default;
+$Background-origin:             bgor !default;
+$Background-size:               bgsz !default;
+
+// Border
+$Border:                        brd !default;
+$Border-top:                    brd + $T !default;
+$Border-right:                  brd + $R !default;
+$Border-bottom:                 brd + $B !default;
+$Border-left:                   brd + $L !default;
+// color
+$Border-color:                  brcl !default;
+$Border-top-color:              drcl + $T !default;
+$Border-right-color:            drcl + $R !default;
+$Border-bottom-color:           drcl + $B !default;
+$Border-left-color:             drcl + $L !default;
+// style
+$Border-style:                  brst !default;
+$Border-top-style:              brst + $T !default;
+$Border-right-style:            brst + $R !default;
+$Border-bottom-style:           brst + $B !default;
+$Border-left-style:             brst + $L !default;
+// width
+$Border-width:                  brwd !default;
+$Border-top-width:              brwd + $T !default;
+$Border-right-width:            brwd + $R !default;
+$Border-bottom-width:           brwd + $B !default;
+$Border-left-width:             brwd + $L !default;
+// radius
+$Border-radius:                 brrd !default;
+$Border-top-right-radius:       brrd + $TR !default;
+$Border-top-left-radius:        brrd + $TL !default;
+$Border-bottom-right-radius:    brrd + $BR !default;
+$Border-bottom-left-radius:     brrd + $BL !default;
+
+// Border-image
+$Border-image:                  brim !default;
+$Border-image-outset:           brio !default;
+$Border-image-repeat:           brir !default;
+$Border-image-width:            briw !default;
+$Border-image-source:           bris !default;
+$Border-image-slice:            brisl !default; //*
+
+// Box shadow
+$Box-shadow:                    bxsh !default;
+
+// Basic Box Layout
+$Box-sizing:                    bxsz !default;
+$Vertical-align:                vral !default;
+$Clear:                         clr !default;
+$Float:                         flt !default;
+$Opacity:                       opc !default;
+$Display:                       dsp !default;
+$Visibility:                    vsb !default;
+$Clip-path:                     clpt !default;
+$Z-index:                       z !default; //a
+// Positioning
+$Position:                      pst !default;
+$Top:                           t !default; //a
+$Right:                         r !default; //a
+$Bottom:                        b !default; //a
+$Left:                          l !default; //a
+// Overflow
+$Overflow:                      ovr !default;
+$Overflow-x:                    ovr + $X !default;
+$Overflow-y:                    ovr + $Y !default;
+$Overflow-style:                ovst !default;
+// Margin
+$Margin:                        mrg !default;
+$Margin-top:                    mrg + $T !default;
+$Margin-right:                  mrg + $R !default;
+$Margin-bottom:                 mrg + $B !default;
+$Margin-left:                   mrg + $L !default;
+// Padding
+$Padding:                       pdd !default;
+$Padding-top:                   pdd + $T !default;
+$Padding-right:                 pdd + $R !default;
+$Padding-bottom:                pdd + $B !default;
+$Padding-left:                  pdd + $L !default;
+// Height
+$Height:                        h !default; //a
+$Max-height:                    mxh !default;
+$Min-height:                    mnh !default;
+// Width
+$Width:                         w !default; //a
+$Max-width:                     mxw !default;
+$Min-width:                     mnh !default;
+
+// Flexbox Layout
+$Align-content:                 alcn !default;
+$Align-items:                   alit !default;
+$Align-self:                    alsl !default;
+$Flex:                          flx !default;
+$Flex-basis:                    flbs !default;
+$Flex-direction:                fldr !default;
+$Flex-flow:                     flfl !default;
+$Flex-grow:                     flgr !default;
+$Flex-shrink:                   flsh !default;
+$Flex-wrap:                     flwr !default;
+$Justify-content:               jscn !default;
+$Order:                         ord !default;
+
+// Line-height
+$Line-height:                   lnhg !default;
+
+// Text
+$Text-shadow:                   txsh !default;
+$Text-align:                    txal !default;
+$Text-emphasis:                 txem !default;
+$Text-height:                   txhg !default;
+$Text-indent:                   txin !default;
+$Text-justify:                  txjs !default;
+$Text-outline:                  txot !default;
+$Text-replace:                  txrp !default;
+$Text-transform:                txtr !default;
+$Text-wrap:                     txwr !default;
+$Text-overflow:                 txov !default;
+
+// Text-decoration
+$Text-decoration:               txdc !default;
+$Text-decoration-color:         txdc !default;
+$Text-decoration-line:          txdl !default;
+$Text-decoration-style:         txds !default;
+
+// Word, Letter, White space, Tab size
+$Tab-size:                      tbsz !default;
+$Word-break:                    wrbr !default;
+$Word-spacing:                  wrsp !default;
+$Word-wrap:                     wrwr !default;
+$Letter-spacing:                ltsp !default;
+$White-space:                   whsp !default;
+$White-space-collapse:          whsc !default;
+
+// Font
+$Font:                          fnt !default;
+$Font-weight:                   fnwg !default;
+$Font-style:                    fnst !default;
+$Font-variant:                  fnvr !default;
+$Font-size:                     fnsz !default;
+$Font-size-adjust:              fnsa !default;
+$Font-family:                   fnfm !default;
+$Font-effect:                   fnef !default;
+$Font-emphasize:                fnem !default;
+$Font-emphasize-position:       fnep !default;
+$Font-emphasize-style:          fnes !default;
+$Font-smooth:                   fnsm !default;
+$Font-stretch:                  fnstr !default; //*
+
+// Writing Modes
+$Direction:                     drc !default;
+$Unicode-bidi:                  unbd !default;
+
+// Table
+$Border-collapse:               brcll !default; //*
+$Border-spacing:                brsp !default;
+$Table-layout:                  tblt !default;
+$Caption-side:                  cpsd !default;
+$Empty-cells:                   emcl !default;
+
+// List
+$List-style:                    ls !default; //a
+$List-style-position:           lssp !default;
+$List-style-type:               lsst !default;
+$List-style-image:              lsim !default;
+
+// Animation
+$Animation:                     anm !default;
+$Animation-delay:               andl !default;
+$Animation-direction:           andi !default; //*
+$Animation-duration:            andu !default; //*
+$Animation-fill-mode:           anfm !default;
+$Animation-iteration-count:     anic !default;
+$Animation-name:                annm !default;
+$Animation-play-state:          anps !default;
+$Animation-timing-function:     antf !default;
+
+// Transform
+$Transform:                     tf !default; //a
+$Transform-origin:              tfor !default;
+$Transform-style:               tfst !default;
+$Backface-visibility:           bcvs !default;
+$Perspective:                   prs !default;
+$Perspective-origin:            pror !default;
+
+// Transition
+$Transition:                    trn !default;
+$Transition-property:           trpr !default;
+$Transition-duration:           trdr !default;
+$Transition-timing-function:    trtf !default;
+$Transition-delay:              trdl !default;
+
+// User Interface
+$Pointer-events:                pnev !default;
+$Cursor:                        crs !default;
+$User-select:                   ussl !default; //unofficial
+$Zoom:                          zm !default;
+$Resize:                        rsz !default;
+$Outline:                       otl !default;
+$Outline-color:                 otcl !default;
+$Outline-offset:                otof !default;
+$Outline-width:                 otwd !default;
+$Outline-style:                 otst !default;
+
+// Multi-column Layout
+$Columns:                       clm !default;
+$Column-count:                  clcn !default;
+$Column-fill:                   clfl !default;
+$Column-gap:                    clgp !default;
+$Column-rule:                   clrl !default;
+$Column-rule-color:             clrc !default;
+$Column-rule-style:             clrs !default;
+$Column-rule-width:             clrw !default;
+$Column-span:                   clsp !default;
+$Column-widht:                  clwd !default;
+$Orientation:                   orn !default;
+
+// Paged Media
+$Page-break-before:             pgbb !default;
+$Page-break-inside:             pgbi !default;
+$Page-break-after:              pgba !default;
+$Orphans:                       orp !default;
+$Widows:                        wds !default;
+
+// Generated content
+$Content:                       cnt !default;
+$Quotes:                        qts !default;
+$Counter-increment:             cnin !default;
+$Counter-reset:                 cnrs !default;
+
+// Filter
+$Filter:                        flt !default;
+
+// Image
+$Image-orientation:             imor !default;
+$Image-rendering:               imrn !default;
+$Image-resolution:              imrs !default;
+
+// Replaced Content
+// developer.mozilla.org/en-US/docs/Web/CSS/Replaced_element
+$Object-fit:                    obft !default;
+$Object-position:               obps !default;
+
+// Pseudo selectors
+// elements
+$-after:                aft !default;
+$-before:               bfr !default;
+$-first-letter:         frlt !default;
+$-first-line:           frln !default;
+$-selection:            slc !default;
+// classes
+$-active:               act !default;
+$-checked:              chc !default;
+$-disabled:             dsb !default;
+$-empty:                emp !default;
+$-enabled:              enb !default;
+$-first-child:          frch !default;
+$-first-of-type:        frot !default;
+$-focus:                fcs !default;
+$-hover:                hvr !default;
+$-in-range:             inrn !default;
+$-invalid:              inv !default;
+$-lang:                 lng !default;
+$-last-child:           lsch !default;
+$-last-of-type:         lsot !default;
+$-link:                 lnk !default;
+$-not:                  'not' !default;
+$-nth-child:            ntch !default;
+$-nth-last-child:       ntlc !default;
+$-nth-last-of-type:     ntlot!default;
+$-nth-of-type:          ntot !default;
+$-only-of-type:         onot !default;
+$-only-child:           onch !default;
+$-optional:             opt !default;
+$-out-of-range:         ouor !default;
+$-read-only:            rdon !default;
+$-read-write:           rdwr !default;
+$-required:             rqr !default;
+$-root:                 rt !default;
+$-target:               trg !default;
+$-valid:                vld !default;
+$-visited:              vst !default;

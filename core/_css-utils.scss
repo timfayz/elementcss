@@ -58,41 +58,44 @@
 }
 
 // media
-// renders a content blocks under associated query string. $map is a map where
-// key is name of query and value is the query itself. If $map is presented, $query
-// must be a key of corresponding key-value pair in $map. If $map is null,
-// $query can be a query string itself. $unit is a CSS unit in which numbers presented
-// in a query string will be converted to.
-//    $devices: (
+// renders a content blocks under associated query string.
+// $map is a map where key is name of query and value is the query string
+// itself. If $map is presented, $key must be actual key. If there is no pair
+// corresponding to $key function outputs nothing. If $map is null, $key must
+// be a query string itself.
+// If you type CSS unit before the map (as in the example below) or after a
+// query string, function automatically retrieve the numbers and converts them
+// according to specified unit.
+//    $queries: rem (
 //       tablet:   '@media screen and (max-width: 740px)',
 //       mobile:   '@media screen and (max-width: 480px)',
 //       touch:    '.touch',
 //    );
-//    @include media(mobile, $devices, rem) { .test {color: white;} }
+//    @include media(mobile, $queries) { .test {color: white;} }
 //    or
-//    @include media('@media screen and (max-width: 480px)', rem) { .test {color: white;} }
+//    @include media('@media screen and (max-width: 480px)' rem) { .test {color: white;} }
 //    result of both is the same:
 //    @media screen and (max-width: 30rem) { .test {color: white;} }
-@mixin media($name, $map:null) {
-  // `default` query name is exception, just pass through
-  @if $name == default {
+@mixin media($key, $map:null) {
+  // `root` query name is exception, just pass through
+  @if $key == root {
     @content;
   } @else {
     $query: null;
     $params: null;
-    // if $map is presented, get query string from associated $name
+    // if $map is presented, get query string from associated $key
     @if $map {
       // split map from unit params
       @if length($map) == 2 and type-of(nth($map, 2)) == map {
         $params: nth($map, 1);
-        $query: map-get(nth($map, 2), $name);
+        $query: map-get(nth($map, 2), $key);
       } @else {
-        $query: map-get($map, $name);
+        $query: map-get($map, $key);
       }
     }
-    // else use $name as actual query string
+    // else use $key as actual query string
     @else {
-      $query: $name;
+      $query: $key;
     }
 
     @if $query {
@@ -108,7 +111,7 @@
           $parent: if(length($params) == 2, nth($params, 2), 16);
           $res: ();
           @each $num in $nums {
-            $res: append($res, convert-unit($num, $unit, $parent));
+            $res: append($res, convert-length($num, $unit, $parent));
           }
           $query: str-replace($query, $nums, $res);
         }
@@ -121,42 +124,84 @@
         }
       }
     }
+    // else output nothing
   }
 }
 
 // container
-// generates ._container classes for centering a content within. 1st arg is parameter
-// map, where key = query name, value = width of container under this query.
-//    $devices: (
-//      default: null, tablet: '@media (max-width: 740px)', mobile: '@media (max-width: 480px)'
-//    );
-//    @include container((default: 960px, mobile: 100%), $devices);
-//    output:
+// generates ._container class(es) for centering content within. $data can be
+// (1) width for root container, or (2) - if $query-map is presented - param map
+// where key = query name, value = width of container under this query.
+// 1. @include container(960px); ->
 //    ...
 //    ._container {width: 960px}
-//    @media (max-width: 480px) { ._container, .mobile-container {width: 100%;} }
-@mixin container($params, $media:null) {
-  @if type-of($params) != map {
-    $params: (default: $params);
+//
+// 2. $devices: (mobile: '@media (max-width: 480px)', ...);
+//    @include container((root: 960px, mobile: 100%), $devices); ->
+//    ...
+//    ._container {width: 960px}
+//    @media (max-width: 480px) {._container, .mobile_container {width: 100%;}}
+@mixin container($data, $query-map:()) {
+  // prepare query map and query name list
+  $q-map: if(length($query-map) == 2 and type-of(nth($query-map, 2)) == map,
+  nth($query-map, 2), $query-map);
+  $q-names: if($q-map, map-keys($q-map), ());
+
+  $db:();
+  @if type-of($data) == map {
+    @each $key, $param in $data {
+      // all:
+      @if $key == all {
+        // if root isn't specified explicitly
+        @if index($q-names, root) == null {
+          $db: map-merge($db, (root:$param));
+        }
+        // go through all available queries
+        @each $q in $q-names {
+          $db: map-merge($db, ($q:$param));
+        }
+      }
+      // query*:
+      @else if has-prefix($key, 'query') {
+        $subq: nth($param, 1); // names after (query: (names) (...))
+        $param: unwrap(slice($param, 2));
+        // all queries, except root
+        @if $subq == all {
+          @each $q in remove($q-names, root) {
+            @if map-get($q-map, $q) { $db: map-merge($db, ($q:$param)); }
+          }
+        }
+        // explicitly specified
+        @else {
+          @each $q in $subq {
+            @if map-get($q-map, $q) { $db: map-merge($db, ($q:$param)); }
+          }
+        }
+      }
+      // root/others:
+      @else {
+        $db: map-merge($db, ($key:$param));
+      }
+    }
   }
-  // init base class
+  // $data is root parameter then
+  @else {
+    $db: (root: $data);
+  }
+
+  // init class container
   ._container {
     position: relative;
-    margin-#{$_left}: auto;
-    margin-#{$_right}: auto;
+    margin-left: auto;
+    margin-right: auto;
   }
   // generate query containers
-  @each $name, $param  in $params {
-    @include media($name, $media) {
-      $prefix: __($name, '_');
-      @if $prefix == _ {
+  @each $q-name, $param in $db {
+    @include media($q-name, $query-map) {
+      @if $q-name == root {
         ._container { width: $param; }
       } @else {
-        $s: unquote('._container');
-        @if $prefix {
-          $s: append($s, unquote('.#{$prefix}container'), comma)
-        }
-        #{$s} { width: $param; }
+        ._container, .#{$q-name}_container { width: $param; }
       }
     }
   }
@@ -171,17 +216,17 @@
 //    body::after {
 //      @include ruler(22px, red);
 //    }
-@mixin ruler($line-height: 16px, $color: rgba(0,0,0,0.3), $z-index: null, $type: horizontal) {
+@mixin ruler($line-height: 16px, $color: rgba(0,0,0,0.2), $z-index: null, $type: horizontal) {
   $a: null;
   $b: $line-height;
   @if unit($line-height) == px {
     $a: $line-height - 1;
   } @else if unit($line-height) == rem or unit($line-height) == em {
-    $a: $line-height - convert-unit(1px, rem);
+    $a: $line-height - convert-length(1px, rem);
   } @else if unit($line-height) == pt {
-    $a: $line-height - convert-unit(1px, pt);
+    $a: $line-height - convert-length(1px, pt);
   }
-  @if $a == nul { @error "@mixin ruler(): 1st argument must be in px, rem or pt"; }
+  @if $a == null { @error "@mixin ruler(): 1st argument must be in px, rem or pt"; }
   content: " ";
   position: absolute;
   width: 100%;
@@ -211,8 +256,10 @@
 // icon-set
 // generate bare minimum of styles to use font icons.
 // style rules inspired by FontAwesome and Web Starter Kit
+// TODO: test after, before and from title
 @mixin icon-set($font-family:null, $class-prefix:null, $pseudo-element:before, $content-map:(), $from-title:false) {
-  .#{$class-prefix}, .#{$class-prefix}-after::after, .#{$class-prefix}-before::before {
+
+  .#{$class-prefix}, #{if($pseudo-element == before, ".#{$class-prefix}-after::before", ".#{$class-prefix}-before::after")} {
     display: inline-block;
     font-family: $font-family;
     font-style: normal;
@@ -255,4 +302,3 @@
     }
   }
 }
-
