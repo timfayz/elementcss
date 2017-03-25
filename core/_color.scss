@@ -1,12 +1,12 @@
-// _color.scss provides useful functions for manipulating with CSS colors.
+// _color.scss provides functions for manipulating with CSS colors.
 
 // shade
-// darkens the $clr by mixing it with black in amount of $percentage.
+// darkens the $clr by mixing it with black in amount of $percentage. $percentage
+// can be 50% or 50, but not 0.5.
 //    shade(#f2f2f2, 50%) -> #797979
 //    shade(#f2f2f2, 50)  -> #797979
 //    shade(white, 100%)  -> black
 //    shade(red, 45)  -> #8c0000
-//  NOTE: don't matter to write with percentage or without
 @function shade($clr, $percentage) {
   $black: rgb(0, 0, 0);
   @return mix($black, $clr, $percentage);
@@ -23,62 +23,64 @@
   @return mix($black, $clr, $percentage);
 }
 
-// convert-color
-// converts one color model into another. $clr can be any of hex, rgb(a), hsl(a), hsv(a), keyword color model
-//    convert-color(#6082b6, rgb)             -> rgb(96, 130, 182)
-//    convert-color(hsl(120, 100%, 50%), hsv) -> 120 100% 100%
-//    convert-color(120 100% 100%, hex)       -> lime
-//    convert-color(rgba(0, 255, 0, 1), hsv)  -> 120 100% 100%
-// http://ariya.blogspot.com/2008/07/converting-between-hsl-and-hsv.html
-@function convert-color($clr, $model) {
-  // if $clr is list (hence hsv(a)) convert it to type of color
-  @if type-of($clr) == list and length($clr) >= 3 {
-    $hsv-h: nth($clr, 1);
-    $hsv-s: nth($clr, 2) / 100;
-    $hsv-v: nth($clr, 3) / 100;
-    $l: (2 - $hsv-s) * $hsv-v;
-    $s: $hsv-s * $hsv-v / if($l <= 1, $l, 2 - $l);
-
-    $l: limit($l * 100 / 2, 0, 100);
-    $s: if($s == Infinity, 0, limit($s * 100, 0, 100));
-
-    @if length($clr) == 4 {
-      $clr: hsla($hsv-h, $s, $l, nth($clr, 4));
-    } @else {
-      $clr: hsl($hsv-h, $s, $l);
-    }
-  }
+// _calc-bright used in brightness(), contrast-color() and
+// contrast-ratio() functions. It implements 4 well-known algorithms for
+// calculating relative luminance or "brightness" of color. To understand how
+// it works see appropriate link attached with algorithm name.
+// YIQ and Rec-709 algorithms almost the same.
+@function _calc-bright($fn, $clr, $algorithm) {
   @if type-of($clr) == color {
-    @if $model == hex {
-      // sass automaticaly converts rgb into hex
-      @return rgb(red($clr), green($clr), blue($clr));
-    } @else if $model == rgb {
-      @return unquote("rgb(#{round(red($clr))}, #{round(green($clr))}, #{round(blue($clr))})");
-    } @else if $model == rgba {
-      @return rgba(red($clr), green($clr), blue($clr), alpha($clr));
-    } @else if $model == hsl {
-      @return unquote("hsl(#{trim-unit(hue($clr))}, #{saturation($clr)}, #{lightness($clr)})");
-    } @else if $model == hsla {
-
-
-      @return unquote("hsla(#{trim-unit(hue($clr))}, #{saturation($clr)}, #{lightness($clr)}, #{alpha($clr)})");
-    } @else if $model == hsv or $model == hsva or $model == hsb or $model == hsba {
-      $h: trim-unit(hue($clr));                                      // set the final hue
-      $l: trim-unit(lightness($clr))/100 * 2;                        // prepare
-      $s: trim-unit(saturation($clr))/100 * if($l <= 1, $l, 2 - $l); // prepare
-      $v: ($l + $s) / 2;                                            // set the final saturation
-      $s: (2 * $s) / ($l + $s);                                     // set the final value
-      @if $model == hsv {
-        @return $h percentage($s) percentage($v);
-      } @else {
-        @return $h percentage($s) percentage($v) alpha($clr);
+    $r: red($clr);
+    $g: green($clr);
+    $b: blue($clr);
+    // http://www.w3.org/TR/2008/REC-WCAG20-20081211/#relativeluminancedef
+    @if $algorithm == relative {
+      $res: ();
+      @each $c in ($r $g $b) {
+        $c: $c/255;
+        $c: if($c < .03928, $c / 12.92, pow(($c + .055) / 1.055, 2.4));
+        $res: append($res, $c);
       }
+      @return (.2126*nth($res,1) + .7152*nth($res,2) + .0722*nth($res,3)) * 100%;
     }
+    // http://alienryderflex.com/hsp.html
+    @else if $algorithm == HSP {
+      @return root(($r*$r * .299) + ($g*$g * .587) + ($b*$b * .114)) / 255 * 100%;
+    }
+    // http://www.w3.org/TR/AERT#color-contrast
+    // https://en.wikipedia.org/wiki/YIQ
+    @else if $algorithm == YIQ {
+      @return (($r * .299) + ($g * .587) + ($b * .114)) / 255 * 100%;
+    }
+    // https://en.wikipedia.org/wiki/Relative_luminance (gives the same values)
+    // https://en.wikipedia.org/wiki/Rec._709 (see "Luma coefficients")
+    @else if $algorithm == Rec-709 or $algorithm == BT-709 {
+      @return (($r * .2126) + ($g * .7152) + ($b * .0722)) / 255 * 100%;
+    }
+    @error "@function #{$fn}(): no algorithm name is specified.";
   }
-  // if can't convert the $clr, just return it
-  @return $clr;
+  @error "@function #{$fn}(): `#{$clr}` is not a color.";
 }
 
+// default brightness algorithm for brightness(), contrast-color() and
+// contrast-ratio() functions.
+$brightness-algorithm: relative !default;
+
+// brightness (or relative-luminance)
+// computes the relative luminance or "brightness" of a color. Returns a number
+// between 0% and 100%, where 100% is fully bright (white) and 0% is fully dark
+// (black). If $clr is not a CSS color but a number it returns the same value
+// to be used as actual CSS brightness() filter function.
+//    brightness(#111, YIQ)     -> 6.66667%
+//    brightness(#111, HSP)     -> 6.66667%
+//    brightness(#111, Rec-709) -> 6.66667%
+//    brightness(#111, sRGB)    -> 5.49757%
+@function brightness($clr, $algorithm:$brightness-algorithm) {
+  @if type-of($clr) == color {
+    @return _calc-bright(brightness, $clr, $algorirthm);
+  }
+  @return unquote("brightness(#{$clr})");
+}
 
 // contrast-color
 // returns either the $light or $dark color by deciding which contrasts more with $clr.
@@ -87,184 +89,410 @@
 //    contrast-color(red, black, white)   -> white
 //    contrast-color(cyan, black, white)  -> black
 //    contrast-color(#111, black, white)  -> white
-$contrast-color-algorithm: sRGB !default;
-@function contrast-color($clr, $dark, $light, $algorithm:$contrast-color-algorithm) {
-  @if type-of($clr) == list and length($clr) >= 3 {
-    $clr: convert-color($clr, rgba);
-  }
-  @if type-of($clr) == color {
-    $clr-bright: brightness($clr, $algorithm);
-    $dark-bright: brightness($dark, $algorithm);
-    $light-bright: brightness($light, $algorithm);
-    @return if(abs($clr-bright - $light-bright) > abs($clr-bright - $dark-bright), $light, $dark);
-  }
-  @return null;
+@function contrast-color($clr, $dark, $light, $algorithm:$brightness-algorithm) {
+  $clr-bright: _calc-bright(contrast-color, $clr, $algorithm);
+  $dark-bright: _calc-bright(contrast-color, $dark, $algorithm);
+  $light-bright: _calc-bright(contrast-color, $light, $algorithm);
+  @return if(abs($clr-bright - $light-bright) > abs($clr-bright - $dark-bright), $light, $dark);
 }
 
-// brightness
-// Computes the "brightness" of a color.
-// Returns a number between 0% and 100%, where 100% is fully bright (white) and
-// 0% is fully dark (black). If $clr is not color but just a number it returns
-// the same value to be used as actual CSS brightness() filter function.
-//    brightness(#111, YIQ)     -> 6.66667%
-//    brightness(#111, HSP)     -> 6.66667%
-//    brightness(#111, Rec-709) -> 6.66667%
-//    brightness(#111, sRGB)    -> 5.49757%
-// NOTE: YIQ and Rec-709 algorithms almost the same.
-$brightness-algorithm: sRGB !default;
-@function brightness($clr, $algorithm:$brightness-algorithm) {
+// contrast-ratio
+// returns contrast ratio between [1,21]. Useful to check the contrast b/w two
+// colors. For more detail see:
+// http://www.w3.org/TR/WCAG20/#visual-audio-contrast-contrast
+//    contrast-ratio(black, white)  -> 21
+//    contrast-ratio(blue, white)   -> 8.59
+//    contrast-ratio(red, white)    -> 3.99
+//    contrast-ratio(gray, white)   -> 3.94
+@function contrast-ratio($c1, $c2, $algorithm:$brightness-algorithm) {
+  $y1: _calc-bright(contrast-ratio, $c1, $algorithm)/100;
+  $y2: _calc-bright(contrast-ratio, $c2, $algorithm)/100;
+  // swap so $y1 is lightest
+  @if $y1 < $y2 {
+      $y3: $y1;
+      $y1: $y2;
+      $y2: $y3;
+  }
+  @return ($y1 + 0.05) / ($y2 + 0.05);
+}
+
+// $hue [0,6)
+@function _hueToRgb($t1, $t2, $hue) {
+  @if $hue < 0  { $hue: $hue + 6; }
+  @if $hue >= 6 { $hue: $hue - 6; }
+
+  @if $hue < 1        { @return ($t2 - $t1) * $hue + $t1; }
+  @else if $hue < 3   { @return $t2; }
+  @else if $hue < 4   { @return ($t2 - $t1) * (4 - $hue) + $t1; }
+  @else               { @return $t1; }
+}
+
+// $hue [0,6)
+// $sat $light [0,1]
+// return $r $g $b [0,255]
+@function _hslToRgb($hue, $sat, $light) {
+  $t2: if($light<=.5, $light * ($sat + 1), $light + $sat - ($light * $sat));
+  $t1: $light * 2 - $t2;
+  $r: _hueToRgb($t1, $t2, $hue + 2); //2
+  $g: _hueToRgb($t1, $t2, $hue);
+  $b: _hueToRgb($t1, $t2, $hue - 2); //2
+  @return $r*255 $g*255 $b*255;
+}
+
+// $r $g $b [0,255]
+// return $h [0,6), $s $l [0,1]
+@function _rgbToHsl($r, $g, $b) {
+  $r: $r/255;
+  $g: $g/255;
+  $b: $b/255;
+  $max: max($r, $g, $b);
+  $min: min($r, $g, $b);
+  $h: null;
+  $s: null;
+  $l: ($max + $min) / 2;
+  @if $max == $min {
+    $h: 0;
+    $s: 0;
+  } @else {
+    $d: $max - $min;
+    $s: if($l > 0.5, $d / (2 - $max - $min), $d / ($max + $min));
+    @if $max == $r      { $h: ($g - $b) / $d + if($g < $b, 6, 0); }
+    @else if $max == $g { $h: ($b - $r) / $d + 2; }
+    @else if $max == $b { $h: ($r - $g) / $d + 4; }
+  }
+  @return $h $s $l;
+}
+
+// hsl
+// converts hsl color into valid CSS rgba or hex. $hue is a valid <angle>
+// unit (unitless, deg, rad, turn etc). $sat and $light are numbers b/w 0 and
+// 100, % is optional. Alpha channel is optional and lies b/w 0 and 1.
+//    hsl(40, 20, 10)     ->
+@function hsl($hue, $sat, $light, $alpha:1) {
+  $hue: (convert-angle($hue) % 360)/60;         // -> [0,6)
+  $sat: trim-unit(limit($sat, 0, 100)/100);     // -> [0,1]
+  $light: trim-unit(limit($light, 0, 100)/100); // -> [0,1]
+  $rgb: _hslToRgb($hue, $sat, $light);
+  @return rgba(nth($rgb,1), nth($rgb,2), nth($rgb,3), $alpha);
+}
+
+// $hue [0,6), $white $black [0,1]
+// return $r $g $b [0,255]
+@function _hwbToRgb($hue, $white, $black) {
+  $rgb: _hslToRgb($hue, 1, .5);
+  $r: nth($rgb, 1)/255 * (1 - $white - $black) + $white;
+  $g: nth($rgb, 2)/255 * (1 - $white - $black) + $white;
+  $b: nth($rgb, 3)/255 * (1 - $white - $black) + $white;
+  @return $r*255 $g*255 $b*255;
+}
+
+// $r $g $b [0,255]
+// return $h [0,6), $s $v [0,1]
+@function _rgbToHwb($r, $g, $b) {
+  $hsv: _rgbToHsv($r, $g, $b);
+  $s: nth($hsv, 2);
+  $v: nth($hsv, 3);
+  @return nth($hsv,1) (1-$s)*$v 1-$v;
+}
+
+// hwb
+// converts hwb color into valid CSS rgba or hex. $hue is a valid <angle> unit
+// (unitless, deg, rad, turn etc). $sat and $light are numbers b/w 0 and 100,
+// % is optional. Alpha channel is optional and lies b/w 0 and 1. More
+// information here:
+// https://en.wikipedia.org/wiki/HWB_color_model
+//    hwb(40, 20, 10)     ->
+@function hwb($hue, $white, $black, $alpha:1) {
+  $hue: (convert-angle($hue) % 360)/60;         // -> [0,6)
+  $white: trim-unit(limit($white, 0, 100)/100); // -> [0,1]
+  $black: trim-unit(limit($black, 0, 100)/100); // -> [0,1]
+  $rgb: _hwbToRgb($hue, $white, $black);
+  @return rgba(nth($rgb,1), nth($rgb,2), nth($rgb,3), $alpha);
+}
+
+// $hue [0,6), $sat $val [0,1]
+// return $r $g $b [0,255]
+@function _hsvToRgb($hue, $sat, $val) {
+  // determine the lightness
+  $l: (2 - $sat) * $val / 2;
+  // store the HSL components
+  $s: $sat * $val / if($l < 0.5, $l * 2, 2 - $l * 2);
+  // correct a division-by-zero error
+  @if $s/1 != $s { $s: 0; }
+  @return _hslToRgb($hue, $s, $l);
+}
+
+// $r $g $b [0,255]
+// return $h [0,6), $s $v [0,1]
+@function _rgbToHsv($r, $g, $b) {
+  $hsl: _rgbToHsl($r, $g, $b);
+  $l: nth($hsl, 3);
+  $s: nth($hsl, 2);
+  $s: $s * if($l < 0.5, $l, 1 - $l);
+  $ls: $l+$s;
+  $s: if($ls == 0, 0, 2*$s/$ls);
+  @return nth($hsl,1) $s $ls;
+}
+
+// hsv
+// converts hsv color into valid CSS rgba or hex. $hue is a valid <angle>
+// unit (unitless, deg, rad, turn etc). $sat and $light are numbers b/w 0 and
+// 100, % is optional. Alpha channel is optional and lies b/w 0 and 1.
+@function hsv($hue, $sat, $value, $alpha:1) {
+  $hue: (convert-angle($hue) % 360)/60;         // -> [0,6)
+  $sat: trim-unit(limit($sat, 0, 100)/100);     // -> [0,1]
+  $value: trim-unit(limit($value, 0, 100)/100); // -> [0,1]
+  $rgb: _hsvToRgb($hue, $sat, $value);
+  @return rgba(nth($rgb,1), nth($rgb,2), nth($rgb,3), $alpha);
+}
+
+// $cyan $magneta $yellow $key [0,1]
+// return $r $g $b [0,255]
+@function _cmykToRgb($cyan, $magneta, $yellow, $key) {
+  $r: 1 - min(1, $cyan * (1 - $key) + $key);
+  $g: 1 - min(1, $magneta * (1 - $key) + $key);
+  $b: 1 - min(1, $yellow * (1 - $key) + $key);
+  @return $r*255 $g*255 $b*255;
+}
+
+// $r $g $b [0,255]
+// return $c $m $y $k [0,1]
+@function _rgbToCmyk($r, $g, $b) {
+  $r: $r/255;
+  $g: $g/255;
+  $b: $b/255;
+  $k: 1 - max($r, $g, $b);
+  $c: if($k == 1, 0, (1 - $r - $k)/(1 - $k));
+  $m: if($k == 1, 0, (1 - $g - $k)/(1 - $k));
+  $y: if($k == 1, 0, (1 - $b - $k)/(1 - $k));
+  @return $c $m $y $k;
+}
+
+// device-cmyk
+// implements CSS4 device-cmyk() function. Converts cmyk color into valid CSS
+// rgba or hex. $cyan, $magneta, $yellow, $key are numbers b/w 0 and 100, % is
+// optional. Alpha channel is optional and lies b/w 0 and 1.
+@function device-cmyk($cyan, $magneta, $yellow, $key, $alpha:1) {
+  $cyan: trim-unit(limit($cyan, 0, 100)/100);       // -> [0,1]
+  $magneta: trim-unit(limit($magneta, 0, 100)/100); // -> [0,1]
+  $yellow: trim-unit(limit($yellow, 0, 100)/100);   // -> [0,1]
+  $key: trim-unit(limit($key, 0, 100)/100);         // -> [0,1]
+  $rgb: _cmykToRgb($cyan, $magneta, $yellow, $key);
+  @return rgba(nth($rgb,1), nth($rgb,2), nth($rgb,3), $alpha);
+}
+
+// gray
+// implements CSS4 gray() function. Simplify specifying the common set of gray
+// colors. Return shade of gray. $v either 0-255 or 0-100%. $alpha is usual
+// alpha channel value from 0 to 1.
+//    gray(2)       -> #020202
+//    gray(2, 0,5)  -> rgba(2, 2, 2, 0.5)
+//    gray(2%)      -> #050505
+//    gray(2%, 0,5) -> rgba(5, 5, 5, 0.5)
+@function gray($v, $alpha:1) {
+  $v: trim-unit(if(unit($v)=='%', $v/100*255, $v));
+  @return rgba($v, $v, $v, $alpha);
+}
+
+// render-color
+// renders input color into another color model. $clr must be a valid CSS color
+// (rgb(a), hsl(a), hex, keyword) or any elementcss built-in color function
+// which is automatically outputs the valid color, eg: hsl, hsb, hsv,
+// device-cmyk. $model can be one of: hex, rgb, rgba, hsl, hsla, hwb, cmyk.
+//    render-color(#6082b6, rgb)           -> rgb(96, 130, 182)
+//    render-color(hsl(120,100%,50%), hwb) -> hwb(120, 0%, 100%)
+//    render-color(hsv(110,100%,100%, hex) -> #000100
+//    render-color(rgba(0,255,0,1), foo)   -> error: `foo` isn't supported
+@function render-color($clr, $model) {
   @if type-of($clr) == color {
-    // http://www.w3.org/TR/2008/REC-WCAG20-20081211/#relativeluminancedef
-    @if $algorithm == sRGB {
-      $rgb: red($clr), green($clr), blue($clr);
-      $result: ();
-      @for $i from 1 through 3 {
-        $c: nth($rgb, $i);
-        $c: $c / 255;
-        $c: if($c < .03928, $c / 12.92, pow(($c + .055) / 1.055, 2.4));
-        $result: append($result, $c);
+    @if $model == hex {
+      // Sass automaticaly converts rgb into hex
+      @return rgb(red($clr), green($clr), blue($clr));
+    } @else if $model == rgb {
+      @return unquote("rgb(#{red($clr)}, #{green($clr)}, #{blue($clr)})");
+    } @else if $model == rgba {
+      @return unquote("rgba(#{red($clr)}, #{green($clr)}, #{blue($clr)}, #{alpha($clr)})");
+    } @else if $model == hsl or $model == hsla {
+      $h: round(trim-unit(hue($clr)));
+      $s: round(saturation($clr));
+      $l: round(lightness($clr));
+      @if $model == hsl {
+        @return unquote("hsl(#{$h}, #{$s}, #{$l})");
       }
-      @return (.2126 * nth($result, 1) + .7152 * nth($result, 2) + 0.0722 * nth($result, 3)) * 100%;
+      $a: alpha($clr);
+      @return unquote("hsla(#{$h}, #{$s}, #{$l}, #{$a})");
+    } @else if $model == hwb {
+      $hwb: _rgbToHwb(red($clr), green($clr), blue($clr));
+      $h: round(nth($hwb,1)*60);
+      $w: round(nth($hwb,2)*100%);
+      $b: round(nth($hwb,3)*100%);
+      $a: alpha($clr);
+      @return unquote("hwb(#{$h}, #{$w}, #{$b}#{if($a==1,'',', #{$a}')})");
+    } @else if $model == cmyk {
+      $cmyk: _rgbToCmyk(red($clr), green($clr), blue($clr));
+      $c: round(nth($cmyk,1)*100%);
+      $m: round(nth($cmyk,2)*100%);
+      $y: round(nth($cmyk,3)*100%);
+      $k: round(nth($cmyk,4)*100%);
+      $a: alpha($clr);
+      @return unquote("cmyk(#{$c}, #{$m}, #{$y}, #{$k}#{if($a==1,'',', #{$a}')})");
+    } @else if $model == hsv-test {
+      $hsv: _rgbToHsv(red($clr), green($clr), blue($clr));
+      $h: round(nth($hsv,1)*60);
+      $s: round(nth($hsv,2)*100%);
+      $v: round(nth($hsv,3)*100%);
+      $a: alpha($clr);
+      @return unquote("hsv(#{$h}, #{$s}, #{$v}#{if($a==1,'',', #{$a}')})");
     }
-    // http://www.w3.org/TR/AERT#color-contrast
-    // https://en.wikipedia.org/wiki/YIQ
-    @else if $algorithm == YIQ {
-      @return ((red($clr) * .299) + (green($clr) * .587) + (blue($clr) * .114)) / 255 * 100%;
-    }
-    // http://alienryderflex.com/hsp.html
-    @else if $algorithm == HSP {
-      @return root(((red($clr)*red($clr) * .299) + (green($clr)*green($clr) * .587) + (blue($clr)*blue($clr) * .114))) / 255 * 100%;
-    }
-    // https://en.wikipedia.org/wiki/Relative_luminance (gives the same values)
-    // https://en.wikipedia.org/wiki/Rec._709 (see "Luma coefficients")
-    @else if $algorithm == Rec-709 or $algorithm == BT-709 {
-      @return ((red($clr) * .2126) + (green($clr) * .7152) + (blue($clr) * .0722)) / 255 * 100%;
-    }
-    @error ("@function brightness(): Type the correct algorithm name.");
+    // keyword?
+    @error "@function render-color(): `#{$model}` isn't valid CSS color model.";
   }
-  @else {
-    @return unquote("brightness(#{$clr})");
-  }
+  @error "@function render-color(): `#{$clr}` is not a color.";
 }
 
-// _scale
-// fluidly scales $val within the $min, $max range.
-//    scale(10, +100, 0, 100) -> 100
-//    scale(10, +20, 0, 100)  -> 28
-//    scale(10, -20, 0, 100)  -> 8
-//    scale(10, -100, 0, 100) -> 0
-@function _scale($val, $amount, $min:0, $max:100) {
-  @if $amount > 0 {
-    $val: $val + ($max - $val) * ($amount / 100.0);
-    @if $val > $max {
-      $val: $max;
-    }
-  } @else if $amount < 0 {
-    $val: $val + ($val * $amount / 100.0);
-    @if $val < $min {
-      $val: $min;
-    }
-  }
+// implements color()
+// used as inline function to modify input $val according to given action.
+@function _m($action, $val, $origin) {
+  @if $action == adjust { @return $origin + $val; }
+  @if $action == scale  { @return $origin*$val/100; }
+  // else action == set
   @return $val;
 }
 
-// color
-// implements color adjusting/scaling/changing using different
-// color models. Supported models: rgb, hsl, hsv/hsb. $props must be a map.
-// $clr can be any of rgb(a), hsl(a), hsv/hsb(a), hex and keyword color.
-// By default $model is hsl.
-//    color(adjust, #fff, (a:-20%))                        -> rgba(255,255,255,0.8)
-//    color(scale, 5 40% 40%, (s:-30%, v:30%), hsv)        -> 5 28% 58%
-//    color(change, rgb(10, 10, 10), (r:100%, g:50), rgb)  -> rgb(255,50,10)
-// NOTE: to convert hsv/hsb values into valid CSS color use convert-color() func.
-@function color($action, $clr, $props, $model:hsl) {
-  @if type-of($props) != map { @error "@function _color(): 4rd argument must be a map."; }
-  @if $model == rgb {
-    $clr: convert-color($clr, rgba);
-    // initial values
-    $org-r: red($clr);
-    $org-g: green($clr);
-    $org-b: blue($clr);
-    $org-a: alpha($clr);
-    // input values
-    $r: if(map-has-key($props, r), map-get($props, r), null);
-    $g: if(map-has-key($props, g), map-get($props, g), null);
-    $b: if(map-has-key($props, b), map-get($props, b), null);
-    $a: if(map-has-key($props, a), map-get($props, a), null);
-    // change values
-    @if $action == adjust {
-      $r:  if($r == null, $org-r, limit($org-r + if(unit($r) == '%', 255/100 * trim-unit($r), $r), 0, 255));
-      $g:  if($g == null, $org-g, limit($org-g + if(unit($g) == '%', 255/100 * trim-unit($g), $g), 0, 255));
-      $b:  if($b == null, $org-b, limit($org-b + if(unit($b) == '%', 255/100 * trim-unit($b), $b), 0, 255));
-      $a:  if($a == null, $org-a, limit($org-a + if(unit($a) == '%', $a/100%, $a), 0, 1));
-    } @else if $action == scale {
-      $r: if($r == null, $org-r, _scale($org-r, trim-unit($r), 0, 255));
-      $g: if($g == null, $org-g, _scale($org-g, trim-unit($g), 0, 255));
-      $b: if($b == null, $org-b, _scale($org-b, trim-unit($b), 0, 255));
-      $a: if($a == null, $org-a, _scale($org-a, trim-unit($a), 0, 1));
-    } @else if $action == change {
-      $r: if($r == null, $org-r, limit(if(unit($r) == '%', 255/100 * trim-unit($r), $r), 0, 255));
-      $g: if($g == null, $org-g, limit(if(unit($g) == '%', 255/100 * trim-unit($g), $g), 0, 255));
-      $b: if($b == null, $org-b, limit(if(unit($b) == '%', 255/100 * trim-unit($b), $b), 0, 255));
-      $a: if($a == null, $org-a, limit(if(unit($a) == '%', $a/100%, trim-unit($a)), 0, 1));
-    }
-    @return rgba($r, $g, $b, $a);
-
-  } @else if $model == hsl or $model == hsv or $model == hsb {
-    // initial values
-    $org-h: null;
-    $org-s: null;
-    $org-lv: null;
-    $org-a: null;
-    @if $model == hsl {
-      $clr: convert-color($clr, rgba);
-      $org-h: hue($clr);
-      $org-s: saturation($clr);
-      $org-lv: lightness($clr);
-      $org-a: alpha($clr);
-    } @else {
-      $clr: convert-color($clr, hsva);
-      $org-h: nth($clr, 1);
-      $org-s: nth($clr, 2);
-      $org-lv: nth($clr, 3);
-      $org-a: nth($clr, 4);
-    }
-    // input values
-    $h: if(map-has-key($props, h), map-get($props, h), null);
-    $s: if(map-has-key($props, s), map-get($props, s), null);
-    $lv: null;
-    @if $model == hsl {
-      $lv: if(map-has-key($props, l), map-get($props, l), null);
-    } @else {
-      $lv: if(map-has-key($props, v), map-get($props, v), if(map-has-key($props, b), map-get($props, b), null));
-    }
-    $a: if(map-has-key($props, a), map-get($props, a), null);
-    // change values
-    //@debug ORIGINAL $org-h, $org-s, $org-lv, $org-a;
-    //@debug PARAMS $h, $s, $lv, $a;
-    @if $action == adjust {
-      $h: if($h == null, $org-h, limit($org-h + if(unit($h) == '%', 360/100 * trim-unit($h), $h), 0, 360));
-      $s: if($s == null, $org-s, limit($org-s + $s, 0, 100));
-      $lv: if($lv == null, $org-lv, limit($org-lv + $lv, 0, 100));
-      $a: if($a == null, $org-a, limit($org-a + if(unit($a) == '%', $a/100%, $a), 0, 1));
-    } @else if $action == scale {
-      $h: if($h == null, $org-h, _scale($org-h, trim-unit($h), 0, 360));
-      $s: if($s == null, $org-s, _scale($org-s, trim-unit($s), 0, 100));
-      $lv: if($lv == null, $org-lv, _scale($org-lv, trim-unit($lv), 0, 100));
-      $a: if($a == null, $org-a, _scale($org-a, trim-unit($a), 0, 1));
-    } @else if $action == change {
-      $h: if($h == null, $org-h, limit(if(unit($h) == '%', 360/100 * trim-unit($h), $h), 0, 360));
-      $s: if($s == null, $org-s, limit(trim-unit($s), 0, 100));
-      $lv: if($lv == null, $org-lv, limit(trim-unit($lv), 0, 100));
-      $a: if($a == null, $org-a, limit(if(unit($a) == '%', $a/100%, trim-unit($a)), 0, 1));
-    }
-    //@debug FINAL $h, $s, $lv, $a;
-    @if $model == hsl {
-      @return hsla($h, $s, $lv, $a);
-    } @else {
-      @return convert-color($h $s $lv $a, rgba);
-    }
+// implements color()
+// used to parse input values of color adjusters like h(), s(), l() etc.
+@function _parse($arg) {
+  @if type-of($arg) == number {
+    @return adjust $arg;
   }
-  // invalid model, just return
-  @return $clr;
+  @if length($arg) == 2 {
+    $type: if(nth($arg,1) == m, scale, change);
+    @return $type nth($arg,2);
+  }
+  @if type-of($arg) == string {
+    $type: if(has-prefix($arg, m), scale, change);
+    @return $type calc-number($arg);
+  }
+  @error "@function color(): check the syntax of adjusters.";
 }
+
+// color
+// implements CSS4 color() function. It modifies a color using different color
+// models adjusting their channels. Because it's a Sass implementation the
+// syntax is slightly different from the original function, so be attentively!
+// $args must be a list where the first item is a valid CSS color (hex, rgb,
+// hwb, hsl etc) and the rest are adjuster-functions, eg: h() s() l(). There is
+// no comma b/w list items. The list of supported adjusters and their arguments
+// listed from the next function. Accuracy is about 0.765% due to intermediate
+// conversions.
+//    color(hwb(5,40%,40%) h(+5) w(-10%) b(+10%))     -> #80554d = hwb(10,30,50)
+//    color(hsl(10,50%,40%) h(+5deg) s(+10%))         -> #994433 = hsl(10,50,40)
+//    color(#333 rd(5) grn(1) bl(-10) a(-0.3))        -> rgba(8,4,0,0.7)
+// In the examples above adjusters use adjust (default) mode, hence add or
+// subtract a value from origin. Here are two additional modes: scale and change.
+// Add `m`(multiply) or `c`(change) flags before the value to scale or change
+// an origin accordingly:
+//    rd(5) or rd(+5) = add five to the red channel in rgb model
+//    rd(5%) or rd(+5%) = add 13 (255/100%*5 rounded)
+//    rd(c 5) or rd(c 5%) = set red channel to 5 or 13 accordingly
+//    rd(m 50) or rd(m 50%) = set red channel to 50% of the original value
+// The same rules is applied to any adjuster of any color model.
+// More information here: https://drafts.csswg.org/css-color/#modifying-colors
+@function color($args) {
+  $clr: nth($args, 1);
+  @if type-of($clr) == color {
+    $params: slice($args, 2);
+    // adjuster type, action, value
+    @each $adj, $a, $v in $params {
+      //@debug $clr $adj $a $v;
+      // h sv v b w s l
+      @if str-length(inspect($adj)) < 2 {
+        // hue adjuster (the same for hsl, hsv, hwb)
+        @if $adj == h {
+          // adjust and change: 20=20deg; scale: 20=20,20%=20
+          $v: if(unit($v)=='%' and $a==scale, trim-unit($v), convert-angle($v));
+          $c: _rgbToHsl(red($clr), green($clr), blue($clr));
+          $clr: hsl(_m($a,$v,nth($c,1)*60), nth($c,2)*100, nth($c,3)*100);
+        }
+        // hsv adjusters
+        @else if $adj == sv {
+          $c: _rgbToHsv(red($clr), green($clr), blue($clr));
+          $clr: hsv(nth($c,1)*60, _m($a,$v,nth($c,2)*100), nth($c,3)*100, alpha($clr));
+        } @else if $adj == v {
+          $c: _rgbToHsv(red($clr), green($clr), blue($clr));
+          $clr: hsv(nth($c,1)*60, nth($c,2)*100, _m($a,$v,nth($c,3),100), alpha($clr));
+        }
+        // hwb adjusters
+        @else if $adj == w {
+          $c: _rgbToHwb(red($clr), green($clr), blue($clr));
+          $clr: hwb(nth($c,1)*60, _m($a,$v,nth($c,2)*100), nth($c,3)*100, alpha($clr));
+        } @else if $adj == b {
+          $c: _rgbToHwb(red($clr), green($clr), blue($clr));
+          $clr: hwb(nth($c,1)*60, nth($c,2)*100, _m($a,$v,nth($c,3)*100), alpha($clr));
+        }
+        // hsl adjusters
+        @else if $adj == s {
+          $c: _rgbToHsl(red($clr), green($clr), blue($clr));
+          $clr: hsl(nth($c,1)*60, _m($a,$v,nth($c,2)*100), nth($c,3)*100, alpha($clr));
+        } @else if $adj == l {
+          $c: _rgbToHsl(red($clr), green($clr), blue($clr));
+          $clr: hsl(nth($c,1)*60, nth($c,2)*100, _m($a,$v,nth($c,3)*100), alpha($clr));
+        }
+      }
+      // alpha red green blue
+      @else {
+        $u: unit($v);
+        @if $adj == alpha {
+          // adjust and change: 20=20,20%=0.2; scale: 20=20,20%=20
+          $v: trim-unit(if($u=='%' and $a!=scale, $v/100, $v));
+          $clr: rgba(red($clr), green($clr), blue($clr), _m($a,$v,alpha($clr)));
+        } @else {
+          // adjust: 20=20,20%=51; scale: 20/20%=20; change: 20=20,20%=51;
+          $v: if($a==change, $v, trim-unit(if($a==adjust and $u=='%', 255*$v/100, $v)));
+          @if $adj == red {
+            $clr: rgba(_m($a,$v,red($clr)), green($clr), blue($clr), alpha($clr));
+          } @else if $adj == green {
+            $clr: rgba(red($clr), _m($a,$v,green($clr)), blue($clr), alpha($clr));
+          } @else if $adj == blue {
+            $clr: rgba(red($clr), green($clr), _m($a,$v,blue($clr)), alpha($clr));
+          } @else if $adj == alpha {
+            $clr: rgba(red($clr), green($clr), blue($clr), _m($a,$v,alpha($clr)));
+          }
+        }
+      }
+    }
+    @return $clr;
+  }
+  @error "@function color(): `#{$clr}` is not a color.";
+}
+
+// color adjusters
+// Supported adjusters:
+//    general:        a() (alpha)
+//    hsv, hsl, hwb:  h() sv() v() b() w() s() l()
+//    rgb:            rd() grn() bl()
+// All names are shortened, because Sass has functions with the same names like
+// red(), saturation, green() etc. sv() is saturation of hsv color model. Usage:
+//    adjuster(+10)   add 10 %/degree/units (depending on context) to origin.
+//    adjuster(c 10)  set origin to 10 %/degree/units (depending on context).
+//    adjuster(m 10)  multiply origin by 10%.
+// I recommend always to use units explicitly according to adjuster and the
+// mode (scale, adjust, change) to avoid ambiguity. For example:
+//    a(+0.3) instead a(0.3)
+//    h(+30deg) instead h(30)
+//    s(+10%) instead s(10)
+//    a(c +0.3) instead a(c 0.3)
+//    h(m 130%) instead h(m 130)
+//    etc...
+//    the exception are rgb channels, eg: rd(+10) and rd(+10%) aren't the same
+@function a($a)     {@return join(alpha, _parse($a));}
+@function h($a)     {@return join(h, _parse($a));}
+@function sv($a)    {@return join(sv, _parse($a));}
+@function v($a)     {@return join(v, _parse($a));}
+@function w($a)     {@return join(w, _parse($a));}
+@function b($a)     {@return join(b, _parse($a));}
+@function s($a)     {@return join(s, _parse($a));}
+@function l($a)     {@return join(l, _parse($a));}
+@function rd($a)    {@return join(red, _parse($a));}
+@function grn($a)   {@return join(green, _parse($a));}
+@function bl($a)    {@return join(blue, _parse($a));}
