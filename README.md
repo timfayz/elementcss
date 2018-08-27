@@ -52,7 +52,7 @@ index.html  main.scss  elementcss/
 ```
 //main.scss
 ...
-@import "path-to/elementcss/core.scss"; // correct import path
+@import "elementcss/core.scss"; // correct import path
 ...
 ```
 * Open command line in project root and compile `main.scss` into `main.css`:

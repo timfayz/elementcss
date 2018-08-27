@@ -1,12 +1,12 @@
-#CSS-ELEMENT CONVENTIONS
+# CSS-ELEMENT CONVENTIONS
 **[Return to the beginning](https://github.com/kalopsia/element/blob/master/docs/0_preface.md)**<br/>
 
 To create really convenient and reusable styles we should follow some rules. Since the main idea of ELEMENT is using a big amount of classes we take care about class naming and make it logical, intuitive and "ease of remembering" as much as possible. Thus far all classes that you will generate should obey to some rules. Most of all conventions came from best practice in creating styles.
 
 For simplification and standardization purposes CSS property prefixes conventions are already defined in the ELEMENT itself. **Full list of available properties' abbreviations** available in ``_naming.scss`` file. This file can be imported anywhere and used for standardized and concise class names.
 
-##CSS Naming Conventions
-###General Conventions
+## CSS Naming Conventions
+### General Conventions
 
 **All class names must be lowercase**
 
@@ -31,11 +31,11 @@ The most descriptive, mature and convenient set of names for this purposes are p
   - `lg` = large value
   - `xlg` = larger value
   - `xxlg` = the largest value
-  
+
 If the above set is not enough we can use:
   - `min` = smaller than `xxsm`
   - `max` = larger than `xxlg`
-  
+
 Examples:
 ```
 | property-name:          | value;          | class name
@@ -57,9 +57,9 @@ This set of names can be used in many cases:
   - amount of opacity
   - amount of alpha chanel in RGBA\HSLA colors <br>
   etc
-  
 
-###CSS Properties
+
+### CSS Properties
 
 **Words indicating directions of properties abbreviate as first letter of direction and must be always presented in class name:**
 
@@ -95,23 +95,23 @@ Examples:
   vertical-align:           center;           .vra-center
 ```
 
-###CSS Values
+### CSS Values
 [todo]
 
 
-###CSS Measurement Values
+### CSS Measurement Values
 
 **Measurement values abbreviate as sign(positive have no prefix and negative have "n" prefix) + digits + two letter from CSS unit's name:**
 
 Relative length units
   - Parent-relative length:
     - `` % (percentage)
-  
+
   - Font-relative lengths:
     - `re` = rem
     - `em` = em
     - `ex` = ex
-    
+
   - Viewport-percentage lengths
     - `vh` = vh (1% of the height of the viewport)
     - `vw` = vw (1% of the width of the viewport)
@@ -138,7 +138,7 @@ Examples:
   any-property:             -10rem;           .classname-n10re
 ```
 
-###CSS Color Values
+### CSS Color Values
 
 **Basic color keywords values abbreviated as `k` letter + name of keyword (or shortened version):**
 
@@ -159,10 +159,10 @@ Examples:
 
 **Numerical color values abbreviated as one letter(type of color) + name of color's visual sense + name of alpha channel (if presented):**
 
-  - Hex color values: **no prefix + name of visual sense** 
+  - Hex color values: **no prefix + name of visual sense**
   - RGB and RGBA color values: **`r` + name of visual sense + alpha channel**
   - HSL and HSLA color values are prefixed by `h` letter
-  
+
 Examples:
 ```
 | property-name:          | value;          | class name
@@ -182,7 +182,7 @@ For alpha channel we use size names (see the beginning of the page). See example
 ```
 
 
-###CSS Complex Values
+### CSS Complex Values
 
 **For complex CSS values there is no strict rules**
 
@@ -193,7 +193,7 @@ As a rule we abbreviate complex values as one general and demonstrative word. Fo
                             0 0 40px rgba(0, 0, 0, 0.1) inset;    .bxsh-effectname
 ```
 
-##Variable Naming Conventions
+## Variable Naming Conventions
 
 **Variables should be namespaced**
 
@@ -210,7 +210,7 @@ Let's be less verbose and just see some examples:
 As you can every variable has it own namespace/prefix. Just make sure that every set of related variables have its own unified namespace/prefix. As a rule we set namespace according to filename of components. For example component `_grid.scss` contains variables all start with `$grid-*` etc.
 
 
-##Why we should follow naming rules and use standardized class prefixes?
+## Why we should follow naming rules and use standardized class prefixes?
 Standardized names and rules are very important for the several reasons:
 
   1. We can reuse our own sets of classes in new projects with few changes.
@@ -220,5 +220,5 @@ Standardized names and rules are very important for the several reasons:
 
 ---
 
-####Let's do something better together!
+#### Let's do something better together!
 Start new issue [here](https://github.com/kalopsia/element/issues/new) if you have found mistake or have any questions, suggestions and problems.

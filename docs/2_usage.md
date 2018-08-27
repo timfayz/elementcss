@@ -1,9 +1,9 @@
-#CSS-ELEMENT USAGE
+# CSS-ELEMENT USAGE
 **[Return to the beginning](https://github.com/kalopsia/element/blob/master/docs/0_preface.md)**<br/>
 
 *First of all it is important to learn the basics of HTML/HTML5, CSS/CSS3 and SASS. At the beginning you may find framework difficult - different logic, many variables, many files, unknown functions, mixins and methods in creating styles. However sometime later when you learn SASS and CSS-ELEMENT better you realize that the mentioned difficulties are quite simple and logically required to achieve previously mentioned features.*
 
-##Create New Project
+## Create New Project
 Let's get started with CSS-ELEMENT on an example. First of all, to make the process easier we need to choose template under `docs/templates/app-*` folder. We choose `app-minimal` to start play without the mess. Copy and paste file `app.scss` from the folder near to the [downloaded](https://github.com/kalopsia/element/archive/master.zip) and extracted `element-master` archive. *master* prefix is added automatically by github - it means you get copy from *master* branch and as a rule it's the latest version of repository. From now on we need to bring the structure in the following form:
 
 ```
@@ -107,11 +107,11 @@ $color: color // "color" defines valid CSS property will be used by future class
     black, #000,              // .clr-black {color:#000;}
     //      └ value
     white, #fff,              // .clr-white {color:#fff;}
-    
+
     // ┌ (prefix, postfix) - another method of notation
     (no, black), #fff,        // .no_clr-black {color:#fff;}
     //                              └ underscore adds automatically following after prefix
-    
+
     // ┌ ('selector before'_'selector after') - method of notation additional selectors
     ('a '_':hover'),
     black, #000,              // a .clr-black:hover {color:#000;}
@@ -160,13 +160,13 @@ $color: color // "color" defines valid CSS property will be used by future class
 
 ```
 
-##About Components
+## About Components
 SASS unlike CSS allows us to make separate files and combine them into single one. One of the ideas of CSS-ELEMENT is to include and generate exactly what you need and what you want. That is why we have some amount of logically separated components.
 
-##What Next?
+## What Next?
 After playing with `app-minimal` we recommend you to try `app-basic` template. It has well-designed initial structure for scalable and long-term maintainable projects. For now we can go next section and learn more about CSS-ELEMENT structure and functionality.
 
 ---
 
-####Let's do something better!
+#### Let's do something better!
 Start new issue [here](https://github.com/kalopsia/element/issues/new) if you have found mistake or have any questions, suggestions and problems.
