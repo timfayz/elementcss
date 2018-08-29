@@ -1,7 +1,7 @@
-#CSS-ELEMENT STRUCTURE
+# CSS-ELEMENT STRUCTURE
 **[Return to the beginning](https://github.com/kalopsia/element/blob/master/docs/0_preface.md)**<br/>
 
-##File Structure
+## File Structure
     docs/
         templates/
             app-basic/
@@ -36,7 +36,7 @@
 `.md` - extension means the file uses markdown syntax (like wiki markup)<br/>
 `.scss` - extension means the file uses SCSS syntax of SASS preprocessor
 
-##Logic
+## Logic
 Despite the fact that CSS-ELEMENT already has basic well-designed components it doesn't mean you *must* (or it *necessary* to) use them. You can just include CSS-ELEMENT functionality by importing `_.scss` file and start to create your own tool/theme/framework using core mixins or functions. The idea of this project is not to *overwrite* your styles but to *extend* your existing project or create new one in CSS-ELEMENT way.
 
 1. **Tag initialization (normalize).** The module ``modules/_normalize.scss`` responsible for initiating particular [category of tags](http://www.w3schools.com/tags/ref_byfunc.asp). Hence it covers almost all HTML tags like html, body, form, legend, input, button, etc. What is normalizing? Tag initiating or normalizing means resetting tags into unified view between different browsers.
@@ -47,5 +47,5 @@ Despite the fact that CSS-ELEMENT already has basic well-designed components it 
 
 ---
 
-####Let's do something better together!
+#### Let's do something better together!
 Start new issue [here](https://github.com/kalopsia/element/issues/new) if you have found mistake or have any questions, suggestions and problems.

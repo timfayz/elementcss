@@ -3,10 +3,11 @@
  * Version: 1.0
  * Authors: Name <email> url
  */
-@import 'path-to/elementcss/core.scss';
+@import 'elementcss/core.scss';
 
 // generate set
-@include set($Color, color (
+//       (css-property, class-prefix, (...))
+@include set(color, $Color, (
   blue, #5948FF,
   green, #509D2C,
 ));
