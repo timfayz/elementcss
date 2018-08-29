@@ -38,12 +38,12 @@ $calc-line-parent:    16 !default;      // round to integer pixel
     @if type-of($v) == number {
       @if unitless($v) {
         @if $v != 0 {
-          $v: $v * convert-length($baseline, rem);
+          $v: $v * convert-len($baseline, rem);
         }
       } @else {
         // baseline is always 16px parent
-        $bs: trim-unit(convert-length($baseline, px));
-        $v: trim-unit(convert-length($v, px, $parent));
+        $bs: trim-unit(convert-len($baseline, px));
+        $v: trim-unit(convert-len($v, px, $parent));
         $th: trim-unit($thresh);
 
         $base: $bs * ($th / 100);
@@ -57,7 +57,7 @@ $calc-line-parent:    16 !default;      // round to integer pixel
         }
         $v: $calc / $base * $baseline;
       }
-      $v: if($round, round-length($v, $unit, $parent), convert-length($v, $unit, $parent));
+      $v: if($round, round-len($v, $unit, $parent), convert-len($v, $unit, $parent));
       $res: append($res, $v);
     }
     @else if $v == important or $v == "!important" {

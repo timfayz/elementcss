@@ -1,8 +1,8 @@
 /*!
-* elementcss v2.9.0 | MIT License | (c) 2013-2016 Timur Fayzrakhmanov
+* elementcss v2.9.0 | MIT License | (c) 2013-2018 Timur Fayzrakhmanov
 * https://github.com/timfayz/elementcss
 */
-// _core.scss is entry point of elementcss. It imports all files under a core/.
+// _import.scss is entry point of elementcss. It imports all files under a src/.
 // By default, elementcss doesn't generate anything unless you call or @include
 // something explicitly. Each function and mixin has well-written inline
 // documentation and usage examples so use them as API docs.
@@ -16,14 +16,13 @@
 // Files that do not begin with "css-" prefix consist only of Sass functions.
 // The rest of files consist mostly of mixins and intended to generate actual CSS
 // code.
-@import "core/math.scss";
-@import "core/unit.scss";
-@import "core/string.scss";
-@import "core/map.scss";
-@import "core/list.scss";
-@import "core/color.scss";
-@import "core/metrics.scss";
-@import "core/var.scss";
-@import "core/css-utils.scss";
-@import "core/css-sem.scss";
-@import "core/css-grid.scss";
+@import "src/math.scss";
+@import "src/unit.scss";
+@import "src/string.scss";
+@import "src/map.scss";
+@import "src/list.scss";
+@import "src/color.scss";
+@import "src/metrics.scss";
+@import "src/css-utils.scss";
+@import "src/css-sem.scss";
+@import "src/css-grid.scss";

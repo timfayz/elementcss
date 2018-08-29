@@ -29,7 +29,7 @@ $_unit-zeroes: (
 );
 
 // <length> type factors. If you multiply any pixel value say by factor from
-// 'pt', you get actual pt value, but in the original unit. See convert-length()
+// 'pt', you get actual pt value, but in the original unit. See convert-len()
 // function.
 $_unit-px-factors: (
   'px':   1,
@@ -90,7 +90,7 @@ $_unit-second-factors: (
   }
 }
 
-// convert-length
+// convert-len
 // converts a given $val according to CSS length $unit. $val
 // must be a number (100px, 1rem, 1, 7pt etc). Returns error if $unit isn't
 // supported. $parent is unitless pixel value used to calculate relative
@@ -98,12 +98,12 @@ $_unit-second-factors: (
 // (default is 16). $ppi is unitless number used to calculate actual length on
 // screens with different pixel density (default is 96). Supported units: rem,
 // '%', unitless, px, pt, pc, cm, mm, q, in, vh, vw, vmin, vmax.
-//    convert-length(2foo, '%')     -> error: `foo` is not supported.
-//    convert-length(16px, '%')     -> 100%
-//    convert-length(2em, px)       -> 32px
-//    convert-length(1.423rem, px)  -> 22.768px
-//    convert-length(14pt, px)      -> 18.66667px
-@function convert-length($val, $unit, $parent: 16, $ppi: 96) {
+//    convert-len(2foo, '%')     -> error: `foo` is not supported.
+//    convert-len(16px, '%')     -> 100%
+//    convert-len(2em, px)       -> 32px
+//    convert-len(1.423rem, px)  -> 22.768px
+//    convert-len(14pt, px)      -> 18.66667px
+@function convert-len($val, $unit, $parent: 16, $ppi: 96) {
   // keep input value unit
   $u: unit($val);
   // if requested unit is the same as input
@@ -131,35 +131,35 @@ $_unit-second-factors: (
           or $u == 'vmin'
           or $u == 'vmax' { $px: $val*$parent/100; }    // > px
     @else {
-      @error "@function convert/round-length: `#{$u}` is not supported.";
+      @error "@function convert/round-len: `#{$u}` is not supported.";
     }
     // get pixel-to-unit factor multiplying by which we get the final result
     $f: map-get($_unit-px-factors, $unit);
     @if $f == null {
-      @error "@function convert/round-length: `#{$unit}` is not supported.";
+      @error "@function convert/round-len: `#{$unit}` is not supported.";
     }
     // multiply pixel value by factor, ppi ratio and append the unit
     @return append-unit($px*$f*$ppi/96, $unit);
   }
 }
 
-// round-length
+// round-len
 // converts a given $val according to CSS length $unit. $val must be a number
-// (100px, 1rem, 1, 7pt etc). The main difference b/w convert-length() and
-// round-length() is the returned value is always an integer pixel at the end
+// (100px, 1rem, 1, 7pt etc). The main difference b/w convert-len() and
+// round-len() is the returned value is always an integer pixel at the end
 // of browser rendering. If $unit = `detect` function converts $val into the
-// same unit it has, but rounded. See convert-length() for more information.
-//    round-length(16.672px, px)   -> 17px
-//    round-length(23.45%, px)     -> 4px
-//    round-length(1.423rem, rem)  -> 1.4375rem (1.4375 * 16 = 23px)
-//    round-length(1.423rem)       -> 1.4375rem (unit is detected automatically)
-@function round-length($val, $unit:detect, $parent: 16, $ppi:96) {
-  $res: convert-length($val, px, $parent, $ppi);
+// same unit it has, but rounded. See convert-len() for more information.
+//    round-len(16.672px, px)   -> 17px
+//    round-len(23.45%, px)     -> 4px
+//    round-len(1.423rem, rem)  -> 1.4375rem (1.4375 * 16 = 23px)
+//    round-len(1.423rem)       -> 1.4375rem (unit is detected automatically)
+@function round-len($val, $unit:detect, $parent: 16, $ppi:96) {
+  $res: convert-len($val, px, $parent, $ppi);
   // round the resulting px value and convert it into specified $unit
   @if $unit == detect {
     $unit: unit($val);
   }
-  @return convert-length(round($res), $unit, $parent, $ppi);
+  @return convert-len(round($res), $unit, $parent, $ppi);
 }
 
 // convert-angle
@@ -236,11 +236,3 @@ $_unit-second-factors: (
     }
   }
 }
-
-// calc-unit
-// TODO
-@function calc-unit($args...) {
-  @each $a in $args {
-  }
-}
-

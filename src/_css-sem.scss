@@ -156,10 +156,14 @@
 
 // add
 // store sets into a given $storage variable.
+// Use it to increase performance replacing `@include set(..)` 
+//    Step 1. Prepare sets
 //    $s: ();
 //    $s: add($s, pdd, padding (def, 20px));
 //    $s: add($s, mrg, margin (def, 20px));
 //      -> (default: (pdd padding () (def, 20px)) (mrg margin () (def, 20px)))
+//    Step 2. Render them
+//    @include sets($s);
 @function add($storage, $p-name, $s-base, $set-data) {
   @if length($set-data) == 0 or $set-data == null  {
     @return $storage; // nothing to store, pass through
@@ -173,14 +177,14 @@
   @return map-merge($storage, (length($storage): $s-base $p-name $set-data));
 }
 
-// pass
+// pass-sets
 // skips input data and returns untouched $storage.
-@function pass($args...) {
+@function pass-sets($args...) {
   @return nth($args,1);
 }
 
 // sets
-// generates sets from $storage.
+// generates sets from $storage. See `add()`
 //    @include sets($s) -> .pdd-def {padding: 20px;}
 @mixin sets($storage, $query-map:()) {
   @if length($storage) == 0 or $storage == null {
@@ -269,11 +273,11 @@
 
 // set
 // generates the only one given set.
-//    @include set(bg, background (red, #ff1b2e))
+//    @include set(bg, background, (red, #ff1b2e))
 //      -> .bg-red {background: #ff1b2e;}
-//    @include set(indent, (margin padding) (sm, 20px));
+//    @include set(indent, (margin padding), (sm, 20px));
 //      -> .indent-sm {margin: 20px; padding: 20px;}
-@mixin set($p-name, $s-base, $set-data, $q-map:null) {
+@mixin set($s-base, $p-name, $set-data, $q-map:null) {
   @include sets(add((), $p-name, $s-base, $set-data), $q-map);
 }
 
