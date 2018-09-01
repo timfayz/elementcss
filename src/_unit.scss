@@ -28,27 +28,6 @@ $_unit-zeroes: (
   'ms':   0ms,
 );
 
-// <length> type factors. If you multiply any pixel value say by factor from
-// 'pt', you get actual pt value, but in the original unit. See convert-len()
-// function.
-$_unit-px-factors: (
-  'px':   1,
-  'pt':   72/96,
-  'pc':   6/96,
-  'cm':   2.54/96,
-  'mm':   0.254/96,
-  'q':    0.0635/96, // 0.254/4 - quarter-millimeter
-  'in':   1/96,
-  '':     1/16,
-  'rem':  1/16,
-  'em':   1/16,
-  '%':    6.25, // 1/16*100
-  'vh':   6.25,
-  'vw':   6.25,
-  'vmin': 6.25,
-  'vmax': 6.25,
-);
-
 // <angle> type factors. Multiplying turn value by any factor according to
 // 'unit' key, you converted" value, but in the original unit. See
 // convert-angle() function.
@@ -93,73 +72,179 @@ $_unit-second-factors: (
 // convert-len
 // converts a given $val according to CSS length $unit. $val
 // must be a number (100px, 1rem, 1, 7pt etc). Returns error if $unit isn't
-// supported. $parent is unitless pixel value used to calculate relative
-// lengths like rem, em, %, vh etc, due to their dependence on parent length
-// (default is 16). $ppi is unitless number used to calculate actual length on
-// screens with different pixel density (default is 96). Supported units: rem,
-// '%', unitless, px, pt, pc, cm, mm, q, in, vh, vw, vmin, vmax.
-//    convert-len(2foo, '%')     -> error: `foo` is not supported.
-//    convert-len(16px, '%')     -> 100%
-//    convert-len(2em, px)       -> 32px
-//    convert-len(1.423rem, px)  -> 22.768px
-//    convert-len(14pt, px)      -> 18.66667px
-@function convert-len($val, $unit, $parent: 16, $ppi: 96) {
-  // keep input value unit
+// supported. $parent is absolute px value used to calculate relative lengths
+// like rem, em, %, vh etc, due to their dependence on parent (default is 16). 
+// $parent is unitless and always* treated as px value.
+// $ppi is unitless number used to calculate "actual" length on screen with
+// different pixel density (default is 96). Play around!
+// Supported units: 
+//  (relative) unitless, rem, '%', vh, vw, vmin, vmax
+//  (absolute) px, pt, pc, cm, mm, q, in
+//    convert-len(2foo, '%')          -> error: `foo` is not supported.
+//    convert-len(16px, '%')          -> 100%
+//    convert-len(2em, px)            -> 32px
+//    convert-len(2.1rem, px)         -> 33.6px
+//    convert-len(2em, px, 8)         -> 16px
+//    convert-len(1in, in, $ppi:225)  -> 1in (here ppi doesn't make sense)
+//    convert-len(2.54cm, px, $ppi:25)-> 25px (here ppi make sense)
+// *One can implement $parent to be different absolute units but it is
+// unlikely to be useful and decrease performance.
+$convert-len-ref: 16 !default;    // px unitless! (can not be converted)
+$convert-len-ppi: 96 !default;    // pixel per inch
+@function convert-len($val, $unit, $ref: $convert-len-ref, $ppi: $convert-len-ppi) {
+  // input value unit
   $u: unit($val);
-  // if requested unit is the same as input
-  @if $u == $unit {
-    // just multiply by ppi ratio
-    @return $val*$ppi/96;
-  }
-  // if unit is different
+  // CONVERT input to $px from $u
+  $px: null;
+  // here we implay the screen is 96ppi
+  @if      $u == 'px'     { $px: $val; }
+  // relative->absolute conv should use $ref
+  @else if $u == 'rem'
+        or $u == 'em'
+        or $u == ''       { $px: $val*$ref; }        
+  @else if $u == '%' 
+        or $u == 'vh'
+        or $u == 'vw'
+        or $u == 'vmin'
+        or $u == 'vmax'   { $px: $val*$ref/100; }    
+  // absolute->absolute conv shouln't use $ref!
+  @else if $u == 'pt'     { $px: $val/72*$ppi; }
+  @else if $u == 'in'     { $px: $val*$ppi; }
+  @else if $u == 'pc'     { $px: $val/6*$ppi; } 
+  @else if $u == 'cm'     { $px: $val/2.54*$ppi; }
+  @else if $u == 'mm'     { $px: $val/25.4*$ppi; }
+  // quarter-millimeter or 1inch/(25.4*4)
+  @else if $u == 'q'      { $px: $val/101.6*$ppi; }
   @else {
-    $px: null;
-    // convert any input value to pixel
-    @if      $u == 'px'   { $px: $val; }
-    @else if $u == 'rem'
-          or $u == 'em'
-          or $u == ''     { $px: $val*$parent; }        // > px
-    @else if $u == '%'    { $px: $val*$parent/100; }    // > px
-    @else if $u == 'pt'   { $px: $val * 96/72; }        // > px
-    @else if $u == 'pc'   { $px: $val/6 * 96; }         // > in > px
-    @else if $u == 'cm'   { $px: $val/2.54 * 96; }      // > in > px
-    @else if $u == 'mm'   { $px: $val/25.4 * 96; }      // > in > px
-    @else if $u == 'q'    { $px: $val/101.6 * 96; }     // > in > px
-    @else if $u == 'in'   { $px: $val*96; }             // > px
-    @else if $u == 'vh'
-          or $u == 'vw'
-          or $u == 'vmin'
-          or $u == 'vmax' { $px: $val*$parent/100; }    // > px
-    @else {
-      @error "@function convert/round-len: `#{$u}` is not supported.";
-    }
-    // get pixel-to-unit factor multiplying by which we get the final result
-    $f: map-get($_unit-px-factors, $unit);
-    @if $f == null {
-      @error "@function convert/round-len: `#{$unit}` is not supported.";
-    }
-    // multiply pixel value by factor, ppi ratio and append the unit
-    @return append-unit($px*$f*$ppi/96, $unit);
+    @error "@function convert/round-len: `#{$u}` is not supported.";
   }
+
+  // CONVERT $px back to specified $unit
+  @if      $unit == 'px'  { @return append-unit($px, $unit); }
+  @else if $unit == 'rem'
+        or $unit == 'em'
+        or $unit == '' 
+                          { @return append-unit($px/$ref, $unit); }
+  @else if $unit == '%' 
+        or $unit == 'vh'
+        or $unit == 'vw'
+        or $unit == 'vmin'
+        or $unit == 'vmax'{ @return append-unit($px/$ref*100, $unit); }   
+  @else if $unit == 'pt'  { @return append-unit($px*72/$ppi, $unit); }
+  @else if $unit == 'in'  { @return append-unit($px/$ppi, $unit); }
+  // rare
+  @else if $unit == 'pc'  { @return append-unit($px*6/$ppi, $unit); } 
+  @else if $unit == 'cm'  { @return append-unit($px*2.54/$ppi, $unit); } 
+  @else if $unit == 'mm'  { @return append-unit($px*0.254/$ppi, $unit); }
+  @else if $unit == 'q'   { @return append-unit($px*0.0635/$ppi, $unit); }
+  @else { 
+    @error "@function convert/round-len: `#{$unit}` is not supported."; 
+  }  
 }
 
 // round-len
 // converts a given $val according to CSS length $unit. $val must be a number
 // (100px, 1rem, 1, 7pt etc). The main difference b/w convert-len() and
-// round-len() is the returned value is always an integer pixel at the end
+// round-len() the returned value is always an integer pixel at the end
 // of browser rendering. If $unit = `detect` function converts $val into the
 // same unit it has, but rounded. See convert-len() for more information.
 //    round-len(16.672px, px)   -> 17px
 //    round-len(23.45%, px)     -> 4px
 //    round-len(1.423rem, rem)  -> 1.4375rem (1.4375 * 16 = 23px)
 //    round-len(1.423rem)       -> 1.4375rem (unit is detected automatically)
-@function round-len($val, $unit:detect, $parent: 16, $ppi:96) {
-  $res: convert-len($val, px, $parent, $ppi);
+@function round-len($val, $unit:detect, $ref: $convert-len-ref, $ppi:$convert-len-ppi) {
+  $res: convert-len($val, px, $ref, $ppi);
   // round the resulting px value and convert it into specified $unit
   @if $unit == detect {
     $unit: unit($val);
   }
-  @return convert-len(round($res), $unit, $parent, $ppi);
+  @return convert-len(round($res), $unit, $ref, $ppi);
+}
+
+// snap-len
+// provides convenient way to control vertical/horizontal rhythm. It snaps any input CSS
+// length (eg line-height, margin, height etc) and restrict it to fixed base according
+// to your page layout baseline. Useful to sync values with invisible v/h grid.
+//    snap-len(1 0.5, 8px)           -> 0.5rem 0.25rem;
+//    snap-len(0.25 0.5 1, $unit:px) -> 2px 4px 8px;
+//    snap-len(0 1 important)        -> 0 0.5rem !important;
+//    snap-len(15px, 16px, px, 100%) -> 16px
+//    snap-len(31px, 16px, px, 100%) -> 32px
+//    snap-len(15px, 16px, px, 60%)  -> 32px
+//    snap-len(31px, 16px, px, 60%)  -> 64px
+//    usage example:
+//      $snap-len-base: 22px; (optional) allow to skip constantly entering `base` arg
+//      $snap-len-unit: rem;      (optional) allow to skip constantly entering `unit` arg
+//      img { padding: snap-len(0.5 1); height: snap-len(6); } ->
+//      img { padding: 0.6875rem 1.375rem; height: 8.25rem; }
+$snap-len-base:     8px !default;     // number with valid CSS unit
+$snap-len-ref:      $snap-len-base !default; // reference for relative lengths
+$snap-len-thresh:   100% !default;    // new line jumping threshold
+$snap-len-step:     1 !default;       // new line jumping stepping, eg 0.5, 1, etc (> 0)
+$snap-len-round:    false !default;   // round to integer pixel
+@function snap-len(
+  $vals,
+  $unit,
+  $base:    $snap-len-base,
+  $ref:     $snap-len-ref,
+  $thresh:  $snap-len-thresh,
+  $step:    $snap-len-step,
+  $round:   $snap-len-round) {
+  $res: ();
+  @each $v in $vals {
+    @if type-of($v) == number {
+      // except if zero
+      @if trim-unit($v) == 0 {
+        @error "@function snap-len(): $vals must be positive non-zero number(s).";
+      }
+      // calculation imply everything in px without unit
+      $v:  trim-unit(convert-len($v, px, $ref));
+      $bs: trim-unit(convert-len($base, px, $ref));
+      $th: trim-unit($thresh);
+      // start magic
+      $_base: $bs * ($th / 100);
+      $ratio: ceil($v / $_base);
+      $calc: $_base * ($ratio - 1);
+      @if $step <= 0 {
+        @error "@function snap-len(): $step must be positive non-zero number.";
+      }
+      @while ($v > $calc) {
+        $calc: $calc + $_base * $step;
+      }
+      $v: $calc / $_base * $base;
+      // end magic
+      // convert to resulting unit rounding if necessary
+      $v: if($round, round-len($v, $unit, $ref), convert-len($v, $unit, $ref));
+      $res: append($res, $v);
+    }
+    @else if $v == important or $v == "!important" {
+      $res: append($res, unquote('!important'));
+    }
+  }
+  @if length($res) == 1 {
+    @return nth($res, 1);
+  }
+  @return $res;
+}
+
+// adopt-len
+// Experimental function which "adopt" font-size so that applying relative line-height
+// resulting value can be snaped as well... 
+// Text's line-height is a font-size's "parent". Ok? 
+$adopt-len-base: 8px !default;
+$adopt-len-parent: 1.25 !default;
+@function adopt-len($val, $parent: $adopt-len-parent, $base: $adopt-len-base) {
+  $u: unit($parent);
+  @if $u == '%' {
+  }
+  // imply $val is absolute length converted to px
+  $v: convert-len($val, px);
+  // imply $parent initialy rem, em or unitless
+  $f: trim-unit($parent);
+  // apply snapping to calc desired value
+  $snapped: snap-len($v * $f, unit($val), $base);
+  // return dividing back by $parent
+  @return $snapped/$f;
 }
 
 // convert-angle
