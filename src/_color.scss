@@ -470,7 +470,7 @@ $brightness-algorithm: relative !default;
 // color adjusters
 // Supported adjusters:
 //    general:  a() (alpha)
-//    hsv:      h(), sv(), vv() 
+//    hsv:      h(), sv(), v() 
 //    hsl:      h(), s(), l() 
 //    hwb:      h(), w(), b()
 //    rgb:      rd(), grn(), bl()
@@ -491,7 +491,7 @@ $brightness-algorithm: relative !default;
 @function a($a)     {@return join(alpha, _parse($a));}
 @function h($a)     {@return join(h, _parse($a));}        // hsv, hsl, hwb
 @function sv($a)    {@return join(sv, _parse($a));}       // hsv
-@function vv($a)    {@return join(v, _parse($a));}        // hsv
+@function v($a)    {@return join(v, _parse($a));}         // hsv
 @function w($a)     {@return join(w, _parse($a));}        // hwb 
 @function b($a)     {@return join(b, _parse($a));}        // hwb
 @function s($a)     {@return join(s, _parse($a));}        // hsl
