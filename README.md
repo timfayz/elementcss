@@ -2,7 +2,7 @@
 
 [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/timfayz/elementcss?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
-> Minimal toolkit to work with CSS and Sass.
+> Library to work with CSS in the [SEM](https://github.com/timfayz/SEM)-way.
 
 **elementcss** provides minimal, well-organized, strict, but rich library (written in Sass) that promotes clean, object-oriented design and encourages rapid prototyping. It helps you to create complex, scalable and elaborate GUI for the contemporary web applications as well as integrate to existing project. The way of working, thought-out structure and features make it possible even recreate other popular frameworks or just create your favorite theme, use it and share. elementcss is not just framework, but tool and suit of best practices and methods from many professionals around the world to make GUI building more maintainable, easier and faster.
 
@@ -13,7 +13,7 @@ elementcss is a minimalistic toolkit of Sass functions and mixins. It allows you
 
 - **grid system**. Powerful `grid()` mixin to generate flexbox or float-based grid system with unlimited number of breakpoints and customizable number of columns, width, gap in each breakpoint. Implements all widely used grid features like changeable column `width`, `push`, `pull`, `offset`, `centering` etc.
 
-- **metrics**. `calc-line()` restricts input values into fixed base ("snapping") according to your baseline (eg document's `line-height`). Use it with properties like height, margin, padding etc to provide horizontal/vertical rhythm. `calc-grid()` calculates grid parameters like column width, gap width etc.
+- **metrics**. `snap-len()` restricts input values into fixed base ("snapping") according to your baseline (eg document's `line-height`). Use it with properties like height, margin, padding etc to provide horizontal/vertical rhythm. `calc-grid()` calculates grid parameters like column width, gap width etc.
 
 - **SEM implementation**. elementcss implements [SEM methodology](https://github.com/timfayz/SEM). Minimalistic syntax of `set()` mixin provide full control over generating dozens of *mixes* and *elements*. [Learn more..](https://github.com/timfayz/SEM)
 
@@ -65,9 +65,9 @@ sass --watch main.scss:main.css
 ## File structure
 ```
 docs/         documentation
-templates/    project templates
-core/*.scss   logically separated core files
-_core.scss    elementcss entry point unites all core/* files
+templates/    project boilerplates
+src/*.scss    logically separated core files
+_import.scss  entry point (unites all core/* files)
 LICENSE       license information
 README.md     this is what you are currently reading
 ```
@@ -86,7 +86,7 @@ At the moment there is no API page. However all core files have well-written inl
 -->
 
 ## Documentation
-Documentation is under heavy development. The current docs for v1.9.0 and below.
+Documentation is under heavy development. The docs below is quite deprecated is intended for v1.9.0 and below. Please, for the last changes refer to source code.
 
 1. [API](https://github.com/timfayz/elementcss/blob/master/docs/0_preface.md)<br/>
 1. [Usage](https://github.com/timfayz/elementcss/blob/master/docs/2_usage.md)<br/>
