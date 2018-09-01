@@ -13,23 +13,23 @@ $_font-family-mono:   Monaco, Menlo, Consolas, "Courier New", monospace;
 // Main properties
 $_baseline:       8px;
 $_font-size:      16px;
-$_line-height:    calc-line(24px, $_baseline);
+$_line-height:    snap-len(24px, $_baseline);
 $_font-family:    $_font-family-sans;
 
-// Set calc-line() baseline relative to line-height
-$calc-line-baseline: $_line-height;
-$calc-line-threshold: 90%;
+// Set snap-len() baseline relative to line-height
+$snap-len-baseline: $_line-height;
+$snap-len-threshold: 90%;
 // Type set (name, font-size, line-height, font-weight)
-$_type-max:       disp4  112px  calc-line(112px) $Light;
-$_type-xxlg:      disp3  56px   calc-line(56px)  $Normal;
-$_type-xlg:       disp2  45px   calc-line(45px)  $Normal;
-$_type-lg:        disp1  34px   calc-line(34px)  $Normal;
-$_type-md:        head   24px   calc-line(24px)  $Normal;
-$_type-sm:        titl   20px   calc-line(20px)  $Medium;
-$_type-xsm:       subh   16px   calc-line(16px)  $Normal;
-$_type-xxsm:      butt   14px   calc-line(14px)  $Medium;
-$_type-min:       capt   12px   calc-line(12px)  $Normal;
-$_type-default:   body   14px   calc-line(14px)  $Normal;
+$_type-max:       disp4  112px  snap-len(112px) $Light;
+$_type-xxlg:      disp3  56px   snap-len(56px)  $Normal;
+$_type-xlg:       disp2  45px   snap-len(45px)  $Normal;
+$_type-lg:        disp1  34px   snap-len(34px)  $Normal;
+$_type-md:        head   24px   snap-len(24px)  $Normal;
+$_type-sm:        titl   20px   snap-len(20px)  $Medium;
+$_type-xsm:       subh   16px   snap-len(16px)  $Normal;
+$_type-xxsm:      butt   14px   snap-len(14px)  $Medium;
+$_type-min:       capt   12px   snap-len(12px)  $Normal;
+$_type-default:   body   14px   snap-len(14px)  $Normal;
 
 // Define Sets
 // --------------------------------------------------

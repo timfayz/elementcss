@@ -5,18 +5,18 @@ $s: (); // temp sets storage
 
 // Define Basic Variables
 // --------------------------------------------------
-// Set calc-line() baseline relative to line-height
-$calc-line-baseline: $_line-height;
-$calc-line-threshold: 100%;
+// Set snap-len() baseline relative to line-height
+$snap-len-baseline: $_line-height;
+$snap-len-threshold: 100%;
 // Spacing variables
-$sz-default:  $Default   calc-line(1);
-$sz-xxlg:     $Xxlg      calc-line(7);
-$sz-xlg:      $Xlg       calc-line(5);
-$sz-lg:       $Lg        calc-line(4);
-$sz-md:       $Md        calc-line(3);
-$sz-sm:       $Sm        calc-line(2);
-$sz-xsm:      $Xsm       calc-line(0.5);
-$sz-xxsm:     $Xxsm      calc-line(0.25);
+$sz-default:  $Default   snap-len(1);
+$sz-xxlg:     $Xxlg      snap-len(7);
+$sz-xlg:      $Xlg       snap-len(5);
+$sz-lg:       $Lg        snap-len(4);
+$sz-md:       $Md        snap-len(3);
+$sz-sm:       $Sm        snap-len(2);
+$sz-xsm:      $Xsm       snap-len(0.5);
+$sz-xxsm:     $Xxsm      snap-len(0.25);
 
 // Define Sets
 // --------------------------------------------------
