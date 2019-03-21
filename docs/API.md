@@ -1,15 +1,17 @@
-# elementcss API
+# API
 
 elementcss has well-written embedded documentation with several examples per each `@function()` and `@mixin()` definition. Files are logically separated and organized so that you can read them as API sections. The listings below is generated automatically and gives you direct links to the source definitions.
 
 Files starting with `_css-*` basically means they *also* have `@mixin`(s) that generate CSS code. Otherwise, they only contain function definitions.
 
-### Grid `src/_css-grid.scss`
+### Grid 
+`src/_css-grid.scss`
 
 - [`calc-grid($return, $data)`](https://github.com/timfayz/elementcss/blob/master/src/_css-grid.scss#L18)
 - [`grid($type, $data, $query-map:null, $rows:gutter columned, $dir:ltr)`](https://github.com/timfayz/elementcss/blob/master/src/_css-grid.scss#L201)
 
-### SEM utils `src/_css-sem.scss`
+### Generating SEM 
+`src/_css-sem.scss`
 
 - [`add($storage, $p-name, $s-base, $set-data)`](https://github.com/timfayz/elementcss/blob/master/src/_css-sem.scss#L167)
 - [`pass-sets($args...)`](https://github.com/timfayz/elementcss/blob/master/src/_css-sem.scss#L182)
@@ -17,7 +19,8 @@ Files starting with `_css-*` basically means they *also* have `@mixin`(s) that g
 - [`set($s-base, $p-name, $set-data, $q-map:null)`](https://github.com/timfayz/elementcss/blob/master/src/_css-sem.scss#L280)
 - [`pass-set($s-base, $data, $q-map:null)`](https://github.com/timfayz/elementcss/blob/master/src/_css-sem.scss#L287)
 
-### CSS unit utils `src/_unit.scss`
+### CSS units
+`src/_unit.scss`
 
 - [`trim-unit($val)`](https://github.com/timfayz/elementcss/blob/master/src/_unit.scss#L53)
 - [`append-unit($val, $unit)`](https://github.com/timfayz/elementcss/blob/master/src/_unit.scss#L63)
@@ -27,7 +30,8 @@ Files starting with `_css-*` basically means they *also* have `@mixin`(s) that g
 - [`convert-angle($val, $unit:'', $round: true)`](https://github.com/timfayz/elementcss/blob/master/src/_unit.scss#L260)
 - [`convert-time($val, $unit:null)`](https://github.com/timfayz/elementcss/blob/master/src/_unit.scss#L303)
 
-### Miscellaneous `src/_css-utils.scss`
+### Miscellaneous 
+`src/_css-utils.scss`
 
 - [`clearfix()`](https://github.com/timfayz/elementcss/blob/master/src/_css-utils.scss#L6)
 - [`font-face($font-family, $font-path, $formats:null, $font-weight:normal, $font-style:normal, $svg-font-name:null, $version:null)`](https://github.com/timfayz/elementcss/blob/master/src/_css-utils.scss#L25)
@@ -36,7 +40,8 @@ Files starting with `_css-*` basically means they *also* have `@mixin`(s) that g
 - [`ruler($line-height: 16px, $color: rgba(0,0,0,0.2), $z-index: null, $type: horizontal)`](https://github.com/timfayz/elementcss/blob/master/src/_css-utils.scss#L219)
 - [`icon-set($font-family:null, $class-prefix:null, $pseudo-element:before, $content-map:(), $from-title:false)`](https://github.com/timfayz/elementcss/blob/master/src/_css-utils.scss#L260)
 
-### Color utils `src/_color.scss`
+### Color utils 
+`src/_color.scss`
 
 - [`shade($clr, $percentage)`](https://github.com/timfayz/elementcss/blob/master/src/_color.scss#L10)
 - [`tint($clr, $percentage)`](https://github.com/timfayz/elementcss/blob/master/src/_color.scss#L21)
@@ -51,7 +56,8 @@ Files starting with `_css-*` basically means they *also* have `@mixin`(s) that g
 - [`render-color($clr, $model)`](https://github.com/timfayz/elementcss/blob/master/src/_color.scss#L306)
 - [`color($args)`](https://github.com/timfayz/elementcss/blob/master/src/_color.scss#L401)
 
-### String utils `src/_string.scss`
+### String utils 
+`src/_string.scss`
 
 - [`prefix($val, $prefix:'-', $onNull:false, $except:root)`](https://github.com/timfayz/elementcss/blob/master/src/_string.scss#L10)
 - [`postfix($val, $postfix:'-', $onNull:false, $except:root)`](https://github.com/timfayz/elementcss/blob/master/src/_string.scss#L22)
@@ -64,7 +70,8 @@ Files starting with `_css-*` basically means they *also* have `@mixin`(s) that g
 - [`trim-left($str, $cutset)`](https://github.com/timfayz/elementcss/blob/master/src/_string.scss#L289)
 - [`trim-right($str, $cutset)`](https://github.com/timfayz/elementcss/blob/master/src/_string.scss#L312)
 
-### Lists utils `src/_list.scss`
+### Lists utils 
+`src/_list.scss`
 
 - [`wrap($list)`](https://github.com/timfayz/elementcss/blob/master/src/_list.scss#L10)
 - [`unwrap($list)`](https://github.com/timfayz/elementcss/blob/master/src/_list.scss#L20)
@@ -86,7 +93,8 @@ Files starting with `_css-*` basically means they *also* have `@mixin`(s) that g
 - [`before($list, $val)`](https://github.com/timfayz/elementcss/blob/master/src/_list.scss#L616)
 - [`after($list, $val)`](https://github.com/timfayz/elementcss/blob/master/src/_list.scss#L635)
 
-### Map utils `src/_map.scss`
+### Map utils 
+`src/_map.scss`
 
 - [`m($map, $keys...)`](https://github.com/timfayz/elementcss/blob/master/src/_map.scss#L13)
 - [`nth-key($map, $n)`](https://github.com/timfayz/elementcss/blob/master/src/_map.scss#L28)
@@ -97,7 +105,8 @@ Files starting with `_css-*` basically means they *also* have `@mixin`(s) that g
 - [`map-list($map, $separator:auto)`](https://github.com/timfayz/elementcss/blob/master/src/_map.scss#L110)
 - [`map-get-key($map, $val)`](https://github.com/timfayz/elementcss/blob/master/src/_map.scss#L123)
 
-### Math `src/_math.scss`
+### Math 
+`src/_math.scss`
 
 - [`gcd($a, $b)`](https://github.com/timfayz/elementcss/blob/master/src/_math.scss#L10)
 - [`pow($base, $exp, $prec: 12)`](https://github.com/timfayz/elementcss/blob/master/src/_math.scss#L24)
@@ -107,5 +116,5 @@ Files starting with `_css-*` basically means they *also* have `@mixin`(s) that g
 - [`max($args...)`](https://github.com/timfayz/elementcss/blob/master/src/_math.scss#L93)
 - [`min($args...)`](https://github.com/timfayz/elementcss/blob/master/src/_math.scss#L103)
 
-### Found broken links?
+### Found broken link?
 Please, [open](https://github.com/timfayz/elementcss/issues) an issue or [write](mailto:timfayz.only@gmail.com?subject=elementcss.%20Issue) me an email. 
