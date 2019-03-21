@@ -1,65 +1,79 @@
 # elementcss
 
+> Rich Sass library to work with CSS4 and generate complex GUI in the [SEM](https://github.com/timfayz/SEM)-way
+
 [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/timfayz/elementcss?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
-> Library to work with CSS in the [SEM](https://github.com/timfayz/SEM)-way.
-
-**elementcss** provides minimal, well-organized, strict, but rich library (written in Sass) that promotes clean, object-oriented design and encourages rapid prototyping. It helps you to create complex, scalable and elaborate GUI for the contemporary web applications as well as integrate to existing project. The way of working, thought-out structure and features make it possible even recreate other popular frameworks or just create your favorite theme, use it and share. elementcss is not just framework, but tool and suit of best practices and methods from many professionals around the world to make GUI building more maintainable, easier and faster.
+**elementcss** is a *three* part framework. One is a rich Sass library to manipulate Sass lists, strings & maps. Second is utils to convert CSS4 colors & units back and forth, generate grid layout, define vertical rhythm and easily reset the whole HTML document to style from "scratch". Third is the utils implementing [SEM](https://github.com/timfayz/SEM)-methodology. Idea is simple: put one property per class and apply them in WYSIWYG-way. Full list of available functions & mixins you can found [here](docs/API.md).
 
 **[Download v2.9.0](https://github.com/timfayz/elementcss/archive/master.zip)**
 
+## Demo
+
+The CSS styles for following pages were generated with elementcss:
+- [Personal webpage](https://timfayz.github.io) ([repository](https://github.com/timfayz/timfayz.github.io) | [source styles](https://github.com/timfayz/timfayz.github.io/blob/master/styles/main.scss) > [resulting css](https://github.com/timfayz/timfayz.github.io/blob/master/styles/main.css))
+- [Birthday gift card](https://marynicole.github.io) ([repository](https://github.com/marynicole/marynicole.github.io) | [resulting css](https://github.com/marynicole/marynicole.github.io/blob/master/css/main.css))
+
+
 ## Features
-elementcss is a minimalistic toolkit of Sass functions and mixins. It allows your to create your own GUI framework on top of it.
 
-- **grid system**. Powerful `grid()` mixin to generate flexbox or float-based grid system with unlimited number of breakpoints and customizable number of columns, width, gap in each breakpoint. Implements all widely used grid features like changeable column `width`, `push`, `pull`, `offset`, `centering` etc.
+- **grid system**. Powerful `grid()` mixin generates flexbox or float-based layout with unlimited number of breakpoints. Customize number of columns, width and gap per each `@media` rule. Implements all widely used grid features: column's `width`, `push`, `pull`, `offset`, `center`, etc.
 
-- **metrics**. `snap-len()` restricts input values into fixed base ("snapping") according to your baseline (eg document's `line-height`). Use it with properties like height, margin, padding etc to provide horizontal/vertical rhythm. `calc-grid()` calculates grid parameters like column width, gap width etc.
+- **metrics**. `snap-len()` "snaps" input values into fixed baseline height (eg. your document's `line-height`). Useful for stepping height, margin, padding, etc. and defining horizontal/vertical rhythm.
 
-- **SEM implementation**. elementcss implements [SEM methodology](https://github.com/timfayz/SEM). Minimalistic syntax of `set()` mixin provide full control over generating dozens of *mixes* and *elements*. [Learn more..](https://github.com/timfayz/SEM)
+- **SEM**. elementcss implements [SEM methodology](https://github.com/timfayz/SEM). Minimalistic syntax of `set()` mixin provides full control over generating dozens of *mixes* and *elements*. [Learn more..](https://github.com/timfayz/SEM/blob/master/docs/guide.md)
 
-- **init.css**. elementcss is intended to use with [init.css](https://github.com/timfayz/init.css). init.css is best from both `normalize.css` and `Reset CSS 2.0`, init.css makes appearance of all HTML tags unstyled/unified to start styling from a blank sheet. [Learn more..](https://github.com/timfayz/init.css)
+- **style reset**. elementcss is backed by [init.css](https://github.com/timfayz/init.css) project. `init.css` is a best from both worlds `normalize.css` and `Reset CSS 2.0`. Both makes an appearance of HTML tags unstyled/unified to start styling from a blank sheet. But, `init.css` merge best practices into one solution. [Learn more..](https://github.com/timfayz/init.css)
 
-- **color utils.** Useful functions to work with colors. `convert-color()` to convert different color models into one another; `color()` to adjust, change, scale color params using different color models; `brightness()` to get brightness of color; `tint()`, `shade()`, `contrast-color()` to tint, shade and get contrast color b/w two ones. Supporting models: `hexadecimal`, `rgb(a)`, `hsb/v(a)`, `hsl(a)`.
+- **color utils.** Useful functions to work with colors: `convert-color()` to convert different models back and forth; `color()` to adjust, set and scale internal color parameters using different models; `brightness()` to extract the brightness; `tint()`, `shade()` and `contrast-color()` to tint, shade and get contrast b/w two colors accordingly. Supporting models: `hex`, `rgb(a)`, `hsb/v(a)`, `hsl(a)`.
 
-- **unit utils**. Functions to work with CSS units. `trim-unit()`, `append-unit()`, `convert-unit()` etc to remove, append and convert different CSS units into one another. `round-unit()` function makes sure you get integer pixel when the browser finishes rendering. Support for all valid CSS units: `rem`, `px`, `pt`, `%`, `pc` etc.
+- **unit utils**. Functions to work with CSS units. `trim-unit()`, `append-unit()`, `convert-unit()` to remove, append and convert different CSS units into one another; `round-unit()` makes sure you get an integer pixel at the end of browser rendering. Supported all valid CSS units: `rem`, `px`, `pt`, `%`, `pc`, etc.
 
 - **helper utils**. Popular helper classes gathered from best practice. Clearfix, image replacement, hiding, visually hiding, text hiding and more.
 
-- **string utils**. Useful functions to work with strings. `str-exists()`, `has-prefix()/-postfix()`, `str-replace()`, `trim-left()/-right()` to check occurrence, replace and trim specified substring(s).
+- **string utils**. Functions to work with strings. `str-exists()`, `has-prefix()/-postfix()`, `str-replace()`, `trim-left()/-right()` to check occurrence, replace and trim specified substring(s) accordingly.
 
-- **list/map utils**. Handy functions to work with lists and maps. `slice()`, `union()`, `nth-replace()`, `replace-value()`, `nth-remove()`, `remove-value()` to slice, merge, replace and remove by index/value in lists; `map-append-val()`, `map-union()` to append key value pair and union maps.
+- **list/map utils**. Functions to work with Sass build-in lists and maps. `slice()`, `union()`, `nth-replace()`, `replace-value()`, `nth-remove()`, `remove-value()` to slice, merge, replace and remove items by index/value accordingly; `map-append-val()`, `map-union()` to append key-value pair and union maps.
 
 - **math utils**. Basic math functions. `pow()`, `root()`, `gcd()` to power, root and find great common divider of a number.
 
 
 ## Quick Start
 * [Install Sass](http://sass-lang.com/install)
-* Create project folder and go inside:
-```
+
+* Create project dir and go inside:
+```bash
 mkdir myproject
 cd myproject
 ```
-* Clone repository or [download archive](https://github.com/kalopsia/element/archive/master.zip) and extract it into your project root:
-```
+
+* Clone repository, or [download archive](https://github.com/kalopsia/element/archive/master.zip) and extract it into the project root:
+```bash
 git clone https://github.com/timfayz/elementcss
 ```
+
 * Copy content of `elementcss/templates/app-minimal` into your project root:
-```
+```bash
 ls
 index.html  main.scss  elementcss/
 ```
-* Check import path to elementcss' core in `main.scss`:
-```
-//main.scss
+
+* Open `main.scss` and check if its import path is correct:
+```scss
+// main.scss
 ...
-@import "elementcss/core.scss"; // correct import path
+@import "elementcss/import"; // correct import path
 ...
 ```
-* Open command line in project root and compile `main.scss` into `main.css`:
+
+* Open command line in the project root and compile `main.scss`:
+```bash
+sass --watch main.scss:main.css # compile resulting .css file & watch for new changes
 ```
-sass --watch main.scss:main.css
-```
-* `main.css` already linked, just open `index.html` in your browser and check the result.
+
+* `main.css` is already generated, now open `index.html` in your browser and see the results. 
+
+* You've **done!**
 
 
 ## File structure
@@ -67,30 +81,18 @@ sass --watch main.scss:main.css
 docs/         documentation
 templates/    project boilerplates
 src/*.scss    logically separated core files
-_import.scss  entry point (unites all core/* files)
+_import.scss  entry point (unites all src/* files)
 LICENSE       license information
 README.md     this is what you are currently reading
 ```
 
-## API
-At the moment there is no API page. However all core files have well-written inline docs with examples and description of each function and mixin. Files splitted and organized so that you can read them as API reference.
-
-<!---
-### Color utils
-- [`shade($clr, $percentage)`](https://github.com/timfayz/elementcss/blob/master/core/_color.scss#L3)
-- `tint($clr, $percentage)`
-- `convert-color($clr, $model)`
-- `contrast-color($clr, $dark, $light, $algorithm:sRGB)`
-- `brightness($clr, $algorithm:$brightness-algorithm)`
-- `color($action, $clr, $props, $model:hsl)`
--->
-
 ## Documentation
-Documentation is under heavy development. The docs below is quite deprecated is intended for v1.9.0 and below. Please, for the last changes refer to source code.
+*Documentation is under heavy development.<br>Please, refer last changes to the source code.* 
 
-1. [API](https://github.com/timfayz/elementcss/blob/master/docs/0_preface.md)<br/>
-1. [Usage](https://github.com/timfayz/elementcss/blob/master/docs/2_usage.md)<br/>
-1. [Conventions](https://github.com/timfayz/elementcss/blob/master/docs/4_conventions.md)<br/>
+API is generated automatically and link you direct to source definitions. Such a decision was made since source code has well-written embedded documentation with several examples per each function or mixin definition. So I wish you fun reading the sources! :] <br>The guide is based on a quite old version so be caution - there might be inconsistences.
+
+1. [API](docs/API.md)
+2. [Guide](docs/1-preface.md) 
 
 ## Contributing
-If you want to help and contribute this project please make your own pull request or [report issues](https://github.com/timfayz/elementcss/issues). We are very welcome to any kind of ideas and support, even tp merge into new repo or project.
+If you want to help or contribute to this project feel free to make a pull request or create a new [issue](https://github.com/timfayz/elementcss/issues). I'm very welcome to any kind of ideas and support.
