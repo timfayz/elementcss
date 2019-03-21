@@ -1,6 +1,6 @@
 # elementcss API
 
-All source code has well-written embedded documentation with several examples per each `@function()` or `@mixin()` definition. Files are logically separated and organized so that you can read them as API sections. That's why the listings below is given as automatically generated set of direct links to the sources.
+elementcss has well-written embedded documentation with several examples per each `@function()` and `@mixin()` definition. Files are logically separated and organized so that you can read them as API sections. The listings below is generated automatically and gives you direct links to the source definitions.
 
 Files starting with `_css-*` basically means they *also* have `@mixin`(s) that generate CSS code. Otherwise, they only contain function definitions.
 

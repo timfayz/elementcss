@@ -73,7 +73,7 @@ sass --watch main.scss:main.css # compile resulting .css file & watch for new ch
 
 * `main.css` is already generated, now open `index.html` in your browser and see the results. 
 
-* You've **done!**
+* You've done!
 
 
 ## File structure
@@ -87,12 +87,14 @@ README.md     this is what you are currently reading
 ```
 
 ## Documentation
-*Documentation is under heavy development.<br>Please, refer last changes to the source code.* 
+*Documentation is under heavy development.* 
 
-API is generated automatically and link you direct to source definitions. Such a decision was made since source code has well-written embedded documentation with several examples per each function or mixin definition. So I wish you fun reading the sources! :] <br>The guide is based on a quite old version so be caution - there might be inconsistences.
+API is always relevant and generated automatically by little script `docs/API.py`. It creates list of links pointing right to source definitions. Such an approach is taken since all the code has a well-written embedded documentation with several examples per each function and mixin definition. So please refer last changes to the source itself! 
 
 1. [API](docs/API.md)
 2. [Guide](docs/1-preface.md) 
+
+The guide might be outdated since it was written years ago based on previous versions. Logically it should be correct, but there might be inconsistences.
 
 ## Contributing
 If you want to help or contribute to this project feel free to make a pull request or create a new [issue](https://github.com/timfayz/elementcss/issues). I'm very welcome to any kind of ideas and support.
